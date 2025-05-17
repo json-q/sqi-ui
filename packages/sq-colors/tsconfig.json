@@ -1,0 +1,8 @@
+{
+  "extends": "@sq-ui/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": "."
+  },
+  "include": ["src"]
+}

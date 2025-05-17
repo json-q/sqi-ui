@@ -1,0 +1,16 @@
+{
+  "name": "@sq-ui/web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@sq-ui/themes": "workspace:*",
+    "@sq-ui/icons": "workspace:*"
+  }
+}

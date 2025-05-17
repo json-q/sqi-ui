@@ -1,0 +1,13 @@
+{
+  "extends": "@sq-ui/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sq-ui/themes": ["./packages/themes/src/index.ts"],
+      "@sq-ui/icons": ["./packages/icons/src/index.ts"]
+    }
+  },
+  "include": ["packages/**/*.tsx", "packages/**/*.ts"],
+  "exclude": ["**/node_modules", "**/dist", "**/.turbo"]
+}
