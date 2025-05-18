@@ -1,0 +1,130 @@
+@use '../../style/mixin' as *;
+
+@use './var' as *;
+
+$module: #{$prefix}-btn;
+$module-loading: #{$module}-loading;
+
+@mixin btn-type($type) {
+  $type-colors: map-get($btn-type-colors, $type);
+
+  .#{$module}-#{$type} {
+    color: map-get($type-colors, 'color');
+    background-color: map-get($type-colors, 'bg');
+
+    &:hover {
+      color: map-get($type-colors, 'color');
+      background-color: map-get($type-colors, 'bg-hover');
+    }
+    &:active {
+      color: map-get($type-colors, 'color');
+      background-color: map-get($type-colors, 'bg-active');
+    }
+
+    &[disabled] {
+      color: map-get($type-colors, 'color-disabled');
+      background-color: map-get($type-colors, 'bg-disabled');
+      border-color: map-get($type-colors, 'bg-disabled');
+    }
+  }
+}
+
+@mixin btn-status($status) {
+  $status-colors: map-get($btn-status-colors, $status);
+
+  .#{$module}-status-#{$status} {
+    color: map-get($status-colors, 'color');
+    background-color: map-get($status-colors, 'bg');
+
+    &:hover {
+      color: map-get($status-colors, 'color');
+      background-color: map-get($status-colors, 'bg-hover');
+    }
+    &:active {
+      color: map-get($status-colors, 'color');
+      background-color: map-get($status-colors, 'bg-active');
+    }
+    &[disabled] {
+      color: map-get($status-colors, 'color-disabled');
+      background-color: map-get($status-colors, 'bg-disabled');
+      border-color: map-get($status-colors, 'bg-disabled');
+    }
+  }
+}
+
+.#{$module} {
+  @include reset;
+
+  border: $btn-border-width solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $btn-border-radius;
+  transition: all $anim-duration-base linear;
+  white-space: nowrap;
+
+  height: $btn-height-md;
+  padding: 0 $btn-padding-md;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  // &-outline {
+  //   background-color: $btn-color-white-bg;
+  //   color: $btn-color-text;
+  //   border-color: $btn-color-border-gray;
+
+  //   &:hover {
+  //     background-color: $btn-color-text-bg;
+  //     color: $btn-color-text-hover;
+  //     border-color: $btn-color-text-hover;
+  //   }
+  //   &:active {
+  //     background-color: $btn-color-text-bg-active;
+  //     color: $btn-color-text-active;
+  //     border-color: $btn-color-text-active;
+  //   }
+  // }
+
+  // &-danger {
+  //   background-color: $btn-color-danger;
+  //   color: $btn-text-variant-base-color;
+  //   border-color: $btn-color-danger;
+
+  //   &:hover {
+  //     background-color: $btn-color-danger-hover;
+  //     border-color: $btn-color-danger-hover;
+  //   }
+  //   &:active {
+  //     background-color: $btn-color-danger-active;
+  //     border-color: $btn-color-danger-active;
+  //   }
+  // }
+
+  // &-ghost {
+  //   background-color: $btn-color-white-ghost;
+  //   color: $btn-color-text;
+  //   border-color: $btn-color-primary;
+
+  //   &:hover {
+  //     background-color: $btn-color-white-ghost-hover;
+  //     border-color: $btn-color-white-ghost-hover;
+  //   }
+  //   &:active {
+  //     background-color: $btn-color-white-ghost-active;
+  //     border-color: $btn-color-white-ghost-active;
+  //   }
+  // }
+}
+
+@include btn-type(default);
+@include btn-type(primary);
+@include btn-type(text);
+
+@include btn-status(primary);
+@include btn-status(success);
+@include btn-status(warning);
+@include btn-status(danger);

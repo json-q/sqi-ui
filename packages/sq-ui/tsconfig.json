@@ -2,7 +2,11 @@
   "extends": "@sq-ui/tsconfig/react-library.json",
   "compilerOptions": {
     "noEmit": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@sq-ui/web": ["./src/index.ts"],
+      "@sq-ui/web/es/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }

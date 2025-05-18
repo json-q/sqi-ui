@@ -18,11 +18,15 @@ export default defineConfig([
   eslintConfigPrettier,
   prettierRecommended,
   {
-    name: 'custom',
+    name: 'internal-plugins',
     files: ['**/*.{jsx,tsx}'],
     plugins: { 'react-hooks': reactHooks },
+  },
+  {
+    name: 'internal-rules',
     rules: {
       'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
   {

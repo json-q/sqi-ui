@@ -11,9 +11,9 @@ export default defineConfig({
   exportStatic: {},
   resolve: {
     docDirs: ['docs'],
-    atomDirs: [{ type: 'component', dir: join(__dirname, '../sq-ui') }],
+    atomDirs: [{ type: 'component', dir: '../sq-ui/src' }],
   },
   alias: {
-    '@sq-ui/web': join(__dirname, '../sq-ui/index.ts'),
+    '@sq-ui/web': join(__dirname, '../sq-ui/src'),
   },
 });

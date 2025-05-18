@@ -9,8 +9,15 @@
   "scripts": {
     "clean": "rimraf dist .turbo"
   },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
   "dependencies": {
-    "@sq-ui/themes": "workspace:*",
-    "@sq-ui/icons": "workspace:*"
+    "@sq-ui/icons": "workspace:*",
+    "@sq-ui/hooks": "workspace:*"
+  },
+  "devDependencies": {
+    "clsx": "^2.1.1"
   }
 }

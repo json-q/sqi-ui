@@ -1,0 +1,7 @@
+@use './variables' as *;
+
+@mixin reset {
+  font: $font-md;
+  color: $text-color-primary;
+  box-sizing: border-box;
+}

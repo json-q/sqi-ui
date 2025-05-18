@@ -1,21 +1,20 @@
 {
-  "name": "@sq-ui/doc",
+  "name": "@sq-ui/dumi",
   "version": "0.0.1",
-  "description": "library doc",
-  "authors": [
-    "jsonq"
-  ],
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "scripts": {
     "dev": "dumi dev",
     "build": "dumi build",
-    "preview": "dumi preview",
-    "clean": "rimraf dist .turbo"
+    "preview": "dumi preview"
   },
   "dependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "dumi": "^2.4.13"
+    "dumi": "^2.4.21"
   }
 }

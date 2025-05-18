@@ -4,8 +4,9 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@sq-ui/themes": ["./packages/themes/src/index.ts"],
-      "@sq-ui/icons": ["./packages/icons/src/index.ts"]
+      "@sq-ui/web": ["./packages/sq-ui/src/index.ts"],
+      "@sq-ui/icons": ["./packages/sq-icons/src/index.ts"],
+      "@sq-ui/hooks": ["./packages/sq-hooks/src/index.ts"]
     }
   },
   "include": ["packages/**/*.tsx", "packages/**/*.ts"],
