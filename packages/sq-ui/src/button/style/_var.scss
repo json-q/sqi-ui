@@ -29,6 +29,9 @@ $btn-padding-sm: $padding-md;
 $btn-padding-md: $padding-lg;
 $btn-padding-lg: $padding-xl;
 
+// margin
+$btn-icon-margin: $margin-sm;
+
 $btn-border-width: 1px;
 
 $btn-type-colors: (
@@ -42,7 +45,7 @@ $btn-type-colors: (
     border: $bg-color-component,
     border-hover: $bg-color-component-hover,
     border-active: $bg-color-component-active,
-    border-disabled: $bg-color-component-hover,
+    border-disabled: $bg-color-component-disabled,
   ),
   primary: (
     color: $text-color-anti,
@@ -121,6 +124,7 @@ $btn-status-colors: (
     border-disabled: $error-color-disabled,
   ),
 );
+
 // // 状态色 - 主色
 // $btn-color-primary: $brand-color;
 // $btn-color-primary-hover: $brand-color-hover;

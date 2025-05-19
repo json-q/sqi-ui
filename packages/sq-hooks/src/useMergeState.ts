@@ -25,7 +25,7 @@ export function useMergeState<T>(
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // 第一次渲染时候，props.value 已经在useState里赋值给stateValue了，不需要再次赋值。
+    // 初始化时，props.value 已经在 useState 里赋值
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

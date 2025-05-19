@@ -11,6 +11,7 @@ $module-loading: #{$module}-loading;
   .#{$module}-#{$type} {
     color: map-get($type-colors, 'color');
     background-color: map-get($type-colors, 'bg');
+    border-color: map-get($type-colors, 'border');
 
     &:hover {
       color: map-get($type-colors, 'color');
@@ -72,52 +73,23 @@ $module-loading: #{$module}-loading;
     cursor: not-allowed;
   }
 
-  // &-outline {
-  //   background-color: $btn-color-white-bg;
-  //   color: $btn-color-text;
-  //   border-color: $btn-color-border-gray;
+  &-loading {
+    opacity: 0.5;
+    pointer-events: none;
 
-  //   &:hover {
-  //     background-color: $btn-color-text-bg;
-  //     color: $btn-color-text-hover;
-  //     border-color: $btn-color-text-hover;
-  //   }
-  //   &:active {
-  //     background-color: $btn-color-text-bg-active;
-  //     color: $btn-color-text-active;
-  //     border-color: $btn-color-text-active;
-  //   }
-  // }
+    .#{$prefix}-icon {
+      @include spin;
 
-  // &-danger {
-  //   background-color: $btn-color-danger;
-  //   color: $btn-text-variant-base-color;
-  //   border-color: $btn-color-danger;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+    }
 
-  //   &:hover {
-  //     background-color: $btn-color-danger-hover;
-  //     border-color: $btn-color-danger-hover;
-  //   }
-  //   &:active {
-  //     background-color: $btn-color-danger-active;
-  //     border-color: $btn-color-danger-active;
-  //   }
-  // }
-
-  // &-ghost {
-  //   background-color: $btn-color-white-ghost;
-  //   color: $btn-color-text;
-  //   border-color: $btn-color-primary;
-
-  //   &:hover {
-  //     background-color: $btn-color-white-ghost-hover;
-  //     border-color: $btn-color-white-ghost-hover;
-  //   }
-  //   &:active {
-  //     background-color: $btn-color-white-ghost-active;
-  //     border-color: $btn-color-white-ghost-active;
-  //   }
-  // }
+    > span:not(.#{$prefix}-icon) {
+      margin-left: $btn-icon-margin;
+    }
+  }
 }
 
 @include btn-type(default);

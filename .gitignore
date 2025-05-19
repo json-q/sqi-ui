@@ -26,13 +26,6 @@ build
 dist
 es
 lib
-.dumi/tmp
-.dumi/tmp-test
-.dumi/tmp-production
-.DS_Store
-docs-dist
-temp
-
 
 # Debug
 npm-debug.log*

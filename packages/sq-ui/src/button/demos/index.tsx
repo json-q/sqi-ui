@@ -37,6 +37,29 @@ export default function Demo1() {
           Warning
         </Button>
       </div>
+      <hr />
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <Button loading>Default</Button>
+        <Button type="primary" loading>
+          Primary
+        </Button>
+        <Button type="text" loading>
+          Text
+        </Button>
+
+        <Button loading status="primary">
+          Primary
+        </Button>
+        <Button loading status="danger">
+          Danger
+        </Button>
+        <Button loading status="success">
+          Success
+        </Button>
+        <Button loading status="warning">
+          Warning
+        </Button>
+      </div>
     </>
   );
 }

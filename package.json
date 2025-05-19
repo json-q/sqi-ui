@@ -6,6 +6,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
+    "turbo:dev": "turbo dev",
     "turbo:lint": "turbo lint",
     "turbo:clean": "turbo clean",
     "lint:eslint": "eslint . --fix --cache",

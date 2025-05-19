@@ -4,9 +4,6 @@ import { join } from 'node:path';
 export default defineConfig({
   outputPath: 'docs-dist',
   npmClient: 'pnpm',
-  // themeConfig: {
-  //   name: 'sq-ui',
-  // },
   hash: true,
   exportStatic: {},
   resolve: {
