@@ -9,7 +9,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
    * @description 按钮类型
    * @default "default" 容器灰色背景
    */
-  type?: 'primary' | 'default' | 'text';
+  type?: 'primary' | 'default' | 'link';
   /**
    * @description 按钮状态
    */
@@ -17,7 +17,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   /**
    * @description 按钮变体
    */
-  variant?: 'outline' | 'ghost' | 'dashed';
+  variant?: 'default' | 'outline' | 'text';
   /**
    * @description 按钮 loading
    */

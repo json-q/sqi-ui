@@ -5,13 +5,13 @@ import './style';
 import { LoadingIcon } from '@sq-ui/icons';
 
 export default function Button(props: ButtonProps) {
-  const { children, type = 'default', status, loading, disabled, variant, icon, ...restProps } = props;
+  const { children, type = 'default', status, loading, disabled, variant = 'default', icon, ...restProps } = props;
   const iconNode = loading ? <LoadingIcon /> : icon;
 
   const classes = clsx('sq-btn', `sq-btn-${type}`, {
-    [`sq-btn-status-${status}`]: Boolean(status),
+    [`sq-btn-status-${status}`]: status,
     'sq-btn-loading': loading,
-    [`sq-btn-variant`]: variant,
+    [`sq-btn-variant-${variant}`]: variant,
   });
 
   return (

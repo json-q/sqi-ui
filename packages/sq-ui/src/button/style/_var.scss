@@ -6,9 +6,10 @@ $btn-height-md: $size-md;
 $btn-height-lg: $size-lg;
 
 // 圆角
-$btn-border-radius-sm: $border-radius-sm;
 $btn-border-radius: $border-radius-md;
-$btn-border-radius-lg: $border-radius-lg;
+$btn-shape-border-radius-sm: calc($btn-height-sm / 2);
+$btn-shape-border-radius-md: calc($btn-height-md / 2);
+$btn-shape-border-radius-lg: calc($btn-height-lg / 2);
 
 //字号
 $btn-font-sm: $font-sm;
@@ -16,177 +17,110 @@ $btn-font-md: $font-md;
 $btn-font-lg: $font-lg;
 
 // 图标大小
-$btn-icon-size-sm: $font-size-sm;
-$btn-icon-size-md: $font-size-md;
-$btn-icon-size-lg: $font-size-lg;
+$btn-icon-size-sm: $font-size-md;
+$btn-icon-size-md: $font-size-lg;
+$btn-icon-size-lg: $font-size-xl;
 $btn-loading-size: $font-size-lg;
 
 // 按钮中icon和文字的间距
-$btn-icon-text-gap: 8px;
+$btn-icon-text-margin-left: 8px;
 
 // padding
 $btn-padding-sm: $padding-md;
 $btn-padding-md: $padding-lg;
 $btn-padding-lg: $padding-xl;
 
-// margin
-$btn-icon-margin: $margin-sm;
-
 $btn-border-width: 1px;
 
-$btn-type-colors: (
-  default: (
-    color: $text-color-primary,
-    color-disabled: $text-color-disabled,
-    bg: $bg-color-component,
-    bg-hover: $bg-color-component-hover,
-    bg-active: $bg-color-component-active,
-    bg-disabled: $bg-color-component-disabled,
-    border: $bg-color-component,
-    border-hover: $bg-color-component-hover,
-    border-active: $bg-color-component-active,
-    border-disabled: $bg-color-component-disabled,
-  ),
+$btn-color: (
   primary: (
-    color: $text-color-anti,
-    color-disabled: $text-color-anti,
-    bg: $brand-color,
-    bg-hover: $brand-color-hover,
-    bg-active: $brand-color-active,
-    bg-disabled: $brand-color-disabled,
-    border: $brand-color,
-    border-hover: $brand-color-hover,
-    border-active: $brand-color-active,
-    border-disabled: $brand-color-disabled,
-  ),
-  text: (
-    // 文本情况下，背景应该时容器背景，组件背景色比容器深2梯度
-    color: $text-color-primary,
-    color-disabled: $text-color-disabled,
-    bg: transparent,
-    bg-disabled: transparent,
-    bg-hover: $bg-color-container-hover,
-    bg-active: $bg-color-container-active,
-    border: transparent,
-    border-hover: $bg-color-container-hover,
-    border-active: $bg-color-container-active,
-    border-disabled: transparent,
-  ),
-);
-
-$btn-status-colors: (
-  primary: (
-    color: $text-color-anti,
-    color-disabled: $text-color-anti,
-    bg: $brand-color,
-    bg-hover: $brand-color-hover,
-    bg-active: $brand-color-active,
-    bg-disabled: $brand-color-disabled,
-    border: $brand-color,
-    border-hover: $brand-color-hover,
-    border-active: $brand-color-active,
-    border-disabled: $brand-color-disabled,
+    // 状态色 - 主色
+    normal: $brand-color,
+    hover: $brand-color-hover,
+    active: $brand-color-active,
+    disabled: $brand-color-disabled,
   ),
   success: (
-    color: $text-color-anti,
-    color-disabled: $text-color-anti,
-    bg: $success-color,
-    bg-hover: $success-color-hover,
-    bg-active: $success-color-active,
-    bg-disabled: $success-color-disabled,
-    border: $success-color,
-    border-hover: $success-color-hover,
-    border-active: $success-color-active,
-    border-disabled: $success-color-disabled,
+    // 状态色 - 危险
+    normal: $success-color,
+    hover: $success-color-hover,
+    active: $success-color-active,
+    disabled: $success-color-disabled,
   ),
   warning: (
-    color: $text-color-anti,
-    color-disabled: $text-color-anti,
-    bg: $warning-color,
-    bg-hover: $warning-color-hover,
-    bg-active: $warning-color-active,
-    bg-disabled: $warning-color-disabled,
-    border: $warning-color,
-    border-hover: $warning-color-hover,
-    border-active: $warning-color-active,
-    border-disabled: $warning-color-disabled,
+    // 状态色 - 危险
+    normal: $warning-color,
+    hover: $warning-color-hover,
+    active: $warning-color-active,
+    disabled: $warning-color-disabled,
   ),
+
   danger: (
-    color: $text-color-anti,
-    color-disabled: $text-color-anti,
-    bg: $error-color,
-    bg-hover: $error-color-hover,
-    bg-active: $error-color-active,
-    bg-disabled: $error-color-disabled,
-    border: $error-color,
-    border-hover: $error-color-hover,
-    border-active: $error-color-active,
-    border-disabled: $error-color-disabled,
+    // 状态色 - 危险
+    normal: $error-color,
+    hover: $error-color-hover,
+    active: $error-color-active,
+    disabled: $error-color-disabled,
+  ),
+
+  white-bg: (
+    // 状态色 - 白 ghost
+    normal: transparent,
+    hover: transparent,
+    active: $bg-color-container-active,
+    disabled: $bg-color-component-disabled,
+  ),
+
+  gray-bg: (
+    // 状态色 - 灰 背景
+    normal: $bg-color-component,
+    hover: $bg-color-component-hover,
+    active: $bg-color-component-active,
+    disabled: $bg-color-component-disabled,
+  ),
+
+  text-bg: (
+    // 状态色 - 无框背景 - 即文字背景
+    normal: transparent,
+    hover: $bg-color-container-hover,
+    active: $bg-color-container-active,
+    disabled: transparent,
+  ),
+
+  border-gray: (
+    // 状态色 - border 灰
+    normal: $component-border,
+    hover: $brand-color-hover,
+    active: $brand-color-active,
+    disabled: $component-border,
+  ),
+
+  text: (
+    // 状态色 - 文字 for 描边
+    normal: $text-color-primary,
+    hover: $brand-color-hover,
+    active: $brand-color-active,
+    disabled: $text-color-disabled,
+  ),
+
+  text-gray: (
+    // 状态色 - 灰字 for base default | 灰色文字按钮
+    normal: $text-color-primary,
+    hover: $text-color-primary,
+    active: $text-color-primary,
+    disabled: $text-color-disabled,
+  ),
+
+  none: (
+    normal: transparent,
+    hover: transparent,
+    active: transparent,
+    disabled: transparent,
   ),
 );
 
-// // 状态色 - 主色
-// $btn-color-primary: $brand-color;
-// $btn-color-primary-hover: $brand-color-hover;
-// $btn-color-primary-active: $brand-color-active;
-// $btn-color-primary-disabled: $brand-color-disabled;
+// 文本
+$btn-text-variant-base-color: $text-color-anti;
 
-// // 状态色 - 危险
-// $btn-color-danger: $error-color;
-// $btn-color-danger-hover: $error-color-hover;
-// $btn-color-danger-active: $error-color-active;
-// $btn-color-danger-disabled: $error-color-disabled;
-
-// // 状态色 - 白 背景
-// // input 输入框需要在浅色主题下有默认白色背景，而在暗色等其他主题下 transparent 适配背景色，因此不使用通用背景 token
-// $btn-color-white-bg: transparent;
-// $btn-color-white-bg-hover: transparent;
-// $btn-color-white-bg-active: $bg-color-container-active;
-// $btn-color-white-bg-disabled: $bg-color-component-disabled;
-
-// // 状态色 - 白 ghost
-// $btn-color-white-ghost: $text-color-anti;
-// $btn-color-white-ghost-hover: $brand-color-hover;
-// $btn-color-white-ghost-active: $brand-color-active;
-// $btn-color-white-ghost-disabled: $component-border;
-
-// // 状态色 - 灰 背景
-// $btn-color-gray-bg: $bg-color-component;
-// $btn-color-gray-bg-hover: $bg-color-component-hover;
-// $btn-color-gray-bg-active: $bg-color-component-active;
-// $btn-color-gray-bg-disabled: $bg-color-component-disabled;
-
-// // 状态色 - 无框背景 - 即文字背景
-// $btn-color-text-bg: transparent;
-// $btn-color-text-bg-hover: $bg-color-container-hover;
-// $btn-color-text-bg-active: $bg-color-container-active;
-// $btn-color-text-bg-disabled: transparent;
-
-// // 状态色 - border 灰
-// $btn-color-border-gray: $component-border;
-// $btn-color-border-gray-hover: $brand-color-hover;
-// $btn-color-border-gray-active: $brand-color-active;
-// $btn-color-border-gray-disabled: $component-border;
-
-// // 状态色 - 文字 for 描边
-// $btn-color-text: $text-color-primary;
-// $btn-color-text-hover: $brand-color-hover;
-// $btn-color-text-active: $brand-color-active;
-// $btn-color-text-disabled: $text-color-disabled;
-
-// // 状态色 - 灰字 for base default | 灰色文字按钮
-// $btn-color-text-gray: $text-color-primary;
-// $btn-color-text-gray-hover: $text-color-primary;
-// $btn-color-text-gray-active: $text-color-primary;
-// $btn-color-text-gray-disabled: $text-color-disabled;
-
-// $btn-color-none: transparent;
-// $btn-color-none-hover: transparent;
-// $btn-color-none-active: transparent;
-// $btn-color-none-disabled: transparent;
-
-// // 文本
-// $btn-text-variant-base-color: $text-color-anti;
-
-// // 状态色 - disabled ghost
-// $btn-color-ghost-disabled: rgba(255, 255, 255, 0.22);
+// 状态色 - disabled ghost
+$btn-color-ghost-disabled: rgba(255, 255, 255, 0.22);
