@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button } from '@sq-ui/web';
+import { Button, Space } from '@sq-ui/web';
 
 export default function Demo() {
   return (
     <>
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <h5>Disabled</h5>
+      <Space>
         <Button disabled>Default</Button>
         <Button type="primary" disabled>
           Primary
@@ -21,9 +22,9 @@ export default function Demo() {
         <Button disabled status="warning">
           Warning
         </Button>
-      </div>
-      <hr />
-      <div style={{ display: 'flex', gap: '10px' }}>
+      </Space>
+      <h5>Disabled href</h5>
+      <Space>
         <Button disabled href="#">
           Default
         </Button>
@@ -42,7 +43,7 @@ export default function Demo() {
         <Button disabled status="warning" href="#">
           Warning
         </Button>
-      </div>
+      </Space>
     </>
   );
 }

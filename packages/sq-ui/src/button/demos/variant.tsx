@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button } from '@sq-ui/web';
+import { Button, Space } from '@sq-ui/web';
 
 export default function Demo() {
   return (
     <>
-      <div style={{ display: 'flex', gap: '10px' }}>
+      <h5>Outline</h5>
+      <Space>
         <Button variant="outline">Default</Button>
         <Button variant="outline" type="primary">
           Primary
@@ -18,9 +19,9 @@ export default function Demo() {
         <Button variant="outline" status="warning">
           Warning
         </Button>
-      </div>
-      <hr />
-      <div style={{ display: 'flex', gap: '10px' }}>
+      </Space>
+      <h4>Text</h4>
+      <Space>
         <Button variant="text">Default</Button>
         <Button variant="text" type="primary">
           Primary
@@ -34,9 +35,9 @@ export default function Demo() {
         <Button variant="text" status="warning">
           Warning
         </Button>
-      </div>
-      <hr />
-      <div style={{ display: 'flex', gap: '10px' }}>
+      </Space>
+      <h5>Dashed</h5>
+      <Space>
         <Button variant="dashed">Default</Button>
         <Button variant="dashed" type="primary">
           Primary
@@ -50,7 +51,7 @@ export default function Demo() {
         <Button variant="dashed" status="warning">
           Warning
         </Button>
-      </div>
+      </Space>
     </>
   );
 }

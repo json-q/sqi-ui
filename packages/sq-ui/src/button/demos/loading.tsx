@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from '@sq-ui/web';
+import { Button, Space } from '@sq-ui/web';
 
 export default function Demo() {
   return (
-    <div style={{ display: 'flex', gap: '10px' }}>
+    <Space>
       <Button loading>Default</Button>
       <Button type="primary" loading>
         Primary
@@ -20,6 +20,6 @@ export default function Demo() {
       <Button loading status="warning">
         Warning
       </Button>
-    </div>
+    </Space>
   );
 }

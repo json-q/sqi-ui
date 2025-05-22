@@ -1,7 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import type { ButtonProps } from './type';
-import './style';
 import { LoadingIcon } from '@sq-ui/icons';
 
 export default function Button(props: ButtonProps) {

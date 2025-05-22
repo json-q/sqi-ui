@@ -14,10 +14,12 @@
     "react-dom": ">=16.9.0"
   },
   "dependencies": {
+    "@sq-ui/hooks": "workspace:*",
     "@sq-ui/icons": "workspace:*",
-    "@sq-ui/hooks": "workspace:*"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.16",
     "clsx": "^2.1.1"
   }
 }
