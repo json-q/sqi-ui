@@ -30,6 +30,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.16"
+    "@types/lodash": "^4.17.16",
+    "@types/react": "^19.1.4"
   }
 }

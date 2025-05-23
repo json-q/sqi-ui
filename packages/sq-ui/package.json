@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.17.16",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
     "clsx": "^2.1.1"
   }
 }

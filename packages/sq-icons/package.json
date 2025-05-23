@@ -31,6 +31,7 @@
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@types/fs-extra": "^11.0.4",
+    "@types/react": "^19.1.4",
     "camelcase": "^8.0.0",
     "clsx": "^2.1.1",
     "decamelize": "^6.0.0",
