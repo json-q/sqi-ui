@@ -1,6 +1,0 @@
-@use './variables' as *;
-@use './common' as *;
-
-#{$prefix}.icon-loading {
-  @include spin;
-}

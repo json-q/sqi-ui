@@ -41,7 +41,7 @@ function toArray(children: ReactNode): ReactNode[] {
 }
 
 export default function Space(baseProps: SpaceProps) {
-  const { prefixCls, size: ctxSize, componentConfig } = useContext(ConfigContext);
+  const { prefixCls, size: ctxSize = 'md', componentConfig } = useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Space);
 
   const {

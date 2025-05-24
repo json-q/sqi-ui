@@ -1,8 +1,10 @@
-import BaseIcon from './components/BaseIcon';
+import './style';
+
+import BaseIcon from './components/Icon';
 
 export * from './icons';
 
-export * from './components/BaseIcon';
+export * from './components/Icon';
 
 export { default as IconContext } from './components/Context';
 

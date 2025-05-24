@@ -51,12 +51,7 @@ $module: #{$prefix}-btn;
   transition: all $anim-duration-base linear;
   text-decoration: none;
 
-  .sq-icon {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-
+  .#{$prefix}-icon {
     & + span:not(:empty) {
       margin-left: $btn-icon-text-margin-left;
     }

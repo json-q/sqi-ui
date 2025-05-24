@@ -12,7 +12,7 @@ const defaultProps: ButtonProps = {
 };
 
 export default function Button(baseProps: ButtonProps) {
-  const { prefixCls, size: ctxSize, componentConfig } = React.useContext(ConfigContext);
+  const { prefixCls, size: ctxSize = 'md', componentConfig } = React.useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Button);
 
   const {

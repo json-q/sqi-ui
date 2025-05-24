@@ -1,4 +1,6 @@
 import { defineConfig } from '@rslib/core';
+import { pluginReact } from '@rsbuild/plugin-react';
+import { pluginSass } from '@rsbuild/plugin-sass';
 
 export default defineConfig({
   source: {
@@ -6,6 +8,7 @@ export default defineConfig({
       index: './src/**',
     },
   },
+  plugins: [pluginReact(), pluginSass()],
   output: {
     cleanDistPath: true,
     target: 'web',

@@ -3,14 +3,14 @@ import type { ComponentType, DetailedHTMLProps, HTMLAttributes, ReactNode } from
 import clsx from 'clsx';
 import IconContext from './Context';
 
-export interface BaseIconProps extends DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
+export interface IconProps extends DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
   svg: ReactNode;
   spin?: boolean;
   rotate?: number;
   type?: string;
 }
 
-const BaseIcon = React.forwardRef<HTMLSpanElement, BaseIconProps>((props, ref) => {
+const Icon = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
   const { svg, type, spin, rotate, className, style, ...restProps } = props;
   const { prefixCls = 'sq' } = React.useContext(IconContext);
   const module = `${prefixCls}-icon`;
@@ -35,18 +35,18 @@ const BaseIcon = React.forwardRef<HTMLSpanElement, BaseIconProps>((props, ref) =
   );
 });
 
-BaseIcon.displayName = 'BaseIcon';
+Icon.displayName = 'Icon';
 
-const convertBaseIcon = (Svg: ComponentType, iconType: string) => {
-  const InnerIcon = React.forwardRef<HTMLSpanElement, Omit<BaseIconProps, 'svg' | 'type'>>((props, ref) => (
-    <BaseIcon svg={React.createElement(Svg)} type={iconType} ref={ref} {...props} />
+const convertIcon = (Svg: ComponentType, iconType: string) => {
+  const InnerIcon = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+    <Icon svg={React.createElement(Svg)} type={iconType} ref={ref} {...props} />
   ));
 
   if (process.env.NODE_ENV === 'development') {
-    InnerIcon.displayName = 'BaseIcon';
+    InnerIcon.displayName = 'Icon';
   }
   return InnerIcon;
 };
 
-export { convertBaseIcon };
-export default BaseIcon;
+export { convertIcon };
+export default Icon;

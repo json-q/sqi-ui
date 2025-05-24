@@ -1,4 +1,4 @@
-import './style/theme/index.scss';
+import './style';
 
 export * from './button';
 export * from './space';
