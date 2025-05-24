@@ -7,10 +7,10 @@ import { useMergeProps } from '@sq-ui/hooks';
 
 const defaultProps: ButtonProps = {
   type: 'default',
-  size: 'md',
   variant: 'default',
   htmlType: 'button',
 };
+
 export default function Button(baseProps: ButtonProps) {
   const { prefixCls, size: ctxSize, componentConfig } = React.useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Button);

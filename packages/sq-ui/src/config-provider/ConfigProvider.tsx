@@ -9,7 +9,6 @@ function NormalConfigProvider(baseProps: ConfigProviderProps) {
   const props = useMergeProps(baseProps, defaultConfigProps);
   const { iconPrefix, children } = props;
   const providerValue = omit(props, 'children', 'iconPrefix');
-  console.log('render------');
 
   const IconProviderPlaceholder = iconPrefix ? IconContext.Provider : Fragment;
 

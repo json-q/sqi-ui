@@ -15,7 +15,6 @@ const spaceSize = {
 };
 
 const defaultProps: SpaceProps = {
-  size: 'md',
   direction: 'horizontal',
   align: 'center',
   wrap: false,

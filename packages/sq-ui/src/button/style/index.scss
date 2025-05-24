@@ -77,12 +77,11 @@ $module: #{$prefix}-btn;
 
   color: $btn-text-variant-base-color;
 
+  @include button-size($btn-height-md, $btn-font-md, $btn-icon-size-md, $btn-padding-md);
+
   &-size {
     &-sm {
       @include button-size($btn-height-sm, $btn-font-sm, $btn-icon-size-sm, $btn-padding-sm);
-    }
-    &-md {
-      @include button-size($btn-height-md, $btn-font-md, $btn-icon-size-md, $btn-padding-md);
     }
     &-lg {
       @include button-size($btn-height-lg, $btn-font-lg, $btn-icon-size-lg, $btn-padding-lg);

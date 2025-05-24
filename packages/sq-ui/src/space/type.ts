@@ -6,7 +6,7 @@ export type SizeType = ConfigSize | number | undefined;
 export interface SpaceProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @description 间距大小
-   * @default 'md'
+   * @default ''
    */
   size?: SizeType | [SizeType, SizeType];
   /**
