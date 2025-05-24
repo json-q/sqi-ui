@@ -1,16 +1,10 @@
 import React from 'react';
 import { ConfigProvider, Button, Space } from '@sq-ui/web';
+
 export default function Demo() {
   return (
-    <Space>
-      <ConfigProvider
-        size="lg"
-        componentConfig={{
-          Button: {
-            status: 'danger',
-          },
-        }}
-      >
+    <ConfigProvider size="lg">
+      <Space>
         <Button type="primary">Button</Button>
 
         <ConfigProvider
@@ -23,7 +17,7 @@ export default function Demo() {
         >
           <Button variant="text">Button</Button>
         </ConfigProvider>
-      </ConfigProvider>
-    </Space>
+      </Space>
+    </ConfigProvider>
   );
 }

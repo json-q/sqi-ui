@@ -3,12 +3,13 @@ import { IconContext } from '@sq-ui/icons';
 import type { ConfigProviderProps } from './type';
 import { ConfigContext, defaultConfigProps } from './context';
 import { omit } from 'lodash-es';
-import { useMergeProps as useP } from '@sq-ui/hooks';
+import { useMergeProps } from '@sq-ui/hooks';
 
-export default function ConfigProvider(baseProps: ConfigProviderProps) {
-  const props = useP(baseProps, defaultConfigProps);
+function NormalConfigProvider(baseProps: ConfigProviderProps) {
+  const props = useMergeProps(baseProps, defaultConfigProps);
   const { iconPrefix, children } = props;
   const providerValue = omit(props, 'children', 'iconPrefix');
+  console.log('render------');
 
   const IconProviderPlaceholder = iconPrefix ? IconContext.Provider : Fragment;
 
@@ -18,3 +19,9 @@ export default function ConfigProvider(baseProps: ConfigProviderProps) {
     </ConfigContext.Provider>
   );
 }
+
+const ConfigProvider = React.memo(NormalConfigProvider, Object.is);
+
+export default ConfigProvider;
+
+ConfigProvider.displayName = 'ConfigProvider';
