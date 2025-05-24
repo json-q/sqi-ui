@@ -2,11 +2,12 @@ import * as React from 'react';
 import clsx from 'clsx';
 import type { ButtonProps } from './type';
 import { LoadingIcon } from '@sq-ui/icons';
-import { useMergeProps } from '@sq-ui/hooks';
 import { ConfigContext } from '../config-provider';
+import { useMergeProps } from '@sq-ui/hooks';
 
 const defaultProps: ButtonProps = {
   type: 'default',
+  size: 'md',
   variant: 'default',
   htmlType: 'button',
 };
@@ -17,7 +18,7 @@ export default function Button(baseProps: ButtonProps) {
   const {
     children,
     type,
-    size,
+    size = ctxSize,
     htmlType,
     status,
     loading,
@@ -35,7 +36,7 @@ export default function Button(baseProps: ButtonProps) {
   const _type = href ? 'link' : type;
 
   const classes = clsx(`${prefixCls}-btn`, `${prefixCls}-btn-${_type}`, {
-    [`${prefixCls}-btn-size-${size || ctxSize}`]: !!(size || ctxSize),
+    [`${prefixCls}-btn-size-${size}`]: size,
     [`${prefixCls}-btn-status-${status}`]: !!status,
     [`${prefixCls}-btn-variant-${variant}`]: variant,
     [`${prefixCls}-btn-loading`]: loading,
@@ -66,3 +67,5 @@ export default function Button(baseProps: ButtonProps) {
     </button>
   );
 }
+
+Button.displayName = 'Button';
