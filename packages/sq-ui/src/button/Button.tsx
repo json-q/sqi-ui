@@ -2,17 +2,28 @@ import * as React from 'react';
 import clsx from 'clsx';
 import type { ButtonProps } from './type';
 import { LoadingIcon } from '@sq-ui/icons';
+import { useMergeProps } from '@sq-ui/hooks';
+import { ConfigContext } from '../config-provider';
 
-export default function Button(props: ButtonProps) {
+const defaultProps: ButtonProps = {
+  type: 'default',
+  variant: 'default',
+  htmlType: 'button',
+};
+export default function Button(baseProps: ButtonProps) {
+  const { prefixCls, size: ctxSize, componentConfig } = React.useContext(ConfigContext);
+  const props = useMergeProps(baseProps, defaultProps, componentConfig?.Button);
+
   const {
     children,
-    type = 'default',
+    type,
+    size,
+    htmlType,
     status,
     loading,
     disabled,
-    variant = 'default',
+    variant,
     icon,
-    size,
     href,
     target,
     onClick,
@@ -20,15 +31,15 @@ export default function Button(props: ButtonProps) {
     ...restProps
   } = props;
 
-  const iconNode = loading ? <LoadingIcon /> : icon;
+  const iconNode = loading ? <LoadingIcon spin={loading} /> : icon;
   const _type = href ? 'link' : type;
 
-  const classes = clsx('sq-btn', `sq-btn-${_type}`, {
-    [`sq-btn-status-${status}`]: !!status,
-    [`sq-btn-variant-${variant}`]: variant,
-    [`sq-btn-size-${size}`]: !!size,
-    'sq-btn-loading': loading,
-    'sq-btn-disabled': disabled,
+  const classes = clsx(`${prefixCls}-btn`, `${prefixCls}-btn-${_type}`, {
+    [`${prefixCls}-btn-size-${size || ctxSize}`]: !!(size || ctxSize),
+    [`${prefixCls}-btn-status-${status}`]: !!status,
+    [`${prefixCls}-btn-variant-${variant}`]: variant,
+    [`${prefixCls}-btn-loading`]: loading,
+    [`${prefixCls}-btn-disabled`]: disabled,
   });
 
   const handleClick: ButtonProps['onClick'] = (e) => {
@@ -41,7 +52,7 @@ export default function Button(props: ButtonProps) {
 
   if (href) {
     return (
-      <a href={href} target={target} className={classes} onClick={handleClick} {...anchorProps}>
+      <a {...anchorProps} href={href} target={target} className={classes} onClick={handleClick}>
         {iconNode}
         <span>{children}</span>
       </a>
@@ -49,7 +60,7 @@ export default function Button(props: ButtonProps) {
   }
 
   return (
-    <button type="button" className={classes} onClick={handleClick} {...restProps}>
+    <button type={htmlType} className={classes} onClick={handleClick} {...restProps}>
       {iconNode}
       <span>{children}</span>
     </button>

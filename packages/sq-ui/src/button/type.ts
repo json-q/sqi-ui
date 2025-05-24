@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, HTMLProps, MouseEventHandler, ReactNode } from 'react';
+import type { ConfigSize } from '@sq-ui/web';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
   /**
@@ -37,8 +38,9 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   icon?: ReactNode;
   /**
    * @description 按钮尺寸
+   * @default ''
    */
-  size?: 'sm' | 'lg';
+  size?: ConfigSize;
   /**
    * @description 与 a 标签 href 行为一致
    */

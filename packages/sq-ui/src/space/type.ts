@@ -1,11 +1,12 @@
-import { HTMLAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
+import type { ConfigSize } from '@sq-ui/web';
 
-export type SizeType = 'small' | 'middle' | 'large' | number | undefined;
+export type SizeType = ConfigSize | number | undefined;
 
 export interface SpaceProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @description 间距大小
-   * @default 'small'
+   * @default 'md'
    */
   size?: SizeType | [SizeType, SizeType];
   /**

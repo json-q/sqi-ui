@@ -2,7 +2,10 @@
   "extends": "@sq-ui/tsconfig/react-library.json",
   "compilerOptions": {
     "noEmit": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"]
+    }
   },
   "include": [".dumirc.ts"],
   "exclude": ["node_modules"]

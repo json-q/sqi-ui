@@ -1,6 +1,5 @@
 import { type SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
-import isFunction from 'lodash/isFunction';
-import isUndefined from 'lodash/isUndefined';
+import { isFunction, isUndefined } from 'lodash-es';
 import { usePrevious } from './usePrevious';
 
 interface UseMergeStateOptions<T> {

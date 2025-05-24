@@ -1,20 +1,20 @@
-import React, { Children, CSSProperties, Fragment, ReactNode, useCallback } from 'react';
+import React, { Fragment, Children, useCallback } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import clsx from 'clsx';
-import isArray from 'lodash/isArray';
-import isString from 'lodash/isString';
+import { isArray, isString } from 'lodash-es';
 import type { SpaceProps } from './type';
 
 const spaceSize = {
-  small: 8,
-  middle: 16,
-  large: 24,
+  sm: 8,
+  md: 16,
+  lg: 24,
 };
 
 export default function Space(props: SpaceProps) {
   const {
     className,
     children,
-    size = 'small',
+    size = 'md',
     direction = 'horizontal',
     align,
     split,
@@ -41,7 +41,9 @@ export default function Space(props: SpaceProps) {
     (isLastChildren: boolean): CSSProperties => {
       // 若传入数组，以传入为主，若为字符串或数字，则分别设置水平和垂直方向的间距
       const mergeSize = isArray(size) ? size : [size, size];
-      const [horizontalGap, verticalGap] = mergeSize.map((_size) => (isString(_size) ? spaceSize[_size] : _size || 0));
+      const [horizontalGap, verticalGap] = mergeSize.map((_size) =>
+        isString(_size) ? spaceSize[_size as keyof typeof spaceSize] : _size || 0,
+      );
 
       if (wrap) {
         return {

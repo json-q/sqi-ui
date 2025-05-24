@@ -73,15 +73,11 @@ $module: #{$prefix}-btn;
   &-loading {
     opacity: 0.5;
     pointer-events: none;
-
-    .sq-icon {
-      @include spin;
-    }
   }
 
   color: $btn-text-variant-base-color;
-  @include button-size($btn-height-md, $btn-font-md, $btn-icon-size-md, $btn-padding-md);
 
+  @include button-size($btn-height-md, $btn-font-md, $btn-icon-size-md, $btn-padding-md);
   &-size {
     &-sm {
       @include button-size($btn-height-sm, $btn-font-sm, $btn-icon-size-sm, $btn-padding-sm);

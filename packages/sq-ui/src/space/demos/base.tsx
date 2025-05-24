@@ -4,20 +4,20 @@ import { Button, Space } from '@sq-ui/web';
 export default function Demo() {
   return (
     <>
-      <h5>Small gap (default)</h5>
+      <h5>Small gap </h5>
+      <Space size="sm">
+        <Button type="primary">Item1</Button>
+        <Button type="primary">Item2</Button>
+        <Button type="primary">Item3</Button>
+      </Space>
+      <h5>Middle gap (default)</h5>
       <Space>
         <Button type="primary">Item1</Button>
         <Button type="primary">Item2</Button>
         <Button type="primary">Item3</Button>
       </Space>
-      <h5>Middle gap</h5>
-      <Space size="middle">
-        <Button type="primary">Item1</Button>
-        <Button type="primary">Item2</Button>
-        <Button type="primary">Item3</Button>
-      </Space>
       <h5>Large gap</h5>
-      <Space size="large">
+      <Space size="lg">
         <Button type="primary">Item1</Button>
         <Button type="primary">Item2</Button>
         <Button type="primary">Item3</Button>

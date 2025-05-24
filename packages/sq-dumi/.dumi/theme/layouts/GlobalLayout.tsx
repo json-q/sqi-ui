@@ -1,4 +1,3 @@
-// .dumi/theme/layouts/GlobalLayout.tsx
 import { useOutlet, usePrefersColor } from 'dumi';
 import { useEffect } from 'react';
 

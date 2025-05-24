@@ -12,12 +12,13 @@ export interface BaseIconProps extends DetailedHTMLProps<HTMLAttributes<HTMLSpan
 
 const BaseIcon = React.forwardRef<HTMLSpanElement, BaseIconProps>((props, ref) => {
   const { svg, type, spin, rotate, className, style, ...restProps } = props;
-  const { prefixCls = 'sq-icon' } = React.useContext(IconContext);
+  const { prefixCls = 'sq' } = React.useContext(IconContext);
+  const module = `${prefixCls}-icon`;
 
   const classes = clsx(
-    prefixCls,
+    module,
     {
-      [`${prefixCls}-spin`]: !!spin && !!svg,
+      [`${module}-spin`]: !!spin && !!svg,
     },
     className,
   );
