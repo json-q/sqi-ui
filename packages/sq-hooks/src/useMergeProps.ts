@@ -7,6 +7,7 @@ export function useMergeProps<P>(
 ): P {
   return useMemo(() => {
     const _defaultProps = { ...componentDefaultProps, ...globalComponentConfig };
+    // fix(#1): 不能 deepClone, 引用地址变化会导致 rerender 再次触发 hook，无限 rerender
     const mProps = { ...componentProps };
 
     // https://github.com/facebook/react/blob/main/packages/react/src/jsx/ReactJSXElement.js#L733-L740
