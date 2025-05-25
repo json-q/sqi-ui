@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
-import type { ButtonProps } from './type';
 import { LoadingIcon } from '@sq-ui/icons';
-import { ConfigContext } from '../config-provider';
 import { useMergeProps } from '@sq-ui/hooks';
+import { ConfigContext } from '../config-provider';
+import type { ButtonProps } from './type';
 
 const defaultProps: ButtonProps = {
   type: 'default',
@@ -12,7 +12,7 @@ const defaultProps: ButtonProps = {
 };
 
 export default function Button(baseProps: ButtonProps) {
-  const { prefixCls, size: ctxSize = 'md', componentConfig } = React.useContext(ConfigContext);
+  const { prefixCls, size: ctxSize = 'md', componentConfig } = useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Button);
 
   const {

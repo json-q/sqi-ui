@@ -9,7 +9,7 @@ export default function Demo() {
       <SearchIcon />
 
       <SearchIcon rotate={90} />
-      <SearchIcon spin />
+      <AddIcon spin />
     </Space>
   );
 }

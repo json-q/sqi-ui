@@ -1,11 +1,9 @@
 import React from 'react';
-import { Space } from '@sq-ui/web';
+import { Space, Divider } from '@sq-ui/web';
 
 export default function Demo() {
-  const Split = <div style={{ padding: '0 8px' }}>|</div>;
-
   return (
-    <Space split={Split}>
+    <Space size={4} split={<Divider direction="vertical" />}>
       <span>text</span>
       <span>text</span>
       <span>text</span>

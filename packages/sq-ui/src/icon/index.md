@@ -10,9 +10,11 @@ group:
 
 # Icon 图标
 
-组件库不内置 Icon，需引入 `@sq-ui/icons`
+组件库不内置 Icon，需引入 `@sq-ui/icons`，`@sq-ui/icons` 携带了极少量的样式，当使用图标时，样式会自动引入
 
 ## 基本用法
+
+通过设置 `rotate` 控制图标的旋转角度，设置 `spin` 可无限旋转
 
 <code src="./demos/base.tsx"></code>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { createContext } from 'react';
 import type { ConfigProviderProps } from './type';
 
 export const defaultConfigProps: ConfigProviderProps = {
@@ -7,4 +7,4 @@ export const defaultConfigProps: ConfigProviderProps = {
   iconPrefix: 'sq',
 };
 
-export const ConfigContext = React.createContext<ConfigProviderProps>(defaultConfigProps);
+export const ConfigContext = createContext<ConfigProviderProps>(defaultConfigProps);

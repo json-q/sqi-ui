@@ -1,5 +1,6 @@
 import React from 'react';
 import { ConfigProvider, Button } from '@sq-ui/web';
+
 export default function Demo() {
   return (
     <ConfigProvider

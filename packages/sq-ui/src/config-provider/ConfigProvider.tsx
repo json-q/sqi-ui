@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { IconContext } from '@sq-ui/icons';
-import type { ConfigProviderProps } from './type';
-import { ConfigContext, defaultConfigProps } from './context';
 import { omit } from 'lodash-es';
 import { useMergeProps } from '@sq-ui/hooks';
+import { IconContext } from '@sq-ui/icons';
+import { ConfigContext, defaultConfigProps } from './context';
+import type { ConfigProviderProps } from './type';
 
-function NormalConfigProvider(baseProps: ConfigProviderProps) {
+export default function ConfigProvider(baseProps: ConfigProviderProps) {
   const props = useMergeProps(baseProps, defaultConfigProps);
   const { iconPrefix, children } = props;
   const providerValue = omit(props, 'children', 'iconPrefix');
@@ -18,9 +18,5 @@ function NormalConfigProvider(baseProps: ConfigProviderProps) {
     </ConfigContext.Provider>
   );
 }
-
-const ConfigProvider = React.memo(NormalConfigProvider, Object.is);
-
-export default ConfigProvider;
 
 ConfigProvider.displayName = 'ConfigProvider';

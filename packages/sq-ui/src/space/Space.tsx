@@ -4,9 +4,8 @@ import { isFragment } from 'react-is';
 import clsx from 'clsx';
 import { isArray, isString } from 'lodash-es';
 import { useMergeProps } from '@sq-ui/hooks';
-
-import type { SpaceProps } from './type';
 import { ConfigContext } from '../config-provider';
+import type { SpaceProps } from './type';
 
 const spaceSize = {
   sm: 8,
