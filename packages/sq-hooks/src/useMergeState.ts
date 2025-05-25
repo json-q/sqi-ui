@@ -1,5 +1,5 @@
 import { type SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
-import { isFunction, isUndefined } from 'lodash-es';
+import { isFunction, isUndefined } from '@sq-ui/utils';
 import { usePrevious } from './usePrevious';
 
 interface UseMergeStateOptions<T> {

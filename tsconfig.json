@@ -6,7 +6,8 @@
     "paths": {
       "@sq-ui/web": ["./packages/sq-ui/src/index.ts"],
       "@sq-ui/icons": ["./packages/sq-icons/src/index.ts"],
-      "@sq-ui/hooks": ["./packages/sq-hooks/src/index.ts"]
+      "@sq-ui/hooks": ["./packages/sq-hooks/src/index.ts"],
+      "@sq-ui/utils": ["./packages/sq-utils/src/index.ts"]
     }
   },
   "include": ["packages/**/*.tsx", "packages/**/*.ts"],
