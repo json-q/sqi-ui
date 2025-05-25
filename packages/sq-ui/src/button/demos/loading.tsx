@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Space } from '@sq-ui/web';
+import { Button, Divider, Space } from '@sq-ui/web';
 import { AddIcon } from '@sq-ui/icons';
 
 export default function Demo() {
@@ -27,7 +27,7 @@ export default function Demo() {
           Warning
         </Button>
       </Space>
-      <hr />
+      <Divider />
       <Space>
         <Button type="primary" icon={<AddIcon />} loading={loading1} onClick={() => setLoading1(!loading1)} />
         <Button type="primary" icon={<AddIcon />} loading={loading2} onClick={() => setLoading2(!loading2)}>
