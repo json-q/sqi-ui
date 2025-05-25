@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { ButtonProps } from '../button';
 import type { SpaceProps } from '../space';
+import { DividerProps } from '../divider';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
 
@@ -30,4 +31,5 @@ export interface ConfigProviderProps {
 export type ComponentConfig = {
   Button?: ButtonProps;
   Space?: SpaceProps;
+  Divider?: DividerProps;
 };
