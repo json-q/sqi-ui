@@ -1,5 +1,10 @@
 export { default as AddIcon } from './AddIcon';
+export { default as CheckCircleFilledIcon } from './CheckCircleFilledIcon';
 export { default as ChevronDownIcon } from './ChevronDownIcon';
+export { default as CloseCircleFilledIcon } from './CloseCircleFilledIcon';
+export { default as CloseIcon } from './CloseIcon';
+export { default as ErrorCircleFilledIcon } from './ErrorCircleFilledIcon';
+export { default as InfoCircleFilledIcon } from './InfoCircleFilledIcon';
 export { default as LoadingIcon } from './LoadingIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as UploadIcon } from './UploadIcon';
