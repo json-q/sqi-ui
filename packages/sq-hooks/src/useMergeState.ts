@@ -1,5 +1,5 @@
 import { type Dispatch, type SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
-import { isFunction, isUndefined } from '@sq-ui/utils';
+import { isFunction, isUndefined } from '@sqi-ui/utils';
 import { usePrevious } from './usePrevious';
 
 interface UseMergeStateOptions<T> {

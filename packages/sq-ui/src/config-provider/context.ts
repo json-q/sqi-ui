@@ -3,8 +3,8 @@ import type { ConfigProviderProps } from './type';
 
 export const defaultConfigProps: ConfigProviderProps = {
   componentConfig: {},
-  prefixCls: 'sq',
-  iconPrefix: 'sq',
+  prefixCls: 'sqi',
+  iconPrefix: 'sqi',
 };
 
 export const ConfigContext = createContext<ConfigProviderProps>(defaultConfigProps);

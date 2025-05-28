@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import clsx from 'clsx';
-import { useMergeProps } from '@sq-ui/hooks';
+import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider';
 import type { DividerProps } from './type';
 

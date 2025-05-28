@@ -18,12 +18,12 @@ export interface ConfigProviderProps {
   size?: ConfigSize;
   /**
    * @description 组件类名前缀
-   * @default 'sq'
+   * @default 'sqi'
    */
   prefixCls?: string;
   /**
    * @description 组件图标前缀
-   * @default 'sq-icon'
+   * @default 'sqi-icon'
    */
   iconPrefix?: string;
   children?: ReactNode;

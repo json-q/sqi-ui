@@ -1,52 +1,52 @@
 // size/margin/padding相关 token
 :root {
-  --sq-size-1: 2px;
-  --sq-size-2: 4px;
-  --sq-size-3: 6px;
-  --sq-size-4: 8px;
-  --sq-size-5: 12px;
-  --sq-size-6: 16px;
-  --sq-size-7: 20px;
-  --sq-size-8: 24px;
-  --sq-size-9: 28px;
-  --sq-size-10: 32px;
-  --sq-size-11: 36px;
-  --sq-size-12: 40px;
-  --sq-size-13: 48px;
-  --sq-size-14: 56px;
-  --sq-size-15: 64px;
-  --sq-size-16: 72px;
+  --sqi-size-1: 2px;
+  --sqi-size-2: 4px;
+  --sqi-size-3: 6px;
+  --sqi-size-4: 8px;
+  --sqi-size-5: 12px;
+  --sqi-size-6: 16px;
+  --sqi-size-7: 20px;
+  --sqi-size-8: 24px;
+  --sqi-size-9: 28px;
+  --sqi-size-10: 32px;
+  --sqi-size-11: 36px;
+  --sqi-size-12: 40px;
+  --sqi-size-13: 48px;
+  --sqi-size-14: 56px;
+  --sqi-size-15: 64px;
+  --sqi-size-16: 72px;
 
   //全局 component 组件尺寸高度相关 token
-  --sq-size-xxxs: var(--sq-size-6);
-  --sq-size-xxs: var(--sq-size-7);
-  --sq-size-xs: var(--sq-size-8);
-  --sq-size-sm: var(--sq-size-9);
-  --sq-size-md: var(--sq-size-10);
-  --sq-size-lg: var(--sq-size-11);
-  --sq-size-xl: var(--sq-size-12);
-  --sq-size-xxl: var(--sq-size-13);
-  --sq-size-xxxl: var(--sq-size-14);
-  --sq-size-xxxxl: var(--sq-size-15);
-  --sq-size-xxxxxl: var(--sq-size-16);
+  --sqi-size-xxxs: var(--sqi-size-6);
+  --sqi-size-xxs: var(--sqi-size-7);
+  --sqi-size-xs: var(--sqi-size-8);
+  --sqi-size-sm: var(--sqi-size-9);
+  --sqi-size-md: var(--sqi-size-10);
+  --sqi-size-lg: var(--sqi-size-11);
+  --sqi-size-xl: var(--sqi-size-12);
+  --sqi-size-xxl: var(--sqi-size-13);
+  --sqi-size-xxxl: var(--sqi-size-14);
+  --sqi-size-xxxxl: var(--sqi-size-15);
+  --sqi-size-xxxxxl: var(--sqi-size-16);
 
   //全局 component 组件左右边距 token
-  --sq-padding-xxs: var(--sq-size-1);
-  --sq-padding-xs: var(--sq-size-2);
-  --sq-padding-sm: var(--sq-size-4);
-  --sq-padding-md: var(--sq-size-5);
-  --sq-padding-lg: var(--sq-size-6);
-  --sq-padding-xl: var(--sq-size-8);
-  --sq-padding-xxl: var(--sq-size-10);
+  --sqi-padding-xxs: var(--sqi-size-1);
+  --sqi-padding-xs: var(--sqi-size-2);
+  --sqi-padding-sm: var(--sqi-size-4);
+  --sqi-padding-md: var(--sqi-size-5);
+  --sqi-padding-lg: var(--sqi-size-6);
+  --sqi-padding-xl: var(--sqi-size-8);
+  --sqi-padding-xxl: var(--sqi-size-10);
 
   //全局 component 组件间距 token
-  --sq-margin-xxs: var(--sq-size-1);
-  --sq-margin-xs: var(--sq-size-2);
-  --sq-margin-sm: var(--sq-size-4);
-  --sq-margin-md: var(--sq-size-5);
-  --sq-margin-lg: var(--sq-size-6);
-  --sq-margin-xl: var(--sq-size-7);
-  --sq-margin-xxl: var(--sq-size-8);
-  --sq-margin-xxxl: var(--sq-size-10);
-  --sq-margin-xxxxl: var(--sq-size-12);
+  --sqi-margin-xxs: var(--sqi-size-1);
+  --sqi-margin-xs: var(--sqi-size-2);
+  --sqi-margin-sm: var(--sqi-size-4);
+  --sqi-margin-md: var(--sqi-size-5);
+  --sqi-margin-lg: var(--sqi-size-6);
+  --sqi-margin-xl: var(--sqi-size-7);
+  --sqi-margin-xxl: var(--sqi-size-8);
+  --sqi-margin-xxxl: var(--sqi-size-10);
+  --sqi-margin-xxxxl: var(--sqi-size-12);
 }

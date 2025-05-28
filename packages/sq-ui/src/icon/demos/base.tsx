@@ -1,6 +1,6 @@
 import React from 'react';
-import { AddIcon, SearchIcon } from '@sq-ui/icons';
-import { Space } from '@sq-ui/web';
+import { AddIcon, SearchIcon } from '@sqi-ui/icons';
+import { Space } from '@sqi-ui/web';
 
 export default function Demo() {
   return (

@@ -10,7 +10,7 @@ group:
 
 # Icon 图标
 
-组件库不内置 Icon，需引入 `@sq-ui/icons`，`@sq-ui/icons` 携带了极少量的样式，当使用图标时，样式会自动引入
+组件库不内置 Icon，需引入 `@sqi-ui/icons`，`@sqi-ui/icons` 携带了极少量的样式，当使用图标时，样式会自动引入
 
 ## 基本用法
 

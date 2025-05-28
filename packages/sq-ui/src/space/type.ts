@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react';
-import type { ConfigSize } from '@sq-ui/web';
+import type { ConfigSize } from '@sqi-ui/web';
 
 export type SizeType = ConfigSize | number | undefined;
 

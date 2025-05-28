@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Divider, Space } from '@sq-ui/web';
-import { AddIcon } from '@sq-ui/icons';
+import { Button, Divider, Space } from '@sqi-ui/web';
+import { AddIcon } from '@sqi-ui/icons';
 
 export default function Demo() {
   const [loading1, setLoading1] = useState(false);

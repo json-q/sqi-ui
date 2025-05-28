@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigProvider, Button, Space } from '@sq-ui/web';
+import { ConfigProvider, Button, Space } from '@sqi-ui/web';
 
 export default function Demo() {
   return (

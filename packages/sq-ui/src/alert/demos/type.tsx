@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from '@sq-ui/web';
+import { Alert } from '@sqi-ui/web';
 
 export default function Demo() {
   return (

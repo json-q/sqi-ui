@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '@sq-ui/icons';
+import Icon from '@sqi-ui/icons';
 
 export default function Demo() {
   return <Icon svg={<CustomIcon />} style={{ color: 'red' }} />;

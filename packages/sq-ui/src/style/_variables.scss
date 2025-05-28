@@ -1,119 +1,119 @@
 // 公共前缀
 
-$prefix: 'sq';
+$prefix: 'sqi';
 
 // 可读基础颜色
-$brand-color: var(--sq-brand-color); // 色彩-品牌-可操作
-$warning-color: var(--sq-warning-color); // 色彩-功能-警告
-$error-color: var(--sq-error-color); // 色彩-功能-失败
-$success-color: var(--sq-success-color); // 色彩-功能-成功
+$brand-color: var(--sqi-brand-color); // 色彩-品牌-可操作
+$warning-color: var(--sqi-warning-color); // 色彩-功能-警告
+$error-color: var(--sqi-error-color); // 色彩-功能-失败
+$success-color: var(--sqi-success-color); // 色彩-功能-成功
 
 // 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
-$brand-color-hover: var(--sq-brand-color-hover); // hover态
-$brand-color-focus: var(--sq-brand-color-focus); // focus态，包括鼠标和键盘
-$brand-color-active: var(--sq-brand-color-active); // 点击态
-$brand-color-disabled: var(--sq-brand-color-disabled); // 禁用态
-$brand-color-light: var(--sq-brand-color-light); // 浅色的选中态
-$brand-color-light-hover: var(--sq-brand-color-light-hover);
+$brand-color-hover: var(--sqi-brand-color-hover); // hover态
+$brand-color-focus: var(--sqi-brand-color-focus); // focus态，包括鼠标和键盘
+$brand-color-active: var(--sqi-brand-color-active); // 点击态
+$brand-color-disabled: var(--sqi-brand-color-disabled); // 禁用态
+$brand-color-light: var(--sqi-brand-color-light); // 浅色的选中态
+$brand-color-light-hover: var(--sqi-brand-color-light-hover);
 
 // 警告色扩展
-$warning-color-hover: var(--sq-warning-color-hover);
-$warning-color-focus: var(--sq-warning-color-focus);
-$warning-color-active: var(--sq-warning-color-active);
-$warning-color-disabled: var(--sq-warning-color-disabled);
-$warning-color-light: var(--sq-warning-color-light);
-$warning-color-light-hover: var(--sq-warning-color-light-hover);
+$warning-color-hover: var(--sqi-warning-color-hover);
+$warning-color-focus: var(--sqi-warning-color-focus);
+$warning-color-active: var(--sqi-warning-color-active);
+$warning-color-disabled: var(--sqi-warning-color-disabled);
+$warning-color-light: var(--sqi-warning-color-light);
+$warning-color-light-hover: var(--sqi-warning-color-light-hover);
 
 // 失败/错误色扩展
-$error-color-hover: var(--sq-error-color-hover);
-$error-color-focus: var(--sq-error-color-focus);
-$error-color-active: var(--sq-error-color-active);
-$error-color-disabled: var(--sq-error-color-disabled);
-$error-color-light: var(--sq-error-color-light);
-$error-color-light-hover: var(--sq-error-color-light-hover);
+$error-color-hover: var(--sqi-error-color-hover);
+$error-color-focus: var(--sqi-error-color-focus);
+$error-color-active: var(--sqi-error-color-active);
+$error-color-disabled: var(--sqi-error-color-disabled);
+$error-color-light: var(--sqi-error-color-light);
+$error-color-light-hover: var(--sqi-error-color-light-hover);
 
 // 成功色扩展
-$success-color-hover: var(--sq-success-color-hover);
-$success-color-focus: var(--sq-success-color-focus);
-$success-color-active: var(--sq-success-color-active);
-$success-color-disabled: var(--sq-success-color-disabled);
-$success-color-light: var(--sq-success-color-light);
-$success-color-light-hover: var(--sq-success-color-light-hover);
+$success-color-hover: var(--sqi-success-color-hover);
+$success-color-focus: var(--sqi-success-color-focus);
+$success-color-active: var(--sqi-success-color-active);
+$success-color-disabled: var(--sqi-success-color-disabled);
+$success-color-light: var(--sqi-success-color-light);
+$success-color-light-hover: var(--sqi-success-color-light-hover);
 
 // 背景色
-$bg-color-container: var(--sq-bg-color-container); // 色彩  - 组件
-$bg-color-container-hover: var(--sq-bg-color-container-hover); // 色彩 - 组件 - hover
-$bg-color-container-active: var(--sq-bg-color-container-active); // 色彩 - 组件 - active
-$bg-color-component: var(--sq-bg-color-component); // 色彩  - 组件
-$bg-color-component-hover: var(--sq-bg-color-component-hover); // 色彩 - 组件 - hover
-$bg-color-component-active: var(--sq-bg-color-component-active); // 色彩 - 组件 - active
-$bg-color-component-disabled: var(--sq-bg-color-component-disabled); // 色彩 - 组件 - disabled
+$bg-color-container: var(--sqi-bg-color-container); // 色彩  - 组件
+$bg-color-container-hover: var(--sqi-bg-color-container-hover); // 色彩 - 组件 - hover
+$bg-color-container-active: var(--sqi-bg-color-container-active); // 色彩 - 组件 - active
+$bg-color-component: var(--sqi-bg-color-component); // 色彩  - 组件
+$bg-color-component-hover: var(--sqi-bg-color-component-hover); // 色彩 - 组件 - hover
+$bg-color-component-active: var(--sqi-bg-color-component-active); // 色彩 - 组件 - active
+$bg-color-component-disabled: var(--sqi-bg-color-component-disabled); // 色彩 - 组件 - disabled
 
 // 文本颜色
-$text-color-primary: var(--sq-text-color-primary); // 色彩-文字-主要
-$text-color-secondary: var(--sq-text-color-secondary); // 色彩-文字-次要
-$text-color-placeholder: var(--sq-text-color-placeholder); // 色彩-文字-占位符/说明
-$text-color-disabled: var(--sq-text-color-disabled); // 色彩-文字-禁用
-$text-color-anti: var(--sq-text-color-anti); // 色彩-文字-反色
-$text-color-brand: var(--sq-text-color-brand); // 色彩-文字-品牌
-$text-color-link: var(--sq-text-color-link); // 色彩-文字-链接
+$text-color-primary: var(--sqi-text-color-primary); // 色彩-文字-主要
+$text-color-secondary: var(--sqi-text-color-secondary); // 色彩-文字-次要
+$text-color-placeholder: var(--sqi-text-color-placeholder); // 色彩-文字-占位符/说明
+$text-color-disabled: var(--sqi-text-color-disabled); // 色彩-文字-禁用
+$text-color-anti: var(--sqi-text-color-anti); // 色彩-文字-反色
+$text-color-brand: var(--sqi-text-color-brand); // 色彩-文字-品牌
+$text-color-link: var(--sqi-text-color-link); // 色彩-文字-链接
 
 // 分割线
-$component-stroke: var(--sq-component-stroke);
+$component-stroke: var(--sqi-component-stroke);
 // 边框
-$component-border: var(--sq-component-border);
+$component-border: var(--sqi-component-border);
 
 // component 组件尺寸高度相关 token
-$size-xs: var(--sq-size-xs);
-$size-sm: var(--sq-size-sm);
-$size-md: var(--sq-size-md);
-$size-lg: var(--sq-size-lg);
-$size-xl: var(--sq-size-xl);
-$size-xxl: var(--sq-size-xxl);
+$size-xs: var(--sqi-size-xs);
+$size-sm: var(--sqi-size-sm);
+$size-md: var(--sqi-size-md);
+$size-lg: var(--sqi-size-lg);
+$size-xl: var(--sqi-size-xl);
+$size-xxl: var(--sqi-size-xxl);
 
 // component 组件 padding token
-$padding-xs: var(--sq-padding-xs);
-$padding-sm: var(--sq-padding-sm);
-$padding-md: var(--sq-padding-md);
-$padding-lg: var(--sq-padding-lg);
-$padding-xl: var(--sq-padding-xl);
-$padding-xxl: var(--sq-padding-xxl);
+$padding-xs: var(--sqi-padding-xs);
+$padding-sm: var(--sqi-padding-sm);
+$padding-md: var(--sqi-padding-md);
+$padding-lg: var(--sqi-padding-lg);
+$padding-xl: var(--sqi-padding-xl);
+$padding-xxl: var(--sqi-padding-xxl);
 
 // component 组件 margin token
-$margin-xs: var(--sq-margin-xs);
-$margin-sm: var(--sq-margin-sm);
-$margin-md: var(--sq-margin-md);
-$margin-lg: var(--sq-margin-lg);
-$margin-xl: var(--sq-margin-xl);
-$margin-xxl: var(--sq-margin-xxl);
+$margin-xs: var(--sqi-margin-xs);
+$margin-sm: var(--sqi-margin-sm);
+$margin-md: var(--sqi-margin-md);
+$margin-lg: var(--sqi-margin-lg);
+$margin-xl: var(--sqi-margin-xl);
+$margin-xxl: var(--sqi-margin-xxl);
 
-$text-line-height-sm: var(--sq-line-height-sm);
-$text-line-height-md: var(--sq-line-height-md);
-$text-line-height-lg: var(--sq-line-height-lg);
+$text-line-height-sm: var(--sqi-line-height-sm);
+$text-line-height-md: var(--sqi-line-height-md);
+$text-line-height-lg: var(--sqi-line-height-lg);
 
 // Font
-$font-size-sm: var(--sq-font-size-sm);
-$font-size-md: var(--sq-font-size-md);
-$font-size-lg: var(--sq-font-size-lg);
-$font-size-xl: var(--sq-font-size-title-lg);
+$font-size-sm: var(--sqi-font-size-sm);
+$font-size-md: var(--sqi-font-size-md);
+$font-size-lg: var(--sqi-font-size-lg);
+$font-size-xl: var(--sqi-font-size-title-lg);
 
-$font-family: var(--sq-font-family);
+$font-family: var(--sqi-font-family);
 
 // font token
-$font-sm: var(--sq-font-sm);
-$font-md: var(--sq-font-md);
-$font-lg: var(--sq-font-lg);
-$font-title-sm: var(--sq-font-title-sm);
-$font-title-md: var(--sq-font-title-md);
-$font-title-lg: var(--sq-font-title-lg);
+$font-sm: var(--sqi-font-sm);
+$font-md: var(--sqi-font-md);
+$font-lg: var(--sqi-font-lg);
+$font-title-sm: var(--sqi-font-title-sm);
+$font-title-md: var(--sqi-font-title-md);
+$font-title-lg: var(--sqi-font-title-lg);
 
 // Border Radius
-$border-radius-sm: var(--sq-radius-sm); // 圆角-2
-$border-radius-md: var(--sq-radius-md); // 圆角-3
-$border-radius-lg: var(--sq-radius-lg); // 圆角-6
-$border-radius-extra-lg: var(--sq-radius-extra-lg); // 圆角-9
-$border-radius-round: var(--sq-radius-round); // 圆角-999
-$border-radius-circle: var(--sq-radius-circle); // 圆角-全圆角
+$border-radius-sm: var(--sqi-radius-sm); // 圆角-2
+$border-radius-md: var(--sqi-radius-md); // 圆角-3
+$border-radius-lg: var(--sqi-radius-lg); // 圆角-6
+$border-radius-extra-lg: var(--sqi-radius-extra-lg); // 圆角-9
+$border-radius-round: var(--sqi-radius-round); // 圆角-999
+$border-radius-circle: var(--sqi-radius-circle); // 圆角-全圆角
 
 // 动画
 $anim-time-fn-easing: cubic-bezier(0.38, 0, 0.24, 1);

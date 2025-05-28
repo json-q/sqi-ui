@@ -12,7 +12,7 @@ export interface IconProps extends DetailedHTMLProps<HTMLAttributes<HTMLSpanElem
 
 const Icon = React.forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
   const { svg, type, spin, rotate, className, style, ...restProps } = props;
-  const { prefixCls = 'sq' } = React.useContext(IconContext);
+  const { prefixCls = 'sqi' } = React.useContext(IconContext);
   const module = `${prefixCls}-icon`;
 
   const classes = clsx(

@@ -1,5 +1,5 @@
 import React, { createElement, isValidElement, useContext, useState } from 'react';
-import { useMergeProps } from '@sq-ui/hooks';
+import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider';
 import type { AlertProps } from './type';
 import clsx from 'clsx';
@@ -9,7 +9,7 @@ import {
   WarnCircleFilledIcon,
   InfoCircleFilledIcon,
   CloseIcon,
-} from '@sq-ui/icons';
+} from '@sqi-ui/icons';
 
 const defaultProps: AlertProps = {
   type: 'info',

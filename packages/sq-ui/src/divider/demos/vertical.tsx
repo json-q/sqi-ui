@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from '@sq-ui/web';
+import { Divider } from '@sqi-ui/web';
 
 export default function Demo() {
   return (

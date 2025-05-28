@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { omit } from '@sq-ui/utils';
-import { useMergeProps } from '@sq-ui/hooks';
-import { IconContext } from '@sq-ui/icons';
+import { omit } from '@sqi-ui/utils';
+import { useMergeProps } from '@sqi-ui/hooks';
+import { IconContext } from '@sqi-ui/icons';
 import { ConfigContext, defaultConfigProps } from './context';
 import type { ConfigProviderProps } from './type';
 

@@ -7,9 +7,9 @@
 }
 
 @mixin spin {
-  animation: sq-spin 1s linear infinite;
+  animation: sqi-spin 1s linear infinite;
 
-  @keyframes sq-spin {
+  @keyframes sqi-spin {
     0% {
       transform: rotate(0deg);
     }

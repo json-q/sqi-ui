@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import clsx from 'clsx';
-import { LoadingIcon } from '@sq-ui/icons';
-import { useMergeProps } from '@sq-ui/hooks';
+import { LoadingIcon } from '@sqi-ui/icons';
+import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider';
 import type { ButtonProps } from './type';
 

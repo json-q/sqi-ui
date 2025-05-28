@@ -1,5 +1,5 @@
 import type { ButtonHTMLAttributes, HTMLProps, MouseEventHandler, ReactNode } from 'react';
-import type { ConfigSize } from '@sq-ui/web';
+import type { ConfigSize } from '@sqi-ui/web';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
   /**
