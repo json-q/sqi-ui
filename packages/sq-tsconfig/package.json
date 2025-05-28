@@ -1,8 +1,0 @@
-{
-  "name": "@sq-ui/tsconfig",
-  "version": "0.0.1",
-  "private": true,
-  "description": "common tsconfig",
-  "keywords": [],
-  "author": "jsonq"
-}

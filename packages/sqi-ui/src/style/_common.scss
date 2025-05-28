@@ -1,0 +1,21 @@
+@use './variables' as *;
+
+@mixin reset {
+  font: $font-md;
+  color: $text-color-primary;
+  box-sizing: border-box;
+}
+
+@mixin spin {
+  animation: sqi-spin 1s linear infinite;
+
+  @keyframes sqi-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

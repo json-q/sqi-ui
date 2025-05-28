@@ -1,0 +1,129 @@
+:root[theme-mode='dark'],
+[theme-mode='dark'] {
+  --sqi-brand-color-1: #1b2f51;
+  --sqi-brand-color-2: #173463;
+  --sqi-brand-color-3: #143975;
+  --sqi-brand-color-4: #103d88;
+  --sqi-brand-color-5: #0d429a;
+  --sqi-brand-color-6: #054bbe;
+  --sqi-brand-color-7: #2667d4;
+  --sqi-brand-color-8: #4582e6;
+  --sqi-brand-color-9: #699ef5;
+  --sqi-brand-color-10: #96bbf8;
+  --sqi-warning-color-1: #4f2a1d;
+  --sqi-warning-color-2: #582f21;
+  --sqi-warning-color-3: #733c23;
+  --sqi-warning-color-4: #a75d2b;
+  --sqi-warning-color-5: #cf6e2d;
+  --sqi-warning-color-6: #dc7633;
+  --sqi-warning-color-7: #e8935c;
+  --sqi-warning-color-8: #ecbf91;
+  --sqi-warning-color-9: #eed7bf;
+  --sqi-warning-color-10: #f3e9dc;
+  --sqi-error-color-1: #472324;
+  --sqi-error-color-2: #5e2a2d;
+  --sqi-error-color-3: #703439;
+  --sqi-error-color-4: #83383e;
+  --sqi-error-color-5: #a03f46;
+  --sqi-error-color-6: #c64751;
+  --sqi-error-color-7: #de6670;
+  --sqi-error-color-8: #ec888e;
+  --sqi-error-color-9: #edb1b6;
+  --sqi-error-color-10: #eeced0;
+  --sqi-success-color-1: #193a2a;
+  --sqi-success-color-2: #1a4230;
+  --sqi-success-color-3: #17533d;
+  --sqi-success-color-4: #0d7a55;
+  --sqi-success-color-5: #059465;
+  --sqi-success-color-6: #43af8a;
+  --sqi-success-color-7: #46bf96;
+  --sqi-success-color-8: #80d2b6;
+  --sqi-success-color-9: #b4e1d3;
+  --sqi-success-color-10: #deede8;
+  --sqi-gray-color-1: #f3f3f3;
+  --sqi-gray-color-2: #eee;
+  --sqi-gray-color-3: #e8e8e8;
+  --sqi-gray-color-4: #ddd;
+  --sqi-gray-color-5: #c6c6c6;
+  --sqi-gray-color-6: #a6a6a6;
+  --sqi-gray-color-7: #8b8b8b;
+  --sqi-gray-color-8: #777;
+  --sqi-gray-color-9: #5e5e5e;
+  --sqi-gray-color-10: #4b4b4b;
+  --sqi-gray-color-11: #393939;
+  --sqi-gray-color-12: #2c2c2c;
+  --sqi-gray-color-13: #242424;
+  --sqi-gray-color-14: #181818;
+
+  // 文字 & 图标 颜色
+  --sqi-font-white-1: rgba(255, 255, 255, 90%);
+  --sqi-font-white-2: rgba(255, 255, 255, 55%);
+  --sqi-font-white-3: rgba(255, 255, 255, 35%);
+  --sqi-font-white-4: rgba(255, 255, 255, 22%);
+  --sqi-font-gray-1: rgba(0, 0, 0, 90%);
+  --sqi-font-gray-2: rgba(0, 0, 0, 60%);
+  --sqi-font-gray-3: rgba(0, 0, 0, 40%);
+  --sqi-font-gray-4: rgba(0, 0, 0, 26%);
+
+  // 基础颜色
+  --sqi-brand-color: var(--sqi-brand-color-8); // 色彩-品牌-可操作
+  --sqi-warning-color: var(--sqi-warning-color-5); // 色彩-功能-警告
+  --sqi-error-color: var(--sqi-error-color-6); // 色彩-功能-失败
+  --sqi-success-color: var(--sqi-success-color-5); // 色彩-功能-成功
+
+  // 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
+  --sqi-brand-color-hover: var(--sqi-brand-color-7); // hover态
+  --sqi-brand-color-focus: var(--sqi-brand-color-2); // focus态，包括鼠标和键盘
+  --sqi-brand-color-active: var(--sqi-brand-color-9); // 点击态
+  --sqi-brand-color-disabled: var(--sqi-brand-color-3); // 禁用态
+  --sqi-brand-color-light: var(--sqi-brand-color-1); // 浅色的选中态
+  --sqi-brand-color-light-hover: var(--sqi-brand-color-2);
+
+  // 警告色扩展
+  --sqi-warning-color-hover: var(--sqi-warning-color-4);
+  --sqi-warning-color-focus: var(--sqi-warning-color-2);
+  --sqi-warning-color-active: var(--sqi-warning-color-6);
+  --sqi-warning-color-disabled: var(--sqi-warning-color-3);
+  --sqi-warning-color-light: var(--sqi-warning-color-1);
+  --sqi-warning-color-light-hover: var(--sqi-warning-color-2);
+
+  // 失败/错误色扩展
+  --sqi-error-color-hover: var(--sqi-error-color-5);
+  --sqi-error-color-focus: var(--sqi-error-color-2);
+  --sqi-error-color-active: var(--sqi-error-color-7);
+  --sqi-error-color-disabled: var(--sqi-error-color-3);
+  --sqi-error-color-light: var(--sqi-error-color-1);
+  --sqi-error-color-light-hover: var(--sqi-error-color-2);
+
+  // 成功色扩展
+  --sqi-success-color-hover: var(--sqi-success-color-4);
+  --sqi-success-color-focus: var(--sqi-success-color-2);
+  --sqi-success-color-active: var(--sqi-success-color-6);
+  --sqi-success-color-disabled: var(--sqi-success-color-3);
+  --sqi-success-color-light: var(--sqi-success-color-1);
+  --sqi-success-color-light-hover: var(--sqi-success-color-2);
+
+  // 背景色
+  --sqi-bg-color-container: var(--sqi-gray-color-13); // 色彩 - 容器
+  --sqi-bg-color-container-hover: var(--sqi-gray-color-12); // 色彩 - 容器 - hover
+  --sqi-bg-color-container-active: var(--sqi-gray-color-10); // 色彩 - 容器 - active
+  --sqi-bg-color-container-select: var(--sqi-gray-color-9); // 色彩 - 容器 - select
+  --sqi-bg-color-component: var(--sqi-gray-color-11); // 色彩  - 组件
+  --sqi-bg-color-component-hover: var(--sqi-gray-color-10); // 色彩 - 组件 - hover
+  --sqi-bg-color-component-active: var(--sqi-gray-color-9); // 色彩 - 组件 - active
+  --sqi-bg-color-component-disabled: var(--sqi-gray-color-12); // 色彩 - 组件 - disabled
+
+  // 文本颜色
+  --sqi-text-color-primary: var(--sqi-font-white-1); // 色彩-文字-主要
+  --sqi-text-color-secondary: var(--sqi-font-white-2); // 色彩-文字-次要
+  --sqi-text-color-placeholder: var(--sqi-font-white-3); // 色彩-文字-占位符/说明
+  --sqi-text-color-disabled: var(--sqi-font-white-4); // 色彩-文字-禁用
+  --sqi-text-color-anti: #fff; // 色彩-文字-反色
+  --sqi-text-color-brand: var(--sqi-brand-color-8); // 色彩-文字-品牌
+  --sqi-text-color-link: var(--sqi-brand-color-8); // 色彩-文字-链接
+
+  // 分割线
+  --sqi-component-stroke: var(--sqi-gray-color-11);
+  // 边框
+  --sqi-component-border: var(--sqi-gray-color-9);
+}

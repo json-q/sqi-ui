@@ -1,0 +1,8 @@
+{
+  "extends": "@sqi-ui/tsconfig/react-library.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": "."
+  },
+  "include": ["src"]
+}
