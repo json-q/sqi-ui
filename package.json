@@ -14,7 +14,7 @@
   },
   "keywords": [],
   "author": "jsonq",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@rslib/core": "^0.7.1",

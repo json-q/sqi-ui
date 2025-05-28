@@ -17,7 +17,7 @@
   ],
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "dev": "rslib build --watch",
     "build": "rslib build",

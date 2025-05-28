@@ -20,7 +20,7 @@
   ],
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "gen:icon": "tsx  ./scripts/genIcon",
     "dev": "rslib build --watch",
