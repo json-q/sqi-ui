@@ -1,4 +1,4 @@
-import { type SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 import { isFunction, isUndefined } from '@sq-ui/utils';
 import { usePrevious } from './usePrevious';
 
@@ -8,16 +8,17 @@ interface UseMergeStateOptions<T> {
   onChange?: (value: T) => void;
 }
 
+type Fn = (...args: any[]) => any;
 export function useMergeState<T>(
   defaultStateValue: T,
   props?: UseMergeStateOptions<T>,
-): [T, React.Dispatch<React.SetStateAction<T>>] {
+): [T, Dispatch<SetStateAction<T>>] {
   const { defaultValue, value: propsValue, onChange } = props || {};
 
   const [innerValue, setInnerValue] = useState<T>(() => {
     if (!isUndefined(propsValue)) return propsValue;
-    else if (!isUndefined(defaultValue)) return isFunction(defaultValue) ? defaultValue : defaultValue;
-    else return isFunction(defaultStateValue) ? defaultStateValue() : defaultStateValue;
+    else if (!isUndefined(defaultValue)) return isFunction(defaultValue) ? (defaultValue as Fn)() : defaultValue;
+    else return isFunction(defaultStateValue) ? (defaultStateValue as Fn)() : defaultStateValue;
   });
 
   const prevPropsValue = usePrevious(propsValue);
@@ -45,7 +46,7 @@ export function useMergeState<T>(
 
   const triggerChange = useCallback(
     (value: SetStateAction<T>) => {
-      const nextValue = isFunction(value) ? value(mergedValue) : value;
+      const nextValue = isFunction(value) ? (value as Fn)(mergedValue) : value;
 
       if (isUndefined(propsValue)) {
         setInnerValue(nextValue);
@@ -59,5 +60,5 @@ export function useMergeState<T>(
     [innerValue, mergedValue],
   );
 
-  return [mergedValue, triggerChange];
+  return [mergedValue as T, triggerChange];
 }
