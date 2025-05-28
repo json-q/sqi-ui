@@ -1,0 +1,90 @@
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-alert;
+
+.#{$module} {
+  @include reset;
+
+  display: flex;
+  align-items: flex-start;
+  padding: $alert-padding;
+  border-radius: $border-radius-md;
+
+  &-icon,
+  &-close {
+    font-size: $alert-icon-size;
+    line-height: $text-line-height-sm;
+  }
+
+  &-icon {
+    margin-right: $alert-margin-right;
+  }
+
+  &-content {
+    flex: 1;
+    font-size: $alert-font-size;
+    line-height: $alert-line-height;
+
+    .#{$module}-title {
+      color: $alert-title-color;
+      font-weight: 600;
+
+      + .#{$module}-description:not(:empty) {
+        margin-top: $alert-description-margin-top;
+      }
+    }
+
+    .#{$module}-description {
+      color: $alert-description-color;
+    }
+  }
+
+  &-action {
+    margin-left: $alert-close-margin-left;
+  }
+
+  &-close {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    color: $alert-close-color;
+    margin-left: $alert-close-margin-left;
+    transition: all $anim-duration-base;
+
+    &:hover {
+      color: $alert-close-color-hover;
+    }
+  }
+
+  &-success {
+    background-color: $alert-success-bg-color;
+
+    .#{$prefix}-alert-icon {
+      color: $alert-success-icon-color;
+    }
+  }
+  &-info {
+    background-color: $alert-info-bg-color;
+
+    .#{$prefix}-alert-icon {
+      color: $alert-info-icon-color;
+    }
+  }
+  &-warning {
+    background-color: $alert-warning-bg-color;
+
+    .#{$prefix}-alert-icon {
+      color: $alert-warning-icon-color;
+    }
+  }
+  &-error {
+    background-color: $alert-error-bg-color;
+
+    .#{$prefix}-alert-icon {
+      color: $alert-error-icon-color;
+    }
+  }
+}

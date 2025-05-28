@@ -4,6 +4,7 @@ nav:
   title: 组件
 group:
   title: 布局
+  order: 2
 ---
 
 # Divider 分割线
