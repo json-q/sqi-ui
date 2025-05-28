@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
 import { convertIcon } from '../components/Icon';
-function ErrorCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
+function WarnCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -20,5 +20,5 @@ function ErrorCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(ErrorCircleFilledIcon, 'error-circle-filled');
+const IconComponent = convertIcon(WarnCircleFilledIcon, 'warn-circle-filled');
 export default IconComponent;
