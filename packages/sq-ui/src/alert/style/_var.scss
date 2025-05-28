@@ -16,16 +16,6 @@ $alert-error-icon-color: $error-color;
 $alert-close-color: $text-color-secondary;
 $alert-close-color-hover: $text-color-primary;
 
-$alert-success-trigger-color: $success-color-focus;
-$alert-info-trigger-color: $brand-color;
-$alert-warning-trigger-color: $warning-color-focus;
-$alert-error-trigger-color: $error-color-focus;
-
-$alert-success-trigger-active-color: $success-color;
-$alert-info-trigger-active-color: $brand-color;
-$alert-warning-trigger-active-color: $warning-color;
-$alert-error-trigger-active-color: $error-color;
-
 // size
 $alert-font-size: $font-size-md;
 $alert-line-height: $text-line-height-md;
@@ -33,10 +23,9 @@ $alert-icon-size: $alert-line-height;
 $alert-close-size: calc($alert-line-height - 2px);
 
 // 间距
-$alert-padding: $padding-lg $padding-xl;
-$alert-operation-padding: 0 $padding-sm;
-$alert-margin-right: $margin-sm;
+$alert-padding: $padding-md $padding-lg;
+$alert-action-margin-left: $margin-lg;
+$alert-icon-margin-right: $margin-sm;
 $alert-close-margin-left: $margin-lg;
 $alert-close-padding: calc(($alert-line-height - $alert-close-size) / 2) 0;
 $alert-description-margin-top: $margin-sm;
-$alert-collapse-margin-top: $margin-sm;

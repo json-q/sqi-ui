@@ -1,4 +1,4 @@
-import React, { createElement, isValidElement, useContext } from 'react';
+import React, { createElement, isValidElement, useContext, useState } from 'react';
 import { useMergeProps } from '@sq-ui/hooks';
 import { ConfigContext } from '../config-provider';
 import type { AlertProps } from './type';
@@ -24,9 +24,20 @@ const iconTypeMap = {
 
 export default function Alert(baseProps: AlertProps) {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const props = useMergeProps(baseProps, defaultProps, componentConfig?.Alert);
+  const {
+    className,
+    style,
+    title,
+    description,
+    type,
+    closable,
+    showIcon = true,
+    action,
+    icon,
+    onClose,
+  } = useMergeProps(baseProps, defaultProps, componentConfig?.Alert);
 
-  const { className, style, title, description, type, closable, showIcon = true, action, icon, onClose } = props;
+  const [closed, setClosed] = useState(false);
 
   const renderIcon = () => {
     if (isValidElement(icon)) return icon;
@@ -34,6 +45,13 @@ export default function Alert(baseProps: AlertProps) {
   };
 
   const classes = clsx(`${prefixCls}-alert`, `${prefixCls}-alert-${type}`, className);
+
+  const handleClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setClosed(true);
+    onClose?.(e);
+  };
+
+  if (closed) return null;
 
   return (
     <div className={classes} style={style}>
@@ -47,7 +65,7 @@ export default function Alert(baseProps: AlertProps) {
       {action && <div className={`${prefixCls}-alert-action`}>{action}</div>}
 
       {closable && (
-        <button className={`${prefixCls}-alert-close`} onClick={onClose}>
+        <button className={`${prefixCls}-alert-close`} onClick={handleClose}>
           <CloseIcon />
         </button>
       )}

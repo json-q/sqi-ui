@@ -13,12 +13,12 @@ $module: #{$prefix}-alert;
 
   &-icon,
   &-close {
-    font-size: $alert-icon-size;
     line-height: $text-line-height-sm;
   }
 
   &-icon {
-    margin-right: $alert-margin-right;
+    font-size: $alert-icon-size;
+    margin-right: $alert-icon-margin-right;
   }
 
   &-content {
@@ -41,7 +41,7 @@ $module: #{$prefix}-alert;
   }
 
   &-action {
-    margin-left: $alert-close-margin-left;
+    margin-left: $alert-action-margin-left;
   }
 
   &-close {
@@ -56,6 +56,11 @@ $module: #{$prefix}-alert;
 
     &:hover {
       color: $alert-close-color-hover;
+    }
+
+    > .#{$prefix}-icon {
+      font-size: $alert-close-size;
+      padding: $alert-close-padding;
     }
   }
 

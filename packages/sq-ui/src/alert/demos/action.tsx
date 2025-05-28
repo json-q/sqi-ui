@@ -14,6 +14,8 @@ export default function Demo() {
         closable
       />
       <br />
+      <Alert title="this is a title" description="this is a description" closable />
+      <br />
       <Alert title="this is a title" description="this is a description" action="Action" />
     </>
   );
