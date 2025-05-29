@@ -8,7 +8,6 @@ interface UseMergeStateOptions<T> {
   onChange?: (value: T) => void;
 }
 
-type Fn = (...args: any[]) => any;
 export function useMergeState<T>(
   defaultStateValue: T,
   props?: UseMergeStateOptions<T>,
@@ -17,8 +16,8 @@ export function useMergeState<T>(
 
   const [innerValue, setInnerValue] = useState<T>(() => {
     if (!isUndefined(propsValue)) return propsValue;
-    else if (!isUndefined(defaultValue)) return isFunction(defaultValue) ? (defaultValue as Fn)() : defaultValue;
-    else return isFunction(defaultStateValue) ? (defaultStateValue as Fn)() : defaultStateValue;
+    else if (!isUndefined(defaultValue)) return isFunction(defaultValue) ? defaultValue() : defaultValue;
+    else return isFunction(defaultStateValue) ? defaultStateValue() : defaultStateValue;
   });
 
   const prevPropsValue = usePrevious(propsValue);
@@ -46,7 +45,7 @@ export function useMergeState<T>(
 
   const triggerChange = useCallback(
     (value: SetStateAction<T>) => {
-      const nextValue = isFunction(value) ? (value as Fn)(mergedValue) : value;
+      const nextValue = isFunction(value) ? value(mergedValue) : value;
 
       if (isUndefined(propsValue)) {
         setInnerValue(nextValue);
@@ -60,5 +59,5 @@ export function useMergeState<T>(
     [innerValue, mergedValue],
   );
 
-  return [mergedValue as T, triggerChange];
+  return [mergedValue, triggerChange];
 }
