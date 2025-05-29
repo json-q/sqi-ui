@@ -2,6 +2,8 @@
   "extends": "@sqi-ui/tsconfig/base.json",
   "compilerOptions": {
     "noEmit": true,
+    "isolatedDeclarations": true,
+    "allowJs": false,
     "baseUrl": "."
   },
   "include": ["src"]

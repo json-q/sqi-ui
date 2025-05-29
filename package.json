@@ -17,7 +17,6 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
-    "@rslib/core": "^0.7.1",
     "@sqi-ui/tsconfig": "workspace:*",
     "@types/node": "^22.15.18",
     "eslint": "^9.27.0",
@@ -31,6 +30,7 @@
     "lint-staged": "^16.0.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
+    "tsdown": "^0.12.4",
     "tsx": "^4.19.4",
     "turbo": "^2.5.3",
     "typescript": "^5.8.3",
