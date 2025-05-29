@@ -1,4 +1,4 @@
-// import './style';
+import './style';
 
 import Icon from './components/Icon';
 

@@ -3,20 +3,27 @@
   "version": "0.0.1",
   "description": "",
   "main": "./src/index.ts",
-  "types": "./dist/es/index.d.mts",
+  "types": "./es/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/es/index.d.mts",
-      "import": "./dist/es/index.mjs",
-      "require": "./dist/lib/index.js"
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
     },
+    "./es/*": "./es/*",
+    "./lib/*": "./lib/*",
     "./dist/*": "./dist/*"
   },
   "sideEffects": [
-    "dist/**/style/*"
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "**/*.scss"
   ],
   "files": [
-    "dist"
+    "dist",
+    "es",
+    "lib"
   ],
   "keywords": [],
   "author": "jsonq",

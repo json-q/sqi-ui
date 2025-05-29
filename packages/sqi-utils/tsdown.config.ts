@@ -5,19 +5,20 @@ const baseConfig: UserConfig = {
   entry: ['./src/index.ts'],
   platform: 'neutral',
   unbundle: true,
+  outExtensions: () => ({ js: '.js' }),
 };
 
 export default [
   defineConfig({
     ...baseConfig,
     format: ['esm'],
-    outDir: './dist/es',
+    outDir: './es',
     dts: true,
   }),
   defineConfig({
     ...baseConfig,
     format: ['cjs'],
-    outDir: './dist/lib',
+    outDir: './lib',
     dts: false,
   }),
 ];
