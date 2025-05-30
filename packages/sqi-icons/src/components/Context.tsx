@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { type Context } from 'react';
 
 export interface IconContextProps {
   prefixCls?: string;
 }
 
-const IconContext = React.createContext<IconContextProps>({});
+const IconContext: Context<IconContextProps> = React.createContext<IconContextProps>({});
 
 export default IconContext;

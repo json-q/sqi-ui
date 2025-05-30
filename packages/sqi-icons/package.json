@@ -15,7 +15,7 @@
     "./dist/*": "./dist/*"
   },
   "sideEffects": [
-    "dist/*",
+    "dist/*.css",
     "es/**/style/*",
     "lib/**/style/*",
     "**/*.scss"

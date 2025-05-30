@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import { convertIcon, type ConvertIconFnType } from '../components/Icon';
 function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,5 @@ function ChevronDownIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(ChevronDownIcon, 'chevron-down');
+const IconComponent: ConvertIconFnType = convertIcon(ChevronDownIcon, 'chevron-down');
 export default IconComponent;

@@ -13,14 +13,14 @@ const customTemplate: Config['template'] = (variables, context) => {
   const { tpl } = context;
 
   return tpl`${imports}
-  import { convertIcon } from '../components/Icon';
+  import { convertIcon, type ConvertIconFnType } from '../components/Icon';
 
   ${interfaces}
   function ${componentName}(${props}) {
     return ${jsx};
   }
 
-  const IconComponent = convertIcon(${componentName}, '${getOriginalSvgFileName(componentName)}');
+  const IconComponent: ConvertIconFnType = convertIcon(${componentName}, '${getOriginalSvgFileName(componentName)}');
 
   export default IconComponent;
     `;

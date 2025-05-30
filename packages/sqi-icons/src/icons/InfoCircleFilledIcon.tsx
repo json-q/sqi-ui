@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import { convertIcon, type ConvertIconFnType } from '../components/Icon';
 function InfoCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,5 @@ function InfoCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(InfoCircleFilledIcon, 'info-circle-filled');
+const IconComponent: ConvertIconFnType = convertIcon(InfoCircleFilledIcon, 'info-circle-filled');
 export default IconComponent;
