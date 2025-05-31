@@ -1,0 +1,13 @@
+@use './variables' as *;
+@use './common' as *;
+
+.#{$prefix}-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+
+  &-spin {
+    @include spin;
+  }
+}

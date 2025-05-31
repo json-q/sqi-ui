@@ -1,5 +1,3 @@
-import './style';
-
 import Icon from './components/Icon';
 
 export * from './icons';

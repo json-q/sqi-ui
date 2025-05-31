@@ -1,26 +1,28 @@
+@use 'sass:map';
 @use '../../style/mixin' as *;
-
 @use './var' as *;
 
 $module: #{$prefix}-btn;
 
 @mixin button-size($btn-height, $btn-font-size, $btn-icon-size, $padding) {
-  height: $btn-height;
-  font: $btn-font-size;
-  padding: 0 calc($padding - $btn-border-width);
-
   .sqi-icon {
     font-size: $btn-icon-size;
+  }
+
+  & {
+    height: $btn-height;
+    font: $btn-font-size;
+    padding: 0 calc($padding - $btn-border-width);
   }
 }
 
 @mixin button-attr-color($type, $attr, $ghost: false) {
-  $color-map: map-get($btn-color, $type);
+  $color-map: map.get($btn-color, $type);
 
-  $theme-normal: map-get($color-map, 'normal');
-  $theme-hover: map-get($color-map, 'hover');
-  $theme-active: map-get($color-map, 'active');
-  $theme-disabled: map-get($color-map, 'disabled');
+  $theme-normal: map.get($color-map, 'normal');
+  $theme-hover: map.get($color-map, 'hover');
+  $theme-active: map.get($color-map, 'active');
+  $theme-disabled: map.get($color-map, 'disabled');
 
   #{$attr}: $theme-normal;
 
@@ -40,16 +42,20 @@ $module: #{$prefix}-btn;
 .#{$module} {
   @include reset;
 
-  border: $btn-border-width solid transparent;
-  background-color: transparent;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  border-radius: $btn-border-radius;
-  transition: all $anim-duration-base linear;
-  text-decoration: none;
+  & {
+    border: $btn-border-width solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: $btn-border-radius;
+    transition: all $anim-duration-base linear;
+    text-decoration: none;
+
+    color: $btn-text-variant-base-color;
+  }
 
   .#{$prefix}-icon {
     & + span:not(:empty) {
@@ -69,8 +75,6 @@ $module: #{$prefix}-btn;
     opacity: 0.5;
     pointer-events: none;
   }
-
-  color: $btn-text-variant-base-color;
 
   @include button-size($btn-height-md, $btn-font-md, $btn-icon-size-md, $btn-padding-md);
 
