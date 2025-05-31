@@ -21,11 +21,11 @@
   "author": "jsonq",
   "license": "MIT",
   "scripts": {
-    "dev": "tsdown --watch",
-    "build": "tsdown",
+    "dev": "rslib build --watch",
+    "build": "rslib build",
     "clean": "rimraf dist .turbo"
   },
   "dependencies": {
-    "@oxc-project/runtime": "^0.72.1"
+    "@swc/helpers": "^0.5.17"
   }
 }
