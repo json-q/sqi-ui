@@ -1,4 +1,4 @@
-import './style';
+// import './style';
 import _Button from './Button';
 
 export type { ButtonProps } from './type';

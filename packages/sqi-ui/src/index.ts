@@ -1,4 +1,4 @@
-import './style';
+// import './style';
 
 export * from './alert';
 export * from './button';

@@ -1,4 +1,4 @@
-import './style';
+// import './style';
 import _Alert from './Alert';
 
 export type { AlertProps } from './type';

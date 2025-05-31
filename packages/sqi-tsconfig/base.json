@@ -19,7 +19,8 @@
     "noUnusedParameters": true,
     "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "verbatimModuleSyntax": true
   },
   "exclude": ["dist", "build", "es", "lib", "node_modules"]
 }
