@@ -1,4 +1,3 @@
-// import './style';
 import _Divider from './Divider';
 
 export type { DividerProps } from './type';
