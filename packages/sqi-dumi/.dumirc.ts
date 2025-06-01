@@ -7,6 +7,6 @@ export default defineConfig({
   exportStatic: {},
   resolve: {
     docDirs: ['docs'],
-    atomDirs: [{ type: 'component', dir: '../sqi-ui/src' }],
+    atomDirs: [{ type: 'component', dir: '../sqi-web/src' }],
   },
 });

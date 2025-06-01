@@ -13,8 +13,10 @@ function compilerScss() {
     .pipe(autoprefixer())
     .pipe(gulp.dest('./es'))
     .pipe(gulp.dest('./lib'))
+    .pipe(concat('index.css'))
+    .pipe(gulp.dest('./dist'))
     .pipe(cleanCSS())
-    .pipe(concat('sqi-ui.min.css'))
+    .pipe(concat('index.min.css'))
     .pipe(gulp.dest('./dist'));
 }
 

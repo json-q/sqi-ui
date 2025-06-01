@@ -2,7 +2,7 @@ import { useOutlet, usePrefersColor } from 'dumi';
 import { useEffect } from 'react';
 
 // babel-plugin-import 会产生非常多的问题，样式路径/依赖丢失等
-import '@sqi-ui/web/dist/sqi-ui.min.css';
+import '@sqi-ui/web/dist/index.css';
 
 export default function GlobalLayout() {
   const outlet = useOutlet();
