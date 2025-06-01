@@ -4,7 +4,15 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "storybook-static/**", "!.next/cache/**", "dist/**", "es/**", "lib/**"]
+      "outputs": [
+        ".next/**",
+        "storybook-static/**",
+        "**/docs-dist/**",
+        "!.next/cache/**",
+        "**/dist/**",
+        "**/es/**",
+        "**/lib/**"
+      ]
     },
     "dev": {
       "cache": false,
