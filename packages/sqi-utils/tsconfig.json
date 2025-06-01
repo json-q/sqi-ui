@@ -1,8 +1,0 @@
-{
-  "extends": "@sqi-ui/tsconfig/base.json",
-  "compilerOptions": {
-    "noEmit": true,
-    "baseUrl": "."
-  },
-  "include": ["src"]
-}
