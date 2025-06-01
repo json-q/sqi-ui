@@ -15,11 +15,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 20
 
-      - name: Install dependencies
-        working-directory: ./packages/sqi-dumi
-        run: npm install
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Install workspace dependencies
+        run: pnpm install
 
       - name: Build with dumi
         working-directory: ./packages/sqi-dumi
