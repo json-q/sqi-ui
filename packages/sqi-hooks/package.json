@@ -2,12 +2,12 @@
   "name": "@sqi-ui/hooks",
   "version": "0.0.1",
   "description": "",
-  "main": "./src/index.ts",
+  "main": "./lib/index.js",
   "types": "./es/index.d.ts",
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
-      "import": "./es/index.js",
+      "import": "./es/index.mjs",
       "require": "./lib/index.js"
     }
   },
@@ -21,16 +21,16 @@
   "author": "jsonq",
   "license": "MIT",
   "scripts": {
-    "dev": "tsdown --watch",
-    "build": "tsdown",
+    "dev": "rslib build --watch",
+    "build": "rslib build",
     "clean": "rimraf dist .turbo"
   },
   "peerDependencies": {
     "react": ">=16.9.0"
   },
   "dependencies": {
-    "@oxc-project/runtime": "^0.72.1",
-    "@sqi-ui/utils": "workspace:*"
+    "@sqi-ui/utils": "workspace:*",
+    "@swc/helpers": "^0.5.17"
   },
   "devDependencies": {
     "@types/react": "^19.1.4"
