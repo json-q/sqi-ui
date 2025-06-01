@@ -39,6 +39,3 @@ yarn-error.log*
 # cache
 .eslintcache
 .stylelintcache
-
-# lock
-pnpm-lock.yaml
