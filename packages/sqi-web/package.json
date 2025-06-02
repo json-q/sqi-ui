@@ -14,7 +14,7 @@
     "rslib:build": "rslib build",
     "gulp:dev": "gulp watch",
     "gulp:build": "gulp",
-    "build": "run-p rslib:build gulp:build",
+    "build": "rslib build && gulp",
     "clean": "rimraf dist .turbo"
   },
   "exports": {
