@@ -2,6 +2,7 @@
 title: Alert 提示
 nav:
   title: 组件
+  order: 2
 group:
   title: 反馈
   order: 3

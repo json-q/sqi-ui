@@ -2,6 +2,7 @@
 title: ConfigProvider 全局配置
 nav:
   title: 组件
+  order: 2
 group:
   title: 其它
   order: 8

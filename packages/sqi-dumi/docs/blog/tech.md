@@ -2,7 +2,8 @@
 title: 技术选型
 order: 1
 nav:
-  title: Blog
+  title: 博客
+  order: 3
 ---
 
 # 项目技术选型
@@ -40,4 +41,10 @@ nav:
 
 rust 的加持下，选择的是 `rslib`，其实我还蛮喜欢 `rspack` 系列的。后来尝试了一下 `tsdown`（更快），又切回了 `rslib`，原因是 dev 下出现错误会无限 rebuild，感觉目前并不适合用于生产
 
-> 做 css 的按需加载没有 gulp 还是有点难办，`tdesign` 和 `semi` 都将 css 引入到了组件中，优势是无感知的按需加载，缺陷是如果要兼容 Next（next 不支持内部引入 css），需额外构建一份无样式（tdesign 方案）或者提供 next 插件（semi 方案）
+### css 的加载设计
+
+最初是想用 `tdesign` 那一套方式，即组件内导入 css，好处是开发者无感知的 css 按需引入（这种方式构建也简单），缺陷是 `next` `remix` 这些框架对这种方式并不是很友好。
+
+`tdesign` 额外构建了一份无样式的纯组件产物，`semi` 则是提供了兼容插件，排除掉了组件内联导入的 css，各有利弊。
+
+而此组件库依然采用 antd4.x 的 css 设计方案（arco 和它一样），提供多种 css 产物格式，方便开发者使用，在此模式下，css 需要开发者手动引入，全量导入或者使用 `babel-plugin-import` 按需导入

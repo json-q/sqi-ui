@@ -1,8 +1,8 @@
 ---
 title: Icon 图标
-order: 2
 nav:
-  title: 组件
+  title: Components
+  order: 2
 group:
   title: 通用
   order: 1

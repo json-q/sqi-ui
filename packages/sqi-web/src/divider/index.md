@@ -2,6 +2,7 @@
 title: Divider 分割线
 nav:
   title: 组件
+  order: 2
 group:
   title: 布局
   order: 2

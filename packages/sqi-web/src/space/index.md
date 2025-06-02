@@ -2,6 +2,7 @@
 title: Space 间距
 nav:
   title: 组件
+  order: 2
 group:
   title: 布局
   order: 2
