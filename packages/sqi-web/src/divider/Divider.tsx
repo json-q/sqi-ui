@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { ConfigContext } from '../config-provider';
+import { ConfigContext } from '../config-provider/context';
 import type { DividerProps } from './type';
 
 const defaultProps: DividerProps = {

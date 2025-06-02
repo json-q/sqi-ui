@@ -1,3 +1,4 @@
+import './style';
 export * from './alert';
 export * from './button';
 export * from './divider';

@@ -1,11 +1,13 @@
 import { defineConfig } from '@rslib/core';
 import { pluginReact } from '@rsbuild/plugin-react';
+import { pluginSass } from '@rsbuild/plugin-sass';
 
 export default defineConfig({
   source: {
     tsconfigPath: './tsconfig.build.json',
   },
   plugins: [
+    pluginSass({}),
     pluginReact({
       swcReactOptions: { runtime: 'classic' },
     }),
@@ -18,7 +20,7 @@ export default defineConfig({
     {
       source: {
         entry: {
-          index: ['./src/**/*.{ts,tsx}', '!src/**/demos/**', '!src/**/style/**'],
+          index: ['./src/**/*.{ts,tsx,scss}', './src/**/index.scss', '!src/**/demos/**'],
         },
       },
       format: 'esm',
@@ -38,7 +40,7 @@ export default defineConfig({
     {
       source: {
         entry: {
-          index: ['./src/**/*.{ts,tsx}', '!src/**/demos/**', '!src/**/style/**'],
+          index: ['./src/**/*.{ts,tsx}', './src/**/index.scss', '!src/**/demos/**'],
         },
       },
       format: 'cjs',
