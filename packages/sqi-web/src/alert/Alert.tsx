@@ -1,6 +1,6 @@
 import React, { createElement, isValidElement, useContext, useState } from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { ConfigContext } from '../config-provider';
+import { ConfigContext } from '../config-provider/context';
 import type { AlertProps } from './type';
 import clsx from 'clsx';
 import {

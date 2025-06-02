@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon, type ConvertIconFnType } from '../components/Icon';
+import { convertIcon } from '../components/Icon';
 function SearchIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,5 @@ function SearchIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent: ConvertIconFnType = convertIcon(SearchIcon, 'search');
+const IconComponent = convertIcon(SearchIcon, 'search');
 export default IconComponent;

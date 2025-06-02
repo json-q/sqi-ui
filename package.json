@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "turbo:dev": "turbo dev",
+    "turbo:dev": "turbo run dev --filter=./packages/**",
     "turbo:build": "turbo build",
     "turbo:lint": "turbo lint",
     "turbo:clean": "turbo clean",

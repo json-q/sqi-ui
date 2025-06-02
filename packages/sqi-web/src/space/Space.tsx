@@ -4,7 +4,7 @@ import { isFragment } from 'react-is';
 import clsx from 'clsx';
 import { isArray, isString } from '@sqi-ui/utils';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { ConfigContext } from '../config-provider';
+import { ConfigContext } from '../config-provider/context';
 import type { SpaceProps } from './type';
 
 const spaceSize = {

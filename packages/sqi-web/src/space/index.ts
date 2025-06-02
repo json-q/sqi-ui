@@ -1,3 +1,4 @@
+import './style';
 import _Space from './Space';
 
 export type { SpaceProps } from './type';
