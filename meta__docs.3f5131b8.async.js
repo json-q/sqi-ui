@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_sqi_ui_dumi=self.webpackChunk_sqi_ui_dumi||[]).push([[904],{82090:function(t,n,u){u.r(n),u.d(n,{demos:function(){return d}});var s=u(55826),d={}},48644:function(t,n,u){u.r(n),u.d(n,{texts:function(){return s}});const s=[]}}]);
