@@ -23,7 +23,7 @@ function compilerScss() {
 // 补充构建产物的 reset.css
 function compilerResetScss() {
   return gulp
-    .src('./src/style/_reset.scss')
+    .src('./src/style/reset.scss')
     .pipe(
       through2.obj(function (file, encoding, next) {
         file.path = file.path.replace(/\.scss/g, '.css');
