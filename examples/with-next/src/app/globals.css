@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '@sqi-ui/web/es/style/index.css';
+@import '@sqi-ui/web/dist/index.css';
 
 :root {
   --background: #ffffff;
