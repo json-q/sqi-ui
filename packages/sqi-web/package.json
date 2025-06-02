@@ -11,9 +11,10 @@
   "scripts": {
     "dev": "run-p rslib:dev gulp:build gulp:dev",
     "rslib:dev": "rslib build --watch",
+    "rslib:build": "rslib build",
     "gulp:dev": "gulp watch",
     "gulp:build": "gulp",
-    "build": "rslib build",
+    "build": "run-p rslib:build gulp:build",
     "clean": "rimraf dist .turbo"
   },
   "exports": {
