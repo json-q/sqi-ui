@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon, type ConvertIconFnType } from '../components/Icon';
+import { convertIcon } from '../components/Icon';
 function LoadingIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -21,5 +21,5 @@ function LoadingIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent: ConvertIconFnType = convertIcon(LoadingIcon, 'loading');
+const IconComponent = convertIcon(LoadingIcon, 'loading');
 export default IconComponent;

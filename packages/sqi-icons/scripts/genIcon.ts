@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import { Config } from '@svgr/core';
+import type { Config } from '@svgr/core';
 import { type PluginConfig } from 'svgo';
 import decamelize from 'decamelize';
 import transSvgToComponent from './transSvgToComponent';
@@ -13,14 +13,14 @@ const customTemplate: Config['template'] = (variables, context) => {
   const { tpl } = context;
 
   return tpl`${imports}
-  import { convertIcon, type ConvertIconFnType } from '../components/Icon';
+  import { convertIcon } from '../components/Icon';
 
   ${interfaces}
   function ${componentName}(${props}) {
     return ${jsx};
   }
 
-  const IconComponent: ConvertIconFnType = convertIcon(${componentName}, '${getOriginalSvgFileName(componentName)}');
+  const IconComponent = convertIcon(${componentName}, '${getOriginalSvgFileName(componentName)}');
 
   export default IconComponent;
     `;

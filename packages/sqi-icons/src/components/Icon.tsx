@@ -1,23 +1,16 @@
 import React, { createElement, forwardRef, useContext } from 'react';
-import type { ComponentType, HTMLAttributes, ReactNode, ForwardRefExoticComponent, RefAttributes } from 'react';
+import type { ComponentType, DetailedHTMLProps, ReactNode } from 'react';
 import clsx from 'clsx';
 import IconContext from './Context';
 
-export interface BaseIconProps extends HTMLAttributes<HTMLSpanElement> {
+export interface IconProps extends DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> {
   svg: ReactNode;
   spin?: boolean;
   rotate?: number;
   type?: string;
 }
 
-export interface IconProps extends BaseIconProps {
-  svg: React.ReactNode;
-  type?: string;
-}
-
-type IconType = ForwardRefExoticComponent<Omit<IconProps, 'ref'> & RefAttributes<HTMLSpanElement>>;
-
-const Icon: IconType = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
+const Icon = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
   const { svg, type, spin, rotate, className, style, ...restProps } = props;
   const { prefixCls = 'sqi' } = useContext(IconContext);
 
@@ -43,14 +36,7 @@ const Icon: IconType = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
 
 Icon.displayName = 'Icon';
 
-export type ConvertIconFnType = ReturnType<typeof convertIcon>;
-
-export type ConvertIconProps = Omit<IconProps, 'svg' | 'type'>;
-
-const convertIcon = (
-  Svg: ComponentType,
-  iconType: string,
-): ForwardRefExoticComponent<ConvertIconProps & RefAttributes<HTMLSpanElement>> => {
+const convertIcon = (Svg: ComponentType, iconType: string) => {
   const InnerIcon = forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
     <Icon svg={createElement(Svg)} type={iconType} ref={ref} {...props} />
   ));

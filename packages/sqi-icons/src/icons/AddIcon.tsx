@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon, type ConvertIconFnType } from '../components/Icon';
+import { convertIcon } from '../components/Icon';
 function AddIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -17,5 +17,5 @@ function AddIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent: ConvertIconFnType = convertIcon(AddIcon, 'add');
+const IconComponent = convertIcon(AddIcon, 'add');
 export default IconComponent;
