@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import Icon, { type IconProps } from '../components/Icon';
 function SearchIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,8 @@ function SearchIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(SearchIcon, 'search');
+const IconComponent = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+  <Icon svg={React.createElement(SearchIcon)} type="search" ref={ref} {...props} />
+));
+IconComponent.displayName = 'SearchIcon';
 export default IconComponent;

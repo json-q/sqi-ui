@@ -13,17 +13,20 @@ const customTemplate: Config['template'] = (variables, context) => {
   const { tpl } = context;
 
   return tpl`${imports}
-  import { convertIcon } from '../components/Icon';
+  import Icon, { type IconProps } from '../components/Icon';
 
   ${interfaces}
   function ${componentName}(${props}) {
     return ${jsx};
   }
 
-  const IconComponent = convertIcon(${componentName}, '${getOriginalSvgFileName(componentName)}');
+  const IconComponent = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+    <Icon svg={React.createElement(${componentName})} type='${getOriginalSvgFileName(componentName)}' ref={ref} {...props} />
+  ));
 
+  IconComponent.displayName = '${componentName}';
   export default IconComponent;
-    `;
+  `;
 };
 
 const svgoPlugins: PluginConfig[] = [

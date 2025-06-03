@@ -1,3 +1,4 @@
+'use client';
 import React, { createElement, isValidElement, useContext, useState } from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';

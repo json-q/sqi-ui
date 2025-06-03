@@ -1,5 +1,7 @@
-import React, { createElement, forwardRef, useContext } from 'react';
-import type { ComponentType, DetailedHTMLProps, ReactNode } from 'react';
+'use client';
+
+import React, { forwardRef, useContext } from 'react';
+import type { DetailedHTMLProps, ReactNode } from 'react';
 import clsx from 'clsx';
 import IconContext from './Context';
 
@@ -36,16 +38,22 @@ const Icon = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
 
 Icon.displayName = 'Icon';
 
-const convertIcon = (Svg: ComponentType, iconType: string) => {
-  const InnerIcon = forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
-    <Icon svg={createElement(Svg)} type={iconType} ref={ref} {...props} />
-  ));
+// const convertIcon = (Svg: ComponentType, iconType: string) => {
+//   const InnerIcon = forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+//     <Icon svg={createElement(Svg)} type={iconType} ref={ref} {...props} />
+//   ));
 
-  if (process.env.NODE_ENV === 'development') {
-    InnerIcon.displayName = 'Icon';
-  }
-  return InnerIcon;
-};
+//   if (process.env.NODE_ENV === 'development') {
+//     InnerIcon.displayName = 'Icon';
+//   }
+//   return InnerIcon;
+// };
 
-export { convertIcon };
+// const RefIcon = forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+//   <Icon svg={createElement(Svg)} type={iconType} ref={ref} {...props} />
+// ));
+
+// RefIcon.displayName = 'Icon';
+
+// export { convertIcon };
 export default Icon;

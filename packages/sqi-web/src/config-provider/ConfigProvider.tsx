@@ -1,3 +1,4 @@
+'use client';
 import React, { Fragment } from 'react';
 import { omit } from '@sqi-ui/utils';
 import { useMergeProps } from '@sqi-ui/hooks';

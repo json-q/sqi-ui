@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '@sqi-ui/web';
 
 export default function Test() {

@@ -1,7 +1,7 @@
 import { basename, resolve } from 'node:path';
 import fs from 'fs-extra';
 
-import { Config, transform } from '@svgr/core';
+import { type Config, transform } from '@svgr/core';
 import { optimize, type PluginConfig } from 'svgo';
 import camelCase from 'camelcase';
 import prettier from 'prettier';

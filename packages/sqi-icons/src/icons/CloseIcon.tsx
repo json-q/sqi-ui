@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import Icon, { type IconProps } from '../components/Icon';
 function CloseIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,8 @@ function CloseIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(CloseIcon, 'close');
+const IconComponent = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+  <Icon svg={React.createElement(CloseIcon)} type="close" ref={ref} {...props} />
+));
+IconComponent.displayName = 'CloseIcon';
 export default IconComponent;
