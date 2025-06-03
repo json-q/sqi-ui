@@ -2,7 +2,6 @@ import { defineConfig } from '@rslib/core';
 
 export default defineConfig({
   output: {
-    cleanDistPath: true,
     target: 'web',
   },
   lib: [
@@ -16,6 +15,9 @@ export default defineConfig({
         distPath: {
           root: './es',
         },
+        filename: {
+          js: '[name].js',
+        },
       },
     },
     {
@@ -26,6 +28,9 @@ export default defineConfig({
       output: {
         distPath: {
           root: './lib',
+        },
+        filename: {
+          js: '[name].js',
         },
       },
     },

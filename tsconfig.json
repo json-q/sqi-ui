@@ -4,7 +4,7 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@sqi-ui/web": ["./packages/sqi-ui/src/index.ts"],
+      "@sqi-ui/web": ["./packages/sqi-web/src/index.ts"],
       "@sqi-ui/icons": ["./packages/sqi-icons/src/index.ts"],
       "@sqi-ui/hooks": ["./packages/sqi-hooks/src/index.ts"],
       "@sqi-ui/utils": ["./packages/sqi-utils/src/index.ts"]

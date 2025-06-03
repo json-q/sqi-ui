@@ -4,13 +4,16 @@
   "description": "",
   "main": "lib/index.js",
   "types": "es/index.d.ts",
-  "module": " es/index.mjs",
+  "module": "es/index.mjs",
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
-      "import": "./es/index.mjs",
+      "import": "./es/index.js",
       "require": "./lib/index.js"
-    }
+    },
+    "./dist/*": "./dist/*",
+    "./es/*": "./es/*",
+    "./lib/*": "./lib/*"
   },
   "sideEffects": false,
   "files": [
@@ -27,7 +30,7 @@
     "clean": "rimraf dist .turbo"
   },
   "peerDependencies": {
-    "react": ">=16.9.0"
+    "react": ">=18"
   },
   "dependencies": {
     "@sqi-ui/utils": "workspace:*",

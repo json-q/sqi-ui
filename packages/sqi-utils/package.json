@@ -4,13 +4,16 @@
   "description": "",
   "main": "lib/index.js",
   "types": "es/index.d.ts",
-  "module": " es/index.mjs",
+  "module": "es/index.js",
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
-      "import": "./es/index.mjs",
+      "import": "./es/index.js",
       "require": "./lib/index.js"
-    }
+    },
+    "./dist/*": "./dist/*",
+    "./es/*": "./es/*",
+    "./lib/*": "./lib/*"
   },
   "sideEffects": false,
   "files": [
