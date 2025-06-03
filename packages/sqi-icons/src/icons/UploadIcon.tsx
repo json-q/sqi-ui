@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import Icon, { type IconProps } from '../components/Icon';
 function UploadIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,8 @@ function UploadIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(UploadIcon, 'upload');
+const IconComponent = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+  <Icon svg={React.createElement(UploadIcon)} type="upload" ref={ref} {...props} />
+));
+IconComponent.displayName = 'UploadIcon';
 export default IconComponent;

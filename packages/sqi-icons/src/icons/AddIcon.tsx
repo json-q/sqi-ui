@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import Icon, { type IconProps } from '../components/Icon';
 function AddIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -17,5 +17,8 @@ function AddIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(AddIcon, 'add');
+const IconComponent = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+  <Icon svg={React.createElement(AddIcon)} type="add" ref={ref} {...props} />
+));
+IconComponent.displayName = 'AddIcon';
 export default IconComponent;

@@ -1,3 +1,4 @@
+'use client';
 import React, { Fragment, Children, useCallback, isValidElement, useContext } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { isFragment } from 'react-is';

@@ -2,17 +2,15 @@
   "name": "@sqi-ui/utils",
   "version": "0.0.1",
   "description": "",
-  "main": "./lib/index.js",
-  "types": "./es/index.d.ts",
+  "main": "lib/index.js",
+  "types": "es/index.d.ts",
+  "module": " es/index.mjs",
   "exports": {
     ".": {
       "types": "./es/index.d.ts",
       "import": "./es/index.mjs",
       "require": "./lib/index.js"
-    },
-    "./dist/*": "./dist/*",
-    "./es/*": "./es/*",
-    "./lib/*": "./lib/*"
+    }
   },
   "sideEffects": false,
   "files": [

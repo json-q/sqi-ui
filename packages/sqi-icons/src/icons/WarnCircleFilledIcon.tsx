@@ -1,6 +1,6 @@
 import * as React from 'react';
 import type { SVGProps } from 'react';
-import { convertIcon } from '../components/Icon';
+import Icon, { type IconProps } from '../components/Icon';
 function WarnCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -20,5 +20,8 @@ function WarnCircleFilledIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-const IconComponent = convertIcon(WarnCircleFilledIcon, 'warn-circle-filled');
+const IconComponent = React.forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
+  <Icon svg={React.createElement(WarnCircleFilledIcon)} type="warn-circle-filled" ref={ref} {...props} />
+));
+IconComponent.displayName = 'WarnCircleFilledIcon';
 export default IconComponent;
