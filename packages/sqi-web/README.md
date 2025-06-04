@@ -3,7 +3,7 @@
 ## 构建
 
 - 多产物构建
-- css 按需加载（需使用 `babel- plugin-import`）
+- css 按需加载（需使用 `babel-plugin-import`）
 
 ### 构建模式
 
