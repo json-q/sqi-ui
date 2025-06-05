@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { forwardRef, useContext, type Ref } from 'react';
 import clsx from 'clsx';
 import { LoadingIcon } from '@sqi-ui/icons';
 import { useMergeProps } from '@sqi-ui/hooks';
@@ -12,7 +12,7 @@ const defaultProps: ButtonProps = {
   htmlType: 'button',
 };
 
-export default function Button(baseProps: ButtonProps) {
+const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>((baseProps: ButtonProps, ref) => {
   const { prefixCls, size: ctxSize = 'md', componentConfig } = useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Button);
 
@@ -54,7 +54,14 @@ export default function Button(baseProps: ButtonProps) {
 
   if (href) {
     return (
-      <a {...anchorProps} href={href} target={target} className={classes} onClick={handleClick}>
+      <a
+        {...anchorProps}
+        href={href}
+        target={target}
+        className={classes}
+        onClick={handleClick}
+        ref={ref as Ref<HTMLAnchorElement>}
+      >
         {iconNode}
         <span>{children}</span>
       </a>
@@ -62,11 +69,19 @@ export default function Button(baseProps: ButtonProps) {
   }
 
   return (
-    <button type={htmlType} className={classes} onClick={handleClick} {...restProps}>
+    <button
+      {...restProps}
+      type={htmlType}
+      className={classes}
+      onClick={handleClick}
+      ref={ref as Ref<HTMLButtonElement>}
+    >
       {iconNode}
       <span>{children}</span>
     </button>
   );
-}
+});
 
 Button.displayName = 'Button';
+
+export default Button;

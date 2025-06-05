@@ -1,5 +1,5 @@
 'use client';
-import React, { createElement, isValidElement, useContext, useState } from 'react';
+import React, { createElement, forwardRef, isValidElement, useContext, useState } from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
 import type { AlertProps } from './type';
@@ -23,7 +23,7 @@ const iconTypeMap = {
   warning: WarnCircleFilledIcon,
 };
 
-export default function Alert(baseProps: AlertProps) {
+const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const {
     className,
@@ -55,7 +55,7 @@ export default function Alert(baseProps: AlertProps) {
   if (closed) return null;
 
   return (
-    <div className={classes} style={style}>
+    <div role="alert" className={classes} style={style} ref={ref}>
       {showIcon && <div className={`${prefixCls}-alert-icon`}>{renderIcon()}</div>}
 
       <div className={`${prefixCls}-alert-content`}>
@@ -72,4 +72,8 @@ export default function Alert(baseProps: AlertProps) {
       )}
     </div>
   );
-}
+});
+
+Alert.displayName = 'Alert';
+
+export default Alert;

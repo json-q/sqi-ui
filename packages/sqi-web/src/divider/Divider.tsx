@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
@@ -9,7 +9,7 @@ const defaultProps: DividerProps = {
   align: 'center',
 };
 
-export default function Divider(baseProps: DividerProps) {
+const Divider = forwardRef<HTMLDivElement, DividerProps>((baseProps: DividerProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Divider);
   const { direction, align, dashed, className, children, text, style } = props;
@@ -26,8 +26,12 @@ export default function Divider(baseProps: DividerProps) {
   });
 
   return (
-    <div className={classes} style={style}>
+    <div className={classes} style={style} ref={ref}>
       {hasText && <span className={`${prefixCls}-divider-inner-text`}>{mergeChildren}</span>}
     </div>
   );
-}
+});
+
+Divider.displayName = 'Divider';
+
+export default Divider;

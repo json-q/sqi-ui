@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment, Children, useCallback, isValidElement, useContext } from 'react';
+import React, { Fragment, Children, useCallback, isValidElement, useContext, forwardRef } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { isFragment } from 'react-is';
 import clsx from 'clsx';
@@ -40,7 +40,7 @@ function toArray(children: ReactNode): ReactNode[] {
   return realNode;
 }
 
-export default function Space(baseProps: SpaceProps) {
+const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
   const { prefixCls, size: ctxSize = 'md', componentConfig } = useContext(ConfigContext);
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.Space);
 
@@ -109,10 +109,12 @@ export default function Space(baseProps: SpaceProps) {
   });
 
   return (
-    <div className={classes} {...restProps}>
+    <div className={classes} {...restProps} ref={ref}>
       {nodes}
     </div>
   );
-}
+});
 
 Space.displayName = 'Space';
+
+export default Space;
