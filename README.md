@@ -1,5 +1,5 @@
 - pnpm workspace + turborepo
 - react + typescript + scss
 - dumi
-- rslib
+- rslib + gulp
 - eslint + prettier

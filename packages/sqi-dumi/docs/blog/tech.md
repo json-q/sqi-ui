@@ -14,7 +14,8 @@ nav:
 - 技术栈：react + typescript
 - css预编译器：sass
 - 文档：dumi（暂定）
-- 构建工具：rslib
+- 构建工具：rslib + gulp
+  - rslib 是用来替代 tsc + babel 的组合，css 使用 `gulp` 编排
 - 代码规范：eslint + prettier（考虑换成 biome）
 
 ## 选择原因
