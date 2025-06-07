@@ -37,6 +37,6 @@
     "@swc/helpers": "^0.5.17"
   },
   "devDependencies": {
-    "@types/react": "^19.1.4"
+    "@types/react": "^19.1.6"
   }
 }
