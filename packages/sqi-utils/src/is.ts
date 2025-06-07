@@ -13,3 +13,7 @@ export function isArray(val: any): val is any[] {
 export function isString(val: any): val is string {
   return typeof val === 'string';
 }
+
+export const isObject = (val: unknown): val is Record<any, any> => {
+  return val !== null && typeof val === 'object';
+};
