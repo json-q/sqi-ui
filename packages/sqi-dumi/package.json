@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "@sqi-ui/web": "workspace:*",
-    "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.6",
     "dumi": "^2.4.21"
   }
 }
