@@ -5,6 +5,6 @@ export interface RowContextState {
   wrap?: boolean;
 }
 
-const RowContext = createContext({});
+const RowContext = createContext<RowContextState>({});
 
 export default RowContext;

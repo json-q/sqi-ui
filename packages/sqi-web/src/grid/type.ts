@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { Breakpoint } from '../_util/responsiveObserve';
 
 export type GridRowGutter = number | Partial<Record<Breakpoint, number>>;
@@ -27,4 +27,21 @@ export interface RowProps {
 
   className?: string;
   style?: CSSProperties;
+  children?: ReactNode;
+}
+
+export interface ColProps {
+  /**
+   * @description 栅格占位格数
+   */
+  span?: number;
+  /**
+   * @description 栅格偏移格数
+   * @default 0
+   */
+  offset?: number;
+
+  style?: CSSProperties;
+  className?: string;
+  children?: ReactNode;
 }

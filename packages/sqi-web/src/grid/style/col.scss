@@ -1,0 +1,44 @@
+@use 'sass:math';
+@use 'sass:map';
+
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-col;
+
+@mixin make-grid-column-span($breakpoint: '') {
+  $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
+
+  @for $i from 1 through $grid-columns {
+    .#{$cls-prefix}-#{$i} {
+      display: block;
+      // width: ($i / $grid-columns * 100%);
+      // flex: 0 0 ($i / $grid-columns * 100%);
+      width: math.percentage(calc($i / $grid-columns));
+      flex: 0 0 math.percentage(calc($i / $grid-columns));
+    }
+  }
+}
+
+@include make-grid-column-span();
+@include make-grid-column-span(xs);
+
+@media (min-width: map.get($breakpoint, sm)) {
+  @include make-grid-column-span(sm);
+}
+
+@media (min-width: map.get($breakpoint, md)) {
+  @include make-grid-column-span(md);
+}
+
+@media (min-width: map.get($breakpoint, lg)) {
+  @include make-grid-column-span(lg);
+}
+
+@media (min-width: map.get($breakpoint, xl)) {
+  @include make-grid-column-span(xl);
+}
+
+@media (min-width: map.get($breakpoint, xxl)) {
+  @include make-grid-column-span(xxl);
+}
