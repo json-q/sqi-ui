@@ -1,14 +1,14 @@
 import type { CSSProperties, ReactNode } from 'react';
 import type { Breakpoint } from '../_util/responsiveObserve';
 
-export type GridRowGutter = number | Partial<Record<Breakpoint, number>>;
+export type RowGutter = number | Partial<Record<Breakpoint, number>>;
 
 export interface RowProps {
   /**
    * @description 栅格间隔
    * @default 0
    */
-  gutter?: GridRowGutter | GridRowGutter[];
+  gutter?: RowGutter | RowGutter[];
   /**
    * @description 列元素对齐方式
    * @default 'start'

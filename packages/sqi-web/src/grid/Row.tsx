@@ -1,9 +1,10 @@
 'use client';
-import React, { useContext, useMemo, forwardRef, type CSSProperties } from 'react';
+import React, { useContext, useMemo, forwardRef, type CSSProperties, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { isNumber, isObject } from '@sqi-ui/utils';
+import { isArray, isNumber, isObject } from '@sqi-ui/utils';
 import { ConfigContext } from '../config-provider/context';
+import ResponsiveObserve, { responsiveArray, type ScreenMap } from '../_util/responsiveObserve';
 import type { RowProps } from './type';
 import RowContext from './context';
 
@@ -23,15 +24,46 @@ const Row = forwardRef<HTMLDivElement, RowProps>((baseProps, ref) => {
     defaultProps,
     componentConfig?.Row,
   );
+  const [screens, setScreens] = useState<ScreenMap>({
+    xs: false,
+    sm: false,
+    md: false,
+    lg: false,
+    xl: false,
+    xxl: false,
+  });
+
+  useEffect(() => {
+    const token = ResponsiveObserve.subscribe((screen) => {
+      if (isObject(gutter) || (isArray(gutter) && (isObject(gutter[0]) || isObject(gutter[1])))) {
+        setScreens(screen);
+      }
+    });
+
+    return () => ResponsiveObserve.unsubscribe(token);
+  }, []);
 
   const gutterArray = getGutter();
+  if (isObject(gutter)) {
+    console.log(gutterArray);
+  }
+
   function getGutter() {
     const gutterResult: [Gap, Gap] = [undefined, undefined];
-    const normalizedGutter = Array.isArray(gutter) ? gutter : [gutter, undefined];
+    const normalizedGutter = isArray(gutter) ? gutter : [gutter, undefined];
 
     normalizedGutter.forEach((item, index) => {
+      // eg: { xs: 8, sm: 16, md: 24, lg: 32 }
       if (isObject(item)) {
-        // TODO
+        // responsiveArray 是从最大尺寸到最小尺寸排序的
+        // 因此当匹配到第一个 screens[breakpoint] 为 true 时, 即当前屏幕尺寸满足 gutter 断点的最小宽度, 则将对应的 gutter 设置
+        for (let i = 0; i < responsiveArray.length; i++) {
+          const breakpoint = responsiveArray[i];
+          if (screens[breakpoint] && item[breakpoint] !== undefined) {
+            gutterResult[index] = item[breakpoint] as number;
+            break;
+          }
+        }
       } else {
         gutterResult[index] = item;
       }

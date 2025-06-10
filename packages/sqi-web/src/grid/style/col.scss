@@ -10,12 +10,15 @@ $module: #{$prefix}-col;
   $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
 
   @for $i from 1 through $grid-columns {
+    $percentage: math.percentage(math.div($i, $grid-columns));
+
     .#{$cls-prefix}-#{$i} {
       display: block;
+      box-sizing: border-box;
       // width: ($i / $grid-columns * 100%);
       // flex: 0 0 ($i / $grid-columns * 100%);
-      width: math.percentage(calc($i / $grid-columns));
-      flex: 0 0 math.percentage(calc($i / $grid-columns));
+      width: $percentage;
+      flex: 0 0 $percentage;
     }
   }
 }
