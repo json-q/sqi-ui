@@ -27,3 +27,7 @@ group:
 ## Flex 自定义填充
 
 <code src="./demos/flex.tsx"></code>
+
+## Col 对齐方式
+
+<code src="./demos/align.tsx"></code>
