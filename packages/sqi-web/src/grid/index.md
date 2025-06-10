@@ -28,6 +28,10 @@ group:
 
 <code src="./demos/flex.tsx"></code>
 
-## Col 对齐方式
+## Col 横向排版
+
+<code src="./demos/justify.tsx"></code>
+
+## Col 竖向对齐
 
 <code src="./demos/align.tsx"></code>

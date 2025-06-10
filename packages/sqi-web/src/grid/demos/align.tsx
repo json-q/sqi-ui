@@ -4,95 +4,89 @@ import { Col, Divider, Row } from '@sqi-ui/web';
 export default function Demo() {
   return (
     <>
-      <Divider align="left">element align left</Divider>
-      <Row justify="start" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+      <Divider align="left">align start</Divider>
+      <Row align="start" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
+        <Col span={6}>
+          <Placeholder color={5} height={100}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={6} height={50}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={5} height={120}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-      </Row>
-
-      <Divider align="left">element align center</Divider>
-      <Row justify="center" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={6} height={80}>
+            col-6
+          </Placeholder>
         </Col>
       </Row>
 
-      <Divider align="left">element align right</Divider>
-      <Row justify="end" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+      <Divider align="left">align center</Divider>
+      <Row align="center" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
+        <Col span={6}>
+          <Placeholder color={5} height={100}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={6} height={50}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={5} height={120}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-      </Row>
-
-      <Divider align="left">element monospaced arrangement</Divider>
-      <Row justify="space-between" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
-        </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={6} height={80}>
+            col-6
+          </Placeholder>
         </Col>
       </Row>
 
-      <Divider align="left">element align full</Divider>
-      <Row justify="space-around" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+      <Divider align="left">align bottom</Divider>
+      <Row align="end" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
+        <Col span={6}>
+          <Placeholder color={5} height={100}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={6} height={50}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={5} height={120}>
+            col-6
+          </Placeholder>
         </Col>
-        <Col span={4}>
-          <Placeholder>col-4</Placeholder>
+        <Col span={6}>
+          <Placeholder color={6} height={80}>
+            col-6
+          </Placeholder>
         </Col>
       </Row>
     </>
   );
 }
 
-function Placeholder({ children }: { children?: React.ReactNode }) {
+function Placeholder({ children, height, color }: { children?: React.ReactNode; height: number; color: number }) {
+  const bg = `var(--sqi-brand-color-${color})`;
+
   return (
     <div
       style={{
-        padding: '12px 0',
-        backgroundColor: 'var(--sqi-brand-color)',
+        height: height,
+        backgroundColor: bg,
         color: 'var(--sqi-text-color-anti)',
         textAlign: 'center',
       }}
