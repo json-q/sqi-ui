@@ -1,56 +1,51 @@
 import React from 'react';
 import { Row, Col } from '@sqi-ui/web';
+import BoxDemo from './box-demo';
 
 export default function Demo() {
   return (
     <>
       <Row>
         <Col span={24}>
-          <Placeholder color={5} />
+          <BoxDemo colorPalette={5} height={40} />
         </Col>
       </Row>
       <br />
       <Row>
         <Col span={12}>
-          <Placeholder color={5} />
+          <BoxDemo colorPalette={5} height={40} />
         </Col>
         <Col span={12}>
-          <Placeholder color={6} />
+          <BoxDemo colorPalette={6} height={40} />
         </Col>
       </Row>
       <br />
       <Row>
         <Col span={8}>
-          <Placeholder color={5} />
+          <BoxDemo colorPalette={5} height={40} />
         </Col>
         <Col span={8}>
-          <Placeholder color={6} />
+          <BoxDemo colorPalette={6} height={40} />
         </Col>
         <Col span={8}>
-          <Placeholder color={5} />
+          <BoxDemo colorPalette={5} height={40} />
         </Col>
       </Row>
       <br />
       <Row>
         <Col span={6}>
-          <Placeholder color={5} />
+          <BoxDemo colorPalette={5} height={40} />
         </Col>
         <Col span={6}>
-          <Placeholder color={6} />
+          <BoxDemo colorPalette={6} height={40} />
         </Col>
         <Col span={6}>
-          <Placeholder color={5} />
+          <BoxDemo colorPalette={5} height={40} />
         </Col>
         <Col span={6}>
-          <Placeholder color={6} />
+          <BoxDemo colorPalette={6} height={40} />
         </Col>
       </Row>
     </>
   );
-}
-
-function Placeholder({ color }: { color: number }) {
-  const bg = `var(--sqi-brand-color-${color})`;
-
-  return <div style={{ padding: '16px 0', backgroundColor: bg }} />;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Divider, Row } from '@sqi-ui/web';
+import BoxDemo from './box-demo';
 
 export default function Demo() {
   return (
@@ -7,91 +8,74 @@ export default function Demo() {
       <Divider align="left">align start</Divider>
       <Row align="start" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
         <Col span={6}>
-          <Placeholder color={5} height={100}>
+          <BoxDemo colorPalette={5} height={100}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={6} height={50}>
+          <BoxDemo colorPalette={6} height={50}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={5} height={120}>
+          <BoxDemo colorPalette={5} height={120}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={6} height={80}>
+          <BoxDemo colorPalette={6} height={80}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
       </Row>
 
       <Divider align="left">align center</Divider>
       <Row align="center" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
         <Col span={6}>
-          <Placeholder color={5} height={100}>
+          <BoxDemo colorPalette={5} height={100}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={6} height={50}>
+          <BoxDemo colorPalette={6} height={50}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={5} height={120}>
+          <BoxDemo colorPalette={5} height={120}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={6} height={80}>
+          <BoxDemo colorPalette={6} height={80}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
       </Row>
 
       <Divider align="left">align bottom</Divider>
       <Row align="end" style={{ backgroundColor: 'var(--sqi-bg-color-component)' }}>
         <Col span={6}>
-          <Placeholder color={5} height={100}>
+          <BoxDemo colorPalette={5} height={100}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={6} height={50}>
+          <BoxDemo colorPalette={6} height={50}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={5} height={120}>
+          <BoxDemo colorPalette={5} height={120}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
         <Col span={6}>
-          <Placeholder color={6} height={80}>
+          <BoxDemo colorPalette={6} height={80}>
             col-6
-          </Placeholder>
+          </BoxDemo>
         </Col>
       </Row>
     </>
-  );
-}
-
-function Placeholder({ children, height, color }: { children?: React.ReactNode; height: number; color: number }) {
-  const bg = `var(--sqi-brand-color-${color})`;
-
-  return (
-    <div
-      style={{
-        height: height,
-        backgroundColor: bg,
-        color: 'var(--sqi-text-color-anti)',
-        textAlign: 'center',
-      }}
-    >
-      {children}
-    </div>
   );
 }

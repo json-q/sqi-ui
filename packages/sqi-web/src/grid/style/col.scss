@@ -23,25 +23,46 @@ $module: #{$prefix}-col;
   }
 }
 
+@mixin make-grid-column-offset($breakpoint: '') {
+  $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
+
+  // 1 格是自身, 列最多偏移 23 格
+  $can-offset-columns: 23;
+
+  @for $i from 1 through $can-offset-columns {
+    .#{$cls-prefix}-offset-#{$i} {
+      margin-left: math.percentage(math.div($i, $grid-columns));
+    }
+  }
+}
+
 @include make-grid-column-span();
+@include make-grid-column-offset();
+
 @include make-grid-column-span(xs);
+@include make-grid-column-offset(xs);
 
 @media (min-width: map.get($breakpoint, sm)) {
   @include make-grid-column-span(sm);
+  @include make-grid-column-offset(sm);
 }
 
 @media (min-width: map.get($breakpoint, md)) {
   @include make-grid-column-span(md);
+  @include make-grid-column-offset(md);
 }
 
 @media (min-width: map.get($breakpoint, lg)) {
   @include make-grid-column-span(lg);
+  @include make-grid-column-offset(lg);
 }
 
 @media (min-width: map.get($breakpoint, xl)) {
   @include make-grid-column-span(xl);
+  @include make-grid-column-offset(xl);
 }
 
 @media (min-width: map.get($breakpoint, xxl)) {
   @include make-grid-column-span(xxl);
+  @include make-grid-column-offset(xxl);
 }
