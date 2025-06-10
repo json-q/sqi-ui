@@ -44,10 +44,6 @@ const Row = forwardRef<HTMLDivElement, RowProps>((baseProps, ref) => {
   }, []);
 
   const gutterArray = getGutter();
-  if (isObject(gutter)) {
-    console.log(gutterArray);
-  }
-
   function getGutter() {
     const gutterResult: [Gap, Gap] = [undefined, undefined];
     const normalizedGutter = isArray(gutter) ? gutter : [gutter, undefined];
@@ -74,6 +70,7 @@ const Row = forwardRef<HTMLDivElement, RowProps>((baseProps, ref) => {
   const classes = clsx(
     `${prefixCls}-row`,
     {
+      [`${prefixCls}-row-nowrap`]: wrap === false,
       [`${prefixCls}-row-align-${align}`]: align,
       [`${prefixCls}-row-justify-${justify}`]: justify,
     },
