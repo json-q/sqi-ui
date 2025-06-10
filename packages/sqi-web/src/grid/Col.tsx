@@ -2,18 +2,28 @@
 import React, { forwardRef, useContext, type CSSProperties } from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
-import type { ColProps } from './type';
+import type { ColProps, FlexType } from './type';
 import RowContext from './context';
 import clsx from 'clsx';
+import { isNumber } from '@sqi-ui/utils';
 
 const defaultProps: ColProps = {
   offset: 0,
 };
 
+function formatFlexStyle(flex: FlexType): string {
+  if (isNumber(flex)) return `${flex} ${flex} auto`;
+
+  const isFlexBasis = /^\d+(\.\d+)?(px|em|rem|%)$/.test(flex);
+  if (isFlexBasis) return `0 0 ${flex}`;
+
+  return flex;
+}
+
 const Col = forwardRef<HTMLDivElement, ColProps>((baseProps, ref) => {
   const { componentConfig, prefixCls } = useContext(ConfigContext);
   const { gutter } = useContext(RowContext);
-  const { span, offset, children, className, style, ...restProps } = useMergeProps(
+  const { span, offset, children, className, style, flex, ...restProps } = useMergeProps(
     baseProps,
     defaultProps,
     componentConfig?.Col,
@@ -43,8 +53,13 @@ const Col = forwardRef<HTMLDivElement, ColProps>((baseProps, ref) => {
     }
   }
 
+  const flexStyle: CSSProperties = {};
+  if (flex) {
+    flexStyle.flex = formatFlexStyle(flex);
+  }
+
   return (
-    <div ref={ref} {...restProps} className={classes} style={{ ...style, ...paddingStyle }}>
+    <div ref={ref} {...restProps} className={classes} style={{ ...style, ...flexStyle, ...paddingStyle }}>
       {children}
     </div>
   );

@@ -59,12 +59,10 @@ function Placeholder({ children }: { children?: React.ReactNode }) {
   return (
     <div
       style={{
-        height: 40,
+        padding: '12px 0',
         backgroundColor: 'var(--sqi-brand-color)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
         color: 'var(--sqi-text-color-anti)',
+        textAlign: 'center',
       }}
     >
       {children}

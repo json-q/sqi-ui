@@ -30,6 +30,8 @@ export interface RowProps {
   children?: ReactNode;
 }
 
+export type FlexType = string | number | 'auto' | 'none';
+
 export interface ColProps {
   /**
    * @description 栅格占位格数
@@ -44,4 +46,5 @@ export interface ColProps {
   style?: CSSProperties;
   className?: string;
   children?: ReactNode;
+  flex?: FlexType;
 }
