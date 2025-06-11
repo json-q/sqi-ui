@@ -3,6 +3,7 @@ import type { ButtonProps } from '../button';
 import type { SpaceProps } from '../space';
 import type { DividerProps } from '../divider';
 import type { AlertProps } from '../alert/type';
+import type { ColProps, RowProps } from '../grid/type';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
 
@@ -34,4 +35,6 @@ export type ComponentConfig = {
   Space?: SpaceProps;
   Divider?: DividerProps;
   Alert?: AlertProps;
+  Row?: RowProps;
+  Col?: ColProps;
 };

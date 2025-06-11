@@ -12,7 +12,13 @@ function compilerScss() {
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(gulp.dest('./es'))
-    .pipe(gulp.dest('./lib'))
+    .pipe(gulp.dest('./lib'));
+}
+
+// 合并 css，仅合并 index.css 防止其它 css 文件合并导致 css 重复
+function mergeCssToDist() {
+  return gulp
+    .src(['./es/**/index.css'])
     .pipe(concat('index.css'))
     .pipe(gulp.dest('./dist'))
     .pipe(cleanCSS())
@@ -111,7 +117,7 @@ function copyRenameStyleIndex() {
  */
 const build = gulp.parallel(
   gulp.series(copyRenameStyleIndex, gulp.parallel(genEsmCssJs, genCjsCssJs)),
-  compilerScss,
+  gulp.series(compilerScss, mergeCssToDist),
   compilerResetScss,
   copyScss,
 );
