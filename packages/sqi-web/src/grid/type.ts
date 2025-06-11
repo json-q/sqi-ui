@@ -1,4 +1,4 @@
-import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
+import type { HTMLAttributes } from 'react';
 import type { Breakpoint } from '../_util/responsiveObserve';
 import type { LiteralUnion } from '../_util/type';
 
@@ -25,10 +25,6 @@ export interface RowProps extends HTMLAttributes<HTMLDivElement> {
    * @default true
    */
   wrap?: boolean;
-
-  className?: string;
-  style?: CSSProperties;
-  children?: ReactNode;
 }
 
 export type FlexType = number | LiteralUnion<'none' | 'auto'>;
@@ -53,10 +49,6 @@ export interface ColProps extends HTMLAttributes<HTMLDivElement>, Partial<Record
    * @description 栅格排列顺序
    */
   order?: number;
-
-  style?: CSSProperties;
-  className?: string;
-  children?: ReactNode;
   /**
    * @description 自定义 flex 布局属性
    */
