@@ -39,7 +39,7 @@ const genScreenClassName = (breakpointProps: PickBreakpointProps, prefixCls: str
 
     className = {
       ...className,
-      [`${prefixCls}-col-${size}-${sizeProps.span}`]: sizeProps.span,
+      [`${prefixCls}-col-${size}-${sizeProps.span}`]: isNumber(sizeProps.span),
       [`${prefixCls}-col-${size}-order-${sizeProps.order}`]: sizeProps.order,
       [`${prefixCls}-col-${size}-offset-${sizeProps.offset}`]: sizeProps.offset,
     };
@@ -59,7 +59,7 @@ const Col = forwardRef<HTMLDivElement, ColProps>((baseProps, ref) => {
   const classes = clsx(
     `${prefixCls}-col`,
     {
-      [`${prefixCls}-col-${span}`]: span,
+      [`${prefixCls}-col-${span}`]: isNumber(span),
       [`${prefixCls}-col-offset-${offset}`]: offset,
       [`${prefixCls}-col-order-${order}`]: order, // css 中只提供了 1-24, 因此 0 无意义，不做额外处理
     },

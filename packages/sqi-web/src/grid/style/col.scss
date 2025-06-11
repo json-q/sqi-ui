@@ -9,11 +9,11 @@ $module: #{$prefix}-col;
 @mixin make-grid-column-span($breakpoint: '') {
   $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
 
-  @for $i from 1 through $grid-columns {
+  @for $i from 0 through $grid-columns {
     $percentage: math.percentage(math.div($i, $grid-columns));
 
     .#{$cls-prefix}-#{$i} {
-      display: block;
+      display: if($i == 0, none, block);
       box-sizing: border-box;
       // width: ($i / $grid-columns * 100%);
       // flex: 0 0 ($i / $grid-columns * 100%);
