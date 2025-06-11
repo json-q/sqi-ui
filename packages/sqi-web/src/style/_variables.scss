@@ -1,5 +1,3 @@
-// 公共前缀
-
 $prefix: 'sqi';
 
 // 可读基础颜色
@@ -122,3 +120,12 @@ $anim-time-fn-ease-in: cubic-bezier(0.82, 0, 1, 0.9);
 $anim-duration-base: 0.2s;
 $anim-duration-moderate: 0.24s;
 $anim-duration-slow: 0.28s;
+
+// media 的 css var 暂未支持
+// https://segmentfault.com/q/1010000042614433
+$screen-xxl: 1600px;
+$screen-xl: 1200px;
+$screen-lg: 992px;
+$screen-md: 768px;
+$screen-sm: 576px;
+$screen-xs: 480px;

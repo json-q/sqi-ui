@@ -2,7 +2,7 @@ import React from 'react';
 
 // this is a demo component, not api example
 export default function BoxDemo({
-  colorPalette = 7,
+  colorPalette = 6,
   children,
   height,
 }: {

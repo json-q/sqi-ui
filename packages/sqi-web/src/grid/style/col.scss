@@ -6,9 +6,10 @@
 
 $module: #{$prefix}-col;
 
-@mixin make-grid-column-span($breakpoint: '') {
+@mixin make-grid-column($breakpoint: '') {
   $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
 
+  // span
   @for $i from 0 through $grid-columns {
     $percentage: math.percentage(math.div($i, $grid-columns));
 
@@ -21,24 +22,17 @@ $module: #{$prefix}-col;
       flex: 0 0 $percentage;
     }
   }
-}
 
-@mixin make-grid-column-offset($breakpoint: '') {
-  $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
-
+  // offset
   // 1 格自身, 列最多偏移 23 格
-  $can-offset-columns: 23;
-
+  $can-offset-columns: $grid-columns - 1;
   @for $i from 1 through $can-offset-columns {
     .#{$cls-prefix}-offset-#{$i} {
       margin-left: math.percentage(math.div($i, $grid-columns));
     }
   }
-}
 
-@mixin make-grid-column-order($breakpoint: '') {
-  $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
-
+  // order
   @for $i from 1 through $grid-columns {
     .#{$cls-prefix}-order-#{$i} {
       order: $i;
@@ -46,40 +40,25 @@ $module: #{$prefix}-col;
   }
 }
 
-@include make-grid-column-span();
-@include make-grid-column-offset();
-@include make-grid-column-order();
-
-@include make-grid-column-span(xs);
-@include make-grid-column-offset(xs);
-@include make-grid-column-order(xs);
+@include make-grid-column();
+@include make-grid-column(xs);
 
 @media (min-width: map.get($breakpoint, sm)) {
-  @include make-grid-column-span(sm);
-  @include make-grid-column-offset(sm);
-  @include make-grid-column-order(sm);
+  @include make-grid-column(sm);
 }
 
 @media (min-width: map.get($breakpoint, md)) {
-  @include make-grid-column-span(md);
-  @include make-grid-column-offset(md);
-  @include make-grid-column-order(md);
+  @include make-grid-column(md);
 }
 
 @media (min-width: map.get($breakpoint, lg)) {
-  @include make-grid-column-span(lg);
-  @include make-grid-column-offset(lg);
-  @include make-grid-column-order(lg);
+  @include make-grid-column(lg);
 }
 
 @media (min-width: map.get($breakpoint, xl)) {
-  @include make-grid-column-span(xl);
-  @include make-grid-column-offset(xl);
-  @include make-grid-column-order(xl);
+  @include make-grid-column(xl);
 }
 
 @media (min-width: map.get($breakpoint, xxl)) {
-  @include make-grid-column-span(xxl);
-  @include make-grid-column-offset(xxl);
-  @include make-grid-column-order(xxl);
+  @include make-grid-column(xxl);
 }

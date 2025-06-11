@@ -1,9 +1,11 @@
+@use '../../style/mixin' as *;
+
 $grid-columns: 24;
 $breakpoint: (
-  xxl: 1600px,
-  xl: 1200px,
-  lg: 992px,
-  md: 768px,
-  sm: 576px,
-  xs: 480px,
+  xxl: $screen-xxl,
+  xl: $screen-xl,
+  lg: $screen-lg,
+  md: $screen-md,
+  sm: $screen-sm,
+  xs: $screen-xs,
 );
