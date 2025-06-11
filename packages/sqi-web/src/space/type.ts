@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import type { ConfigSize } from '@sqi-ui/web';
 
 export type SizeType = ConfigSize | number | undefined;
@@ -28,5 +28,5 @@ export interface SpaceProps extends HTMLAttributes<HTMLDivElement> {
    * @description 分隔符
    * @default ''
    */
-  split?: React.ReactNode;
+  split?: ReactNode;
 }

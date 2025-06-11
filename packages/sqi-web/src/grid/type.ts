@@ -1,9 +1,10 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import type { Breakpoint } from '../_util/responsiveObserve';
+import type { LiteralUnion } from '../_util/type';
 
 export type RowGutter = number | Partial<Record<Breakpoint, number>>;
 
-export interface RowProps {
+export interface RowProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @description 栅格间隔
    * @default 0
@@ -30,7 +31,7 @@ export interface RowProps {
   children?: ReactNode;
 }
 
-export type FlexType = string | number | 'auto' | 'none';
+export type FlexType = number | LiteralUnion<'none' | 'auto'>;
 export interface ColSize {
   flex?: FlexType;
   span?: number;
@@ -38,7 +39,7 @@ export interface ColSize {
   offset?: number;
 }
 
-export interface ColProps {
+export interface ColProps extends HTMLAttributes<HTMLDivElement>, Partial<Record<Breakpoint, number | ColSize>> {
   /**
    * @description 栅格占位格数
    */
@@ -60,11 +61,4 @@ export interface ColProps {
    * @description 自定义 flex 布局属性
    */
   flex?: FlexType;
-
-  xs?: number | ColProps;
-  sm?: number | ColProps;
-  md?: number | ColProps;
-  lg?: number | ColProps;
-  xl?: number | ColProps;
-  xxl?: number | ColProps;
 }

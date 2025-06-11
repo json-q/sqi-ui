@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { isArray, isString } from '@sqi-ui/utils';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
-import type { SpaceProps } from './type';
+import type { SizeType, SpaceProps } from './type';
 
 const spaceSize = {
   sm: 8,
@@ -73,8 +73,8 @@ const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
     (isLastChildren: boolean): CSSProperties => {
       // 若传入数组，以传入为主，若为字符串或数字，则分别设置水平和垂直方向的间距
       const mergeSize = isArray(size) ? size : [size, size];
-      const [horizontalGap, verticalGap] = mergeSize.map((_size) =>
-        isString(_size) ? spaceSize[_size as keyof typeof spaceSize] : _size || 0,
+      const [horizontalGap, verticalGap] = mergeSize.map((_size: SizeType) =>
+        isString(_size) ? spaceSize[_size] : _size || 0,
       );
 
       if (wrap) {
