@@ -1,5 +1,6 @@
-:root[theme-mode='dark'],
-[theme-mode='dark'] {
+@use './selector' as *;
+
+#{$dark-selector} {
   --sqi-brand-color-1: #1b2f51;
   --sqi-brand-color-2: #173463;
   --sqi-brand-color-3: #143975;

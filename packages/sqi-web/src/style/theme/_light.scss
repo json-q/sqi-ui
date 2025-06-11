@@ -1,6 +1,6 @@
-:root,
-:root[theme-mode='light'],
-[theme-mode='light'] {
+@use './selector' as *;
+
+#{$light-selector} {
   --sqi-brand-color-1: #f2f3ff;
   --sqi-brand-color-2: #d9e1ff;
   --sqi-brand-color-3: #b5c7ff;
