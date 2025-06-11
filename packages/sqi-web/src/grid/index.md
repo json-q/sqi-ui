@@ -43,3 +43,13 @@ group:
 ## order 排序
 
 <code src="./demos/order.tsx"></code>
+
+## 响应式布局
+
+预设六个响应尺寸：`xs` `sm` `md` `lg` `xl` `xxl` 来实现
+
+`xs` `sm` `md` `lg` `xl` `xxl` 支持传入 `span` `offset` `order` 属性，即响应式栅格、偏移、排序
+
+<code src="./demos/responsive.tsx"></code>
+
+> `xs={6}` 等价于 `xs={{ span: 6 }}`
