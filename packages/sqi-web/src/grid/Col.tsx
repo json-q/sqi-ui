@@ -1,11 +1,11 @@
 'use client';
 import React, { forwardRef, useContext, type CSSProperties } from 'react';
-import { useMergeProps } from '@sqi-ui/hooks';
-import { ConfigContext } from '../config-provider/context';
-import type { ColProps, FlexType } from './type';
-import RowContext from './context';
 import clsx from 'clsx';
+import { useMergeProps } from '@sqi-ui/hooks';
 import { isNumber } from '@sqi-ui/utils';
+import { ConfigContext } from '../config-provider/context';
+import RowContext from './context';
+import type { ColProps, FlexType } from './type';
 
 const defaultProps: ColProps = {
   offset: 0,

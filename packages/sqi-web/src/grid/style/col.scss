@@ -26,7 +26,7 @@ $module: #{$prefix}-col;
 @mixin make-grid-column-offset($breakpoint: '') {
   $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
 
-  // 1 格是自身, 列最多偏移 23 格
+  // 1 格自身, 列最多偏移 23 格
   $can-offset-columns: 23;
 
   @for $i from 1 through $can-offset-columns {
@@ -36,33 +36,50 @@ $module: #{$prefix}-col;
   }
 }
 
+@mixin make-grid-column-order($breakpoint: '') {
+  $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
+
+  @for $i from 1 through $grid-columns {
+    .#{$cls-prefix}-offset-#{$i} {
+      order: $i;
+    }
+  }
+}
+
 @include make-grid-column-span();
 @include make-grid-column-offset();
+@include make-grid-column-order();
 
 @include make-grid-column-span(xs);
 @include make-grid-column-offset(xs);
+@include make-grid-column-order(xs);
 
 @media (min-width: map.get($breakpoint, sm)) {
   @include make-grid-column-span(sm);
   @include make-grid-column-offset(sm);
+  @include make-grid-column-order(sm);
 }
 
 @media (min-width: map.get($breakpoint, md)) {
   @include make-grid-column-span(md);
   @include make-grid-column-offset(md);
+  @include make-grid-column-order(md);
 }
 
 @media (min-width: map.get($breakpoint, lg)) {
   @include make-grid-column-span(lg);
   @include make-grid-column-offset(lg);
+  @include make-grid-column-order(lg);
 }
 
 @media (min-width: map.get($breakpoint, xl)) {
   @include make-grid-column-span(xl);
   @include make-grid-column-offset(xl);
+  @include make-grid-column-order(xl);
 }
 
 @media (min-width: map.get($breakpoint, xxl)) {
   @include make-grid-column-span(xxl);
   @include make-grid-column-offset(xxl);
+  @include make-grid-column-order(xxl);
 }

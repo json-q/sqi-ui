@@ -42,9 +42,16 @@ export interface ColProps {
    * @default 0
    */
   offset?: number;
+  /**
+   * @description 栅格排列顺序
+   */
+  order?: number;
 
   style?: CSSProperties;
   className?: string;
   children?: ReactNode;
+  /**
+   * @description 自定义 flex 布局属性
+   */
   flex?: FlexType;
 }
