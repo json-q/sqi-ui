@@ -40,7 +40,7 @@ $module: #{$prefix}-col;
   $cls-prefix: if($breakpoint == '', $module, #{$module}-#{$breakpoint});
 
   @for $i from 1 through $grid-columns {
-    .#{$cls-prefix}-offset-#{$i} {
+    .#{$cls-prefix}-order-#{$i} {
       order: $i;
     }
   }

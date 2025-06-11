@@ -31,6 +31,12 @@ export interface RowProps {
 }
 
 export type FlexType = string | number | 'auto' | 'none';
+export interface ColSize {
+  flex?: FlexType;
+  span?: number;
+  order?: number;
+  offset?: number;
+}
 
 export interface ColProps {
   /**
@@ -54,4 +60,11 @@ export interface ColProps {
    * @description 自定义 flex 布局属性
    */
   flex?: FlexType;
+
+  xs?: number | ColProps;
+  sm?: number | ColProps;
+  md?: number | ColProps;
+  lg?: number | ColProps;
+  xl?: number | ColProps;
+  xxl?: number | ColProps;
 }

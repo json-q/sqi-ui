@@ -39,3 +39,7 @@ group:
 ## offset 列偏移
 
 <code src="./demos/offset.tsx"></code>
+
+## order 排序
+
+<code src="./demos/order.tsx"></code>
