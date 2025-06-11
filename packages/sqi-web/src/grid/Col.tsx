@@ -2,7 +2,7 @@
 import React, { forwardRef, useContext, type CSSProperties } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { isNumber, isObject, pick } from '@sqi-ui/utils';
+import { isNumber, isObject } from '@sqi-ui/utils';
 import { ConfigContext } from '../config-provider/context';
 import RowContext from './context';
 import type { ColProps, ColSize, FlexType } from './type';
@@ -37,12 +37,12 @@ const genScreenClassName = (breakpointProps: PickBreakpointProps, prefixCls: str
       sizeProps = matchSizeProps;
     }
 
-    className = clsx({
+    className = {
       ...className,
       [`${prefixCls}-col-${size}-${sizeProps.span}`]: sizeProps.span,
       [`${prefixCls}-col-${size}-order-${sizeProps.order}`]: sizeProps.order,
       [`${prefixCls}-col-${size}-offset-${sizeProps.offset}`]: sizeProps.offset,
-    });
+    };
   });
 
   return className;
@@ -51,13 +51,10 @@ const genScreenClassName = (breakpointProps: PickBreakpointProps, prefixCls: str
 const Col = forwardRef<HTMLDivElement, ColProps>((baseProps, ref) => {
   const { componentConfig, prefixCls } = useContext(ConfigContext);
   const { gutter } = useContext(RowContext);
-  const { span, offset, children, className, style, flex, order, ...restProps } = useMergeProps(
-    baseProps,
-    defaultProps,
-    componentConfig?.Col,
-  );
+  const { span, offset, children, className, style, flex, order, xs, sm, md, lg, xl, xxl, ...restProps } =
+    useMergeProps(baseProps, defaultProps, componentConfig?.Col);
 
-  const screenClassName = genScreenClassName(pick(restProps, sizes), prefixCls!);
+  const screenClassName = genScreenClassName({ xs, sm, md, lg, xl, xxl }, prefixCls!);
 
   const classes = clsx(
     `${prefixCls}-col`,
