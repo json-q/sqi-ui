@@ -132,5 +132,5 @@
   --sqi-component-border: var(--sqi-gray-color-9);
 
   // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
-  --td-bg-color-special-component: transparent;
+  --sqi-bg-color-special-component: transparent;
 }

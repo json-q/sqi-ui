@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useState } from 'react';
+import React, { forwardRef, Fragment, useContext, useState, type ReactNode } from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
 import type { InputProps } from './type';
@@ -19,9 +19,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     disabled,
     placeholder,
     variant = 'outline',
+    addBefore,
+    addAfter,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
   const [isFocused, toggleIsFocused] = useState(false);
+  const hasWrapper = addBefore || addAfter;
 
   const wrapperClasses = clsx(`${prefixCls}-input`, {
     [`${prefixCls}-input-variant-${variant}`]: variant,
@@ -41,7 +44,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     toggleIsFocused(false);
   };
 
-  return (
+  const InputGroupWrapper = ({ children }: { children: ReactNode }) => {
+    return <span>{children}</span>;
+  };
+
+  const Wrapper = hasWrapper ? InputGroupWrapper : Fragment;
+
+  const inputElement = (
     <span className={wrapperClasses}>
       <input
         ref={ref}
@@ -53,6 +62,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
         onBlur={internalBlur}
       />
     </span>
+  );
+
+  return (
+    <Wrapper>
+      {addBefore}
+      {inputElement}
+      {addAfter}
+    </Wrapper>
   );
 });
 

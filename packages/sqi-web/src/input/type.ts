@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 import type { LiteralUnion } from '../_util/type';
 import type { ConfigSize } from '../config-provider';
 
@@ -55,6 +55,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   disabled?: boolean;
   /**
    * @description 输入框对齐方式
+   * @default 'left'
    */
   align?: 'left' | 'center' | 'right';
   /**
@@ -62,4 +63,13 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
    * @default 'outline'
    */
   variant?: 'outline' | 'borderless' | 'underline';
+
+  /**
+   * @description 输入框前置标签
+   */
+  addBefore?: ReactNode;
+  /**
+   * @description 输入框后置标签
+   */
+  addAfter?: ReactNode;
 }

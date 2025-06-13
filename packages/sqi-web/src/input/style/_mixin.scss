@@ -83,6 +83,7 @@
 
     &:focus,
     &.#{$prefix}-input-focus {
+      border-color: $normal-border-color;
       box-shadow: 0 0 0 2px $focus-box-shadow-color;
     }
   }
