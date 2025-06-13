@@ -1,0 +1,108 @@
+@use 'sass:map';
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+@mixin input-focus() {
+  // z-index: 1;
+  border-color: map.get($input-border-color, 'default-focus');
+  box-shadow: $input-box-shadow-focus;
+}
+
+@mixin input-base() {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  border-radius: $input-border-radius;
+  border: 1px solid map.get($input-border-color, 'default');
+  padding: $input-padding-md;
+  background-color: map.get($input-bg-color, 'default');
+  transition: $input-real-transition;
+
+  &:hover {
+    border-color: map.get($input-border-color, 'default-hover');
+  }
+
+  &:focus {
+    @include input-focus;
+  }
+}
+
+@mixin input-real-reset() {
+  font: inherit;
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: map.get($input-text-color, 'default');
+  background-color: transparent;
+  appearance: none;
+
+  @include text-ellipsis;
+
+  &::placeholder {
+    color: $input-placeholder-color;
+    user-select: none; // Chrome 会选中 placeholder
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis; // 防止 placeholder 超出 input 宽度
+  }
+
+  // 隐藏Edge浏览器默认的密码框样式
+  &[type='password']::-ms-reveal {
+    display: none;
+  }
+}
+
+@mixin input-disabled() {
+  color: map.get($input-text-color, 'disabled');
+  background-color: map.get($input-bg-color, 'disabled');
+
+  &:hover {
+    border-color: map.get($input-border-color, 'default');
+  }
+
+  > .#{$prefix}-input-real {
+    cursor: not-allowed;
+    color: map.get($input-text-color, 'disabled');
+    text-overflow: initial;
+
+    &::placeholder {
+      color: map.get($input-text-color, 'disabled');
+    }
+  }
+}
+
+@mixin input-status($status) {
+  $hover-key: #{$status}-hover;
+  $focus-key: #{$status}-focus;
+
+  $normal-border-color: map.get($input-border-color, $status);
+  $hover-border-color: map.get($input-border-color, $hover-key);
+  $focus-box-shadow-color: map.get($input-box-shadow-color, $focus-key);
+
+  &-#{$status} {
+    border-color: $normal-border-color;
+
+    &:hover {
+      border-color: $hover-border-color;
+    }
+
+    &:focus,
+    &.#{$prefix}-input-focus {
+      box-shadow: 0 0 0 2px $focus-box-shadow-color;
+    }
+  }
+}
+
+@mixin input-align($align) {
+  &-#{$align} {
+    > .#{$prefix}-input-real {
+      text-align: $align;
+    }
+  }
+}

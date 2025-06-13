@@ -33,60 +33,51 @@ type ResponseHandler = Record<
 >;
 
 const responsiveObserve = {
-  matchHandlers: {} as ResponseHandler,
-  dispatch,
-  subscribe,
-  unsubscribe,
-  register,
-  unregister,
+  handlers: {} as ResponseHandler,
+  dispatch(breakpointMatchStatus: ScreenMap) {
+    screens = breakpointMatchStatus;
+    subscribers.forEach((cb) => cb(screens));
+    return subscribers.size >= 1;
+  },
+  subscribe(cb: SubscribeFunc): number {
+    if (!subscribers.size) this.register();
+    subUid += 1;
+    subscribers.set(subUid, cb);
+    cb(screens);
+    return subUid;
+  },
+  unsubscribe(token: number) {
+    subscribers.delete(token);
+    if (!subscribers.size) this.unregister();
+  },
+  register() {
+    breakPointArray.forEach((bp) => {
+      const listener = ({ matches }: { matches: boolean }) => {
+        this.dispatch({
+          ...screens,
+          [bp]: matches,
+        });
+      };
+
+      const matchMediaQuery = responsiveMap[bp];
+      const mql = window.matchMedia(matchMediaQuery);
+      mql.addListener(listener);
+      this.handlers[matchMediaQuery] = {
+        mql,
+        listener,
+      };
+
+      listener(mql);
+    });
+  },
+  unregister() {
+    breakPointArray.forEach((screen) => {
+      const matchMediaQuery = responsiveMap[screen];
+      const handler = this.handlers[matchMediaQuery];
+      handler?.mql.removeListener(handler?.listener);
+    });
+    subscribers.clear();
+  },
 };
-
-function dispatch(pointMap: ScreenMap) {
-  screens = pointMap;
-  subscribers.forEach((func) => func(screens));
-  return subscribers.size >= 1;
-}
-
-function subscribe(func: SubscribeFunc): number {
-  if (!subscribers.size) responsiveObserve.register();
-  subUid += 1;
-  subscribers.set(subUid, func);
-  func(screens);
-  return subUid;
-}
-
-function unsubscribe(token: number) {
-  subscribers.delete(token);
-  if (!subscribers.size) responsiveObserve.unregister();
-}
-
-function register() {
-  breakPointArray.forEach((screen) => {
-    const matchMediaQuery = responsiveMap[screen];
-    const listener = ({ matches }: { matches: boolean }) => {
-      responsiveObserve.dispatch({
-        ...screens,
-        [screen]: matches,
-      });
-    };
-    const mql = window.matchMedia(matchMediaQuery);
-    mql.addListener(listener);
-    responsiveObserve.matchHandlers[matchMediaQuery] = {
-      mql,
-      listener,
-    };
-
-    listener(mql);
-  });
-}
-
-function unregister() {
-  breakPointArray.forEach((screen) => {
-    const matchMediaQuery = responsiveMap[screen];
-    const handler = responsiveObserve.matchHandlers[matchMediaQuery];
-    handler?.mql.removeListener(handler?.listener);
-  });
-  subscribers.clear();
-}
 
 export default responsiveObserve;

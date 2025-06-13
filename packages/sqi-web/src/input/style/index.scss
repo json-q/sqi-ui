@@ -1,0 +1,50 @@
+@use '../../style/mixin' as *;
+@use './var' as *;
+@use './mixin' as *;
+
+$module: #{$prefix}-input;
+
+.#{$module} {
+  @include reset;
+  @include input-base;
+
+  // input 样式重置
+  &-real {
+    @include input-real-reset;
+  }
+
+  &-focus {
+    @include input-focus;
+  }
+
+  &-disabled {
+    @include input-disabled;
+  }
+
+  &-size {
+    &-md {
+      height: $input-height-md;
+      font: $input-font-md;
+    }
+    &-sm {
+      height: $input-height-sm;
+      font: $input-font-sm;
+    }
+    &-lg {
+      height: $input-height-lg;
+      font: $input-font-lg;
+      padding: $input-padding-lg;
+    }
+  }
+
+  &-status {
+    @include input-status(success);
+    @include input-status(warning);
+    @include input-status(error);
+  }
+
+  &-align {
+    @include input-align(right);
+    @include input-align(center);
+  }
+}

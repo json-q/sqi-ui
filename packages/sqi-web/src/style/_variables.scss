@@ -42,6 +42,9 @@ $success-color-light-hover: var(--sqi-success-color-light-hover);
 $bg-color-container: var(--sqi-bg-color-container); // 色彩  - 组件
 $bg-color-container-hover: var(--sqi-bg-color-container-hover); // 色彩 - 组件 - hover
 $bg-color-container-active: var(--sqi-bg-color-container-active); // 色彩 - 组件 - active
+$bg-color-secondary-container: var(--sqi-bg-color-secondary-container); // 色彩 - 次级容器
+$bg-color-secondary-container-hover: var(--sqi-bg-color-secondary-container-hover); // 色彩 - 次级容器 - hover
+$bg-color-secondary-container-active: var(--sqi-bg-color-secondary-container-active); // 色彩 - 次级容器 - active
 $bg-color-component: var(--sqi-bg-color-component); // 色彩  - 组件
 $bg-color-component-hover: var(--sqi-bg-color-component-hover); // 色彩 - 组件 - hover
 $bg-color-component-active: var(--sqi-bg-color-component-active); // 色彩 - 组件 - active
@@ -60,6 +63,8 @@ $text-color-link: var(--sqi-text-color-link); // 色彩-文字-链接
 $component-stroke: var(--sqi-component-stroke);
 // 边框
 $component-border: var(--sqi-component-border);
+
+$bg-color-special-component: var(--sqi-bg-color-special-component);
 
 // component 组件尺寸高度相关 token
 $size-xs: var(--sqi-size-xs);
@@ -84,6 +89,7 @@ $margin-md: var(--sqi-margin-md);
 $margin-lg: var(--sqi-margin-lg);
 $margin-xl: var(--sqi-margin-xl);
 $margin-xxl: var(--sqi-margin-xxl);
+$margin-xxxl: var(--td-comp-margin-xxxl);
 
 $text-line-height-sm: var(--sqi-line-height-sm);
 $text-line-height-md: var(--sqi-line-height-md);
@@ -107,7 +113,7 @@ $font-title-lg: var(--sqi-font-title-lg);
 
 // Border Radius
 $border-radius-sm: var(--sqi-radius-sm); // 圆角-2
-$border-radius-md: var(--sqi-radius-md); // 圆角-3
+$border-radius-md: var(--sqi-radius-md); // 圆角-4
 $border-radius-lg: var(--sqi-radius-lg); // 圆角-6
 $border-radius-extra-lg: var(--sqi-radius-extra-lg); // 圆角-9
 $border-radius-round: var(--sqi-radius-round); // 圆角-999
@@ -120,6 +126,22 @@ $anim-time-fn-ease-in: cubic-bezier(0.82, 0, 1, 0.9);
 $anim-duration-base: 0.2s;
 $anim-duration-moderate: 0.24s;
 $anim-duration-slow: 0.28s;
+
+$spacer: var(--sqi-spacer); // 8px
+$spacer-sm: var(--sqi-spacer-sm); // 4px
+$spacer-md: var(--sqi-spacer-md); // 6px
+$spacer-lg: var(--sqi-spacer-lg); // 12px
+
+$spacer-1: var(--sqi-spacer-1); // 8px
+$spacer-2: var(--sqi-spacer-2); // 16px
+$spacer-3: var(--sqi-spacer-3); // 24px
+$spacer-4: var(--sqi-spacer-4); // 32px
+$spacer-5: var(--sqi-spacer-5); // 40px
+$spacer-6: var(--sqi-spacer-6); // 48px
+$spacer-7: var(--sqi-spacer-7); // 56px
+$spacer-8: var(--sqi-spacer-8); // 64px
+$spacer-9: var(--sqi-spacer-9); // 72px
+$spacer-10: var(--sqi-spacer-10); // 80px
 
 // media 的 css var 暂未支持
 // https://segmentfault.com/q/1010000042614433

@@ -1,0 +1,18 @@
+:root {
+  --sqi-spacer: 8px;
+
+  --sqi-spacer-sm: calc(var(--sqi-spacer) * 0.5); /* 4px */
+  --sqi-spacer-md: calc(var(--sqi-spacer) * 0.75); /* 6px */
+  --sqi-spacer-lg: calc(var(--sqi-spacer) * 1.5); /* 12px */
+
+  --sqi-spacer-1: var(--sqi-spacer); /* 8px */
+  --sqi-spacer-2: calc(var(--sqi-spacer) * 2); /* 16px */
+  --sqi-spacer-3: calc(var(--sqi-spacer) * 3); /* 24px */
+  --sqi-spacer-4: calc(var(--sqi-spacer) * 4); /* 32px */
+  --sqi-spacer-5: calc(var(--sqi-spacer) * 5); /* 40px */
+  --sqi-spacer-6: calc(var(--sqi-spacer) * 6); /* 48px */
+  --sqi-spacer-7: calc(var(--sqi-spacer) * 7); /* 56px */
+  --sqi-spacer-8: calc(var(--sqi-spacer) * 8); /* 64px */
+  --sqi-spacer-9: calc(var(--sqi-spacer) * 9); /* 72px */
+  --sqi-spacer-10: calc(var(--sqi-spacer) * 10); /* 80px */
+}

@@ -27,7 +27,7 @@ export interface RowProps extends HTMLAttributes<HTMLDivElement> {
   wrap?: boolean;
 }
 
-export type FlexType = number | LiteralUnion<'none' | 'auto'>;
+export type FlexType = number | LiteralUnion<'none' | 'auto', string>;
 export interface ColSize {
   flex?: FlexType;
   span?: number;
