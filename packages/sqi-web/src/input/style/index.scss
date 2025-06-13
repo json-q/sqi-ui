@@ -13,8 +13,8 @@ $module: #{$prefix}-input;
     @include input-real-reset;
   }
 
-  &-focus {
-    @include input-focus;
+  &-variant {
+    @include input-variant();
   }
 
   &-disabled {

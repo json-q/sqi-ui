@@ -18,6 +18,10 @@ group:
 
 <code src="./demos/size.tsx"></code>
 
+## 样式变体
+
+<code src="./demos/variant.tsx"></code>
+
 ## 对齐方式
 
 <code src="./demos/align.tsx"></code>

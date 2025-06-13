@@ -2,30 +2,19 @@
 @use '../../style/mixin' as *;
 @use './var' as *;
 
-@mixin input-focus() {
-  // z-index: 1;
-  border-color: map.get($input-border-color, 'default-focus');
-  box-shadow: $input-box-shadow-focus;
-}
-
 @mixin input-base() {
   display: flex;
   align-items: center;
   width: 100%;
   overflow: hidden;
   border-radius: $input-border-radius;
-  border: 1px solid map.get($input-border-color, 'default');
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  // border: 1px solid map.get($input-border-color, 'default');
   padding: $input-padding-md;
   background-color: map.get($input-bg-color, 'default');
   transition: $input-real-transition;
-
-  &:hover {
-    border-color: map.get($input-border-color, 'default-hover');
-  }
-
-  &:focus {
-    @include input-focus;
-  }
 }
 
 @mixin input-real-reset() {
@@ -104,5 +93,36 @@
     > .#{$prefix}-input-real {
       text-align: $align;
     }
+  }
+}
+
+@mixin input-variant() {
+  &-outline {
+    border-color: map.get($input-border-color, 'default');
+
+    &:hover {
+      border-color: map.get($input-border-color, 'default-hover');
+    }
+
+    &:focus {
+      border-color: map.get($input-border-color, 'default-focus');
+      box-shadow: $input-box-shadow-focus;
+    }
+
+    &.#{$prefix}-input-focus {
+      border-color: map.get($input-border-color, 'default-focus');
+      box-shadow: $input-box-shadow-focus;
+    }
+  }
+
+  &-borderless {
+    border: none;
+  }
+
+  &-underline {
+    border-radius: 0;
+    border-width: 1px 0;
+    border-style: solid none;
+    border-color: transparent transparent map.get($input-border-color, 'default') transparent;
   }
 }

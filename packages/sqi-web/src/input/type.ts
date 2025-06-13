@@ -9,12 +9,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
    * @description 输入框的值
    */
   value?: ValueType;
-  defaultValue?: string;
-  /**
-   * @description 输入框尺寸
-   * @default 'md'
-   */
-  size?: ConfigSize;
+  defaultValue?: ValueType;
   /**
    * @description 输入框类型
    * @link https://developer.mozilla.org/zh-CN/docs/Web/HTML/Reference/Elements/input#%3Cinput%3E_types
@@ -45,7 +40,11 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
     | 'week',
     string
   >;
-
+  /**
+   * @description 输入框尺寸
+   * @default 'md'
+   */
+  size?: ConfigSize;
   /**
    * @description 输入框状态
    */
@@ -58,4 +57,9 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
    * @description 输入框对齐方式
    */
   align?: 'left' | 'center' | 'right';
+  /**
+   * @description 输入框样式变体
+   * @default 'outline'
+   */
+  variant?: 'outline' | 'borderless' | 'underline';
 }

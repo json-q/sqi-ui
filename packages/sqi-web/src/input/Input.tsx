@@ -12,14 +12,19 @@ const defaultProps: InputProps = {
 
 const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { size, status, align, disabled, placeholder, ...restProps } = useMergeProps(
-    baseProps,
-    defaultProps,
-    componentConfig?.Input,
-  );
+  const {
+    size,
+    status,
+    align,
+    disabled,
+    placeholder,
+    variant = 'outline',
+    ...restProps
+  } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
   const [isFocused, toggleIsFocused] = useState(false);
 
   const wrapperClasses = clsx(`${prefixCls}-input`, {
+    [`${prefixCls}-input-variant-${variant}`]: variant,
     [`${prefixCls}-input-size-${size}`]: size,
     [`${prefixCls}-input-disabled`]: disabled,
     [`${prefixCls}-input-align-${align}`]: align,
