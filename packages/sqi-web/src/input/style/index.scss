@@ -48,3 +48,47 @@ $module: #{$prefix}-input;
     @include input-align(center);
   }
 }
+
+.#{$module}-group {
+  @include reset;
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  .#{$module} {
+    // 当输入框不是第一个元素时，移除左侧圆角
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    // 当输入框不是最后一个元素时，移除右侧圆角
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &-addon {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    white-space: nowrap;
+    padding: $input-addon-item-padding;
+    border: 1px solid $input-addon-border-color-default;
+    border-radius: $input-border-radius;
+    background-color: $bg-color-secondary-container;
+    color: $text-color-primary;
+
+    &:first-child {
+      border-right-width: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-child {
+      border-left-width: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}

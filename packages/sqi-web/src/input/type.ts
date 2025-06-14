@@ -67,9 +67,9 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   /**
    * @description 输入框前置标签
    */
-  addBefore?: ReactNode;
+  addonBefore?: ReactNode;
   /**
    * @description 输入框后置标签
    */
-  addAfter?: ReactNode;
+  addonAfter?: ReactNode;
 }

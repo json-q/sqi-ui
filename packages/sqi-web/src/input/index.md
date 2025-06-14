@@ -29,3 +29,7 @@ group:
 ## 状态
 
 <code src="./demos/status.tsx"></code>
+
+## 前置后置标签
+
+<code src="./demos/addon.tsx"></code>
