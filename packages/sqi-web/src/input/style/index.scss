@@ -47,6 +47,51 @@ $module: #{$prefix}-input;
     @include input-align(right);
     @include input-align(center);
   }
+
+  &-prefix,
+  &-suffix {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &-prefix {
+    > .#{$prefix}-icon {
+      font-size: $icon-default;
+      color: $input-real-prefix-icon-color;
+    }
+
+    &:not(:empty) {
+      margin-right: $margin-sm;
+    }
+  }
+
+  &-suffix {
+    > .#{$prefix}-icon {
+      color: $input-real-suffix-icon-color;
+      transition: all $anim-duration-base linear;
+
+      &:hover {
+        color: $input-real-suffix-icon-color-hover;
+        transition: all $anim-duration-base linear;
+      }
+    }
+
+    &:not(:empty) {
+      margin-left: $margin-sm;
+    }
+  }
+
+  // clear 图标
+  &-suffix > span.#{$prefix}-input-clear {
+    opacity: 0;
+    visibility: hidden;
+    transition: $input-real-transition;
+  }
+
+  &-suffix:hover > span.#{$prefix}-input-clear {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .#{$module}-group {

@@ -1,8 +1,8 @@
-import React, { forwardRef, useCallback, useContext, useState, type ReactNode } from 'react';
+import React, { forwardRef, useContext, useMemo, useState, type ReactNode } from 'react';
+import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
 import type { InputProps } from './type';
-import clsx from 'clsx';
 
 const defaultProps: InputProps = {
   type: 'text',
@@ -21,15 +21,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     variant = 'outline',
     addonBefore,
     addonAfter,
+    prefix,
+    suffix,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
   const [isFocused, toggleIsFocused] = useState(false);
   // const inputRef = useRef<HTMLInputElement>(null);
 
-  // group
-  const groupWrapperClasses = clsx(`${prefixCls}-input-group`);
-  const groupAddonWrapperClasses = clsx(`${prefixCls}-input-group-addon`);
-  // default
   const wrapperClasses = clsx(`${prefixCls}-input`, {
     [`${prefixCls}-input-variant-${variant}`]: variant,
     [`${prefixCls}-input-size-${size}`]: size,
@@ -48,23 +46,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     toggleIsFocused(false);
   };
 
-  // fix: rerender 时会重新渲染 `InputGroupWrapper`，导致无法正常聚焦失焦
-  const InputGroupWrapper = useCallback(
-    ({ children }: { children: ReactNode }) => {
+  // fix: rerender 会重新渲染 `InputGroupWrapper`，导致无法正常聚焦失焦
+  const InputGroupWrapper = useMemo(() => {
+    return function GroupWrapper({ children }: { children: ReactNode }) {
       const hasWrapper = addonBefore || addonAfter;
-
-      if (!hasWrapper) return children;
-      return <span className={groupWrapperClasses}>{children}</span>;
-    },
-    [addonBefore, addonAfter],
-  );
-
-  const AddOnWrapper = ({ children }: { children: ReactNode }) => {
-    return <span className={groupAddonWrapperClasses}>{children}</span>;
-  };
+      if (hasWrapper) {
+        return <span className={`${prefixCls}-input-group`}>{children}</span>;
+      }
+      return <>{children}</>;
+    };
+  }, [addonBefore, addonAfter]);
 
   const inputElement = (
-    <span className={wrapperClasses}>
+    <div className={wrapperClasses}>
+      {prefix && <span className={`${prefixCls}-input-prefix`}>{prefix}</span>}
       <input
         ref={ref}
         {...restProps}
@@ -74,14 +69,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
         onFocus={internalFocus}
         onBlur={internalBlur}
       />
-    </span>
+      {suffix && <span className={`${prefixCls}-input-suffix`}>{suffix}</span>}
+    </div>
   );
 
   return (
     <InputGroupWrapper>
-      {addonBefore && <AddOnWrapper>{addonBefore}</AddOnWrapper>}
+      {addonBefore && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonBefore}</span>}
       {inputElement}
-      {addonAfter && <AddOnWrapper>{addonAfter}</AddOnWrapper>}
+      {addonAfter && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonAfter}</span>}
     </InputGroupWrapper>
   );
 });
