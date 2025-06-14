@@ -6,6 +6,8 @@ export default function Demo() {
     <>
       <Input placeholder="Please enter" />
       <br />
+      <Input defaultValue="this is value" allowClear placeholder="Allow clear" />
+      <br />
       <Input placeholder="Disabled enter" disabled />
     </>
   );

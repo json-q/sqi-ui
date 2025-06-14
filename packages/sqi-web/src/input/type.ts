@@ -1,10 +1,11 @@
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { CompositionEvent, FormEvent, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import type { LiteralUnion } from '../_util/type';
 import type { ConfigSize } from '../config-provider';
 
 export type ValueType = string;
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value'> {
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value' | 'onChange'> {
   /**
    * @description 输入框的值
    */
@@ -54,6 +55,10 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
    */
   disabled?: boolean;
   /**
+   * @description 是否允许清除
+   */
+  allowClear?: boolean;
+  /**
    * @description 输入框对齐方式
    * @default 'left'
    */
@@ -80,4 +85,9 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
    * @description 输入框后缀
    */
   suffix?: ReactNode;
+
+  onChange?: (
+    value: string,
+    e: FormEvent<HTMLInputElement> | MouseEvent<any> | CompositionEvent<HTMLDivElement>,
+  ) => void;
 }

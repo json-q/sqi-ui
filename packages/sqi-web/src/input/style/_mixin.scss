@@ -64,6 +64,33 @@
       color: map.get($input-text-color, 'disabled');
     }
   }
+
+  & > .#{$prefix}-input-prefix,
+  & > .#{$prefix}-input-suffix {
+    .#{$prefix}-icon {
+      color: map.get($input-text-color, 'disabled');
+
+      &:hover {
+        color: map.get($input-text-color, 'disabled');
+      }
+    }
+  }
+}
+
+@mixin input-size() {
+  &-md {
+    height: $input-height-md;
+    font: $input-font-md;
+  }
+  &-sm {
+    height: $input-height-sm;
+    font: $input-font-sm;
+  }
+  &-lg {
+    height: $input-height-lg;
+    font: $input-font-lg;
+    padding: $input-padding-lg;
+  }
 }
 
 @mixin input-status($status) {
@@ -125,5 +152,64 @@
     border-width: 1px 0;
     border-style: solid none;
     border-color: transparent transparent map.get($input-border-color, 'default') transparent;
+  }
+}
+
+@mixin input-affix() {
+  &-prefix,
+  &-suffix {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &-prefix {
+    .#{$prefix}-icon {
+      font-size: $icon-default;
+      color: $input-real-prefix-icon-color;
+    }
+
+    &:not(:empty) {
+      margin-right: $margin-sm;
+    }
+  }
+
+  &-suffix {
+    > .#{$prefix}-icon {
+      color: $input-real-suffix-icon-color;
+      transition: all $anim-duration-base linear;
+
+      &:hover {
+        color: $input-real-suffix-icon-color-hover;
+        transition: all $anim-duration-base linear;
+      }
+    }
+
+    &:not(:empty) {
+      margin-left: $margin-sm;
+    }
+  }
+}
+
+@mixin input-clear() {
+  button.#{$prefix}-input-clear {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  // clear 图标
+  .#{$prefix}-input-clear {
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: $input-real-transition;
+  }
+
+  &:hover {
+    .#{$prefix}-input-clear {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
