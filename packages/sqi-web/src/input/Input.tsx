@@ -32,12 +32,32 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     onChange,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
+
+  // =========== Input State ============
   const [innerValue, setInnerValue] = useMergeState<string | undefined>(defaultValue, {
     value: value,
   });
   const formatValue = innerValue === undefined || innerValue === null ? '' : String(innerValue);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInnerValue(value);
+    onChange?.(value, e);
+  };
+
+  // =========== Input Clear ============
+  const isShowClear = allowClear && formatValue && !disabled;
+  const clearIcon = <CloseCircleFilledIcon />;
+
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    setInnerValue('');
+    onChange?.('', e);
+  };
+
+  // =========== Input Event ============
   const [isFocused, toggleIsFocused] = useState(false);
+
   const internalFocus = (e: FocusEvent<HTMLInputElement, Element>) => {
     toggleIsFocused(true);
     onFocus?.(e);
@@ -48,16 +68,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     onBlur?.(e);
   };
 
-  // fix: rerender 会重新渲染 `InputGroupWrapper`，导致无法正常聚焦失焦
-  const InputGroupWrapper = useMemo(() => {
-    return function GroupWrapper({ children }: { children: ReactNode }) {
-      const hasWrapper = addonBefore || addonAfter;
-      if (hasWrapper) {
-        return <span className={`${prefixCls}-input-group`}>{children}</span>;
-      }
-      return children;
-    };
-  }, [addonBefore, addonAfter]);
+  // =========== Input style ============
 
   const wrapperClasses = clsx(`${prefixCls}-input`, {
     [`${prefixCls}-input-variant-${variant}`]: variant,
@@ -69,20 +80,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   });
   const inputClasses = clsx(`${prefixCls}-input-real`);
 
-  const isShowClear = allowClear && formatValue && !disabled;
-  const clearIcon = <CloseCircleFilledIcon />;
+  // =========== Input Element ============
 
-  const handleClear = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-    setInnerValue('');
-    onChange?.('', e);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setInnerValue(value);
-    onChange?.(value, e);
-  };
+  // fix: rerender 会重新渲染 `InputGroupWrapper`，导致无法正常聚焦失焦
+  const InputGroupWrapper = useMemo(() => {
+    return function GroupWrapper({ children }: { children: ReactNode }) {
+      const hasWrapper = addonBefore || addonAfter;
+      if (hasWrapper) {
+        return <span className={`${prefixCls}-input-group`}>{children}</span>;
+      }
+      return children;
+    };
+  }, [addonBefore, addonAfter]);
 
   const inputElement = (
     <span className={wrapperClasses}>
