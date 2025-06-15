@@ -49,3 +49,11 @@ group:
 使用 `prefix` 和 `suffix` 在输入框内添加前缀和后缀
 
 <code src="./demos/affix.tsx"></code>
+
+## 密码框
+
+使用 `type="password"` 创建密码框
+
+使用 `visibilityToggle` 控制密码是否可见，也可传入对象 `visibilityToggle.visible` 进行外部受控，传入 `visibilityToggle.renderIcon` 自定义密码框的图标
+
+<code src="./demos/password.tsx"></code>

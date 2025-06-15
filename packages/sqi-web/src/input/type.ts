@@ -4,6 +4,12 @@ import type { ConfigSize } from '../config-provider';
 
 export type ValueType = string;
 
+export interface VisibilityToggle {
+  visible?: boolean;
+  renderIcon?: (visible: boolean) => ReactNode;
+  onVisibleChange?: (visible: boolean) => void;
+}
+
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value' | 'onChange'> {
   /**
@@ -82,12 +88,19 @@ export interface InputProps
    */
   prefix?: ReactNode;
   /**
-   * @description 输入框后缀
+   * @description 输入框后缀 type="password" 时会存在默认 suffix, 可传入覆盖默认图标
    */
   suffix?: ReactNode;
+  visibilityToggle?: boolean | VisibilityToggle;
+  /**
+   * @description 输入内容变化时触发
+   */
+  onChange?: (value: string, e: FormEvent<HTMLInputElement> | MouseEvent | CompositionEvent<HTMLDivElement>) => void;
+}
 
-  onChange?: (
-    value: string,
-    e: FormEvent<HTMLInputElement> | MouseEvent<any> | CompositionEvent<HTMLDivElement>,
-  ) => void;
+export interface InputPasswordProps extends InputProps {
+  /**
+   * @description 密码可见时，是否显示明文
+   */
+  visible?: boolean;
 }

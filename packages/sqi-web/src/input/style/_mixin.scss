@@ -188,10 +188,16 @@
       margin-left: $margin-sm;
     }
   }
+
+  &-suffix {
+    &-password {
+      cursor: pointer;
+    }
+  }
 }
 
 @mixin input-clear() {
-  button.#{$prefix}-input-clear {
+  .#{$prefix}-input-clear {
     margin: 0;
     padding: 0;
     border: none;
