@@ -52,7 +52,7 @@ group:
 
 ## 密码框
 
-使用 `type="password"` 创建密码框
+使用 `type="password"` 创建密码框，处于密码框状态下，`suffix` 是不生效的
 
 使用 `visibilityToggle` 控制密码是否可见，也可传入对象 `visibilityToggle.visible` 进行外部受控，传入 `visibilityToggle.renderIcon` 自定义密码框的图标
 

@@ -97,10 +97,3 @@ export interface InputProps
    */
   onChange?: (value: string, e: FormEvent<HTMLInputElement> | MouseEvent | CompositionEvent<HTMLDivElement>) => void;
 }
-
-export interface InputPasswordProps extends InputProps {
-  /**
-   * @description 密码可见时，是否显示明文
-   */
-  visible?: boolean;
-}

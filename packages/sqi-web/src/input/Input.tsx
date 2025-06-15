@@ -124,17 +124,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
 
   // =========== Input Suffix ============
 
-  let suffixElement: ReactNode = suffix;
-
-  if (isPassword) {
+  const suffixElement: ReactNode = useMemo(() => {
+    if (!isPassword) return suffix;
     if (isObject(visibilityToggle) && isFunction(visibilityToggle.renderIcon)) {
-      suffixElement = visibilityToggle.renderIcon(renderType === 'text');
-    } else if (renderType === 'password') {
-      suffixElement = <BrowseOffIcon />;
-    } else if (renderType === 'text') {
-      suffixElement = <BrowseIcon />;
+      return visibilityToggle.renderIcon(renderType === 'text');
     }
-  }
+    if (renderType === 'password') return <BrowseOffIcon />;
+    if (renderType === 'text') return <BrowseIcon />;
+    return null;
+  }, [isPassword, renderType, visibilityToggle, suffix]);
 
   // =========== Input Render ============
 
