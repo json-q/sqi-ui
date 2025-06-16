@@ -23,7 +23,7 @@ $btn-icon-size-lg: $font-size-xl;
 $btn-loading-size: $font-size-lg;
 
 // 按钮中icon和文字的间距
-$btn-icon-text-margin-left: 8px;
+$btn-icon-text-margin-left: $spacer;
 
 // padding
 $btn-padding-sm: $padding-md;

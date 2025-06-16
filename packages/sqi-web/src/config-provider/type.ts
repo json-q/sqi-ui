@@ -4,6 +4,7 @@ import type { SpaceProps } from '../space';
 import type { DividerProps } from '../divider';
 import type { AlertProps } from '../alert/type';
 import type { ColProps, RowProps } from '../grid/type';
+import type { InputProps } from '../input/type';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
 
@@ -37,4 +38,5 @@ export type ComponentConfig = {
   Alert?: AlertProps;
   Row?: RowProps;
   Col?: ColProps;
+  Input?: InputProps;
 };

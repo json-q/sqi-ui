@@ -1,4 +1,6 @@
 export { default as AddIcon } from './AddIcon';
+export { default as BrowseOffIcon } from './BrowseOffIcon';
+export { default as BrowseIcon } from './BrowseIcon';
 export { default as CheckCircleFilledIcon } from './CheckCircleFilledIcon';
 export { default as ChevronDownIcon } from './ChevronDownIcon';
 export { default as CloseCircleFilledIcon } from './CloseCircleFilledIcon';

@@ -6,6 +6,13 @@
   box-sizing: border-box;
 }
 
+@mixin text-ellipsis() {
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @mixin spin {
   animation: sqi-spin 1s linear infinite;
 

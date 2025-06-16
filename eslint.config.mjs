@@ -29,6 +29,8 @@ export default defineConfig([
       '@typescript-eslint/no-explicit-any': 'off',
       'react/prop-types': 'off',
       '@typescript-eslint/no-require-imports': 'off',
+      'jsx-a11y/click-events-have-key-events': 'off',
+      'jsx-a11y/no-static-element-interactions': 'off',
     },
   },
   {
