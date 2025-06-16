@@ -2,7 +2,7 @@ import React, { forwardRef, useContext, useEffect, useMemo, useRef, useState } f
 import type { FocusEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
-import { isFunction, isObject, isUndefined } from '@sqi-ui/utils';
+import { isFunction, isNumber, isObject, isString, isUndefined } from '@sqi-ui/utils';
 import { CloseCircleFilledIcon, BrowseOffIcon, BrowseIcon } from '@sqi-ui/icons';
 import { ConfigContext } from '../config-provider/context';
 import { composeRef } from '../_util/composeRef';
@@ -14,6 +14,19 @@ const defaultProps: InputProps = {
   align: 'left',
   visibilityToggle: true,
 };
+
+function formatValueToString(value: unknown, maxLength?: number, errorOnly?: boolean) {
+  let str: string;
+  if (value !== null && !isUndefined(value) && !isString(value)) {
+    str = String(value);
+  } else {
+    str = value || '';
+  }
+  if (isNumber(maxLength) && !errorOnly) {
+    return str.slice(0, maxLength);
+  }
+  return str;
+}
 
 const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
@@ -35,13 +48,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     className,
     style,
     visibilityToggle,
+    maxLength,
     onFocus,
     onBlur,
     onChange,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
+
   const inputRef = useRef<HTMLInputElement>(null);
-  const isPassword = type === 'password';
 
   // =========== Input Focus ============
   const [isFocused, toggleIsFocused] = useState(false);
@@ -56,6 +70,26 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     onBlur?.(e);
   };
 
+  // =========== Input State ============
+  const mergedMaxLength = isNumber(maxLength) ? maxLength : maxLength?.length;
+  const mergedErrorOnly = isNumber(maxLength) ? false : maxLength?.errorOnly;
+  const [innerValue, setInnerValue] = useMergeState<string | undefined>(defaultValue, {
+    value: value,
+  });
+  const formatValue = formatValueToString(innerValue, mergedMaxLength, mergedErrorOnly);
+  const isErrorLength = isNumber(mergedMaxLength) ? formatValue.length > mergedMaxLength : false;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInnerValue(value);
+    onChange?.(value, e);
+  };
+
+  const handleClickInputWrapper = () => {
+    if (disabled) return;
+    inputRef.current?.focus();
+  };
+
   // =========== Input style ============
 
   const wrapperClasses = clsx(
@@ -67,27 +101,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
       [`${prefixCls}-input-align-${align}`]: align,
       [`${prefixCls}-input-status-${status}`]: status,
       [`${prefixCls}-input-focus`]: isFocused,
+      [`${prefixCls}-input-limit-error`]: isErrorLength,
     },
     className,
   );
   const inputClasses = clsx(`${prefixCls}-input-real`);
-
-  // =========== Input State ============
-  const [innerValue, setInnerValue] = useMergeState<string | undefined>(defaultValue, {
-    value: value,
-  });
-  const formatValue = innerValue === undefined || innerValue === null ? '' : String(innerValue);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setInnerValue(value);
-    onChange?.(value, e);
-  };
-
-  const handleClickInputWrapper = () => {
-    if (!disabled) return;
-    inputRef.current?.focus();
-  };
 
   // =========== Input Clear ============
   const isShowClear = allowClear && formatValue && !disabled;
@@ -123,6 +141,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   };
 
   // =========== Input Suffix ============
+  const isPassword = type === 'password';
 
   const suffixElement: ReactNode = useMemo(() => {
     if (!isPassword) return suffix;
@@ -183,6 +202,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
           onMouseUp={(e) => e.preventDefault()}
         >
           {suffixElement}
+        </span>
+      )}
+      {isNumber(mergedMaxLength) && (
+        <span>
+          {formatValue.length} / {mergedMaxLength}
         </span>
       )}
     </span>

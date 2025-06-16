@@ -5,13 +5,38 @@ import type { ConfigSize } from '../config-provider';
 export type ValueType = string;
 
 export interface VisibilityToggle {
+  /**
+   * @description 密码是否可见
+   */
   visible?: boolean;
+  /**
+   * @description 自定义渲染密码图标
+   */
   renderIcon?: (visible: boolean) => ReactNode;
+  /**
+   * @description 切换密码显隐时触发
+   */
   onVisibleChange?: (visible: boolean) => void;
 }
 
+export interface MaxLength {
+  /**
+   * @description 字符最大长度
+   */
+  length?: number;
+  /**
+   * @description 是否显示字符长度限制
+   * @default true
+   */
+  showLimit?: boolean;
+  /**
+   * @description 超出内容长度仅提示错误，不限制输入
+   */
+  errorOnly?: boolean;
+}
+
 export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value' | 'onChange'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type' | 'value' | 'onChange' | 'maxLength'> {
   /**
    * @description 输入框的值
    */
@@ -92,6 +117,7 @@ export interface InputProps
    */
   suffix?: ReactNode;
   visibilityToggle?: boolean | VisibilityToggle;
+  maxLength?: number | MaxLength;
   /**
    * @description 输入内容变化时触发
    */

@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../style/mixin' as *;
 @use './var' as *;
 @use './mixin' as *;
@@ -38,6 +39,11 @@ $module: #{$prefix}-input;
 
   @include input-affix;
   @include input-clear;
+
+  &-limit-error,
+  &-limit-error input {
+    color: map.get($input-text-color, 'error');
+  }
 }
 
 .#{$module}-group {

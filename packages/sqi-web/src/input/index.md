@@ -57,3 +57,9 @@ group:
 使用 `visibilityToggle` 控制密码是否可见，也可传入对象 `visibilityToggle.visible` 进行外部受控，传入 `visibilityToggle.renderIcon` 自定义密码框的图标
 
 <code src="./demos/password.tsx"></code>
+
+## 输入长度限制
+
+使用 `maxLength` 限制输入的长度，当传入 `number` 类型时，会显示输入长度，你可以传入对象格式来隐藏字数限制的提示
+
+<code src="./demos/max-length.tsx"></code>
