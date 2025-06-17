@@ -219,3 +219,18 @@
     }
   }
 }
+
+@mixin input-limit-length() {
+  &-limit-length {
+    &-text {
+      font: $input-font-md;
+      color: $input-limit-color;
+      background: map.get($input-bg-color, 'default');
+    }
+
+    &-error &-text,
+    &-error input {
+      color: map.get($input-text-color, 'error');
+    }
+  }
+}

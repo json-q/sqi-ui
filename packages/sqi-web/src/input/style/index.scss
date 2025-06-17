@@ -40,10 +40,7 @@ $module: #{$prefix}-input;
   @include input-affix;
   @include input-clear;
 
-  &-limit-error,
-  &-limit-error input {
-    color: map.get($input-text-color, 'error');
-  }
+  @include input-limit-length;
 }
 
 .#{$module}-group {

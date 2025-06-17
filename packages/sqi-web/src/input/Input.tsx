@@ -101,7 +101,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
       [`${prefixCls}-input-align-${align}`]: align,
       [`${prefixCls}-input-status-${status}`]: status,
       [`${prefixCls}-input-focus`]: isFocused,
-      [`${prefixCls}-input-limit-error`]: isErrorLength,
+      [`${prefixCls}-input-limit-length-error`]: isErrorLength,
     },
     className,
   );
@@ -194,8 +194,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   );
 
   const limitLengthElement = isNumber(mergedMaxLength) && (
-    <span>
-      {formatValue.length} / {mergedMaxLength}
+    <span className={`${prefixCls}-input-limit-length-text`}>
+      {formatValue.length}/{mergedMaxLength}
     </span>
   );
 
