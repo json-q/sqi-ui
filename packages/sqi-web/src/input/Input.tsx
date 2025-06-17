@@ -117,6 +117,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     onChange?.('', e);
   };
 
+  const clearElement = isShowClear && (
+    <button
+      type="button"
+      tabIndex={-1}
+      className={clsx(`${prefixCls}-input-suffix`, `${prefixCls}-input-clear`)}
+      onClick={handleClear}
+    >
+      {clearIcon}
+    </button>
+  );
+
   // =========== Input Password Visible ============
 
   const visibilityIsControlled = isObject(visibilityToggle) && !isUndefined(visibilityToggle.visible);
@@ -143,7 +154,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   // =========== Input Suffix ============
   const isPassword = type === 'password';
 
-  const suffixElement: ReactNode = useMemo(() => {
+  const suffixBaseElement: ReactNode = useMemo(() => {
     if (!isPassword) return suffix;
     if (isObject(visibilityToggle) && isFunction(visibilityToggle.renderIcon)) {
       return visibilityToggle.renderIcon(renderType === 'text');
@@ -166,9 +177,32 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     };
   }, [addonBefore, addonAfter]);
 
+  const prefixElement = prefix && <span className={`${prefixCls}-input-prefix`}>{prefix}</span>;
+
+  const suffixElement = suffixBaseElement && (
+    <span
+      role="button"
+      tabIndex={-1}
+      className={clsx(`${prefixCls}-input-suffix`, { [`${prefixCls}-input-suffix-password`]: isPassword })}
+      onClick={togglePasswordVisible}
+      // 避免点击后 Input 失去焦点
+      onMouseDown={(e) => e.preventDefault()}
+      onMouseUp={(e) => e.preventDefault()}
+    >
+      {suffixBaseElement}
+    </span>
+  );
+
+  const limitLengthElement = isNumber(mergedMaxLength) && (
+    <span>
+      {formatValue.length} / {mergedMaxLength}
+    </span>
+  );
+
+  // input core element
   const inputElement = (
     <span className={wrapperClasses} style={style} onClick={handleClickInputWrapper}>
-      {prefix && <span className={`${prefixCls}-input-prefix`}>{prefix}</span>}
+      {prefixElement}
       <input
         ref={composeRef(ref, inputRef)}
         {...restProps}
@@ -181,42 +215,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
         onFocus={internalFocus}
         onBlur={internalBlur}
       />
-      {isShowClear && (
-        <button
-          type="button"
-          tabIndex={-1}
-          className={clsx(`${prefixCls}-input-suffix`, `${prefixCls}-input-clear`)}
-          onClick={handleClear}
-        >
-          {clearIcon}
-        </button>
-      )}
-      {suffixElement && (
-        <span
-          role="button"
-          tabIndex={-1}
-          className={clsx(`${prefixCls}-input-suffix`, { [`${prefixCls}-input-suffix-password`]: isPassword })}
-          onClick={togglePasswordVisible}
-          // 避免点击后 Input 失去焦点
-          onMouseDown={(e) => e.preventDefault()}
-          onMouseUp={(e) => e.preventDefault()}
-        >
-          {suffixElement}
-        </span>
-      )}
-      {isNumber(mergedMaxLength) && (
-        <span>
-          {formatValue.length} / {mergedMaxLength}
-        </span>
-      )}
+      {clearElement}
+      {suffixElement}
+      {limitLengthElement}
     </span>
   );
 
+  const addBeforeElement = addonBefore && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonBefore}</span>;
+  const addAfterElement = addonAfter && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonAfter}</span>;
+
   return (
     <InputGroupWrapper>
-      {addonBefore && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonBefore}</span>}
+      {addBeforeElement}
       {inputElement}
-      {addonAfter && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonAfter}</span>}
+      {addAfterElement}
     </InputGroupWrapper>
   );
 });
