@@ -21,3 +21,18 @@ group:
 ## 额外的操作按钮
 
 <code src="./demos/action.tsx"></code>
+
+## API
+
+| 属性        | 描述                                         | 类型                                        | 默认值 |
+| ----------- | -------------------------------------------- | ------------------------------------------- | ------ |
+| title       | 提示标题                                     | `ReactNode`                                 |        |
+| description | 提示内容                                     | `ReactNode`                                 |        |
+| type        | 提示类型                                     | `success` \| `info` \| `warning` \| `error` | `info` |
+| closable    | 是否可关闭                                   | `boolean`                                   |        |
+| showIcon    | 是否显示提示图标                             | `boolean`                                   | `true` |
+| icon        | 自定义显示图标，仅在 showIcon 为 true 时生效 | `ReactNode`                                 |        |
+| action      | 自定义操作                                   | `ReactNode`                                 |        |
+| onClose     | 关闭时触发的函数                             | `(e: MouseEvent) => void`                   |        |
+| className   | 自定义类名                                   | `string`                                    |        |
+| style       | 内联样式                                     | `CSSProperties`                             |        |

@@ -23,3 +23,15 @@ group:
 ## 垂直分割线
 
 <code src="./demos/vertical.tsx"></code>
+
+## API
+
+| 属性      | 描述                      | 类型                       | 默认值       |
+| --------- | ------------------------- | -------------------------- | ------------ |
+| direction | 分割线方向                | `horizontal`\|`vertical`   | `horizontal` |
+| align     | 分割线内容对齐方式        | `left`\|`right` \|`center` | `center`     |
+| dashed    | 是否虚线                  | `boolean`                  |              |
+| text      | 分割线内容，同 `children` | ReactN`ode                 |              |
+| style     | 内联样式                  | `CSSProperties`            |              |
+| className | 自定义类名                | `string`                   |              |
+| children  | 子节点内容                | `ReactNode`                |              |

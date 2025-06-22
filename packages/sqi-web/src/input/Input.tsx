@@ -73,7 +73,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   // =========== Input State ============
   const mergedMaxLength = isNumber(maxLength) ? maxLength : maxLength?.length;
   const mergedErrorOnly = isNumber(maxLength) ? false : maxLength?.errorOnly;
-  const mergedShowLimit = isNumber(maxLength) ? true : maxLength?.showLimit;
+  const mergedShowLimit = isNumber(maxLength) ? true : maxLength?.showLimit !== false;
   const [innerValue, setInnerValue] = useMergeState<string | undefined>(defaultValue, {
     value: value,
   });

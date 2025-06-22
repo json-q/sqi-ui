@@ -35,3 +35,21 @@ group:
 ## 按钮尺寸
 
 <code src="./demos/size.tsx"></code>
+
+## API
+
+| 属性 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| children | 按钮内容 | `ReactNode` |  |
+| type | 按钮类型 | `primary`\|`default`\|`link` | `default` |
+| status | 按钮状态 | `primary`\| `danger`\| `warning`\| `success` |  |
+| variant | 按钮变体 | `default` \|`outline`\|`text`\|`dashed` |  |
+| loading | 按钮loading | `boolean` | `false` |
+| htmlType | 原生 `button` 标签的 type 属性 | `button`\| `submit`\| `reset` | `button` |
+| disabled | 按钮是否禁用 | `boolean` | `false` |
+| icon | 按钮图标 | `ReactNode` |  |
+| size | 按钮尺寸 | `ConfigSize` | `md` |
+| href | 与 a 标签 href 行为一致 | `string` |  |
+| target | a 标签 target 属性，href 存在时生效 | `string` |  |
+| anchorProps | a 标签属性，href 存在时生效 | `HTMLProps<HTMLAnchorElement>` |  |
+| onClick | 点击按钮的回调 | `MouseEventHandler<HTMLButtonElement \| HTMLAnchorElement>` |  |

@@ -31,3 +31,21 @@ group:
 ## 分隔符
 
 <code src="./demos/split.tsx"></code>
+
+## API
+
+下面是将提供的 `SpaceProps` 接口属性转换为 Markdown 格式的表格介绍：
+
+| 属性      | 描述         | 类型                                            | 默认值         |
+| --------- | ------------ | ----------------------------------------------- | -------------- |
+| size      | 间距大小     | [SizeType](#sizetype) \| `[SizeType, SizeType]` |                |
+| direction | 方向         | `'horizontal' \| 'vertical'`                    | `'horizontal'` |
+| align     | 垂直对齐方式 | `'start' \| 'end' \| 'center' \| 'baseline'`    |                |
+| wrap      | 是否自动换行 | `boolean`                                       | `false`        |
+| split     | 分隔符       | `ReactNode`                                     |                |
+
+### SizeType
+
+| 属性     | 描述     | 类型                                | 默认值 |
+| -------- | -------- | ----------------------------------- | ------ |
+| SizeType | 尺寸大小 | `ConfigSize`\|`number`\|`undefined` |        |

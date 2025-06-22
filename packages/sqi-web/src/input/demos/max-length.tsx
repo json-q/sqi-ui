@@ -14,7 +14,6 @@ export default function Demo() {
         maxLength={{
           length: 10,
           errorOnly: true,
-          showLimit: true,
         }}
       />
       <br />
@@ -24,6 +23,7 @@ export default function Demo() {
         maxLength={{
           length: 10,
           errorOnly: true,
+          showLimit: false,
         }}
       />
     </>

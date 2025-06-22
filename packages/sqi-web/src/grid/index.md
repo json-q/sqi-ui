@@ -53,3 +53,31 @@ group:
 <code src="./demos/responsive.tsx"></code>
 
 > `xs={6}` 等价于 `xs={{ span: 6 }}`
+
+## API
+
+下面是将提供的关于栅格系统（Row和Col组件）的TypeScript接口属性转换成Markdown格式的表格介绍：
+
+### RowProps
+
+| 属性    | 描述               | 类型                                                      | 默认值  |
+| ------- | ------------------ | --------------------------------------------------------- | ------- |
+| gutter  | 栅格间隔           | [RowGutter](#rowgutter) \| `RowGutter[]`                  | `0`     |
+| align   | 列元素对齐方式     | `start`\|`center`\|`end`\|`stretch`                       | `start` |
+| justify | 列元素水平排列方式 | `start`\|`center`\|`end`\|`space-around`\|`space-between` | `start` |
+| wrap    | 是否自动换行       | `boolean`                                                 | `true`  |
+
+### ColProps
+
+| 属性   | 描述                 | 类型                               | 默认值 |
+| ------ | -------------------- | ---------------------------------- | ------ |
+| span   | 栅格占位格数         | `number`                           |        |
+| offset | 栅格偏移格数         | `number`                           | `0`    |
+| order  | 栅格排列顺序         | `number`                           |        |
+| flex   | 自定义 flex 布局属性 | `number`\|`none`\|`auto`\|`string` |        |
+
+### RowGutter
+
+| 属性   | 描述                 | 类型                                                                 | 默认值 |
+| ------ | -------------------- | -------------------------------------------------------------------- | ------ |
+| gutter | 栅格间隔，可设置数组 | `number`\|`Record<'xxl'\| 'xl'\| 'lg'\| 'md'\| 'sm'\| 'xs', number>` |        |

@@ -25,3 +25,12 @@ group:
 ## 自定义图标
 
 <code src="./demos/custom.tsx"></code>
+
+## API
+
+| 属性   | 描述                             | 类型        | 默认值  |
+| ------ | -------------------------------- | ----------- | ------- |
+| svg    | 自定义 SVG 图标元素              | `ReactNode` |         |
+| spin   | 是否旋转动画                     | `boolean`   | `false` |
+| rotate | 图标旋转角度                     | `number`    |         |
+| type   | 设置给 span 的 `aria-label` 标识 | `string`    |         |

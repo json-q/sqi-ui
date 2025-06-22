@@ -38,22 +38,4 @@ const Icon = forwardRef<HTMLSpanElement, IconProps>((props, ref) => {
 
 Icon.displayName = 'Icon';
 
-// const convertIcon = (Svg: ComponentType, iconType: string) => {
-//   const InnerIcon = forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
-//     <Icon svg={createElement(Svg)} type={iconType} ref={ref} {...props} />
-//   ));
-
-//   if (process.env.NODE_ENV === 'development') {
-//     InnerIcon.displayName = 'Icon';
-//   }
-//   return InnerIcon;
-// };
-
-// const RefIcon = forwardRef<HTMLSpanElement, Omit<IconProps, 'svg' | 'type'>>((props, ref) => (
-//   <Icon svg={createElement(Svg)} type={iconType} ref={ref} {...props} />
-// ));
-
-// RefIcon.displayName = 'Icon';
-
-// export { convertIcon };
 export default Icon;
