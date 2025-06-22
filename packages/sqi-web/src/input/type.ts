@@ -82,6 +82,10 @@ export interface InputProps
    */
   status?: 'success' | 'warning' | 'error';
   /**
+   * @description 提示信息，颜色跟随 status 设置
+   */
+  tips?: ReactNode;
+  /**
    * @description 是否禁用
    */
   disabled?: boolean;
@@ -99,7 +103,6 @@ export interface InputProps
    * @default 'outline'
    */
   variant?: 'outline' | 'borderless' | 'underline';
-
   /**
    * @description 输入框前置标签
    */
@@ -116,7 +119,13 @@ export interface InputProps
    * @description 输入框后缀 type="password" 时会存在默认 suffix, 可传入覆盖默认图标
    */
   suffix?: ReactNode;
+  /**
+   * @description 清除按钮
+   */
   visibilityToggle?: boolean | VisibilityToggle;
+  /**
+   * @description 文字最大长度
+   */
   maxLength?: number | MaxLength;
   /**
    * @description 输入内容变化时触发

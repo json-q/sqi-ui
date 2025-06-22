@@ -49,6 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     style,
     visibilityToggle,
     maxLength,
+    tips,
     onFocus,
     onBlur,
     onChange,
@@ -170,13 +171,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   // fix: rerender 会重新渲染 `InputGroupWrapper`，导致无法正常聚焦失焦
   const InputGroupWrapper = useMemo(() => {
     return function GroupWrapper({ children }: { children: ReactNode }) {
-      const hasWrapper = addonBefore || addonAfter;
-      if (hasWrapper) {
-        return <span className={`${prefixCls}-input-group`}>{children}</span>;
+      const hasCoreWrapper = addonBefore || addonAfter;
+
+      let content = children;
+      if (hasCoreWrapper) {
+        // 这层主要是针对 input 同一行的各种 dom 进行扩展，因此为 flex
+        content = <div className={`${prefixCls}-input-group`}>{content}</div>;
       }
-      return children;
+
+      if (tips) {
+        // tips 是单独的一行，不能放在 group 中，需格外的一层元素包裹
+        content = <div className={`${prefixCls}-input-group-extra`}>{content}</div>;
+      }
+
+      return content;
     };
-  }, [addonBefore, addonAfter]);
+  }, [addonBefore, addonAfter, tips]);
 
   const prefixElement = prefix && <span className={`${prefixCls}-input-prefix`}>{prefix}</span>;
 
@@ -200,26 +210,34 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     </span>
   );
 
+  const tipsElement = tips && (
+    <div className={clsx(`${prefixCls}-input-tips`, { [`${prefixCls}-input-tips-status-${status}`]: status })}>
+      {tips}
+    </div>
+  );
+
   // input core element
   const inputElement = (
-    <span className={wrapperClasses} style={style} onClick={handleClickInputWrapper}>
-      {prefixElement}
-      <input
-        ref={composeRef(ref, inputRef)}
-        {...restProps}
-        type={renderType}
-        value={formatValue}
-        className={inputClasses}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={handleChange}
-        onFocus={internalFocus}
-        onBlur={internalBlur}
-      />
-      {clearElement}
-      {suffixElement}
-      {limitLengthElement}
-    </span>
+    <>
+      <span className={wrapperClasses} style={style} onClick={handleClickInputWrapper}>
+        {prefixElement}
+        <input
+          ref={composeRef(ref, inputRef)}
+          {...restProps}
+          type={renderType}
+          value={formatValue}
+          className={inputClasses}
+          placeholder={placeholder}
+          disabled={disabled}
+          onChange={handleChange}
+          onFocus={internalFocus}
+          onBlur={internalBlur}
+        />
+        {clearElement}
+        {suffixElement}
+        {limitLengthElement}
+      </span>
+    </>
   );
 
   const addBeforeElement = addonBefore && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonBefore}</span>;
@@ -230,6 +248,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
       {addBeforeElement}
       {inputElement}
       {addAfterElement}
+      {tipsElement}
     </InputGroupWrapper>
   );
 });

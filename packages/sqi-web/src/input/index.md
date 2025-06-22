@@ -38,6 +38,12 @@ group:
 
 <code src="./demos/status.tsx"></code>
 
+## 提示内容
+
+使用 `tips` 设置输入框的提示内容，内容的颜色跟随 `status` 的设置
+
+<code src="./demos/tips.tsx"></code>
+
 ## 前置后置标签
 
 使用 `addonBefore` 和 `addonAfter` 在输入框前后添加内容
@@ -75,6 +81,7 @@ group:
 | type | 原生 input 标签的 type 属性，见：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#属性) | `string` | `text` |
 | size | 输入框尺寸 | `ConfigSize` | `md` |
 | status | 输入框状态 | `success`\|`warning`\| `error` |  |
+| tips | 提示内容 | `ReactNode` |  |
 | disabled | 是否禁用 | `boolean` | `false` |
 | allowClear | 是否允许清除 | `boolean` | `false` |
 | align | 输入框对齐方式 | `left`\|`center` \|`right` | `left` |

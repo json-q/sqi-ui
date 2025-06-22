@@ -15,7 +15,7 @@ $module: #{$prefix}-input;
   }
 
   &-variant {
-    @include input-variant();
+    @include input-variant;
   }
 
   &-disabled {
@@ -39,8 +39,8 @@ $module: #{$prefix}-input;
 
   @include input-affix;
   @include input-clear;
-
   @include input-limit-length;
+  @include input-tip;
 }
 
 .#{$module}-group {

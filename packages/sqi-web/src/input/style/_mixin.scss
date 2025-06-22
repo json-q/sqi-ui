@@ -234,3 +234,23 @@
     }
   }
 }
+
+@mixin input-tip() {
+  &-tips {
+    min-height: $input-tips-min-height;
+    font: $input-tips-font;
+    color: map.get($input-text-color, 'tips');
+  }
+
+  &-tips-status-success {
+    color: map.get($input-text-color, 'success');
+  }
+
+  &-tips-status-warning {
+    color: map.get($input-text-color, 'warning');
+  }
+
+  &-tips-status-error {
+    color: map.get($input-text-color, 'error');
+  }
+}
