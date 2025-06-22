@@ -6,14 +6,24 @@ export default function Demo() {
     <>
       <Input placeholder="Please enter" maxLength={10} />
       <br />
-      <Input placeholder="Please enter" defaultValue="this is  long value" maxLength={10} />
+      <Input placeholder="Please enter" defaultValue="this is long value" maxLength={10} />
       <br />
       <Input
         placeholder="Please enter"
-        defaultValue="this is  long value"
+        defaultValue="this is long value"
         maxLength={{
           length: 10,
           errorOnly: true,
+        }}
+      />
+      <br />
+      <Input
+        placeholder="Please enter"
+        defaultValue="hidden limit tip"
+        maxLength={{
+          length: 10,
+          errorOnly: true,
+          showLimit: false,
         }}
       />
     </>

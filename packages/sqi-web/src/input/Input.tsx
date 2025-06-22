@@ -73,6 +73,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   // =========== Input State ============
   const mergedMaxLength = isNumber(maxLength) ? maxLength : maxLength?.length;
   const mergedErrorOnly = isNumber(maxLength) ? false : maxLength?.errorOnly;
+  const mergedShowLimit = isNumber(maxLength) ? true : maxLength?.showLimit !== false;
   const [innerValue, setInnerValue] = useMergeState<string | undefined>(defaultValue, {
     value: value,
   });
@@ -193,7 +194,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     </span>
   );
 
-  const limitLengthElement = isNumber(mergedMaxLength) && (
+  const limitLengthElement = isNumber(mergedMaxLength) && mergedShowLimit && (
     <span className={`${prefixCls}-input-limit-length-text`}>
       {formatValue.length}/{mergedMaxLength}
     </span>

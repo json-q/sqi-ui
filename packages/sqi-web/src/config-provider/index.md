@@ -21,3 +21,13 @@ group:
 嵌套 `ConfigProvider` 可以覆盖外层 `ConfigProvider` 的属性
 
 <code src="./demos/nest.tsx"></code>
+
+## API
+
+| 属性            | 描述                             | 类型              | 默认值     |
+| --------------- | -------------------------------- | ----------------- | ---------- |
+| componentConfig | 全局配置组件的默认参数           | `ComponentConfig` |            |
+| size            | 组件默认尺寸，仅 `size` 属性生效 | `ConfigSize`      | `md`       |
+| prefixCls       | 组件类名前缀                     | `string`          | `sqi`      |
+| iconPrefix      | 组件图标前缀                     | `string`          | `sqi-icon` |
+| children        | 子节点内容                       | `ReactNode`       |            |
