@@ -63,3 +63,5 @@ group:
 使用 `maxLength` 限制输入的长度，当传入 `number` 类型时，会显示输入长度，你可以传入对象格式来隐藏字数限制的提示
 
 <code src="./demos/max-length.tsx"></code>
+
+> 当 `maxLength` 为 Object 时，`showLimit` 默认为 undefined，如果你需要展示字数限制的提示，请显式设置 `showLimit` 为 true

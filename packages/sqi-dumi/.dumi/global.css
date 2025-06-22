@@ -1,0 +1,7 @@
+.markdown blockquote {
+  padding-block-start: 2px !important;
+  padding-block-end: 2px !important;
+}
+.markdown blockquote p {
+  margin: 0;
+}
