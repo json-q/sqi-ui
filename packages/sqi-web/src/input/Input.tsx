@@ -47,6 +47,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     type,
     className,
     style,
+    readOnly,
     visibilityToggle,
     maxLength,
     tips,
@@ -62,11 +63,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
   const [isFocused, toggleIsFocused] = useState(false);
 
   const internalFocus = (e: FocusEvent<HTMLInputElement, Element>) => {
+    if (disabled || readOnly) return;
     toggleIsFocused(true);
     onFocus?.(e);
   };
 
   const internalBlur = (e: FocusEvent<HTMLInputElement, Element>) => {
+    if (disabled || readOnly) return;
     toggleIsFocused(false);
     onBlur?.(e);
   };
@@ -226,6 +229,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
           {...restProps}
           type={renderType}
           value={formatValue}
+          readOnly={readOnly}
           className={inputClasses}
           placeholder={placeholder}
           disabled={disabled}
