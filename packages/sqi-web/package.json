@@ -55,7 +55,7 @@
     "@types/gulp-autoprefixer": "^0.0.37",
     "@types/gulp-concat": "^0.0.37",
     "@types/gulp-sass": "^5.0.4",
-    "@types/react": "^19.1.6",
+    "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-is": "^19.0.0",
     "clsx": "^2.1.1",
