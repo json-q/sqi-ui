@@ -1,0 +1,124 @@
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-radio;
+
+.#{$module}-wrapper {
+  @include reset;
+
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 0;
+  margin-right: $radio-spacer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    .#{$module}-inner {
+      border-color: $radio-dot-color;
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+
+    .#{$module}-label {
+      color: $radio-btn-color-disabled;
+    }
+
+    // 这里再嵌套一层已提高选择器权重
+    .#{$module}-disabled {
+      .#{$module}-inner {
+        border-color: $radio-border-color;
+        background-color: $radio-input-color-disabled;
+
+        &::after {
+          background-color: $radio-dot-color-disabled-checked;
+        }
+      }
+    }
+
+    &:hover {
+      .#{$module}-input {
+        border-color: $radio-border-color;
+      }
+    }
+  }
+}
+
+.#{$module} {
+  @include reset;
+
+  position: relative;
+  display: inline-block;
+  // 消除行高继承导致的行高与实际高度不一致的问题
+  line-height: 0;
+  border-radius: 50%;
+
+  // 真正的 input
+  &-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  // 占位模拟 radio
+  &-inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: $radio-size;
+    height: $radio-size;
+    border-radius: $border-radius-circle;
+    border: $radio-input-border;
+    background-color: $radio-input-color;
+    transition: $radio-input-transition;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: $radio-size;
+      height: $radio-size;
+      margin-top: -$radio-dot-size;
+      margin-left: -$radio-dot-size;
+      transform: scale(0.5);
+      opacity: $radio-opacity-transparent;
+      border-radius: $border-radius-circle;
+      background-color: $radio-dot-color;
+      transition: all $anim-duration-base $anim-time-fn-ease-out;
+    }
+  }
+
+  &-label {
+    display: inline-block;
+    padding-left: $radio-input-label-spacer;
+    padding-right: $radio-input-label-spacer;
+    color: $radio-label-color;
+    vertical-align: middle;
+    font: $radio-font;
+    white-space: nowrap;
+  }
+
+  &-checked {
+    .#{$module}-inner {
+      border-color: $radio-dot-color;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}

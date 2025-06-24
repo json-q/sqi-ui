@@ -38,15 +38,15 @@ $radio-btn-background-color-primary-filled-disabled-checked: $brand-color-disabl
 
 // 尺寸
 $radio-size: 16px;
-$radio-dot-size: ($radio-size / 2);
+$radio-dot-size: calc($radio-size / 2);
 $radio-margin-right: $margin-xxl;
 $radio-btn-border-radius: $border-radius-sm;
-$radio-outline-height-small: $size-xs;
-$radio-outline-height-medium: $size-md;
-$radio-outline-height-large: $size-xl;
-$radio-height-small: calc($size-xs - ($padding-xxs * 2));
-$radio-height-medium: calc($size-md - ($padding-xxs * 2));
-$radio-height-large: calc($size-xl - ($padding-xxs * 2));
+$radio-outline-height-sm: $size-xs;
+$radio-outline-height-md: $size-md;
+$radio-outline-height-lg: $size-xl;
+$radio-height-sm: calc($size-xs - ($padding-xxs * 2));
+$radio-height-md: calc($size-md - ($padding-xxs * 2));
+$radio-height-lg: calc($size-xl - ($padding-xxs * 2));
 $radio-btn-before-width: 1px;
 
 // 字号
@@ -56,10 +56,11 @@ $radio-btn-font-md: $font-md;
 $radio-btn-font-lg: $font-lg;
 
 // padding
-$radio-input-label-spacer: $margin-sm;
-$radio-btn-padding-small: 0px $padding-sm;
-$radio-btn-padding-medium: $padding-xs $padding-lg;
-$radio-btn-padding-large: $padding-sm $padding-xl;
+$radio-spacer: $margin-sm; // radio 与 radio 之间的间隔
+$radio-input-label-spacer: $margin-sm; // 文本内容与 input 之间的间隔
+$radio-btn-padding-sm: 0px $padding-sm;
+$radio-btn-padding-md: $padding-xs $padding-lg;
+$radio-btn-padding-lg: $padding-sm $padding-xl;
 $radio-btn-before-left: 0px;
 $radio-btn-before-top: 50%;
 $radio-btn-border: 1px solid;
@@ -68,7 +69,7 @@ $radio-group-padding: $padding-xxs $padding-xxs;
 $radio-group-filled-bg-block-left: 2px;
 $radio-group-filled-bg-block-top: 2px;
 
-// 动画&过度
+// 动画
 $radio-group-transition: all $anim-duration-base $anim-time-fn-easing;
 $radio-btn-before-transition: translateY(-50%);
 $radio-btn-transition: color $anim-duration-base $anim-time-fn-ease-out;
