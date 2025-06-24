@@ -42,6 +42,7 @@ $success-color-light-hover: var(--sqi-success-color-light-hover);
 $bg-color-container: var(--sqi-bg-color-container); // 色彩  - 组件
 $bg-color-container-hover: var(--sqi-bg-color-container-hover); // 色彩 - 组件 - hover
 $bg-color-container-active: var(--sqi-bg-color-container-active); // 色彩 - 组件 - active
+$bg-color-container-select: var(--sqi-bg-color-container-select); // 色彩 - 容器 - select
 $bg-color-secondary-container: var(--sqi-bg-color-secondary-container); // 色彩 - 次级容器
 $bg-color-secondary-container-hover: var(--sqi-bg-color-secondary-container-hover); // 色彩 - 次级容器 - hover
 $bg-color-secondary-container-active: var(--sqi-bg-color-secondary-container-active); // 色彩 - 次级容器 - active
@@ -75,6 +76,7 @@ $size-xl: var(--sqi-size-xl);
 $size-xxl: var(--sqi-size-xxl);
 
 // component 组件 padding token
+$padding-xxs: var(--sqi-padding-xxs);
 $padding-xs: var(--sqi-padding-xs);
 $padding-sm: var(--sqi-padding-sm);
 $padding-md: var(--sqi-padding-md);
@@ -154,4 +156,4 @@ $screen-xs: 480px;
 
 // 图标尺寸
 $icon-default: $font-size-lg;
-$icon-l: 24px;
+$icon-lg: 24px;
