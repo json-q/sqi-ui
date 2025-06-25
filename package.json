@@ -6,10 +6,10 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
-    "turbo:dev": "turbo run dev --filter=./packages/**",
-    "turbo:build": "turbo build --filter=./packages/**",
-    "turbo:lint": "turbo lint",
-    "turbo:clean": "turbo clean",
+    "dev": "turbo run dev --filter=./packages/**",
+    "build": "turbo build --filter=./packages/**",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
     "lint:eslint": "eslint . --fix --cache",
     "clean:node-modules": "rimraf ./packages/**/node_modules"
   },

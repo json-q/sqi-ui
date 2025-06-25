@@ -26,8 +26,6 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((pro
     value: checked,
   });
 
-  console.log(props);
-
   const classes = clsx(prefixCls, className, {
     [`${prefixCls}-checked`]: innerValue,
     [`${prefixCls}-disabled`]: disabled,
