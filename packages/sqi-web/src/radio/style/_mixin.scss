@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use './var' as *;
+
+@mixin radio-size() {
+  &-sm {
+    height: $radio-outline-height-sm;
+    padding: $radio-btn-padding-sm;
+    font: $radio-btn-font-sm;
+  }
+
+  &-md {
+    height: $radio-outline-height-md;
+    padding: $radio-btn-padding-md;
+    font: $radio-btn-font-md;
+  }
+
+  &-lg {
+    height: $radio-outline-height-lg;
+    padding: $radio-btn-padding-lg;
+    font: $radio-btn-font-lg;
+  }
+}

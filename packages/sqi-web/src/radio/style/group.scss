@@ -1,0 +1,10 @@
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-radio-group;
+
+.#{$module} {
+  @include reset;
+
+  display: inline-block;
+}

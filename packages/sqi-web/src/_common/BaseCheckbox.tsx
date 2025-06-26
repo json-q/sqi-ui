@@ -3,9 +3,19 @@ import type { ChangeEvent, InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import { useMergeState } from '@sqi-ui/hooks';
 
-export interface BaseCheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface BaseCheckboxChangeEvent {
+  target: CheckboxChangeEventTarget;
+  nativeEvent: ChangeEvent<HTMLInputElement>;
+}
+
+export interface CheckboxChangeEventTarget extends BaseCheckboxProps {
+  checked: boolean;
+}
+
+export interface BaseCheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   type: 'checkbox' | 'radio';
   prefixCls?: string;
+  onChange?: (e: BaseCheckboxChangeEvent) => void;
 }
 
 export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((props, ref) => {
@@ -38,7 +48,13 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((pro
     if (!('checked' in props)) {
       setInnerValue(e.target.checked);
     }
-    onChange?.(e);
+    onChange?.({
+      target: {
+        ...props,
+        checked: e.target.checked,
+      },
+      nativeEvent: e,
+    });
   };
 
   return (

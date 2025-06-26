@@ -18,12 +18,14 @@ $radio-label-color: $text-color-primary;
 $radio-btn-border-color-default: $component-border;
 $radio-btn-border-color-hover: $brand-color-hover;
 $radio-btn-color-outline-hover: $brand-color-hover;
-$radio-btn-border-color-checked: $brand-color;
 $radio-btn-color-outline-checked: $brand-color;
 $radio-btn-background-color-disabled: $bg-color-component-disabled;
 $radio-btn-color-disabled: $text-color-disabled;
 $radio-btn-background-color-outline-disabled-checked: $bg-color-special-component;
 $radio-btn-color-disabled-checked: $text-color-disabled;
+
+// new
+$radio-btn-color-hover: $brand-color;
 
 $radio-btn-group-background-color-filled: $bg-color-component;
 $radio-btn-color-filled: $text-color-secondary;
@@ -40,7 +42,7 @@ $radio-btn-background-color-primary-filled-disabled-checked: $brand-color-disabl
 $radio-size: 16px;
 $radio-dot-size: calc($radio-size / 2);
 $radio-margin-right: $margin-xxl;
-$radio-btn-border-radius: $border-radius-sm;
+$radio-btn-border-radius: $border-radius-md;
 $radio-outline-height-sm: $size-xs;
 $radio-outline-height-md: $size-md;
 $radio-outline-height-lg: $size-xl;

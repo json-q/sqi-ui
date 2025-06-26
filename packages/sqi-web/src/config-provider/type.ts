@@ -4,7 +4,7 @@ import type { ButtonProps } from '../button';
 import type { DividerProps } from '../divider';
 import type { ColProps, RowProps } from '../grid/type';
 import type { InputProps } from '../input/type';
-import type { RadioProps } from '../radio/type';
+import type { RadioGroupProps, RadioProps } from '../radio/type';
 import type { SpaceProps } from '../space';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
@@ -40,5 +40,6 @@ export type ComponentConfig = {
   Row?: RowProps;
   Col?: ColProps;
   Input?: InputProps;
-  Radio?: RadioProps;
+  Radio?: Omit<RadioProps, '_IS_BUTTON_'>;
+  RadioGroup?: RadioGroupProps;
 };
