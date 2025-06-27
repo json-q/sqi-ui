@@ -1,0 +1,85 @@
+@use '../../style/mixin' as *;
+@use './var' as *;
+@use './mixin' as *;
+
+$module: #{$prefix}-radio-button;
+
+.#{$module}-wrapper {
+  @include reset;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid $radio-btn-border-color-default;
+  transition: $radio-btn-transition;
+  border-left-width: 0;
+
+  &:first-child {
+    border-top-left-radius: $radio-btn-border-radius;
+    border-bottom-left-radius: $radio-btn-border-radius;
+    border-left-width: 1px;
+  }
+
+  &:last-child {
+    border-top-right-radius: $radio-btn-border-radius;
+    border-bottom-right-radius: $radio-btn-border-radius;
+  }
+
+  &-size {
+    @include radio-size;
+  }
+
+  &:hover:not(&-disabled):not(&-checked) {
+    color: $radio-btn-color-hover;
+  }
+
+  &-checked {
+    color: $radio-btn-color-hover;
+    border-color: $radio-btn-color-hover;
+
+    &:not(:first-child) {
+      border-left-width: 1px;
+      margin-left: -1px;
+    }
+
+    &.#{$module}-wrapper-disabled {
+      color: $brand-color-disabled;
+      border-color: $brand-color-disabled;
+    }
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    color: $radio-btn-color-disabled;
+
+    &.#{$module}-wrapper-filled {
+      background-color: $bg-color-component-disabled;
+    }
+  }
+
+  &-filled {
+    // 填充 选中样式
+    &.#{$module}-wrapper-checked {
+      color: $radio-btn-color-primary-filled-checked;
+      background-color: $radio-btn-background-color-primary-filled-checked;
+
+      // 填充 选中 禁用
+      &.#{$module}-wrapper-disabled {
+        color: $radio-btn-color-primary-filled-checked;
+        background-color: $radio-btn-background-color-primary-filled-disabled-checked;
+      }
+    }
+  }
+}
+
+.#{$module} {
+  &-input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+}

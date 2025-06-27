@@ -31,6 +31,14 @@ export default defineConfig([
       '@typescript-eslint/no-require-imports': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
       'jsx-a11y/no-static-element-interactions': 'off',
+      // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/label-has-associated-control.md
+      'jsx-a11y/label-has-associated-control': [
+        2,
+        {
+          controlComponents: ['BaseCheckbox'],
+          depth: 3,
+        },
+      ],
     },
   },
   {
