@@ -57,8 +57,23 @@ export interface RadioGroupProps {
    */
   buttonVariant?: 'filled' | 'outline';
   /**
+   * @description 配置形式设置子元素
+   */
+  options?: RadioOptions[] | string[] | number[];
+  /**
    * @description 选中值发生变化时触发
    */
+  onChange?: (e: RadioChangeEvent) => void;
+}
+
+export interface RadioOptions {
+  label: ReactNode;
+  value: RadioValue;
+  disabled?: boolean;
+  className?: string;
+  style?: CSSProperties;
+  id?: string;
+  title?: string;
   onChange?: (e: RadioChangeEvent) => void;
 }
 
