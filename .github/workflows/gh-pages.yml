@@ -38,7 +38,7 @@ jobs:
         run: pnpm install
 
       - name: Build with dumi
-        run: pnpm turbo:build
+        run: pnpm build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
