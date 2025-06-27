@@ -52,10 +52,10 @@ export interface RadioGroupProps {
    */
   appearance?: 'radio' | 'button';
   /**
-   * @description 单选按钮组样式, 仅 appearance=button 时生效
+   * @description 单选按钮组样式, 仅 Button 下生效
    * @default 'outline'
    */
-  variant?: 'fill' | 'outline';
+  buttonVariant?: 'filled' | 'outline';
   /**
    * @description 选中值发生变化时触发
    */
@@ -63,6 +63,7 @@ export interface RadioGroupProps {
 }
 
 export interface RadioProps extends Omit<BaseCheckboxProps, 'type' | 'prefixCls' | 'size' | 'onChange' | 'value'> {
+  children?: ReactNode;
   /**
    * @description 内部 props，不要使用它，除非你知道自己在干什么
    * @internal
@@ -77,10 +78,8 @@ export interface RadioProps extends Omit<BaseCheckboxProps, 'type' | 'prefixCls'
    * @default false
    */
   defaultChecked?: boolean;
-  children?: ReactNode;
   /**
    * @description 是否禁用。若存在父组件 RadioGroup，默认值由 RadioGroup.disabled 控制。优先级：Radio.disabled > RadioGroup.disabled
-   * @default false
    */
   disabled?: boolean;
   /**
@@ -96,12 +95,7 @@ export interface RadioProps extends Omit<BaseCheckboxProps, 'type' | 'prefixCls'
    */
   value?: RadioValue;
   /**
-   * @description 尺寸
-   * @default 'md'
-   */
-  size?: ConfigSize;
-  /**
-   *
+   * @description 选中值改变时触发
    */
   onChange?: (e: RadioChangeEvent) => void;
 }

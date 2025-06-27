@@ -17,7 +17,7 @@ $module: #{$prefix}-radio;
     margin-right: 0;
   }
 
-  &:hover {
+  &:hover:not(&-disabled) {
     .#{$module}-inner {
       border-color: $radio-dot-color;
     }
@@ -39,12 +39,6 @@ $module: #{$prefix}-radio;
         &::after {
           background-color: $radio-dot-color-disabled-checked;
         }
-      }
-    }
-
-    &:hover {
-      .#{$module}-input {
-        border-color: $radio-border-color;
       }
     }
   }
@@ -71,7 +65,7 @@ $module: #{$prefix}-radio;
     z-index: 1;
     margin: 0;
     padding: 0;
-    cursor: pointer;
+    cursor: inherit;
     opacity: 0;
   }
 

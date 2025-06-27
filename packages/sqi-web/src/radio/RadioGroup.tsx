@@ -10,7 +10,7 @@ const defaultProps: RadioGroupProps = {
   disabled: false,
   size: 'md',
   appearance: 'radio',
-  variant: 'outline',
+  buttonVariant: 'outline',
 };
 
 const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) => {
@@ -18,7 +18,18 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
   const props = useMergeProps(baseProps, defaultProps, componentConfig?.RadioGroup);
   const defaultName = useId();
 
-  const { className, style, name = defaultName, value, defaultValue, children, disabled, size, onChange } = props;
+  const {
+    className,
+    style,
+    name = defaultName,
+    value,
+    defaultValue,
+    children,
+    disabled,
+    size,
+    buttonVariant,
+    onChange,
+  } = props;
 
   const [controlValue, setControlValue] = useMergeState(defaultValue, {
     value,
@@ -39,8 +50,8 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
   );
 
   const memoizedState = useMemo(() => {
-    return { name, value: controlValue, disabled, size, onChange: onRadioChange };
-  }, [name, value, disabled, size, onRadioChange]);
+    return { name, value: controlValue, disabled, size, buttonVariant, onChange: onRadioChange };
+  }, [name, value, disabled, size, buttonVariant, onRadioChange]);
 
   return (
     <div ref={ref} className={clsx(`${prefixCls}-radio-group`, className)} style={style}>
