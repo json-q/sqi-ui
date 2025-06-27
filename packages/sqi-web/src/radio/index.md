@@ -28,8 +28,6 @@ group:
 
 ## 尺寸
 
-注意：Radio 自身的 `size` 优先级比 `Radio.Group` 高
-
 <code src="./demos/size.tsx"></code>
 
 ## 垂直排列
