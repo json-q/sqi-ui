@@ -1,2 +1,2 @@
-@import '@sqi-ui/web/dist/reset.css';
+@import 'tailwindcss';
 @import '@sqi-ui/web/dist/index.css';
