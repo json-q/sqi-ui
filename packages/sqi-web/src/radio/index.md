@@ -86,3 +86,10 @@ group:
 | `id`        | 元素 ID                                               | `string`                        |        |
 | `title`     | 额外提示信息                                          | `string`                        |        |
 | `onChange`  | 值变化时触发（优先级高于 `RadioGroup` 的 `onChange`） | `(e: RadioChangeEvent) => void` |        |
+
+### RadioChangeEvent
+
+| 属性     | 描述                               | 类型                                                      | 默认值 |
+| -------- | ---------------------------------- | --------------------------------------------------------- | ------ |
+| `target` | 原生 input 的 props 及少量扩展属性 | `Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>` |        |
+| `event`  | 原生 input 事件                    | `ChangeEvent<HTMLInputElement>`                           |        |
