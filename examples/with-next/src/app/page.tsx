@@ -2,7 +2,7 @@ import Test from '~/components/Test';
 
 export default function Home() {
   return (
-    <div style={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div className="p-24 flex justify-center items-center">
       <Test />
     </div>
   );
