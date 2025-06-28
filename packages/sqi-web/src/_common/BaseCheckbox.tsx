@@ -5,7 +5,7 @@ import { useMergeState } from '@sqi-ui/hooks';
 
 export interface BaseCheckboxChangeEvent {
   target: CheckboxChangeEventTarget;
-  nativeEvent: ChangeEvent<HTMLInputElement>;
+  event: ChangeEvent<HTMLInputElement>;
 }
 
 export interface CheckboxChangeEventTarget extends BaseCheckboxProps {
@@ -53,7 +53,7 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((pro
         ...props,
         checked: e.target.checked,
       },
-      nativeEvent: e,
+      event: e,
     });
   };
 
