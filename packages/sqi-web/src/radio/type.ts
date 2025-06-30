@@ -20,6 +20,10 @@ export interface RadioGroupContextState {
   onChange?: (value: RadioChangeEvent) => void;
 }
 
+export interface CustomRenderItem extends RadioOptions {
+  checked: boolean;
+}
+
 export interface RadioGroupProps {
   className?: string;
   style?: CSSProperties;
@@ -61,14 +65,18 @@ export interface RadioGroupProps {
    */
   options?: RadioOptions[] | string[] | number[];
   /**
+   * @description 自定义渲染内容, 仅使用 options 时生效
+   */
+  renderOptions?: (params: CustomRenderItem) => ReactNode;
+  /**
    * @description 选中值发生变化时触发
    */
   onChange?: (e: RadioChangeEvent) => void;
 }
 
 export interface RadioOptions {
-  label: ReactNode;
-  value: RadioValue;
+  label?: ReactNode;
+  value?: RadioValue;
   disabled?: boolean;
   className?: string;
   style?: CSSProperties;
@@ -79,10 +87,9 @@ export interface RadioOptions {
 
 export interface RadioProps
   extends Omit<BaseCheckboxProps, 'type' | 'prefixCls' | 'size' | 'onChange' | 'value' | 'children'> {
-  children?: ReactNode | (({ checked }: { checked: boolean }) => ReactNode);
+  children?: ReactNode | (({ checked }: { checked: boolean }) => ReactNode); // 单独使用时，所有 props 由外部控制，因此内部只回传 checked 即可
   /**
-   * @description 内部 props，不要使用它，除非你知道自己在干什么
-   * @internal
+   * @private 内部 props，不要使用它，除非你知道自己在干什么
    */
   _IS_BUTTON_?: boolean;
   /**
