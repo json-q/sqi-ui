@@ -38,6 +38,10 @@ group:
 
 > 请注意示例中的 `gap` 属性的兼容性，详见 [Can I Use](https://caniuse.com/flexbox-gap)
 
+## 自定义渲染内容
+
+<code src="./demos/custom-render.tsx"></code>
+
 ## 配置项渲染
 
 <code src="./demos/options.tsx"></code>
