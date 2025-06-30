@@ -1,6 +1,13 @@
 import React from 'react';
 import { Button, Divider, Radio } from '@sqi-ui/web';
 
+/**
+ * Demonstrates custom rendering of radio buttons and radio groups using the `@sqi-ui/web` library.
+ *
+ * Renders three sections: a single custom radio button, a radio group with buttons styled based on selection, and a radio group with each option rendered as a styled card block.
+ *
+ * @returns A React fragment containing the demo UI.
+ */
 export default function Demo() {
   return (
     <>
@@ -46,6 +53,14 @@ export default function Demo() {
   );
 }
 
+/**
+ * Renders a styled card block representing a radio option, visually highlighting the checked state.
+ *
+ * Displays the provided item label in bold and a descriptive text. When checked, the card uses brand colors and shows a decorative triangular icon in the top-left corner.
+ *
+ * @param item - The label to display in the card block
+ * @param checked - Whether the card is in the checked (selected) state
+ */
 function CardBlock({ item, checked }: { item: string; checked: boolean }) {
   const styles: React.CSSProperties = {
     padding: '10px 16px',
