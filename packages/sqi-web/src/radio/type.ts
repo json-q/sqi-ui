@@ -77,8 +77,9 @@ export interface RadioOptions {
   onChange?: (e: RadioChangeEvent) => void;
 }
 
-export interface RadioProps extends Omit<BaseCheckboxProps, 'type' | 'prefixCls' | 'size' | 'onChange' | 'value'> {
-  children?: ReactNode;
+export interface RadioProps
+  extends Omit<BaseCheckboxProps, 'type' | 'prefixCls' | 'size' | 'onChange' | 'value' | 'children'> {
+  children?: ReactNode | (({ checked }: { checked: boolean }) => ReactNode);
   /**
    * @description 内部 props，不要使用它，除非你知道自己在干什么
    * @internal

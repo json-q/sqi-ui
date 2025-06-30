@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import type { ChangeEvent, InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
 import { useMergeState } from '@sqi-ui/hooks';
@@ -16,6 +16,10 @@ export interface BaseCheckboxProps extends Omit<InputHTMLAttributes<HTMLInputEle
   type: 'checkbox' | 'radio';
   prefixCls?: string;
   onChange?: (e: BaseCheckboxChangeEvent) => void;
+  /**
+   * @private always provider latest value when `checked` change
+   */
+  _getCheckedValue?: (checked: boolean) => void;
 }
 
 export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((props, ref) => {
@@ -29,12 +33,17 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((pro
     type = 'checkbox',
     title,
     onChange,
+    _getCheckedValue,
     ...inputProps
   } = props;
 
   const [innerValue, setInnerValue] = useMergeState(defaultChecked, {
     value: checked,
   });
+
+  useEffect(() => {
+    _getCheckedValue?.(innerValue);
+  }, [innerValue]);
 
   const classes = clsx(prefixCls, className, {
     [`${prefixCls}-checked`]: innerValue,
