@@ -67,7 +67,7 @@ export interface RadioGroupProps {
   /**
    * @description 自定义渲染内容, 仅使用 options 时生效
    */
-  renderOptions?: (params: CustomRenderItem) => ReactNode;
+  renderOption?: (params: CustomRenderItem) => ReactNode;
   /**
    * @description 选中值发生变化时触发
    */

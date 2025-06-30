@@ -76,6 +76,7 @@ group:
 | `appearance` | 单选按钮组主题（仅在使用 options 渲染时生效） | `radio` \|`button` | `radio` |
 | `buttonVariant` | 单选按钮组样式（仅 Button 下生效） | `filled`\|`outline` | `outline` |
 | `options` | 配置形式设置子元素 | [RadioOptions[]](#radiooptions) \|`string[]`\|`number[]` |  |
+| `renderOption` | 自定义渲染，仅配置 `options` 时生效 | ` (params: RadioOptions & {checked: boolean}) => ReactNode` |  |
 | `onChange` | 选中值发生变化时触发 | `(e: RadioChangeEvent) => void` |  |
 
 ### RadioOptions

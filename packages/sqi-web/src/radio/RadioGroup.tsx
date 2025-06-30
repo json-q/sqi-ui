@@ -31,7 +31,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
     disabled,
     size,
     buttonVariant,
-    renderOptions,
+    renderOption,
     onChange,
     appearance,
     options,
@@ -59,14 +59,12 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
   const Comp = appearance === 'button' ? RadioButton : Radio;
 
   if (isArray(options) && options.length > 0) {
-    const isCustomRender = isFunction(renderOptions);
+    const isCustomRender = isFunction(renderOption);
 
     renderChildren = options.map((item) => {
       if (isString(item) || isNumber(item)) {
         const isChecked = isCustomRender ? controlValue === item : value === item;
-        const renderNode = isCustomRender
-          ? () => renderOptions({ label: item, value: item, checked: isChecked })
-          : item;
+        const renderNode = isCustomRender ? () => renderOption({ label: item, value: item, checked: isChecked }) : item;
 
         return (
           <Comp key={item.toString()} disabled={disabled} value={item} checked={isChecked}>
@@ -78,7 +76,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
       // 但非自定义渲染（配置项）下，不关注某一项状态，因此没必要始终让 item 和 controlValue 做对比，减少使用侧的 render
       const isChecked = isCustomRender ? controlValue === item.value : value === item.value;
       // 必须包装成 function，否则 Radio 组件无法视为自定义渲染
-      const renderNode = isCustomRender ? () => renderOptions({ ...item, checked: isChecked }) : item.label;
+      const renderNode = isCustomRender ? () => renderOption({ ...item, checked: isChecked }) : item.label;
 
       return (
         <Comp
