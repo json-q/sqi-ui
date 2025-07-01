@@ -22,7 +22,7 @@ export default function Demo() {
         ]}
       />
 
-      <Divider text="Custom render" />
+      <Divider text="Custom radio group render" />
       <Radio.Group
         defaultValue={3}
         options={[
@@ -37,7 +37,7 @@ export default function Demo() {
         )}
       />
 
-      <Divider text="Custom render and control state" />
+      <Divider text="Custom radio group render and control state" />
       <Radio.Group
         value={value}
         options={[

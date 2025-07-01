@@ -24,7 +24,7 @@ export default function Demo() {
         Toggle Disabled
       </Button>
 
-      <Divider text="Control state form Radio Group" align="left" />
+      <Divider text="Control state from Radio Group" align="left" />
       <Radio.Group value={value} onChange={handleChange}>
         <Radio value="Radio 1">Radio 1</Radio>
         <Radio value="Radio 2">Radio 2</Radio>
