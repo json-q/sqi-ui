@@ -3,7 +3,7 @@ import { Button, Divider, Radio, type RadioChangeEvent } from '@sqi-ui/web';
 
 export default function Demo() {
   const [disabled, setDisabled] = useState(true);
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>('Radio 1');
 
   const handleChange = (e: RadioChangeEvent) => {
     setValue(e.target.value as string);
@@ -24,8 +24,8 @@ export default function Demo() {
         Toggle Disabled
       </Button>
 
-      <Divider text="Radio Group" align="left" />
-      <Radio.Group onChange={handleChange}>
+      <Divider text="Control state form Radio Group" align="left" />
+      <Radio.Group value={value} onChange={handleChange}>
         <Radio value="Radio 1">Radio 1</Radio>
         <Radio value="Radio 2">Radio 2</Radio>
         <Radio value="Radio 3">Radio 3</Radio>

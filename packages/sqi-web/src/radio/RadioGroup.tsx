@@ -43,12 +43,11 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
 
   const onRadioChange = useCallback(
     (e: RadioChangeEvent) => {
-      const lastValue = value;
       const val = e.target.value;
       if (!('value' in props)) {
         setControlValue(val as RadioValue);
       }
-      if (val !== lastValue) {
+      if (val !== controlValue) {
         onChange?.(e);
       }
     },
@@ -63,7 +62,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
 
     renderChildren = options.map((item) => {
       if (isString(item) || isNumber(item)) {
-        const isChecked = isCustomRender ? controlValue === item : value === item;
+        const isChecked = controlValue === item;
         const renderNode = isCustomRender ? () => renderOption({ label: item, value: item, checked: isChecked }) : item;
 
         return (
@@ -72,9 +71,8 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
           </Comp>
         );
       }
-      // improve perf: 在自定义渲染的情况下，选中更改是需要重新 render 以确保使用侧的 checked 更新视图
-      // 但非自定义渲染（配置项）下，不关注某一项状态，因此没必要始终让 item 和 controlValue 做对比，减少使用侧的 render
-      const isChecked = isCustomRender ? controlValue === item.value : value === item.value;
+
+      const isChecked = controlValue === item.value;
       // 必须包装成 function，否则 Radio 组件无法视为自定义渲染
       const renderNode = isCustomRender ? () => renderOption({ ...item, checked: isChecked }) : item.label;
 

@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button, Divider, Radio } from '@sqi-ui/web';
+import CardBlock from './_card-block';
 
 export default function Demo() {
+  const [value, setValue] = React.useState(3);
+
   return (
     <>
       <Divider text="Base" />
@@ -27,12 +30,25 @@ export default function Demo() {
           { label: 'Radio 2', value: 2 },
           { label: 'Radio 3', value: 3 },
         ]}
-        renderOptions={(params) => (
+        renderOption={(params) => (
           <Button tabIndex={-1} type="primary" variant={params.checked ? 'default' : 'outline'}>
             {params.label}
           </Button>
         )}
       />
+
+      <Divider text="Custom render and control state" />
+      <Radio.Group
+        value={value}
+        options={[
+          { label: 'Radio 1', value: 1 },
+          { label: 'Radio 2', value: 2 },
+          { label: 'Radio 3', value: 3 },
+        ]}
+        onChange={(e) => setValue(e.target.value as number)}
+        renderOption={(params) => <CardBlock item={params.label} checked={params.checked} />}
+      />
+      <span style={{ marginLeft: 16 }}>control value is: {value}</span>
     </>
   );
 }
