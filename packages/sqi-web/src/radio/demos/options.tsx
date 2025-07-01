@@ -7,10 +7,10 @@ export default function Demo() {
 
   return (
     <>
-      <Divider text="Base" />
+      <Divider align="left" text="Base" />
       <Radio.Group defaultValue="Radio 1" options={['Radio 1', 'Radio 2', 'Radio 3']} />
 
-      <Divider text="Button appearance" />
+      <Divider align="left" text="Button appearance" />
       <Radio.Group
         defaultValue={3}
         appearance="button"
@@ -22,7 +22,7 @@ export default function Demo() {
         ]}
       />
 
-      <Divider text="Custom radio group render" />
+      <Divider align="left" text="Custom radio group render" />
       <Radio.Group
         defaultValue={3}
         options={[
@@ -37,7 +37,7 @@ export default function Demo() {
         )}
       />
 
-      <Divider text="Custom radio group render and control state" />
+      <Divider align="left" text="Custom radio group render and control state" />
       <Radio.Group
         value={value}
         options={[
