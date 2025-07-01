@@ -1171,7 +1171,7 @@ export default function Demo() {
         Toggle Disabled
       </Button>
 
-      <Divider text="Control state form Radio Group" align="left" />
+      <Divider text="Control state from Radio Group" align="left" />
       <Radio.Group value={value} onChange={handleChange}>
         <Radio value="Radio 1">Radio 1</Radio>
         <Radio value="Radio 2">Radio 2</Radio>
@@ -1303,7 +1303,7 @@ export default function Demo() {
         ]}
       />
 
-      <Divider text="Custom render" />
+      <Divider text="Custom radio group render" />
       <Radio.Group
         defaultValue={3}
         options={[
@@ -1318,7 +1318,7 @@ export default function Demo() {
         )}
       />
 
-      <Divider text="Custom render and control state" />
+      <Divider text="Custom radio group render and control state" />
       <Radio.Group
         value={value}
         options={[
