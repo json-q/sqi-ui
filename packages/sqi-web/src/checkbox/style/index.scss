@@ -1,6 +1,5 @@
 @use '../../style/mixin' as *;
 @use './var' as *;
-@use './mixin' as *;
 
 $module: #{$prefix}-checkbox;
 
@@ -10,20 +9,19 @@ $module: #{$prefix}-checkbox;
   display: inline-flex;
   align-items: baseline;
   cursor: pointer;
-  margin-left: 0;
   margin-right: $checkbox-spacer;
 
   &:last-child {
     margin-right: 0;
   }
 
-  &:hover:not(&-disabled):not(&-checked) {
+  &:not(&-disabled):not(&-checked):hover {
     .#{$module}-inner {
       border-color: $checkbox-border-color-hover;
-      transition: border-color $anim-duration-base linear;
     }
   }
 
+  // wrapper 禁用
   &-disabled {
     cursor: not-allowed;
 
@@ -34,14 +32,11 @@ $module: #{$prefix}-checkbox;
     .#{$module}-inner {
       background-color: $checkbox-input-color-disabled;
     }
-  }
 
-  &-checked {
-    @include checked-icon;
-
-    &.#{$module}-wrapper-disabled {
+    // 禁用+选中状态
+    &.#{$module}-wrapper-checked {
       .#{$module}-inner {
-        border-color: $checkbox-input-color-disabled;
+        border-color: $checkbox-border-color;
         background-color: $checkbox-input-color-disabled;
 
         &::after {
@@ -57,9 +52,7 @@ $module: #{$prefix}-checkbox;
 
   position: relative;
   display: inline-block;
-  // 消除行高继承导致的行高与实际高度不一致的问题
   line-height: 0;
-  // 仅针对某个 flex(checkbox) 设置居中对齐, 文本对齐依然为 baseline
   align-self: center;
   border-radius: $checkbox-border-radius;
 
@@ -77,6 +70,7 @@ $module: #{$prefix}-checkbox;
     opacity: 0;
   }
 
+  // 伪 checkbox 基础样式 +  transition
   &-inner {
     position: relative;
     display: inline-block;
@@ -88,7 +82,10 @@ $module: #{$prefix}-checkbox;
     border-radius: $checkbox-border-radius;
     background-color: $checkbox-input-color;
     box-sizing: border-box;
-    flex-shrink: 0;
+
+    transition:
+      background-color $anim-duration-base $anim-time-fn-ease-in,
+      border-color $anim-duration-base linear;
 
     &::after {
       content: '';
@@ -98,26 +95,34 @@ $module: #{$prefix}-checkbox;
     }
   }
 
-  &-label {
-    display: inline-block;
-    padding-left: $checkbox-input-label-spacer;
-    padding-right: $checkbox-input-label-spacer;
-    color: $checkbox-label-color;
-    vertical-align: middle;
-    font: $checkbox-font;
-    white-space: nowrap;
-  }
-
+  // 选中状态 wrapper和 checkbox 统一
+  &-wrapper-checked,
   &-checked {
-    @include checked-icon;
+    .#{$module}-inner {
+      border-color: $checkbox-border-color-checked;
+      background-color: $checkbox-input-color-checked;
+
+      &::after {
+        opacity: 1;
+        top: 6px;
+        left: $checkbox-check-left;
+        width: $checkbox-check-width;
+        height: $checkbox-check-height;
+        border: 2px solid $checkbox-check-color;
+        border-radius: 0 0 1px 0;
+        border-top: 0;
+        border-left: 0;
+        transform: rotate(45deg) scale(1) translate(-50%, -50%);
+        background-color: transparent;
+      }
+    }
   }
 
-  // 半选必须在下以覆盖 x-checked .x-indeterminate
+  // 半选状态
   &-indeterminate {
     .#{$module}-inner {
       border-color: $checkbox-input-color-indeterminate;
       background-color: $checkbox-input-color-indeterminate;
-      transition: background-color $anim-duration-base $anim-time-fn-ease-in;
 
       &::after {
         opacity: 1;
@@ -130,5 +135,15 @@ $module: #{$prefix}-checkbox;
         background-color: $checkbox-indeterminate-color;
       }
     }
+  }
+
+  // 标签样式
+  &-label {
+    display: inline-block;
+    padding: 0 $checkbox-input-label-spacer;
+    color: $checkbox-label-color;
+    vertical-align: middle;
+    font: $checkbox-font;
+    white-space: nowrap;
   }
 }
