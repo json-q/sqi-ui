@@ -33,15 +33,27 @@ $module: #{$prefix}-checkbox;
       background-color: $checkbox-input-color-disabled;
     }
 
-    // 禁用+选中状态
-    &.#{$module}-wrapper-checked {
+    // 禁用 + 选中/半选填充
+    &.#{$module}-wrapper-checked,
+    .#{$module}-indeterminate {
       .#{$module}-inner {
         border-color: $checkbox-border-color;
         background-color: $checkbox-input-color-disabled;
+      }
+    }
 
-        &::after {
-          border-color: $checkbox-check-icon-disabled-color;
-        }
+    // 禁用 + 选中伪类
+    &.#{$module}-wrapper-checked {
+      .#{$module}-inner::after {
+        border-color: $checkbox-check-icon-disabled-color;
+      }
+    }
+
+    // 禁用 + 半选伪类
+    .#{$module}-indeterminate {
+      .#{$module}-inner::after {
+        border-color: $checkbox-check-icon-disabled-color;
+        background-color: $checkbox-check-icon-disabled-color;
       }
     }
   }

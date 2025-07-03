@@ -13,3 +13,7 @@ group:
 ## 基础使用
 
 <code src="./demos/base.tsx"></code>
+
+## 受控
+
+<code src="./demos/control.tsx"></code>

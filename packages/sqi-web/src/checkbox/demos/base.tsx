@@ -7,8 +7,11 @@ export default function Demo() {
       <Checkbox>Checkbox</Checkbox>
       <Checkbox indeterminate>Indeterminate</Checkbox>
       <Checkbox disabled>Disabled</Checkbox>
+      <Checkbox disabled indeterminate>
+        Indeterminate
+      </Checkbox>
       <Checkbox checked disabled>
-        Disabled
+        Checked
       </Checkbox>
     </>
   );
