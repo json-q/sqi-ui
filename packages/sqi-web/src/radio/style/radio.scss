@@ -11,11 +11,6 @@ $module: #{$prefix}-radio;
   align-items: baseline;
   cursor: pointer;
   margin-left: 0;
-  margin-right: $radio-spacer;
-
-  &:last-child {
-    margin-right: 0;
-  }
 
   &:hover:not(&-disabled) {
     .#{$module}-inner {

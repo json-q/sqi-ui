@@ -1,5 +1,16 @@
 $prefix: 'sqi';
 
+// 文字 & 图标 颜色
+$font-white-1: var(--sqi-font-white-1);
+$font-white-2: var(--sqi-font-white-2);
+$font-white-3: var(--sqi-font-white-3);
+$font-white-4: var(--sqi-font-white-4);
+
+$font-gray-1: var(--sqi-font-gray-1);
+$font-gray-2: var(--sqi-font-gray-2);
+$font-gray-3: var(--sqi-font-gray-3);
+$font-gray-4: var(--sqi-font-gray-4);
+
 // 可读基础颜色
 $brand-color: var(--sqi-brand-color); // 色彩-品牌-可操作
 $warning-color: var(--sqi-warning-color); // 色彩-功能-警告
