@@ -31,7 +31,7 @@ export default function CardBlock({ item, checked }: { item: React.ReactNode; ch
     <div style={styles}>
       <div style={iconStyle} />
       <strong>{item}</strong>
-      <div>this is a radio</div>
+      <div>this is a checkbox</div>
     </div>
   );
 }
