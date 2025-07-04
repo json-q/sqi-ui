@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { AlertProps } from '../alert/type';
 import type { ButtonProps } from '../button';
-import type { CheckboxProps } from '../checkbox';
+import type { CheckboxGroupProps, CheckboxProps } from '../checkbox';
 import type { DividerProps } from '../divider';
 import type { ColProps, RowProps } from '../grid/type';
 import type { InputProps } from '../input/type';
@@ -44,4 +44,5 @@ export type ComponentConfig = {
   Radio?: Omit<RadioProps, '_IS_BUTTON_'>;
   RadioGroup?: RadioGroupProps;
   Checkbox?: CheckboxProps;
+  CheckboxGroup?: CheckboxGroupProps;
 };

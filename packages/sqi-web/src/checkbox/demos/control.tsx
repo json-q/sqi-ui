@@ -17,23 +17,21 @@ export default function Demo() {
 
   return (
     <>
-      <p style={{ marginBottom: '20px' }}>
+      <p>
         <Checkbox checked={checked} disabled={disabled} onChange={onChange}>
           {label}
         </Checkbox>
       </p>
-      <p>
-        <Button type="primary" size="sm" onClick={toggleChecked}>
-          {!checked ? 'Check' : 'Uncheck'}
-        </Button>
-        <Button style={{ margin: '0 10px' }} type="primary" size="sm" onClick={toggleDisable}>
-          {!disabled ? 'Disable' : 'Enable'}
-        </Button>
+      <Button type="primary" size="sm" onClick={toggleChecked}>
+        {!checked ? 'Check' : 'Uncheck'}
+      </Button>
+      <Button style={{ margin: '0 10px' }} type="primary" size="sm" onClick={toggleDisable}>
+        {!disabled ? 'Disable' : 'Enable'}
+      </Button>
 
-        <span style={{ marginLeft: 12 }}>
-          {JSON.stringify(checked)} {JSON.stringify(disabled)}
-        </span>
-      </p>
+      <span style={{ marginLeft: 12 }}>
+        {JSON.stringify(checked)} {JSON.stringify(disabled)}
+      </span>
     </>
   );
 }

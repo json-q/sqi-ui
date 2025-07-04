@@ -20,7 +20,7 @@ export interface RadioGroupContextState {
   onChange?: (value: RadioChangeEvent) => void;
 }
 
-export interface CustomRenderItem extends RadioOptions {
+export interface RadioRenderItem extends RadioOptions {
   checked: boolean;
 }
 
@@ -67,7 +67,7 @@ export interface RadioGroupProps {
   /**
    * @description 自定义渲染内容, 仅使用 options 时生效
    */
-  renderOption?: (params: CustomRenderItem) => ReactNode;
+  renderOption?: (params: RadioRenderItem) => ReactNode;
   /**
    * @description 选中值发生变化时触发
    */

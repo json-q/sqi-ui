@@ -1,9 +1,58 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import type { BaseCheckboxChangeEvent, BaseCheckboxProps } from '../_common/BaseCheckbox';
 
 export type CheckboxValue = string | number;
 
 export type CheckboxChangeEvent = BaseCheckboxChangeEvent;
+
+export interface CheckboxRenderItem extends CheckboxProps {
+  checked: boolean;
+}
+
+export interface CheckboxGroupProps {
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+  /**
+   * @description 单选按钮组名称
+   */
+  name?: string;
+  /**
+   * @description 选中项
+   */
+  value?: CheckboxValue[];
+  /**
+   * @description 默认选中的选项
+   */
+  defaultValue?: CheckboxValue[];
+  /**
+   * @description 是否禁用所有多选按钮, 优先级 Checkbox.disabled > CheckboxGroup.disabled
+   */
+  disabled?: boolean;
+  /**
+   * @description 配置形式设置子元素
+   */
+  options?: CheckboxOptions[] | string[] | number[];
+  /**
+   * @description 自定义渲染内容, 仅使用 options 时生效
+   */
+  renderOption?: (params: CheckboxRenderItem) => ReactNode;
+  /**
+   * @description 选中值发生变化时触发
+   */
+  onChange?: (e: CheckboxValue[]) => void;
+}
+
+export interface CheckboxOptions {
+  label: ReactNode;
+  value: CheckboxValue;
+  disabled?: boolean;
+  className?: string;
+  style?: CSSProperties;
+  id?: string;
+  title?: string;
+  onChange?: (e: CheckboxValue[]) => void;
+}
 
 export interface CheckboxProps
   extends Omit<

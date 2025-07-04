@@ -17,3 +17,7 @@ group:
 ## 受控
 
 <code src="./demos/control.tsx"></code>
+
+## 多选组
+
+<code src="./demos/group.tsx"></code>
