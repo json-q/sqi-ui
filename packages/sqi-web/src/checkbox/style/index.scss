@@ -44,7 +44,8 @@ $module: #{$prefix}-checkbox;
 
     // 禁用 + 选中/半选填充
     &.#{$module}-wrapper-checked,
-    &.#{$module}-indeterminate {
+    // indeterminate 在 BaseCheckbox 中，和 wrapper-checked 不在同一个元素
+    .#{$module}-indeterminate {
       .#{$module}-inner {
         border-color: $checkbox-border-color;
         background-color: $checkbox-input-color-disabled;
