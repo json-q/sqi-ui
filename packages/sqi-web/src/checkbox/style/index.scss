@@ -3,17 +3,26 @@
 
 $module: #{$prefix}-checkbox;
 
+.#{$module}-group {
+  @include reset;
+
+  display: inline-block;
+
+  > .#{$module}-wrapper {
+    margin-right: $checkbox-spacer;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .#{$module}-wrapper {
   @include reset;
 
   display: inline-flex;
   align-items: baseline;
   cursor: pointer;
-  margin-right: $checkbox-spacer;
-
-  &:last-child {
-    margin-right: 0;
-  }
 
   &:not(&-disabled):not(&-checked):hover {
     .#{$module}-inner {
@@ -104,6 +113,7 @@ $module: #{$prefix}-checkbox;
       box-sizing: border-box;
       position: absolute;
       opacity: 0;
+      transition: all $anim-duration-base $anim-time-fn-ease-in;
     }
   }
 

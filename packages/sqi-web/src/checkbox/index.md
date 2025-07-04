@@ -21,3 +21,19 @@ group:
 ## 多选组
 
 <code src="./demos/group.tsx"></code>
+
+## 全选/半选
+
+你可以使用 `indeterminate` 来实现全选/半选效果
+
+注意：`indeterminate` 仅支持受控模式
+
+<code src="./demos/indeterminate.tsx"></code>
+
+## 自定义渲染内容
+
+<code src="./demos/custom-render.tsx"></code>
+
+## 配置项渲染
+
+<code src="./demos/options.tsx"></code>

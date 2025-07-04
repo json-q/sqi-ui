@@ -6,10 +6,6 @@ export type RadioValue = string | number;
 
 export type RadioChangeEvent = BaseCheckboxChangeEvent;
 
-// onChange 思路：由于 input 被 label 包裹，所以点击 label 可以触发 input 的 onChange
-// 点击时，onChange 会调用 radio 的 props 和触发 groupContext 的 onChange
-// groupContext 的 onChange 会内部设置此次点击的 value，然后由 radio 消费对比当前 value 和点击项 value 是否一致，若一致，则视为 checked
-
 export interface RadioGroupContextState {
   name?: string;
   value?: RadioValue;

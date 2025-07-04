@@ -1,11 +1,11 @@
 import { createContext } from 'react';
-import type { CheckboxOptions, CheckboxValue } from './type';
+import type { CheckboxValue } from './type';
 
 export interface CheckboxGroupContextType {
   name?: string;
   value: CheckboxValue[];
   disabled?: boolean;
-  toggleOption?: (value: CheckboxOptions) => void;
+  toggleOption?: (value: CheckboxValue) => void;
   registerValue?: (val: CheckboxValue) => void;
   unregisterValue?: (val: CheckboxValue) => void;
 }

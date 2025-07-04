@@ -1,23 +1,28 @@
 import React, { forwardRef, useCallback, useContext, useEffect, useId, useMemo, useState } from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
+import { isArray, isFunction, isNumber, isString } from '@sqi-ui/utils';
 import { ConfigContext } from '../config-provider/context';
 import { CheckboxGroupContext } from './context';
-import type { CheckboxGroupProps, CheckboxOptions, CheckboxValue } from './type';
+import Checkbox from './Checkbox';
+import type { CheckboxGroupProps, CheckboxValue } from './type';
+import clsx from 'clsx';
 
 const defaultProps: CheckboxGroupProps = {};
 
 const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps, ref) => {
-  const { componentConfig } = useContext(ConfigContext);
+  const { prefixCls, componentConfig } = useContext(ConfigContext);
   const defaultName = useId();
 
   const {
     defaultValue,
     children,
+    options,
     className,
     style,
-    onChange,
     disabled,
     name = defaultName,
+    onChange,
+    renderOption,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.CheckboxGroup);
 
@@ -42,25 +47,25 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
     setRegisteredValues((prevValues) => prevValues.filter((v) => v !== val));
   }, []);
 
-  // const formatOptions = useMemo(
-  //   () =>
-  //     options?.map((item) => {
-  //       if (isString(item) || isNumber(item)) {
-  //         return { label: item, value: item };
-  //       }
-  //       return item;
-  //     }),
-  //   [options],
-  // );
+  const formatOptions = useMemo(
+    () =>
+      options?.map((item) => {
+        if (isString(item) || isNumber(item)) {
+          return { label: item, value: item };
+        }
+        return item;
+      }),
+    [options],
+  );
 
   const toggleOption = useCallback(
-    (options: CheckboxOptions) => {
-      const optionIndex = innerValue.indexOf(options.value);
+    (changeValue: CheckboxValue) => {
       const copyValue = [...innerValue];
-      if (optionIndex === -1) {
-        copyValue.push(options.value);
+      const valueIndex = innerValue.indexOf(changeValue);
+      if (valueIndex === -1) {
+        copyValue.push(changeValue);
       } else {
-        copyValue.splice(optionIndex, 1);
+        copyValue.splice(valueIndex, 1);
       }
       // 非受控情况下内部受控
       if (!('value' in restProps)) {
@@ -73,6 +78,32 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
     },
     [innerValue, registeredValues, onChange],
   );
+
+  let renderChildren = children;
+  if (isArray(formatOptions) && formatOptions.length > 0) {
+    const isCustomRender = isFunction(renderOption);
+
+    renderChildren = formatOptions.map((item) => {
+      const isChecked = innerValue.includes(item.value);
+      const renderNode = isCustomRender ? () => renderOption({ ...item, checked: isChecked }) : item.label;
+
+      return (
+        <Checkbox
+          key={`checkbox-group-options-${item.value}`}
+          className={item.className}
+          style={item.style}
+          disabled={'disabled' in item ? item.disabled : disabled}
+          value={item.value}
+          checked={isChecked}
+          id={item.id}
+          title={item.title}
+          onChange={item.onChange}
+        >
+          {renderNode}
+        </Checkbox>
+      );
+    });
+  }
 
   const memoizedContext = useMemo(
     () => ({
@@ -87,8 +118,8 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
   );
 
   return (
-    <div className={className} style={style} ref={ref}>
-      <CheckboxGroupContext.Provider value={memoizedContext}>{children}</CheckboxGroupContext.Provider>
+    <div className={clsx(`${prefixCls}-checkbox-group`, className)} style={style} ref={ref}>
+      <CheckboxGroupContext.Provider value={memoizedContext}>{renderChildren}</CheckboxGroupContext.Provider>
     </div>
   );
 });

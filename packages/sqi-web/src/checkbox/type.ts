@@ -5,7 +5,7 @@ export type CheckboxValue = string | number;
 
 export type CheckboxChangeEvent = BaseCheckboxChangeEvent;
 
-export interface CheckboxRenderItem extends CheckboxProps {
+export interface CheckboxRenderItem extends CheckboxOptions {
   checked: boolean;
 }
 
@@ -40,7 +40,7 @@ export interface CheckboxGroupProps {
   /**
    * @description 选中值发生变化时触发
    */
-  onChange?: (e: CheckboxValue[]) => void;
+  onChange?: (values: CheckboxValue[]) => void;
 }
 
 export interface CheckboxOptions {
@@ -51,7 +51,7 @@ export interface CheckboxOptions {
   style?: CSSProperties;
   id?: string;
   title?: string;
-  onChange?: (e: CheckboxValue[]) => void;
+  onChange?: (e: CheckboxChangeEvent) => void;
 }
 
 export interface CheckboxProps

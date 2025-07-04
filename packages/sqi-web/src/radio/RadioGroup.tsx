@@ -86,6 +86,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
           checked={isChecked}
           id={item.id}
           title={item.title}
+          onChange={item.onChange}
         >
           {renderNode}
         </Comp>

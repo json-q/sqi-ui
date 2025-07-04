@@ -54,7 +54,9 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((baseProps, ref) => {
   const renderChildren = (): React.ReactNode => {
     if (isUndefined(children)) return null;
 
-    if (isFunction(children)) return children({ checked: innerChecked });
+    if (isFunction(children)) {
+      return children({ checked: 'checked' in radioProps ? !!radioProps.checked : innerChecked });
+    }
 
     return <span className={`${customizePrefixCls}-label`}>{children}</span>;
   };

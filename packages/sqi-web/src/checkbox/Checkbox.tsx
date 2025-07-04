@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useRef, type ReactNode } from 'react';
+import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { useLatest, useMergeProps } from '@sqi-ui/hooks';
 import { isEmptyObject, isFunction, isUndefined } from '@sqi-ui/utils';
@@ -23,6 +23,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
     componentConfig?.Checkbox,
   );
 
+  const [innerChecked, setInnerChecked] = useState(false);
   const mergedDisabled = 'disabled' in restProps ? restProps.disabled : checkboxGroup.disabled;
   const prevValue = useLatest(restProps.value);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,9 +50,13 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
 
   const checkboxProps = { ...restProps };
   if (!isEmptyObject(checkboxGroup)) {
+    if (!('value' in restProps)) {
+      console.error('[sqi-web]: value is required when using CheckboxGroup');
+    }
+
     checkboxProps.onChange = (...args) => {
       restProps.onChange?.(...args);
-      checkboxGroup.toggleOption?.({ label: children as ReactNode, value: restProps.value! });
+      checkboxGroup.toggleOption?.(restProps.value!);
     };
 
     checkboxProps.name = checkboxGroup.name;
@@ -77,8 +82,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
   const renderChildren = (): React.ReactNode => {
     if (isUndefined(children)) return null;
 
-    // TODO
-    if (isFunction(children)) return null; /* return children({ checked: innerChecked }); */
+    if (isFunction(children)) {
+      return children({
+        checked: 'checked' in checkboxProps ? !!checkboxProps.checked : innerChecked,
+      });
+    }
 
     return <span className={`${prefixCls}-checkbox-label`}>{children}</span>;
   };
@@ -96,6 +104,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
           ...style,
           display: isFunction(children) ? 'none' : undefined,
         }}
+        _getCheckedValue={setInnerChecked}
       />
       {renderChildren()}
     </label>
