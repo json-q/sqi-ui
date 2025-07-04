@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { useLatest, useMergeProps } from '@sqi-ui/hooks';
+import { useMergeProps, usePrevious } from '@sqi-ui/hooks';
 import { isEmptyObject, isFunction, isUndefined } from '@sqi-ui/utils';
 import { BaseCheckbox } from '../_common/BaseCheckbox';
 import { composeRef } from '../_util/composeRef';
@@ -25,7 +25,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
 
   const [innerChecked, setInnerChecked] = useState(false);
   const mergedDisabled = 'disabled' in restProps ? restProps.disabled : checkboxGroup.disabled;
-  const prevValue = useLatest(restProps.value);
+  let prevValue = usePrevious(restProps.value);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -33,10 +33,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
   }, []);
 
   useEffect(() => {
-    if (restProps.value !== prevValue.current) {
-      checkboxGroup.unregisterValue?.(prevValue.current!);
+    if (restProps.value !== prevValue) {
+      checkboxGroup.unregisterValue?.(prevValue!);
       checkboxGroup.registerValue?.(restProps.value!);
-      prevValue.current = restProps.value;
+      prevValue = restProps.value;
     }
 
     return () => checkboxGroup.unregisterValue?.(restProps.value!);
