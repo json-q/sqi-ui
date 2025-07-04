@@ -52,7 +52,7 @@ group:
 
 | 属性 | 描述 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| `children` | 子元素 | `ReactNode` | - |
+| `children` | 子元素 | `ReactNode \| ({ checked: boolean })=>ReactNode` | - |
 | `checked` | 是否选中（受控） | `boolean` | - |
 | `defaultChecked` | 非受控默认选中状态 | `boolean` | `false` |
 | `disabled` | 是否禁用（优先级：Radio.disabled > RadioGroup.disabled） | `boolean` | - |
@@ -75,22 +75,22 @@ group:
 | `size` | 单选按钮组尺寸（仅 Button 样式下有效） | `ConfigSize` | `'md'` |
 | `appearance` | 单选按钮组主题（仅在使用 options 渲染时生效） | `radio` \|`button` | `radio` |
 | `buttonVariant` | 单选按钮组样式（仅 Button 下生效） | `filled`\|`outline` | `outline` |
-| `options` | 配置形式设置子元素 | [RadioOptions[]](#radiooptions) \|`string[]`\|`number[]` |  |
+| `options` | 配置形式设置子元素 | `RadioOptions[]`\|`string[]`\|`number[]` |  |
 | `renderOption` | 自定义渲染，仅配置 `options` 时生效 | ` (params: RadioOptions & {checked: boolean}) => ReactNode` |  |
 | `onChange` | 选中值发生变化时触发 | `(e: RadioChangeEvent) => void` |  |
 
 ### RadioOptions
 
-| 属性        | 描述                                                  | 类型                            | 默认值 |
-| ----------- | ----------------------------------------------------- | ------------------------------- | ------ |
-| `label`     | 显示标签                                              | `ReactNode`                     |        |
-| `value`     | 值                                                    | `sting`\|`number`               |        |
-| `disabled`  | 是否禁用                                              | `boolean`                       |        |
-| `className` | 自定义类名                                            | `string`                        |        |
-| `style`     | 自定义样式                                            | `CSSProperties`                 |        |
-| `id`        | 元素 ID                                               | `string`                        |        |
-| `title`     | 额外提示信息                                          | `string`                        |        |
-| `onChange`  | 值变化时触发（优先级高于 `RadioGroup` 的 `onChange`） | `(e: RadioChangeEvent) => void` |        |
+| 属性        | 描述         | 类型                            | 默认值 |
+| ----------- | ------------ | ------------------------------- | ------ |
+| `label`     | 显示标签     | `ReactNode`                     |        |
+| `value`     | 值           | `sting`\|`number`               |        |
+| `disabled`  | 是否禁用     | `boolean`                       |        |
+| `className` | 自定义类名   | `string`                        |        |
+| `style`     | 自定义样式   | `CSSProperties`                 |        |
+| `id`        | 元素 ID      | `string`                        |        |
+| `title`     | 额外提示信息 | `string`                        |        |
+| `onChange`  | 值变化时触发 | `(e: RadioChangeEvent) => void` |        |
 
 ### RadioChangeEvent
 

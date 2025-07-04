@@ -25,7 +25,7 @@ export interface RadioGroupProps {
   style?: CSSProperties;
   children?: ReactNode;
   /**
-   * @description 单选按钮组名称
+   * @description 单选按钮组下 input 的 name 属性
    */
   name?: string;
   /**
