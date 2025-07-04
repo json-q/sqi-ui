@@ -66,7 +66,7 @@ group:
 | `value` | 选中值（受控） | `CheckboxValue[]` |  |
 | `defaultValue` | 默认选中的选项（非受控） | `CheckboxValue[]` |  |
 | `disabled` | 是否禁用所有单选按钮（优先级：Checkbox.disabled > CheckboxGroup.disabled） | `boolean` | `false` |
-| `renderOption` | 自定义渲染，仅配置 `options` 时生效 | ` (params: RadioOptions & {checked: boolean}) => ReactNode` |  |
+| `renderOption` | 自定义渲染，仅配置 `options` 时生效 | ` (params: CheckboxOptions & {checked: boolean}) => ReactNode` |  |
 | `onChange` | 选中值变化时触发 | `(e: CheckboxValue) => void` |  |
 
 ### CheckboxOptions
