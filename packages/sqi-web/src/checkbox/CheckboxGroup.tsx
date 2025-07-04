@@ -76,7 +76,7 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
 
       onChange?.(checkedValues);
     },
-    [innerValue, registeredValues, onChange],
+    [innerValue, registeredValues, restProps, onChange],
   );
 
   let renderChildren = children;

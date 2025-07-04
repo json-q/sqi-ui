@@ -31,7 +31,7 @@ export default function Demo() {
         })}
       </Checkbox.Group>
 
-      <Divider text="Custom radio group render" align="left" />
+      <Divider text="Custom checkbox group render" align="left" />
       <Checkbox.Group defaultValue={['Beijing']}>
         {['Beijing', 'Shanghai', 'Guangzhou'].map((item) => {
           return (

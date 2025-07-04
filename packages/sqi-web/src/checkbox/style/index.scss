@@ -44,7 +44,7 @@ $module: #{$prefix}-checkbox;
 
     // 禁用 + 选中/半选填充
     &.#{$module}-wrapper-checked,
-    .#{$module}-indeterminate {
+    &.#{$module}-indeterminate {
       .#{$module}-inner {
         border-color: $checkbox-border-color;
         background-color: $checkbox-input-color-disabled;

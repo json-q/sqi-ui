@@ -50,8 +50,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
 
   const checkboxProps = { ...restProps };
   if (!isEmptyObject(checkboxGroup)) {
-    if (!('value' in restProps)) {
-      console.error('[sqi-web]: value is required when using CheckboxGroup');
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn('[@sqi-ui/web]: value is required when using CheckboxGroup');
     }
 
     checkboxProps.onChange = (...args) => {

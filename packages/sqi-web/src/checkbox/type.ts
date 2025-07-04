@@ -72,6 +72,7 @@ export interface CheckboxProps
   /**
    * @description 是否禁用。若存在父组件 CheckboxGroup，默认值由 CheckboxGroup.disabled 控制。优先级：Radio.disabled > CheckboxGroup.disabled
    */
+  disabled?: boolean;
   /**
    * @description input 的 name 属性
    */

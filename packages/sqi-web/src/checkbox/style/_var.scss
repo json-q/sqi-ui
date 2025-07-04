@@ -26,7 +26,6 @@ $checkbox-margin-right: $margin-sm;
 
 $checkbox-check-width: 5px;
 $checkbox-check-height: 9px;
-$checkbox-check-size: calc(($checkbox-check-width + $checkbox-check-height) / sqrt(2));
 $checkbox-check-left: 3px;
 
 $checkbox-indeterminate-width: 16px;
@@ -37,9 +36,8 @@ $checkbox-indeterminate-color: $font-white-1;
 $checkbox-font: $font-size-md;
 
 // padding
-$checkbox-input-label-spacer: $spacer;
+$checkbox-input-label-spacer: $spacer; // 文本内容与 input 之间的间隔
 $checkbox-spacer: $margin-sm; // checkbox 之间的间隔
-$checkbox-input-label-spacer: $margin-sm; // 文本内容与 input 之间的间隔
 
 // 组合复选框margin
 $checkbox-group-gap: $spacer-2;
