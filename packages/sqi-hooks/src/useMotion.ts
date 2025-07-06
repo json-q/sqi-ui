@@ -12,8 +12,8 @@ import {
   getEndStatus,
   getTimeout,
   nextTick,
-} from '../utils/motion';
-import type { MotionStatus, FormatState } from '../utils/motion';
+} from './utils/motion';
+import type { MotionStatus, FormatState } from './utils/motion';
 
 interface UpdateStateOptions<S = FormatState> {
   status: number;
