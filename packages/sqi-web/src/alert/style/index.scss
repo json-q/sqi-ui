@@ -95,6 +95,7 @@ $module: #{$prefix}-alert;
 }
 
 .#{$module}-motion {
+  overflow: hidden;
   transition:
     opacity $anim-duration-base $anim-time-fn-easing,
     padding-top $anim-duration-base $anim-time-fn-easing,
