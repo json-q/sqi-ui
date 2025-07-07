@@ -23,7 +23,7 @@ const iconTypeMap: Record<NonNullable<AlertProps['type']>, React.ElementType> = 
   info: InfoCircleFilledIcon,
   error: CloseCircleFilledIcon,
   warning: WarnCircleFilledIcon,
-} as const;
+};
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
