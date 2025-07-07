@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { useTransitionState, type TransitionOptions, type TransitionState } from 'react-transition-state';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { ConfigContext } from '../config-provider/context';
 import { isFunction } from '@sqi-ui/utils';
+import { ConfigContext } from '../config-provider/context';
 
 export interface ChildCallbackResult extends TransitionState {
   className: string;

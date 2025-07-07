@@ -5,8 +5,8 @@ import { isEmptyObject, isFunction, isUndefined } from '@sqi-ui/utils';
 import { BaseCheckbox } from '../_common/BaseCheckbox';
 import { composeRef } from '../_util/composeRef';
 import { ConfigContext } from '../config-provider/context';
-import type { CheckboxProps } from './type';
 import { CheckboxGroupContext } from './context';
+import type { CheckboxProps } from './type';
 
 const defaultProps: CheckboxProps = {
   defaultChecked: false,

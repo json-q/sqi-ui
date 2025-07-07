@@ -3,10 +3,10 @@ import React, { forwardRef, useContext, type CSSProperties } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { isNumber, isObject } from '@sqi-ui/utils';
+import type { Breakpoint } from '../_util/responsiveObserve';
 import { ConfigContext } from '../config-provider/context';
 import RowContext from './context';
 import type { ColProps, ColSize, FlexType } from './type';
-import type { Breakpoint } from '../_util/responsiveObserve';
 
 const defaultProps: ColProps = {
   offset: 0,

@@ -1,11 +1,11 @@
 import React, { forwardRef, useCallback, useContext, useEffect, useId, useMemo, useState } from 'react';
+import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { isArray, isFunction, isNumber, isString } from '@sqi-ui/utils';
 import { ConfigContext } from '../config-provider/context';
 import { CheckboxGroupContext } from './context';
 import Checkbox from './Checkbox';
 import type { CheckboxGroupProps, CheckboxValue } from './type';
-import clsx from 'clsx';
 
 const defaultProps: CheckboxGroupProps = {};
 
