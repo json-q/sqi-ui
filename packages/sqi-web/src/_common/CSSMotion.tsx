@@ -20,11 +20,11 @@ const defaultProps: TransitionOptions = {
   timeout: 0,
 };
 const CSSMotion = (baseProps: MotionProps) => {
-  const { prefixCls } = useContext(ConfigContext);
-  const { children, name, ...restProps } = useMergeProps(baseProps, defaultProps);
+  const ctx = useContext(ConfigContext);
+  const { children, name, prefixCls, ...restProps } = useMergeProps(baseProps, defaultProps);
   const [state, toggle] = useTransitionState(restProps);
 
-  const mergedPrefixCls = `${restProps.prefixCls || prefixCls}${name ? `-${name}` : ''}`;
+  const mergedPrefixCls = `${prefixCls || ctx.prefixCls}${name ? `-${name}` : ''}`;
 
   const className = clsx([`${mergedPrefixCls}-motion`], {
     [`${mergedPrefixCls}-motion-${state.status}`]: state.status,

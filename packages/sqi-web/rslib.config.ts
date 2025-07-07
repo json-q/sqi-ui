@@ -11,7 +11,6 @@ export default defineConfig({
     }),
   ],
   output: {
-    cleanDistPath: true,
     target: 'web',
   },
   lib: [
