@@ -47,7 +47,8 @@
     "@sqi-ui/icons": "workspace:*",
     "@sqi-ui/utils": "workspace:*",
     "@swc/helpers": "^0.5.17",
-    "react-is": "^19.1.0"
+    "react-is": "^19.1.0",
+    "react-transition-state": "^2.3.1"
   },
   "devDependencies": {
     "@rsbuild/plugin-react": "^1.3.2",
