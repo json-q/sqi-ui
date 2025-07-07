@@ -1,0 +1,7 @@
+@use './variables' as *;
+
+.#{$prefix}-motion {
+  &.#{$prefix}-motion-exited {
+    display: none;
+  }
+}
