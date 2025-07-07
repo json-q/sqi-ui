@@ -93,3 +93,16 @@ $module: #{$prefix}-alert;
     }
   }
 }
+
+.#{$module}-motion {
+  transition:
+    opacity $anim-duration-base $anim-time-fn-easing,
+    padding-top $anim-duration-base $anim-time-fn-easing,
+    padding-bottom $anim-duration-base $anim-time-fn-easing;
+
+  &-exiting {
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

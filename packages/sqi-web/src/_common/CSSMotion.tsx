@@ -6,24 +6,25 @@ import { ConfigContext } from '../config-provider/context';
 import { isFunction } from '@sqi-ui/utils';
 
 export interface ChildCallbackResult extends TransitionState {
-  className?: string;
-  toggle?: (toEnter?: boolean) => void;
+  className: string;
+  toggle: (toEnter?: boolean) => void;
 }
 
 export interface MotionProps extends TransitionOptions {
   prefixCls?: string;
+  name?: string;
   children: (result: ChildCallbackResult) => React.ReactNode;
 }
 
 const defaultProps: TransitionOptions = {
-  timeout: 250,
+  timeout: 0,
 };
-const Motion = (baseProps: MotionProps) => {
+const CSSMotion = (baseProps: MotionProps) => {
   const { prefixCls } = useContext(ConfigContext);
-  const { children, ...restProps } = useMergeProps(baseProps, defaultProps);
+  const { children, name, ...restProps } = useMergeProps(baseProps, defaultProps);
   const [state, toggle] = useTransitionState(restProps);
 
-  const mergedPrefixCls = restProps.prefixCls || prefixCls;
+  const mergedPrefixCls = `${restProps.prefixCls || prefixCls}${name ? `-${name}` : ''}`;
 
   const className = clsx([`${mergedPrefixCls}-motion`], {
     [`${mergedPrefixCls}-motion-${state.status}`]: state.status,
@@ -40,4 +41,4 @@ const Motion = (baseProps: MotionProps) => {
   }
 };
 
-export default Motion;
+export default CSSMotion;
