@@ -37,7 +37,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   const container = useMemo(() => {
     if (!isBrowser) return null;
     const appendNode = document.createElement('div');
-    appendNode.className = `${prefixCls}-portal-wrapper`;
+    appendNode.className = prefixCls ? `${prefixCls}-portal-wrapper` : '';
     return appendNode;
   }, [prefixCls]);
 
