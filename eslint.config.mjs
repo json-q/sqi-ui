@@ -7,12 +7,14 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import * as reactHooks from 'eslint-plugin-react-hooks';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import reactCompiler from 'eslint-plugin-react-compiler';
 
 export default defineConfig([
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  reactCompiler.configs.recommended,
 
   jsxA11y.flatConfigs.recommended,
   eslintConfigPrettier,
@@ -25,6 +27,7 @@ export default defineConfig([
   {
     name: 'internal-rules',
     rules: {
+      'react-compiler/react-compiler': 'error',
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       'react/prop-types': 'off',
