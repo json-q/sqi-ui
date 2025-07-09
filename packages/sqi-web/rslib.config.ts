@@ -1,18 +1,26 @@
 import { defineConfig } from '@rslib/core';
 import { pluginReact } from '@rsbuild/plugin-react';
+import { pluginBabel } from '@rsbuild/plugin-babel';
 
 export default defineConfig({
   source: {
     tsconfigPath: './tsconfig.build.json',
   },
-  plugins: [
-    pluginReact({
-      swcReactOptions: { runtime: 'classic' },
-    }),
-  ],
   output: {
     target: 'web',
   },
+  plugins: [
+    // compat umd in browser
+    pluginReact({ swcReactOptions: { runtime: 'classic' } }),
+
+    pluginBabel({
+      include: /\.(?:jsx|tsx)$/,
+      babelLoaderOptions(opts) {
+        // compat react18
+        opts.plugins?.unshift(['babel-plugin-react-compiler', { target: '18' }]);
+      },
+    }),
+  ],
   lib: [
     {
       source: {
@@ -26,12 +34,8 @@ export default defineConfig({
       bundle: false,
       externalHelpers: true,
       output: {
-        distPath: {
-          root: './es',
-        },
-        filename: {
-          js: '[name].js',
-        },
+        distPath: { root: './es' },
+        filename: { js: '[name].js' },
       },
     },
     {
@@ -45,12 +49,8 @@ export default defineConfig({
       bundle: false,
       externalHelpers: true,
       output: {
-        distPath: {
-          root: './lib',
-        },
-        filename: {
-          js: '[name].js',
-        },
+        distPath: { root: './lib' },
+        filename: { js: '[name].js' },
       },
     },
     {
@@ -65,9 +65,7 @@ export default defineConfig({
       output: {
         minify: true,
         polyfill: 'usage',
-        distPath: {
-          root: './dist',
-        },
+        distPath: { root: './dist' },
         externals: {
           react: 'React',
           'react-dom': 'ReactDOM',
