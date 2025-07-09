@@ -1,19 +1,6 @@
-import { defineConfig, type RslibConfig } from '@rslib/core';
+import { defineConfig } from '@rslib/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginBabel } from '@rsbuild/plugin-babel';
-
-const commonPlugins: RslibConfig['plugins'] = [
-  // compat umd in browser
-  pluginReact({ swcReactOptions: { runtime: 'classic' } }),
-
-  pluginBabel({
-    include: /\.(?:jsx|tsx)$/,
-    babelLoaderOptions(opts) {
-      // compat react18
-      opts.plugins?.unshift(['babel-plugin-react-compiler', { target: '18' }]);
-    },
-  }),
-];
 
 export default defineConfig({
   source: {
@@ -22,6 +9,18 @@ export default defineConfig({
   output: {
     target: 'web',
   },
+  plugins: [
+    // compat umd in browser
+    pluginReact({ swcReactOptions: { runtime: 'classic' } }),
+
+    pluginBabel({
+      include: /\.(?:jsx|tsx)$/,
+      babelLoaderOptions(opts) {
+        // compat react18
+        opts.plugins?.unshift(['babel-plugin-react-compiler', { target: '18' }]);
+      },
+    }),
+  ],
   lib: [
     {
       source: {
@@ -34,7 +33,6 @@ export default defineConfig({
       dts: true,
       bundle: false,
       externalHelpers: true,
-      plugins: commonPlugins,
       output: {
         distPath: { root: './es' },
         filename: { js: '[name].js' },
@@ -50,7 +48,6 @@ export default defineConfig({
       syntax: 'es2016',
       bundle: false,
       externalHelpers: true,
-      plugins: commonPlugins,
       output: {
         distPath: { root: './lib' },
         filename: { js: '[name].js' },
@@ -65,7 +62,6 @@ export default defineConfig({
           index: './src/index.ts',
         },
       },
-      plugins: commonPlugins,
       output: {
         minify: true,
         polyfill: 'usage',
