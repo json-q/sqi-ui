@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import ResizeObserverPolyfill from 'resize-observer-polyfill';
 import { canUseDom } from '@sqi-ui/utils';
-import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
+import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
-export default function useResizeObserver(
+export function useResizeObserver(
   container: React.RefObject<Element | null>,
   callback?: (data: ResizeObserverEntry[]) => void,
   enabled = true,

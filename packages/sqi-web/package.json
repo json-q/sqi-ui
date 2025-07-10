@@ -49,8 +49,7 @@
     "@swc/helpers": "^0.5.17",
     "react-compiler-runtime": "19.1.0-rc.2",
     "react-is": "^19.1.0",
-    "react-transition-state": "^2.3.1",
-    "resize-observer-polyfill": "^1.5.1"
+    "react-transition-state": "^2.3.1"
   },
   "devDependencies": {
     "@rsbuild/plugin-babel": "^1.0.5",

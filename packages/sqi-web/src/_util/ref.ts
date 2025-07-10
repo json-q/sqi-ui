@@ -1,4 +1,5 @@
 import { useCompareMemo } from '@sqi-ui/hooks';
+import { isFunction, isObject } from '@sqi-ui/utils';
 
 export const composeRef = <T>(...refs: React.Ref<T>[]): React.Ref<T> => {
   const refList = refs.filter(Boolean);
@@ -13,9 +14,9 @@ export const composeRef = <T>(...refs: React.Ref<T>[]): React.Ref<T> => {
 };
 
 export const fillRef = <T>(ref: React.Ref<T>, node: T) => {
-  if (typeof ref === 'function') {
+  if (isFunction(ref)) {
     ref(node);
-  } else if (typeof ref === 'object' && ref && 'current' in ref) {
+  } else if (isObject(ref) && 'current' in ref) {
     ref.current = node;
   }
 };
