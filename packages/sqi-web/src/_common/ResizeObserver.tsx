@@ -1,22 +1,29 @@
-import React, { cloneElement, forwardRef, isValidElement, useEffect, useImperativeHandle, useRef } from 'react';
-import ResizeObserverPolyfill from 'resize-observer-polyfill';
+import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef } from 'react';
 import { throttle } from '@sqi-ui/utils';
 import { toArray } from '../_util/toArray';
 import { getDOM, getReactNodeRef } from '../_util/dom';
 import { useComposeRef } from '../_util/ref';
+import useResizeObserver from '../_hook/useResizeObserver';
 
 export interface ResizeObserverProps {
-  onResize?: (entry: ResizeObserverEntry) => void;
+  onResize?: (entry: ResizeObserverEntry[]) => void;
   children?: React.ReactNode;
+  /**
+   * @description 是否禁用 observer
+   */
   disabled?: boolean;
+  /**
+   * @description 节流时间
+   * @default 100
+   */
+  throttleMs?: number;
 }
 
 const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((props, ref) => {
-  const { children, onResize } = props;
+  const { children, disabled, onResize } = props;
 
   const isElement = isValidElement(children);
-
-  const childNodes = toArray(children);
+  const childNodes = isElement ? toArray(children) : [];
 
   const originRef = isElement ? getReactNodeRef<Element>(children!) : null;
   const elementRef = useRef<Element>(null);
@@ -24,7 +31,7 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   if (process.env.NODE_ENV !== 'production') {
     if (!isElement) {
-      console.error('[@sqi-ui/web]: The `children` of ResizeObserverComponent is invalid.');
+      console.error('[@sqi-ui/web]: The `children` of ResizeObserverComponent is invalid. Nothing is in observe.');
     }
     if (childNodes.length > 1) {
       console.error(
@@ -41,22 +48,11 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   useImperativeHandle(ref, () => getDomElement());
 
-  const throttleResize = onResize ? throttle(onResize, 100) : () => {};
-  useEffect(() => {
-    const observeElement = getDomElement();
-    const observer = new ResizeObserverPolyfill((entries) => {
-      entries.forEach((el) => {
-        console.log(el);
-        throttleResize(el);
-      });
-    });
-    observer.observe(observeElement);
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
+  const throttleResize = onResize ? throttle(onResize, 100) : undefined;
 
-  return isElement ? cloneElement(children as any, { ref: mergedRef }) : null;
+  useResizeObserver(elementRef, throttleResize, !disabled);
+
+  return isElement ? cloneElement(children as any, { ref: mergedRef }) : children;
 });
 
 ResizeObserverComponent.displayName = 'ResizeObserverComponent';
