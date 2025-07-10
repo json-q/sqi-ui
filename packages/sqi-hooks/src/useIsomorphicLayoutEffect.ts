@@ -1,5 +1,5 @@
-import { canUseDom } from '@sqi-ui/utils';
 import { useEffect, useLayoutEffect } from 'react';
+import { canUseDom } from '@sqi-ui/utils';
 
 const isBrowser = canUseDom();
 

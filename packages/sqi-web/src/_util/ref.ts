@@ -1,3 +1,5 @@
+import { useCompareMemo } from '@sqi-ui/hooks';
+
 export const composeRef = <T>(...refs: React.Ref<T>[]): React.Ref<T> => {
   const refList = refs.filter(Boolean);
   if (refList.length <= 1) {
@@ -16,4 +18,12 @@ export const fillRef = <T>(ref: React.Ref<T>, node: T) => {
   } else if (typeof ref === 'object' && ref && 'current' in ref) {
     ref.current = node;
   }
+};
+
+export const useComposeRef = <T>(...refs: React.Ref<T>[]): React.Ref<T> => {
+  return useCompareMemo(
+    () => composeRef(...refs),
+    refs,
+    (prev, next) => prev.length !== next.length || prev.every((ref, i) => ref !== next[i]),
+  )!;
 };

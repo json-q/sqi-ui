@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { isUndefined, isEmptyObject, isFunction } from '@sqi-ui/utils';
 import BaseCheckbox from '../_common/BaseCheckbox';
-import { composeRef } from '../_util/composeRef';
+import { composeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
 import type { ConfigSize } from '../config-provider';
 import RadioGroupContext from './context';
