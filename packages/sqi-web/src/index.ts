@@ -7,3 +7,4 @@ export * from './grid';
 export * from './input';
 export * from './radio';
 export * from './space';
+export * from './trigger';
