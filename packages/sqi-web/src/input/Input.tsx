@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
 import { isFunction, isNumber, isObject, isString, isUndefined } from '@sqi-ui/utils';
 import { CloseCircleFilledIcon, BrowseOffIcon, BrowseIcon } from '@sqi-ui/icons';
-import { composeRef } from '../_util/composeRef';
+import { composeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
 import type { InputProps, VisibilityToggle } from './type';
 

@@ -52,7 +52,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
 
   useImperativeHandle(ref, () => container as HTMLDivElement, [container]);
 
-  return isBrowser ? createPortal(children, container!) : null;
+  return container ? createPortal(children, container!) : null;
 });
 
 Portal.displayName = 'Portal';

@@ -1,10 +1,10 @@
 'use client';
-import React, { Fragment, Children, useCallback, isValidElement, useContext, forwardRef } from 'react';
+import React, { Fragment, useCallback, useContext, forwardRef } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
-import { isFragment } from 'react-is';
 import clsx from 'clsx';
 import { isArray, isString } from '@sqi-ui/utils';
 import { useMergeProps } from '@sqi-ui/hooks';
+import { toArray } from '../_util/toArray';
 import { ConfigContext } from '../config-provider/context';
 import type { SizeType, SpaceProps } from './type';
 
@@ -19,26 +19,6 @@ const defaultProps: SpaceProps = {
   align: 'center',
   wrap: false,
 };
-
-function toArray(children: ReactNode): ReactNode[] {
-  let realNode: ReactNode[] = [];
-
-  Children.toArray(children).forEach((child: any) => {
-    if (child === null || child === undefined) {
-      return;
-    }
-
-    // Fragment 不应占用 space-item，对其进行过滤（context 不能过滤）
-    if (Array.isArray(child)) {
-      realNode = realNode.concat(toArray(child));
-    } else if (isValidElement(child) && isFragment(child) && child.props) {
-      realNode = realNode.concat(toArray((child.props as any).children));
-    } else {
-      realNode.push(child);
-    }
-  });
-  return realNode;
-}
 
 const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
   const { prefixCls, size: ctxSize = 'md', componentConfig } = useContext(ConfigContext);
