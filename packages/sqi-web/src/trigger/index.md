@@ -1,5 +1,5 @@
 ---
-title: Popup 弹出层
+title: Trigger 触发器
 nav:
   title: 组件
   order: 2
@@ -8,8 +8,4 @@ group:
   order: 8
 ---
 
-# Popup 弹出层
-
-## 测试
-
-<code src="./demos/test.tsx"></code>
+# Trigger 触发器
