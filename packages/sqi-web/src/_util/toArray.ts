@@ -4,7 +4,7 @@ import { isFragment } from 'react-is';
 export function toArray(children: ReactNode): ReactNode[] {
   let realNode: ReactNode[] = [];
 
-  Children.toArray(children).forEach((child: any) => {
+  Children.toArray(children).forEach((child) => {
     if (child === null || child === undefined) {
       return;
     }

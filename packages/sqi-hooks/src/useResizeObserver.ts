@@ -8,7 +8,8 @@ export function useResizeObserver(
   callback?: (data: ResizeObserverEntry[]) => void,
   enabled = true,
 ) {
-  const callbackRef = useRef(callback);
+  const callbackRef = useRef<typeof callback>(null);
+  callbackRef.current = callback;
 
   useIsomorphicLayoutEffect(() => {
     const element = container.current;
