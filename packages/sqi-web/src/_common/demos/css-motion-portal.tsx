@@ -30,7 +30,7 @@ export default function Demo() {
         </Checkbox>
       </Space>
 
-      <CSSMotion ref={motionRef} timeout={500} name="demo" mountOnEnter preEnter unmountOnExit={false}>
+      <CSSMotion ref={motionRef} timeout={500} name="demo" mountOnEnter preEnter unmountOnExit={unmountDestroy}>
         {({ className }) => {
           return (
             <Portal>
