@@ -1,5 +1,5 @@
 ---
-title: Portal 挂载组件
+title: Base 基础组件
 nav:
   title: 组件
   order: 2
