@@ -9,7 +9,7 @@ import {
   InfoCircleFilledIcon,
   CloseIcon,
 } from '@sqi-ui/icons';
-import CSSMotion from '../_common/CSSMotion';
+import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 import { ConfigContext } from '../config-provider/context';
 import type { AlertProps } from './type';
 
@@ -33,7 +33,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
     componentConfig?.Alert,
   );
 
-  const toggleRef = useRef<(toEnter?: boolean) => void>(null);
+  const motionRef = useRef<CSSMotionInstance>(null);
 
   const renderIcon = () => {
     if (isValidElement(icon)) return icon;
@@ -44,16 +44,13 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
   const classes = clsx(`${prefixCls}-alert`, `${prefixCls}-alert-${type}`, className);
 
   const handleClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    toggleRef.current?.();
+    motionRef.current?.toggle();
     onClose?.(e);
   };
 
   return (
     <CSSMotion timeout={200} name="alert" unmountOnExit initialEntered>
-      {({ isMounted, className, toggle }) => {
-        if (!isMounted) return null;
-        toggleRef.current = toggle;
-
+      {({ className }) => {
         return (
           <div role="alert" className={clsx(classes, className)} style={style} ref={ref}>
             {showIcon && <div className={`${prefixCls}-alert-icon`}>{renderIcon()}</div>}

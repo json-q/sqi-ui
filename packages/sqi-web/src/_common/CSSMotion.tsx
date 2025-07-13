@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { forwardRef, useContext, useImperativeHandle } from 'react';
 import clsx from 'clsx';
 import { useTransitionState, type TransitionOptions, type TransitionState } from 'react-transition-state';
 import { useMergeProps } from '@sqi-ui/hooks';
@@ -16,13 +16,22 @@ export interface MotionProps extends TransitionOptions {
   children: (result: ChildCallbackResult) => React.ReactNode;
 }
 
+export interface CSSMotionInstance {
+  toggle: (toEnter?: boolean) => void;
+}
+
 const defaultProps: TransitionOptions = {
   timeout: 0,
 };
-const CSSMotion = (baseProps: MotionProps) => {
+
+const CSSMotion = forwardRef<CSSMotionInstance, MotionProps>((baseProps: MotionProps, ref) => {
   const ctx = useContext(ConfigContext);
   const { children, name, prefixCls, ...restProps } = useMergeProps(baseProps, defaultProps);
   const [state, toggle] = useTransitionState(restProps);
+
+  useImperativeHandle(ref, () => ({
+    toggle,
+  }));
 
   const mergedPrefixCls = `${prefixCls || ctx.prefixCls}${name ? `-${name}` : ''}`;
 
@@ -31,14 +40,18 @@ const CSSMotion = (baseProps: MotionProps) => {
   });
 
   if (isFunction(children)) {
-    return children({
-      ...state,
-      className,
-      toggle,
-    });
+    return state.isMounted
+      ? children({
+          ...state,
+          className,
+          toggle,
+        })
+      : null;
   } else {
     return children;
   }
-};
+});
+
+CSSMotion.displayName = 'CSSMotion';
 
 export default CSSMotion;
