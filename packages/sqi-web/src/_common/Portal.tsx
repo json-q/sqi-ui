@@ -16,11 +16,6 @@ export interface PortalProps {
   getContainer?: PortalContainer;
   children: React.ReactNode;
   open?: boolean;
-  /**
-   * @description 是否自动锁定滚动
-   * @default true
-   */
-  autoLockScroll?: boolean;
 }
 
 const isBrowser = canUseDom();
@@ -35,15 +30,8 @@ function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement |
   return document.body;
 }
 
-function lockScroll(parentNode: HTMLElement, lock?: boolean) {
-  if (!parentNode) return;
-  parentNode.style.overflowY = lock ? 'hidden' : '';
-}
-
 const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
-  const { getContainer, prefixCls, children, open = true, autoLockScroll = false } = props;
-
-  console.log(isValidElement(children));
+  const { getContainer, prefixCls, children, open = true } = props;
 
   const childRef = isValidElement(children) ? getReactNodeRef(children) : null;
   const mergedRef = useComposeRef(childRef, ref);
@@ -81,7 +69,6 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     const attachToParent = () => {
       if (!node.parentNode) {
         parent.appendChild(node);
-        if (autoLockScroll) lockScroll(parent, true);
         setIsMounted(true);
       }
     };
@@ -89,7 +76,6 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     const detachFromParent = () => {
       if (node.parentNode) {
         node.parentNode.removeChild(node);
-        if (autoLockScroll) lockScroll(parent, false);
         setIsMounted(false);
       }
     };

@@ -37,3 +37,7 @@ group:
 ### 和 Portal 组件一起使用
 
 <code src="./demos/css-motion-portal.tsx"></code>
+
+## ResizeObserver
+
+<code src="./demos/resize-observer.tsx"></code>
