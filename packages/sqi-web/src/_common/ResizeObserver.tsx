@@ -20,7 +20,7 @@ export interface ResizeObserverProps {
 }
 
 const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((props, ref) => {
-  const { children, disabled, onResize } = props;
+  const { children, disabled, throttleMs = 100, onResize } = props;
 
   const isElement = isValidElement(children);
   const childNodes = isElement ? toArray(children) : [];
@@ -48,7 +48,7 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   useImperativeHandle(ref, () => getDomElement());
 
-  const throttleResize = onResize ? throttle(onResize, 100) : undefined;
+  const throttleResize = onResize ? throttle(onResize, throttleMs) : undefined;
 
   useResizeObserver(elementRef, throttleResize, !disabled);
 
