@@ -11,10 +11,10 @@ export default function Demo() {
     <>
       <Space>
         <Button type="primary" onClick={() => setOpen1(!open1)}>
-          Open
+          open
         </Button>
         <Button ref={btnRef} type="primary" onClick={() => setOpen2(!open2)}>
-          getContainer
+          custom append container
         </Button>
       </Space>
       <Portal open={open1}>
@@ -45,7 +45,7 @@ export default function Demo() {
             color: 'white',
           }}
         >
-          Check append dom position in HTML
+          Append dom position in Button
         </div>
       </Portal>
     </>

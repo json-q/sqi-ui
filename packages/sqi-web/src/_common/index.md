@@ -12,6 +12,28 @@ group:
 
 基础组件仅供内部作为底层组件使用，不对外提供任何可扩展性功能
 
-## Portal 挂载销毁
+## Portal
+
+### 挂载销毁
 
 <code src="./demos/portal.tsx"></code>
+
+## CSSMotion 动画
+
+`CSSMotion` 组件基于 [react-transition-state](https://szhsin.github.io/react-transition-state) 进行简易二次封装，支持所有其 API 参数，更多 API 可查阅 [react-transition-state](https://szhsin.github.io/react-transition-state) 文档
+
+### 基本使用
+
+初始即显示，隐藏/销毁时会存在动画过程
+
+<code src="./demos/css-motion-base.tsx"></code>
+
+> 当设置 `unmountOnExit` 为 `false` 时，组件不会销毁，你需要使用 css 隐藏组件
+
+### 切换显示
+
+<code src="./demos/css-motion-toggle.tsx"></code>
+
+### 和 Portal 组件一起使用
+
+<code src="./demos/css-motion-portal.tsx"></code>

@@ -41,7 +41,9 @@ function lockScroll(parentNode: HTMLElement, lock?: boolean) {
 }
 
 const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
-  const { getContainer, prefixCls, children, open, autoLockScroll = true } = props;
+  const { getContainer, prefixCls, children, open = true, autoLockScroll = false } = props;
+
+  console.log(isValidElement(children));
 
   const childRef = isValidElement(children) ? getReactNodeRef(children) : null;
   const mergedRef = useComposeRef(childRef, ref);
