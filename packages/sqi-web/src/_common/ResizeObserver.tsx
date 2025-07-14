@@ -7,7 +7,7 @@ import { useComposeRef } from '../_util/ref';
 
 export interface ResizeObserverProps {
   onResize?: (entry: ResizeObserverEntry[]) => void;
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   /**
    * @description 是否禁用 observer
    */

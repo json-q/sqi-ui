@@ -40,7 +40,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
-  const shouldRenderChildren = open || isMounted;
+  const shouldRender = open || isMounted;
 
   const createContainerNode = () => {
     if (!isBrowser) return null;
@@ -103,7 +103,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   }, [open, getContainer]);
 
   let content: React.ReactNode = null;
-  if (shouldRenderChildren && children) {
+  if (shouldRender && children) {
     if (isValidElement(children)) {
       content = cloneElement(children as any, { ref: mergedRef });
     } else {
