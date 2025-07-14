@@ -16,6 +16,7 @@ export interface PortalProps {
   getContainer?: PortalContainer;
   children: React.ReactNode;
   open?: boolean;
+  autoLockScroll?: boolean;
 }
 
 const isBrowser = canUseDom();
@@ -31,7 +32,7 @@ function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement |
 }
 
 const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
-  const { getContainer, prefixCls, children, open = true } = props;
+  const { getContainer, prefixCls, children, open = true, autoLockScroll = true } = props;
 
   const childRef = isValidElement(children) ? getReactNodeRef(children) : null;
   const mergedRef = useComposeRef(childRef, ref);
@@ -39,7 +40,6 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
-  // 计算是否应该渲染子节点
   const shouldRenderChildren = open || isMounted;
 
   const createContainerNode = () => {
@@ -61,6 +61,16 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   }, [open]);
 
   useIsomorphicLayoutEffect(() => {
+    // 兼容显示隐藏时（非销毁）的滚动条状态
+    // Portal 暂时没做 cache 节点，因此使用此方式来兼容和 CSSMotion 的隐藏交互
+    if (autoLockScroll === false) {
+      document.body.style.overflow = '';
+    } else if (autoLockScroll && containerRef.current) {
+      document.body.style.overflow = 'hidden';
+    }
+  }, [autoLockScroll]);
+
+  useIsomorphicLayoutEffect(() => {
     if (!isBrowser || !containerRef.current) return;
 
     const node = containerRef.current;
@@ -69,6 +79,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     const attachToParent = () => {
       if (!node.parentNode) {
         parent.appendChild(node);
+        // if (autoLockScroll) document.body.style.overflow = 'hidden';
         setIsMounted(true);
       }
     };
@@ -76,6 +87,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     const detachFromParent = () => {
       if (node.parentNode) {
         node.parentNode.removeChild(node);
+        if (autoLockScroll) document.body.style.overflow = '';
         setIsMounted(false);
       }
     };

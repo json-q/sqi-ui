@@ -12,6 +12,14 @@
         "**/dist/**",
         "**/es/**",
         "**/lib/**"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "packages/**/src/**",
+        "packages/**/package.json",
+        "packages/**/tsconfig.json",
+        "packages/**/rslib.config.ts",
+        "packages/**/gulpfile.js"
       ]
     },
     "dev": {

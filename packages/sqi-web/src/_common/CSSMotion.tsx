@@ -48,7 +48,7 @@ const CSSMotion = forwardRef<CSSMotionInstance, MotionProps>((baseProps: MotionP
         })
       : null;
   } else {
-    return children;
+    return state.isMounted ? children : null;
   }
 });
 
