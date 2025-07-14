@@ -39,7 +39,7 @@ const CSSMotion = forwardRef<CSSMotionInstance, CSSMotionProps>((props: CSSMotio
     if (!isElement) {
       // ==================== Warning ======================
       if (process.env.NODE_ENV !== 'production') {
-        console.error('[CSSMotion] children should be a valid Element or a function');
+        console.error('[CSSMotion] children should be a valid ReactElement or a function that returns a ReactElement');
       }
       return children;
     }
