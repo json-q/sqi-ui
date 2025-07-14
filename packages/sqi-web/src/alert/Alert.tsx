@@ -49,27 +49,23 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
   };
 
   return (
-    <CSSMotion timeout={200} name="alert" unmountOnExit initialEntered>
-      {({ className }) => {
-        return (
-          <div role="alert" className={clsx(classes, className)} style={style} ref={ref}>
-            {showIcon && <div className={`${prefixCls}-alert-icon`}>{renderIcon()}</div>}
+    <CSSMotion ref={motionRef} timeout={200} name="alert" unmountOnExit initialEntered>
+      <div role="alert" className={classes} style={style} ref={ref}>
+        {showIcon && <div className={`${prefixCls}-alert-icon`}>{renderIcon()}</div>}
 
-            <div className={`${prefixCls}-alert-content`}>
-              {!!title && <div className={`${prefixCls}-alert-title`}>{title}</div>}
-              <div className={`${prefixCls}-alert-description`}>{description}</div>
-            </div>
+        <div className={`${prefixCls}-alert-content`}>
+          {!!title && <div className={`${prefixCls}-alert-title`}>{title}</div>}
+          <div className={`${prefixCls}-alert-description`}>{description}</div>
+        </div>
 
-            {action && <div className={`${prefixCls}-alert-action`}>{action}</div>}
+        {action && <div className={`${prefixCls}-alert-action`}>{action}</div>}
 
-            {closable && (
-              <button className={`${prefixCls}-alert-close`} onClick={handleClose}>
-                <CloseIcon />
-              </button>
-            )}
-          </div>
-        );
-      }}
+        {closable && (
+          <button className={`${prefixCls}-alert-close`} onClick={handleClose}>
+            <CloseIcon />
+          </button>
+        )}
+      </div>
     </CSSMotion>
   );
 });

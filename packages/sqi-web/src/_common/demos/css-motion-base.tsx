@@ -28,16 +28,12 @@ export default function Demo() {
       </Space>
 
       <CSSMotion ref={motionRef} timeout={500} name="demo" initialEntered preEnter unmountOnExit={unmountDestroy}>
-        {({ className }) => {
-          return (
-            <div className={className} style={styles}>
-              <p>Motion Container</p>
-              <Button type="primary" onClick={() => motionRef.current?.toggle()}>
-                Close Motion
-              </Button>
-            </div>
-          );
-        }}
+        <div style={styles}>
+          <p>Motion Container</p>
+          <Button type="primary" onClick={() => motionRef.current?.toggle()}>
+            Close Motion
+          </Button>
+        </div>
       </CSSMotion>
     </>
   );

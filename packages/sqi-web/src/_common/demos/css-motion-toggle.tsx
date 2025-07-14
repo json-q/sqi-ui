@@ -25,13 +25,7 @@ export default function Demo() {
       </Space>
 
       <CSSMotion ref={motionRef} timeout={500} name="demo" mountOnEnter preEnter unmountOnExit>
-        {({ className }) => {
-          return (
-            <div className={className} style={styles}>
-              Motion Container
-            </div>
-          );
-        }}
+        <div style={styles}>Motion Container</div>
       </CSSMotion>
     </>
   );
