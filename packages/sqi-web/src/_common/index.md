@@ -22,6 +22,8 @@ group:
 
 `CSSMotion` 组件基于 [react-transition-state](https://szhsin.github.io/react-transition-state) 进行简易二次封装，支持所有其 API 参数，更多 API 可查阅 [react-transition-state](https://szhsin.github.io/react-transition-state) 文档
 
+`CSSMotion` 支持直接传入 children 和 回调 children 两种方式，当直接传入 children 时，请确保该节点是一个标准的 HTMLElement，因为动画效果会作为 css 绑定到该节点，非 HTMLElement 节点将无法正确绑定动画效果
+
 ### 基本使用
 
 初始即显示，隐藏/销毁时会存在动画过程
