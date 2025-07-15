@@ -1,13 +1,13 @@
 'use client';
 import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef } from 'react';
+import { debounce } from '@sqi-ui/utils';
+import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 import type { TriggerProps } from './type';
 import { getReactNodeRef } from '../_util/dom';
 import { computedPosition } from './utils/computedPosition';
 import { supportNodeRef, useComposeRef } from '../_util/ref';
 import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
-import { debounce } from '@sqi-ui/utils';
-import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 
 const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
   const { children, popup, direction = 'bottom-start' } = props;
