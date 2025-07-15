@@ -23,6 +23,7 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
   const { children, disabled, throttleMs = 100, onResize } = props;
 
   const isElement = isValidElement(children);
+
   const childNodes = isElement ? toArray(children) : [];
 
   const originRef = isElement ? getReactNodeRef<Element>(children!) : null;

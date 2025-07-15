@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactElement } from 'react';
 import type { Prettify } from '../_util/type';
 
 type Alignment = 'start' | 'end';
@@ -8,8 +8,8 @@ type AlignedPlacement = `${Side}-${Alignment}`;
 export type TriggerDirection = Prettify<Side | AlignedPlacement>;
 
 export interface TriggerProps {
-  children?: ReactNode;
+  children?: ReactElement;
   direction?: TriggerDirection;
-  popup?: ReactNode;
+  popup?: ReactElement;
   open?: boolean;
 }

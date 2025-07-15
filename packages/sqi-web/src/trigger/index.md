@@ -9,3 +9,7 @@ group:
 ---
 
 # Trigger 触发器
+
+## 测试
+
+<code src="./demos/test.tsx"></code>
