@@ -3,11 +3,18 @@ import { Trigger } from '@sqi-ui/web';
 import { Component } from './_wrapper';
 
 export default function Demo() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useLayoutEffect(() => {
+    containerRef.current?.scrollTo(containerRef.current.clientWidth + 115, containerRef.current.clientHeight);
+  }, [containerRef]);
+
   return (
     <div
+      ref={containerRef}
       className="element-popper-container"
       style={{
-        margin: ' auto',
+        margin: 'auto',
         backgroundColor: 'whitesmoke',
         height: '400px',
         width: '80%',
@@ -26,16 +33,17 @@ export default function Demo() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Trigger
           popup={
-            <Component size={110} backgroundColor="red">
+            <Component size={110} backgroundColor="white">
               Popper Element
             </Component>
           }
         >
-          <Component size={80} backgroundColor="white">
+          <Component size={80} backgroundColor="red">
             Reference Element
           </Component>
         </Trigger>

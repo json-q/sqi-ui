@@ -18,6 +18,7 @@ export const Component = forwardRef<HTMLDivElement, ComponentProps>(({ size, bac
         flexDirection: 'column',
         justifyContent: 'center',
         fontSize: '16px',
+        border: '1px solid #eee',
       }}
     >
       {children}

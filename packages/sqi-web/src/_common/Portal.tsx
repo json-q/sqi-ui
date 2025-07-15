@@ -17,6 +17,7 @@ export interface PortalProps {
   children: React.ReactNode;
   open?: boolean;
   autoLockScroll?: boolean;
+  rootStyle?: React.CSSProperties;
 }
 
 const isBrowser = canUseDom();
@@ -32,7 +33,7 @@ function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement |
 }
 
 const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
-  const { getContainer, prefixCls, children, open = true, autoLockScroll = true } = props;
+  const { getContainer, prefixCls, children, open = true, rootStyle, autoLockScroll = true } = props;
 
   const childRef = isValidElement(children) ? getReactNodeRef(children) : null;
   const mergedRef = useComposeRef(childRef, ref);
@@ -48,6 +49,10 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     const node = document.createElement('div');
     if (prefixCls) {
       node.className = `${prefixCls}-portal-wrapper`;
+    }
+
+    if (rootStyle) {
+      Object.assign(node.style, rootStyle);
     }
 
     node.setAttribute('data-portal', 'true');
