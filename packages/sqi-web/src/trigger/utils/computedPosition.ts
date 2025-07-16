@@ -19,7 +19,7 @@ interface PositionOptions {
 
 interface ElementCollection {
   reference?: HTMLElement | null;
-  floating?: HTMLElement | null;
+  popup?: HTMLElement | null;
   arrow?: HTMLElement;
 }
 
@@ -32,14 +32,14 @@ const defaultOptions: PositionOptions = {
 };
 
 export function computedPosition(doms: ElementCollection, baseOptions: PositionOptions) {
-  const { reference, floating, arrow } = doms;
+  const { reference, popup, arrow } = doms;
 
-  if (!reference || !floating) return;
+  if (!reference || !popup) return;
 
   const options = { ...defaultOptions, ...baseOptions };
 
-  const floatingParentContainer = floating.parentNode;
-  const [translateX, translateY] = getTranslate(floatingParentContainer as HTMLElement);
+  const popupParentContainer = popup.parentNode;
+  const [translateX, translateY] = getTranslate(popupParentContainer as HTMLElement);
 
   // Compatible scrollY see: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY#notes
   // 😓 Are you sure support IE9 ?
@@ -48,22 +48,22 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
   // 定位元素及浮动元素的坐标
   const referencePosition = getNodePosition(reference, scrollLeft, scrollTop);
-  const floatingPosition = getNodePosition(floating, scrollLeft, scrollTop);
+  const popupPosition = getNodePosition(popup, scrollLeft, scrollTop);
 
-  // 两个元素的宽高差，当定位到居中时，floating 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
-  const widthDifference = referencePosition.width - floatingPosition.width;
-  const heightDifference = referencePosition.height - floatingPosition.height;
+  // 两个元素的宽高差，当定位到居中时，popup 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
+  const widthDifference = referencePosition.width - popupPosition.width;
+  const heightDifference = referencePosition.height - popupPosition.height;
 
   //  ================================================ 计算 x y 的基本偏移 ==================================
-  // floating 现有的坐标，需要相对定位父容器偏移的距离（所以需要 + translate 父容器已偏移的值）
-  let x = referencePosition.left - floatingPosition.left + translateX;
-  let y = referencePosition.top - floatingPosition.top + translateY;
+  // popup 现有的坐标，需要相对定位父容器偏移的距离（所以需要 + translate 父容器已偏移的值）
+  let x = referencePosition.left - popupPosition.left + translateX;
+  let y = referencePosition.top - popupPosition.top + translateY;
 
   const [side, align, vertical, horizontal] = splitPlacement(options.direction);
   let currentSide = side;
-  // 当定位到居中时，floating 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
+  // 当定位到居中时，popup 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
   const leftCorner = align === 'left' ? 0 : align === 'right' ? widthDifference : widthDifference / 2;
-  // 浮floating 的 right 与 reference 的 right 之间的距离
+  // 浮popup 的 right 与 reference 的 right 之间的距离
   const rightCorner = widthDifference - leftCorner;
 
   const topCorner = align === 'top' ? 0 : align === 'bottom' ? heightDifference : heightDifference / 2;
@@ -71,12 +71,12 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
   if (vertical) {
     x += leftCorner;
-    // 垂直且 top 情况下，floating 元素在 reference 元素上方，所以 top 值需要 - reference 元素高度，bottom 类推
-    y += side === 'top' ? -floatingPosition.height : referencePosition.height;
+    // 垂直且 top 情况下，popup 元素在 reference 元素上方，所以 top 值需要 - reference 元素高度，bottom 类推
+    y += side === 'top' ? -popupPosition.height : referencePosition.height;
   }
 
   if (horizontal) {
-    x += side === 'left' ? -floatingPosition.width : referencePosition.width;
+    x += side === 'left' ? -popupPosition.width : referencePosition.width;
     y += topCorner;
   }
 
@@ -128,7 +128,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   x = x - distanceX;
   y = y - distanceY;
 
-  (floatingParentContainer as HTMLElement).style.transform = getTransform(x, y);
+  (popupParentContainer as HTMLElement).style.transform = getTransform(x, y);
 
   function checkPopper(position: NodePosition) {
     const { top, bottom, left, right, height, width } = position;
@@ -140,18 +140,18 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
       if (options.enableFlip) {
         if (
-          referencePosition.top - (floatingPosition.height + offsetY + arrowHeight) < top &&
+          referencePosition.top - (popupPosition.height + offsetY + arrowHeight) < top &&
           referenceCenterY <= parentCenterY &&
           currentSide === 'top'
         ) {
-          y += floatingPosition.height + referencePosition.height;
+          y += popupPosition.height + referencePosition.height;
           currentSide = 'bottom';
         } else if (
-          referencePosition.bottom + floatingPosition.height + offsetY + arrowHeight > height + top &&
+          referencePosition.bottom + popupPosition.height + offsetY + arrowHeight > height + top &&
           referenceCenterY >= parentCenterY &&
           currentSide === 'bottom'
         ) {
-          y -= floatingPosition.height + referencePosition.height;
+          y -= popupPosition.height + referencePosition.height;
           currentSide = 'top';
         }
       }
@@ -183,19 +183,19 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
       if (options.enableFlip) {
         if (
-          referencePosition.left - (floatingPosition.width + offsetX + arrowWidth) < left &&
+          referencePosition.left - (popupPosition.width + offsetX + arrowWidth) < left &&
           elementCenterX < parentCenterX &&
           currentSide === 'left'
         ) {
-          x += referencePosition.width + floatingPosition.width;
+          x += referencePosition.width + popupPosition.width;
 
           currentSide = 'right';
         } else if (
-          referencePosition.right + floatingPosition.width + offsetX + arrowWidth > right &&
+          referencePosition.right + popupPosition.width + offsetX + arrowWidth > right &&
           elementCenterX > parentCenterX &&
           currentSide === 'right'
         ) {
-          x -= referencePosition.width + floatingPosition.width;
+          x -= referencePosition.width + popupPosition.width;
 
           currentSide = 'left';
         }

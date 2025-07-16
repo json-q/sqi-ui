@@ -14,9 +14,9 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
   const isElementChild = isValidElement(children);
 
   const referenceRef = useRef<HTMLDivElement>(null);
-  const originFloatRef = getReactNodeRef(popup);
-  const floatRef = useRef<HTMLDivElement>(null);
-  const mergedFloatRef = useComposeRef(originFloatRef, floatRef);
+  const originPopupRef = getReactNodeRef(popup);
+  const popupRef = useRef<HTMLDivElement>(null);
+  const mergedPopupRef = useComposeRef(originPopupRef, popupRef);
 
   useImperativeHandle(ref, () => {});
 
@@ -41,7 +41,7 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
       if (e && e.type !== 'resize' && !e.target.contains(referenceRef.current)) return;
 
       computedPosition(
-        { reference: referenceRef.current, floating: floatRef.current },
+        { reference: referenceRef.current, popup: popupRef.current },
         { direction, enableFlip, enableShift, offset },
       );
     },
@@ -72,7 +72,7 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
           autoLockScroll={false}
           rootStyle={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
         >
-          {cloneElement(popup as any, { ref: mergedFloatRef })}
+          {cloneElement(popup as any, { ref: mergedPopupRef })}
         </Portal>
       ) : null}
     </>
