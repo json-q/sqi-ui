@@ -38,11 +38,11 @@ const defaultOptions: PositionOptions = {
 
 export function computedPosition(doms: ElementCollection, baseOptions: PositionOptions) {
   const { reference, floating, arrow } = doms;
+
   if (!reference || !floating) return;
 
   const options = { ...defaultOptions, ...baseOptions };
 
-  const { clientHeight, clientWidth } = document.documentElement;
   const floatingParentContainer = floating.parentNode;
   const [translateX, translateY] = getTranslate(floatingParentContainer as HTMLElement);
 
@@ -60,7 +60,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   const heightDifference = referencePosition.height - floatingPosition.height;
 
   //  ================================================ 计算 x y 的基本偏移 ==================================
-  // floating 现有的坐标，需要相对定位父容器偏移的距离
+  // floating 现有的坐标，需要相对定位父容器偏移的距离（所以需要 + translate 父容器已偏移的值）
   let x = referencePosition.left - floatingPosition.left + translateX;
   let y = referencePosition.top - floatingPosition.top + translateY;
 
@@ -86,7 +86,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   }
 
   let scrollableParentEl = getScrollableParent(reference);
-  const scrollableParents: HTMLElement[] = [];
+  // const scrollableParents: HTMLElement[] = [];
   let parentPosition: NodePosition;
 
   let distanceX = 0;
@@ -107,12 +107,15 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   y = y - distanceY;
 
   while (scrollableParentEl) {
-    scrollableParents.push(scrollableParentEl);
+    // scrollableParents.push(scrollableParentEl);
     parentPosition = getNodePosition(scrollableParentEl, scrollLeft, scrollTop);
     checkPopper(parentPosition);
     scrollableParentEl = getScrollableParent(scrollableParentEl.parentNode as HTMLElement);
   }
 
+  const { clientHeight, clientWidth } = document.documentElement;
+
+  // 初次渲染需要结合可见的 document 的宽高
   checkPopper({
     top: scrollTop,
     bottom: scrollTop + clientHeight,
@@ -131,8 +134,6 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   //   translateX,
   //   translateY,
   // );
-
-  console.log(x, y);
 
   (floatingParentContainer as HTMLElement).style.transform = getTransform(x, y);
 
@@ -258,9 +259,20 @@ function getTranslate(element: Element) {
   if (!element) return [0, 0];
 
   const style = window.getComputedStyle(element);
+  // translate(701px, 346px) 会被转换成 matrix(1, 0, 0, 1, 701, 346)
   const transform = style.transform || style.webkitTransform || 'none';
 
   if (transform === 'none') return [0, 0];
+
+  if (transform.match(/matrix\(([^)]+)\)/)) {
+    const values = transform
+      .match(/matrix\((.+)\)/)?.[1]
+      ?.split(',')
+      .map(Number) || [0, 0];
+    if (values.length === 6) {
+      return [values[4], values[5]];
+    }
+  }
 
   // 提取 transform:translate() 的偏移值
   const [, x = 0, y = 0] = (transform.match(/translate\((.*?)px,\s(.*?)px\)/) || []).map((string) => Number(string));

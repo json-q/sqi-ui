@@ -1,6 +1,5 @@
 'use client';
-import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef } from 'react';
-import { debounce } from '@sqi-ui/utils';
+import React, { cloneElement, forwardRef, isValidElement, useCallback, useImperativeHandle, useRef } from 'react';
 import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 import type { TriggerProps } from './type';
 import { getReactNodeRef } from '../_util/dom';
@@ -10,13 +9,13 @@ import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
 
 const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
-  const { children, popup, direction = 'bottom-start' } = props;
+  const { children, popup, direction = 'left' } = props;
 
   const isElementChild = isValidElement(children);
 
   const referenceRef = useRef<HTMLDivElement>(null);
   const originFloatRef = getReactNodeRef(popup);
-  const floatRef = useRef<HTMLElement>(null);
+  const floatRef = useRef<HTMLDivElement>(null);
   const mergedFloatRef = useComposeRef(originFloatRef, floatRef);
 
   useImperativeHandle(ref, () => {});
@@ -37,25 +36,27 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
     }
   }
 
+  const updatePosition = useCallback((e?: any) => {
+    if (e && e.type !== 'resize' && !e.target.contains(referenceRef.current)) return;
+
+    computedPosition({ reference: referenceRef.current, floating: floatRef.current }, { direction });
+  }, []);
+
   useIsomorphicLayoutEffect(() => {
-    const debounceUpdatePosition = debounce(function updatePosition(e: any) {
-      if (e && e.type !== 'resize' && !e.target.contains(referenceRef.current)) return;
+    updatePosition();
 
-      computedPosition({ reference: referenceRef.current, floating: floatRef.current }, { direction });
-    }, 100);
-
-    document.addEventListener('scroll', debounceUpdatePosition, {
+    document.addEventListener('scroll', updatePosition, {
       capture: true,
       passive: true,
     });
 
-    window.addEventListener('resize', debounceUpdatePosition);
+    window.addEventListener('resize', updatePosition);
 
     return () => {
-      document.removeEventListener('scroll', debounceUpdatePosition);
-      window.removeEventListener('resize', debounceUpdatePosition);
+      document.removeEventListener('scroll', updatePosition);
+      window.removeEventListener('resize', updatePosition);
     };
-  }, []);
+  }, [direction]);
 
   console.log(popup);
 
@@ -64,9 +65,7 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popup ? (
         <Portal rootStyle={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex: 9999 }}>
-          {cloneElement(popup as any, {
-            ref: mergedFloatRef,
-          })}
+          {cloneElement(popup as any, { ref: mergedFloatRef })}
         </Portal>
       ) : null}
     </>

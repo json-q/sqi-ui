@@ -10,6 +10,6 @@ group:
 
 # Trigger 触发器
 
-## 测试
+## 核心功能
 
-<code src="./demos/test.tsx"></code>
+<code src="./demos/core.tsx"></code>
