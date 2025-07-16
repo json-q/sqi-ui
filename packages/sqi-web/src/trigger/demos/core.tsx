@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trigger, Radio, type TriggerDirection, type RadioChangeEvent } from '@sqi-ui/web';
+import { Trigger, Radio, type RadioChangeEvent, Divider, Space, Input, type TriggerDirection } from '@sqi-ui/web';
 import { Component } from './_wrapper';
 import styles from './demo.module.css';
 
@@ -20,7 +20,9 @@ const positions = [
 
 export default function Demo() {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const [direction, setDirection] = React.useState<TriggerDirection>('top');
+  const [direction, setDirection] = React.useState<TriggerDirection>('bottom');
+  const [offsetX, setOffsetX] = React.useState<string>();
+  const [offsetY, setOffsetY] = React.useState<string>();
 
   React.useLayoutEffect(() => {
     containerRef.current?.scrollTo(containerRef.current.clientWidth + 115, containerRef.current.clientHeight);
@@ -33,9 +35,27 @@ export default function Demo() {
   return (
     <>
       <Radio.Group value={direction} onChange={changeDirection} options={positions} style={{ marginBottom: 10 }} />
+      <Space>
+        <Input
+          prefix="offsetX"
+          value={offsetX}
+          onChange={setOffsetX}
+          disabled={direction.startsWith('top') || direction.startsWith('bottom')}
+        />
+        <Input
+          prefix="offsetY"
+          value={offsetY}
+          onChange={setOffsetY}
+          disabled={direction.startsWith('left') || direction.startsWith('right')}
+        />
+      </Space>
+
+      <Divider />
+
       <div ref={containerRef} className={styles.container}>
         <div className={styles['container-scroll']}>
           <Trigger
+            offset={{ x: Number(offsetX), y: Number(offsetY) }}
             direction={direction}
             popup={
               <Component size={110} backgroundColor="var(--sqi-bg-color-container)">

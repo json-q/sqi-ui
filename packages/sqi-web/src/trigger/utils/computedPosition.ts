@@ -14,12 +14,7 @@ interface PositionOptions {
    * @default true
    */
   enableShift?: boolean;
-  offset?:
-    | number
-    | {
-        x?: number;
-        y?: number;
-      };
+  offset?: number | { x?: number; y?: number };
 }
 
 interface ElementCollection {
@@ -100,11 +95,16 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
   const { height: arrowHeight = 0, width: arrowWidth = 0 } = arrow ? getNodePosition(arrow, scrollLeft, scrollTop) : {};
 
-  if (vertical) y += currentSide === 'bottom' ? offsetY : -offsetY;
-  if (horizontal) x += currentSide === 'right' ? offsetX : -offsetX;
-
-  x = x - distanceX;
-  y = y - distanceY;
+  if (vertical) {
+    y += currentSide === 'bottom' ? offsetY : -offsetY;
+    // 当处于 vertical 时，x 轴偏移的支持有待商酌（暂不支持）
+    // 这种会造成一种问题：当 popup 开始平移时，实际上距离两侧还有 offsetX 的距离，会造成偏移误差
+    // x += offsetX;
+  }
+  if (horizontal) {
+    x += currentSide === 'right' ? offsetX : -offsetX;
+    // y += offsetY;
+  }
 
   while (scrollableParentEl) {
     // scrollableParents.push(scrollableParentEl);
@@ -115,7 +115,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
   const { clientHeight, clientWidth } = document.documentElement;
 
-  // 初次渲染需要结合可见的 document 的宽高
+  // 每次渲染需要结合可见的 document 的宽高
   checkPopper({
     top: scrollTop,
     bottom: scrollTop + clientHeight,
@@ -125,15 +125,8 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
     width: clientWidth,
   });
 
-  // console.log(
-  //   referencePosition,
-  //   floatingPosition,
-  //   clientHeight,
-  //   clientWidth,
-  //   floatingParentContainer,
-  //   translateX,
-  //   translateY,
-  // );
+  x = x - distanceX;
+  y = y - distanceY;
 
   (floatingParentContainer as HTMLElement).style.transform = getTransform(x, y);
 
@@ -270,6 +263,7 @@ function getTranslate(element: Element) {
       ?.split(',')
       .map(Number) || [0, 0];
     if (values.length === 6) {
+      // 提出其中的 x y 轴偏移，这里不考虑 3D 矩阵
       return [values[4], values[5]];
     }
   }

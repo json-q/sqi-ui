@@ -9,7 +9,7 @@ import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
 
 const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
-  const { children, popup, direction = 'left' } = props;
+  const { children, popup, enableShift = true, enableFlip = true, zIndex = 0, offset, direction = 'left' } = props;
 
   const isElementChild = isValidElement(children);
 
@@ -36,11 +36,17 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
     }
   }
 
-  const updatePosition = useCallback((e?: any) => {
-    if (e && e.type !== 'resize' && !e.target.contains(referenceRef.current)) return;
+  const updatePosition = useCallback(
+    (e?: any) => {
+      if (e && e.type !== 'resize' && !e.target.contains(referenceRef.current)) return;
 
-    computedPosition({ reference: referenceRef.current, floating: floatRef.current }, { direction });
-  }, []);
+      computedPosition(
+        { reference: referenceRef.current, floating: floatRef.current },
+        { direction, enableFlip, enableShift, offset },
+      );
+    },
+    [direction, enableFlip, enableShift, offset],
+  );
 
   useIsomorphicLayoutEffect(() => {
     updatePosition();
@@ -56,15 +62,16 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
       document.removeEventListener('scroll', updatePosition);
       window.removeEventListener('resize', updatePosition);
     };
-  }, [direction]);
-
-  console.log(popup);
+  }, [direction, enableFlip, enableShift, offset]);
 
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popup ? (
-        <Portal rootStyle={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex: 9999 }}>
+        <Portal
+          autoLockScroll={false}
+          rootStyle={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
+        >
           {cloneElement(popup as any, { ref: mergedFloatRef })}
         </Portal>
       ) : null}
