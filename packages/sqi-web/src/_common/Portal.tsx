@@ -1,4 +1,4 @@
-import React, { cloneElement, forwardRef, useRef, useState, isValidElement } from 'react';
+import React, { cloneElement, forwardRef, useRef, useState, isValidElement, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 import { canUseDom, isFunction, isString } from '@sqi-ui/utils';
@@ -40,8 +40,15 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [customizeParent, setCustomizeParent] = useState<HTMLElement | null>(() => getAttachNode(getContainer));
+  const mergedParentNode = customizeParent || document.body;
 
   const shouldRender = open || isMounted;
+
+  useEffect(() => {
+    const newParentNode = getAttachNode(getContainer);
+    setCustomizeParent(newParentNode || null);
+  }, [getContainer]);
 
   const createContainerNode = () => {
     if (!isBrowser) return null;
@@ -79,11 +86,10 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     if (!isBrowser || !containerRef.current) return;
 
     const node = containerRef.current;
-    const parent = getAttachNode(getContainer) || document.body;
 
     const attachToParent = () => {
       if (!node.parentNode) {
-        parent.appendChild(node);
+        mergedParentNode.appendChild(node);
         // if (autoLockScroll) document.body.style.overflow = 'hidden';
         setIsMounted(true);
       }
@@ -105,7 +111,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
         detachFromParent();
       }
     };
-  }, [open, getContainer]);
+  }, [open, customizeParent]);
 
   let content: React.ReactNode = null;
   if (shouldRender && children) {

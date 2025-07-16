@@ -23,7 +23,6 @@ export default function Demo() {
   const [direction, setDirection] = React.useState<TriggerDirection>('bottom');
   const [offsetX, setOffsetX] = React.useState<string>();
   const [offsetY, setOffsetY] = React.useState<string>();
-  console.log(containerRef);
 
   React.useLayoutEffect(() => {
     containerRef.current?.scrollTo(containerRef.current.clientWidth + 115, containerRef.current.clientHeight);
