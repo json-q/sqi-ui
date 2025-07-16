@@ -1,15 +1,37 @@
 'use client';
-import React, { cloneElement, forwardRef, isValidElement, useCallback, useImperativeHandle, useRef } from 'react';
-import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
+import React, {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useContext,
+  useImperativeHandle,
+  useRef,
+} from 'react';
+import { useIsomorphicLayoutEffect, useMergeProps } from '@sqi-ui/hooks';
 import type { TriggerProps } from './type';
 import { getReactNodeRef } from '../_util/dom';
 import { computedPosition } from './utils/computedPosition';
 import { supportNodeRef, useComposeRef } from '../_util/ref';
 import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
+import { ConfigContext } from '../config-provider/context';
 
-const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
-  const { children, popup, enableShift = true, enableFlip = true, zIndex = 0, offset, direction = 'left' } = props;
+const defaultProps: TriggerProps = {
+  direction: 'bottom',
+  enableFlip: true,
+  enableShift: true,
+  offset: 0,
+  zIndex: 0,
+};
+
+const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
+  const { componentConfig } = useContext(ConfigContext);
+  const { children, popup, enableShift, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
+    baseProps,
+    defaultProps,
+    componentConfig?.Trigger,
+  );
 
   const isElementChild = isValidElement(children);
 
@@ -42,7 +64,7 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
 
       computedPosition(
         { reference: referenceRef.current, popup: popupRef.current },
-        { direction, enableFlip, enableShift, offset },
+        { direction: direction!, enableFlip, enableShift, offset },
       );
     },
     [direction, enableFlip, enableShift, offset],
@@ -69,6 +91,7 @@ const Trigger = forwardRef<any, TriggerProps>((props, ref) => {
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popup ? (
         <Portal
+          getContainer={getContainer}
           autoLockScroll={false}
           rootStyle={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
         >

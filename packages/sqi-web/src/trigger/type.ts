@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import type { Prettify } from '../_util/type';
+import type { PortalContainer } from '../_common/Portal';
 
 export type Alignment = 'start' | 'end';
 export type Side = 'top' | 'right' | 'bottom' | 'left';
@@ -35,4 +36,9 @@ export interface TriggerProps {
    * @default 0
    */
   zIndex?: number;
+  /**
+   * @description 指定 popup 挂载的位置
+   * @default document.body
+   */
+  getContainer?: PortalContainer;
 }
