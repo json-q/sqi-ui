@@ -7,6 +7,7 @@ import type { ColProps, RowProps } from '../grid/type';
 import type { InputProps } from '../input/type';
 import type { RadioGroupProps, RadioProps } from '../radio/type';
 import type { SpaceProps } from '../space';
+import type { TriggerProps } from '../trigger';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
 
@@ -34,15 +35,16 @@ export interface ConfigProviderProps {
 }
 
 export type ComponentConfig = {
-  Button?: ButtonProps;
-  Space?: SpaceProps;
-  Divider?: DividerProps;
   Alert?: AlertProps;
-  Row?: RowProps;
+  Button?: ButtonProps;
+  Checkbox?: CheckboxProps;
+  CheckboxGroup?: CheckboxGroupProps;
   Col?: ColProps;
+  Divider?: DividerProps;
   Input?: InputProps;
   Radio?: Omit<RadioProps, '_IS_BUTTON_'>;
   RadioGroup?: RadioGroupProps;
-  Checkbox?: CheckboxProps;
-  CheckboxGroup?: CheckboxGroupProps;
+  Row?: RowProps;
+  Space?: SpaceProps;
+  Trigger?: TriggerProps;
 };

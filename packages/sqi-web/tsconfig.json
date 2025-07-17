@@ -8,5 +8,5 @@
       "@sqi-ui/web/es/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "shims.d.ts"]
 }

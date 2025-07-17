@@ -1,9 +1,7 @@
-import React, { cloneElement, forwardRef, useRef, useState, isValidElement } from 'react';
+import React, { forwardRef, useState, useEffect, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 import { canUseDom, isFunction, isString } from '@sqi-ui/utils';
-import { getReactNodeRef } from '../_util/dom';
-import { useComposeRef } from '../_util/ref';
 
 export type PortalContainer = string | (() => HTMLElement | null) | HTMLElement | null;
 
@@ -17,6 +15,7 @@ export interface PortalProps {
   children: React.ReactNode;
   open?: boolean;
   autoLockScroll?: boolean;
+  rootStyle?: React.CSSProperties;
 }
 
 const isBrowser = canUseDom();
@@ -32,15 +31,19 @@ function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement |
 }
 
 const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
-  const { getContainer, prefixCls, children, open = true, autoLockScroll = true } = props;
+  const { getContainer, prefixCls, children, open = true, rootStyle, autoLockScroll = true } = props;
 
-  const childRef = isValidElement(children) ? getReactNodeRef(children) : null;
-  const mergedRef = useComposeRef(childRef, ref);
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [containerWrapper, setContainerWrapper] = useState<HTMLDivElement | null>(null);
+  const [customizeParent, setCustomizeParent] = useState<HTMLElement | null>(() => getAttachNode(getContainer));
+  const mergedParentNode = customizeParent || document.body;
 
   const shouldRender = open || isMounted;
+
+  useEffect(() => {
+    const newParentNode = getAttachNode(getContainer);
+    setCustomizeParent(newParentNode || null);
+  }, [getContainer]);
 
   const createContainerNode = () => {
     if (!isBrowser) return null;
@@ -50,43 +53,49 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
       node.className = `${prefixCls}-portal-wrapper`;
     }
 
+    if (rootStyle) {
+      Object.assign(node.style, rootStyle);
+    }
+
     node.setAttribute('data-portal', 'true');
     return node;
   };
 
   useIsomorphicLayoutEffect(() => {
-    if (isBrowser && open && !containerRef.current) {
-      containerRef.current = createContainerNode();
+    if (!isBrowser) return;
+    if (open) {
+      if (!containerWrapper) setContainerWrapper(() => createContainerNode());
+    } else {
+      setContainerWrapper(null);
     }
   }, [open]);
+
+  useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
 
   useIsomorphicLayoutEffect(() => {
     // 兼容显示隐藏时（非销毁）的滚动条状态
     // Portal 暂时没做 cache 节点，因此使用此方式来兼容和 CSSMotion 的隐藏交互
     if (autoLockScroll === false) {
       document.body.style.overflow = '';
-    } else if (autoLockScroll && containerRef.current) {
+    } else if (autoLockScroll && containerWrapper) {
       document.body.style.overflow = 'hidden';
     }
-  }, [autoLockScroll]);
+  }, [autoLockScroll, containerWrapper]);
 
   useIsomorphicLayoutEffect(() => {
-    if (!isBrowser || !containerRef.current) return;
-
-    const node = containerRef.current;
-    const parent = getAttachNode(getContainer) || document.body;
+    if (!isBrowser || !containerWrapper) return;
 
     const attachToParent = () => {
-      if (!node.parentNode) {
-        parent.appendChild(node);
+      if (!containerWrapper.parentNode) {
+        mergedParentNode.appendChild(containerWrapper);
         // if (autoLockScroll) document.body.style.overflow = 'hidden';
         setIsMounted(true);
       }
     };
 
     const detachFromParent = () => {
-      if (node.parentNode) {
-        node.parentNode.removeChild(node);
+      if (containerWrapper.parentNode) {
+        containerWrapper.parentNode.removeChild(containerWrapper);
         if (autoLockScroll) document.body.style.overflow = '';
         setIsMounted(false);
       }
@@ -96,25 +105,15 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     else detachFromParent();
 
     return () => {
-      if (node.parentNode) {
+      if (containerWrapper.parentNode) {
         detachFromParent();
       }
     };
-  }, [open, getContainer]);
+  }, [open, containerWrapper]);
 
-  let content: React.ReactNode = null;
-  if (shouldRender && children) {
-    if (isValidElement(children)) {
-      content = cloneElement(children as any, { ref: mergedRef });
-    } else {
-      content = children;
-      if (process.env.NODE_ENV !== 'production' && ref) {
-        console.error('[@sqi-web/ui] Portal: a `string` children is not support ref');
-      }
-    }
-  }
+  if (!(shouldRender && children)) return null;
 
-  return containerRef.current ? createPortal(content, containerRef.current) : null;
+  return containerWrapper ? createPortal(children, containerWrapper) : null;
 });
 
 Portal.displayName = 'Portal';
