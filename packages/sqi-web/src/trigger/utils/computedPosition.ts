@@ -1,8 +1,15 @@
-import { isObject } from '@sqi-ui/utils';
-import type { Prettify } from '../../_util/type';
-import type { Alignment, Side, TriggerDirection } from '../type';
+import type { TriggerDirection } from '../type';
+import {
+  getTranslateValue,
+  getElementPosition,
+  type ElementPosition,
+  getScrollableParent,
+  genTransformStyle,
+  calcMaxDistance,
+} from './dom';
+import { formatDirection, formatOffset } from './format';
 
-interface PositionOptions {
+export interface PositionOptions {
   direction: TriggerDirection;
   /**
    * @description 开启自动翻转
@@ -23,23 +30,20 @@ interface ElementCollection {
   arrow?: HTMLElement;
 }
 
-const getTransform = (x: number, y: number) => `translate(${x}px, ${y}px)`;
-
 const defaultOptions: PositionOptions = {
   direction: 'bottom',
   enableFlip: true,
   enableShift: true,
 };
 
-export function computedPosition(doms: ElementCollection, baseOptions: PositionOptions) {
+export default function computedPosition(doms: ElementCollection, baseOptions: PositionOptions) {
   const { reference, popup, arrow } = doms;
-
   if (!reference || !popup) return;
 
   const options = { ...defaultOptions, ...baseOptions };
 
-  const popupParentContainer = popup.parentNode;
-  const [translateX, translateY] = getTranslate(popupParentContainer as HTMLElement);
+  const popupParentContainer = popup.parentNode as HTMLElement;
+  const [translateX, translateY] = getTranslateValue(popupParentContainer);
 
   // Compatible scrollY see: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY#notes
   // 😓 Are you sure support IE9 ?
@@ -47,8 +51,8 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   const scrollLeft = window.pageXOffset;
 
   // 定位元素及浮动元素的坐标
-  const referencePosition = getNodePosition(reference, scrollLeft, scrollTop);
-  const popupPosition = getNodePosition(popup, scrollLeft, scrollTop);
+  const referencePosition = getElementPosition(reference, scrollLeft, scrollTop);
+  const popupPosition = getElementPosition(popup, scrollLeft, scrollTop);
 
   // 两个元素的宽高差，当定位到居中时，popup 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
   const widthDifference = referencePosition.width - popupPosition.width;
@@ -59,7 +63,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   let x = referencePosition.left - popupPosition.left + translateX;
   let y = referencePosition.top - popupPosition.top + translateY;
 
-  const [side, align, vertical, horizontal] = splitPlacement(options.direction);
+  const [side, align, vertical, horizontal] = formatDirection(options.direction);
   let currentSide = side;
   // 当定位到居中时，popup 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
   const leftCorner = align === 'left' ? 0 : align === 'right' ? widthDifference : widthDifference / 2;
@@ -82,18 +86,16 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
   let scrollableParentEl = getScrollableParent(reference);
   // const scrollableParents: HTMLElement[] = [];
-  let parentPosition: NodePosition;
+  let parentPosition: ElementPosition;
 
   let distanceX = 0;
   let distanceY = 0;
 
-  const [offsetX, offsetY] = options.offset
-    ? isObject(options.offset)
-      ? [options.offset.x || 0, options.offset.y || 0]
-      : [options.offset || 0, options.offset || 0]
-    : [0, 0];
+  const [offsetX, offsetY] = formatOffset(options.offset);
 
-  const { height: arrowHeight = 0, width: arrowWidth = 0 } = arrow ? getNodePosition(arrow, scrollLeft, scrollTop) : {};
+  const { height: arrowHeight = 0, width: arrowWidth = 0 } = arrow
+    ? getElementPosition(arrow, scrollLeft, scrollTop)
+    : {};
 
   if (vertical) {
     y += currentSide === 'bottom' ? offsetY : -offsetY;
@@ -108,15 +110,15 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
   while (scrollableParentEl) {
     // scrollableParents.push(scrollableParentEl);
-    parentPosition = getNodePosition(scrollableParentEl, scrollLeft, scrollTop);
-    checkPopper(parentPosition);
+    parentPosition = getElementPosition(scrollableParentEl, scrollLeft, scrollTop);
+    detectEdge(parentPosition);
     scrollableParentEl = getScrollableParent(scrollableParentEl.parentNode as HTMLElement);
   }
 
   const { clientHeight, clientWidth } = document.documentElement;
 
   // 每次渲染需要结合可见的 document 的宽高
-  checkPopper({
+  detectEdge({
     top: scrollTop,
     bottom: scrollTop + clientHeight,
     left: scrollLeft,
@@ -128,9 +130,10 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
   x = x - distanceX;
   y = y - distanceY;
 
-  (popupParentContainer as HTMLElement).style.transform = getTransform(x, y);
+  popupParentContainer.style.transform = genTransformStyle(x, y);
 
-  function checkPopper(position: NodePosition) {
+  /** 边缘碰撞检测并调整位置 */
+  function detectEdge(position: ElementPosition) {
     const { top, bottom, left, right, height, width } = position;
 
     if (vertical) {
@@ -158,7 +161,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
 
       if (options.enableShift) {
         if (referencePosition.left + leftCorner < left) {
-          distanceX = getMaxDistance(
+          distanceX = calcMaxDistance(
             referencePosition.right - arrowWidth > left
               ? referencePosition.left + leftCorner - left
               : -referencePosition.width + leftCorner + arrowWidth,
@@ -167,7 +170,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
         }
 
         if (referencePosition.right - rightCorner > right) {
-          distanceX = getMaxDistance(
+          distanceX = calcMaxDistance(
             referencePosition.left + arrowWidth < right
               ? referencePosition.right - rightCorner - right
               : referencePosition.width - rightCorner - arrowWidth,
@@ -188,7 +191,6 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
           currentSide === 'left'
         ) {
           x += referencePosition.width + popupPosition.width;
-
           currentSide = 'right';
         } else if (
           referencePosition.right + popupPosition.width + offsetX + arrowWidth > right &&
@@ -196,14 +198,13 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
           currentSide === 'right'
         ) {
           x -= referencePosition.width + popupPosition.width;
-
           currentSide = 'left';
         }
       }
 
       if (options.enableShift) {
         if (referencePosition.top + topCorner < top) {
-          distanceY = getMaxDistance(
+          distanceY = calcMaxDistance(
             referencePosition.bottom - arrowHeight > top
               ? referencePosition.top + topCorner - top
               : -referencePosition.height + topCorner + arrowHeight,
@@ -212,7 +213,7 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
         }
 
         if (referencePosition.bottom - bottomCorner > bottom) {
-          distanceY = getMaxDistance(
+          distanceY = calcMaxDistance(
             referencePosition.top + arrowHeight < bottom
               ? referencePosition.bottom - bottomCorner - bottom
               : referencePosition.height - bottomCorner - arrowHeight,
@@ -222,102 +223,4 @@ export function computedPosition(doms: ElementCollection, baseOptions: PositionO
       }
     }
   }
-}
-
-interface NodePosition {
-  width: number;
-  height: number;
-  top: number;
-  left: number;
-  right: number;
-  bottom: number;
-}
-
-function getNodePosition(el: HTMLElement, scrollLeft: number, scrollTop: number): Prettify<NodePosition> {
-  const { top, left, width, height } = el.getBoundingClientRect();
-  const elementTop = top + scrollTop;
-  const elementLeft = left + scrollLeft;
-
-  return {
-    width,
-    height,
-    top: elementTop,
-    bottom: elementTop + height,
-    left: elementLeft,
-    right: elementLeft + width,
-  };
-}
-
-function getTranslate(element: Element) {
-  if (!element) return [0, 0];
-
-  const style = window.getComputedStyle(element);
-  // translate(701px, 346px) 会被转换成 matrix(1, 0, 0, 1, 701, 346)
-  const transform = style.transform || style.webkitTransform || 'none';
-
-  if (transform === 'none') return [0, 0];
-
-  if (transform.match(/matrix\(([^)]+)\)/)) {
-    const values = transform
-      .match(/matrix\((.+)\)/)?.[1]
-      ?.split(',')
-      .map(Number) || [0, 0];
-    if (values.length === 6) {
-      // 提出其中的 x y 轴偏移，这里不考虑 3D 矩阵
-      return [values[4], values[5]];
-    }
-  }
-
-  // 提取 transform:translate() 的偏移值
-  const [, x = 0, y = 0] = (transform.match(/translate\((.*?)px,\s(.*?)px\)/) || []).map((string) => Number(string));
-
-  return [x, y];
-}
-
-type AlignRelative = 'left' | 'right' | 'top' | 'bottom'; // 在主侧边为垂直方向时为 left right，在主侧边为水平方向时为 top bottom
-function splitPlacement(placement: TriggerDirection): [Side, AlignRelative, boolean, boolean] {
-  const splitPlacement = placement.split('-');
-  const side = (splitPlacement[0] || 'bottom') as Side;
-  const align = (splitPlacement[1] || 'center') as Alignment;
-
-  let relativeAlign: AlignRelative | undefined = undefined;
-
-  const isVertical = side === 'top' || side === 'bottom';
-  const isHorizontal = side === 'left' || side === 'right';
-
-  if (isVertical) {
-    if (align === 'start') relativeAlign = 'left';
-    if (align === 'end') relativeAlign = 'right';
-  }
-
-  if (isHorizontal) {
-    if (align === 'start') relativeAlign = 'top';
-    if (align === 'end') relativeAlign = 'bottom';
-  }
-
-  return [side, relativeAlign!, isVertical, isHorizontal];
-}
-
-function getScrollableParent(element: HTMLElement) {
-  if (!element || element.tagName === 'HTML') return;
-
-  const style = window.getComputedStyle(element);
-  const isScrollable = (string: string) => ['auto', 'scroll'].includes(string);
-
-  if (
-    (element.clientHeight < element.scrollHeight && isScrollable(style.overflowX)) ||
-    (element.clientWidth < element.scrollWidth && isScrollable(style.overflowY))
-  ) {
-    return element;
-  }
-
-  return getScrollableParent(element.parentNode as HTMLElement);
-}
-
-function getMaxDistance(currentDistance: number, previousDistance: number) {
-  if (Math.round(Math.abs(currentDistance)) > Math.round(Math.abs(previousDistance))) {
-    return currentDistance;
-  }
-
-  return previousDistance;
 }

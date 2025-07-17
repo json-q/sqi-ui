@@ -9,13 +9,15 @@ import React, {
   useRef,
 } from 'react';
 import { useIsomorphicLayoutEffect, useMergeProps } from '@sqi-ui/hooks';
-import type { TriggerProps } from './type';
-import { getReactNodeRef } from '../_util/dom';
-import { computedPosition } from './utils/computedPosition';
-import { supportNodeRef, useComposeRef } from '../_util/ref';
+
 import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
+import { getReactNodeRef } from '../_util/dom';
+import { supportNodeRef, useComposeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
+
+import { computedPosition } from './utils';
+import type { TriggerProps } from './type';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
