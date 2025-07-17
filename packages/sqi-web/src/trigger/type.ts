@@ -11,7 +11,6 @@ export type TriggerDirection = Prettify<Side | AlignedPlacement>;
 export interface TriggerProps {
   children?: ReactElement;
   popup?: ReactElement;
-  open?: boolean;
   /**
    * @description popup 位置
    * @default bottom

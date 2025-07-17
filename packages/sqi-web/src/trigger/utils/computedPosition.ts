@@ -27,7 +27,7 @@ export interface PositionOptions {
 interface ElementCollection {
   reference?: HTMLElement | null;
   popup?: HTMLElement | null;
-  arrow?: HTMLElement;
+  arrow?: HTMLElement | null;
 }
 
 const defaultOptions: PositionOptions = {

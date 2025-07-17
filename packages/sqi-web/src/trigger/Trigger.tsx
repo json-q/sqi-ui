@@ -28,7 +28,7 @@ const defaultProps: TriggerProps = {
 };
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
-  const { componentConfig } = useContext(ConfigContext);
+  const { prefixCls, componentConfig } = useContext(ConfigContext);
   const { children, popup, enableShift, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
     baseProps,
     defaultProps,
@@ -38,6 +38,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const isElementChild = isValidElement(children);
 
   const referenceRef = useRef<HTMLDivElement>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
   const originPopupRef = getReactNodeRef(popup);
   const popupRef = useRef<HTMLDivElement>(null);
   const mergedPopupRef = useComposeRef(originPopupRef, popupRef);
@@ -61,11 +62,12 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   }
 
   const updatePosition = useCallback(
-    (e?: any) => {
-      if (e && e.type !== 'resize' && !e.target.contains(referenceRef.current)) return;
+    (e?: Event) => {
+      if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
+      console.log(arrowRef.current);
 
       computedPosition(
-        { reference: referenceRef.current, popup: popupRef.current },
+        { reference: referenceRef.current, popup: popupRef.current, arrow: arrowRef.current },
         { direction: direction!, enableFlip, enableShift, offset },
       );
     },
@@ -92,12 +94,14 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popup ? (
-        <Portal
-          getContainer={getContainer}
-          autoLockScroll={false}
-          rootStyle={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
-        >
-          {cloneElement(popup as any, { ref: mergedPopupRef })}
+        <Portal getContainer={getContainer} autoLockScroll={false}>
+          {/* {<div ref={arrowRef} className={`${prefixCls}-trigger-arrow`}></div>} */}
+          <div
+            className={`${prefixCls}-trigger`}
+            style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
+          >
+            {cloneElement(popup as any, { ref: mergedPopupRef })}
+          </div>
         </Portal>
       ) : null}
     </>
