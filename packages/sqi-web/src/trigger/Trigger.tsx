@@ -53,11 +53,11 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
       console.error(
         '[@sqi-ui/web]: The `children` not support ref. Please use `React.forwardRef` to wrap your component.',
       );
-      if (!canUsePopupRef) {
-        console.error(
-          '[@sqi-ui/web]: The `popup` not support ref. Please use `React.forwardRef` to wrap your component.',
-        );
-      }
+    }
+    if (!canUsePopupRef) {
+      console.error(
+        '[@sqi-ui/web]: The `popup` not support ref. Please use `React.forwardRef` to wrap your component.',
+      );
     }
   }
 
