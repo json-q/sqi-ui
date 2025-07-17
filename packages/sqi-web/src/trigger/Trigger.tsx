@@ -93,7 +93,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popup ? (
-        <Portal getContainer={getContainer} autoLockScroll={false}>
+        <Portal getContainer={getContainer}>
           {/* {<div ref={arrowRef} className={`${prefixCls}-trigger-arrow`}></div>} */}
           <div
             className={`${prefixCls}-trigger`}

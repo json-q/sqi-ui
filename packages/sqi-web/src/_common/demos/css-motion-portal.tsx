@@ -31,9 +31,9 @@ export default function Demo() {
       </Space>
 
       <CSSMotion ref={motionRef} timeout={500} name="demo" mountOnEnter preEnter unmountOnExit={unmountDestroy}>
-        {({ className, status }) => {
+        {({ className }) => {
           return (
-            <Portal autoLockScroll={status !== 'exited' && status !== 'unmounted'}>
+            <Portal>
               <div className={className} style={styles}>
                 This is a container use Portal
               </div>
