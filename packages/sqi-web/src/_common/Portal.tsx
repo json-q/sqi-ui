@@ -14,7 +14,6 @@ export interface PortalProps {
   getContainer?: PortalContainer;
   children: React.ReactNode;
   open?: boolean;
-  autoLockScroll?: boolean;
   rootStyle?: React.CSSProperties;
 }
 
@@ -31,14 +30,11 @@ function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement |
 }
 
 const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
-  const { getContainer, prefixCls, children, open = true, rootStyle, autoLockScroll = true } = props;
+  const { getContainer, prefixCls, children, open = true, rootStyle } = props;
 
-  const [isMounted, setIsMounted] = useState(false);
   const [containerWrapper, setContainerWrapper] = useState<HTMLDivElement | null>(null);
-  const [customizeParent, setCustomizeParent] = useState<HTMLElement | null>(() => getAttachNode(getContainer));
+  const [customizeParent, setCustomizeParent] = useState<HTMLElement | null>(null);
   const mergedParentNode = customizeParent || document.body;
-
-  const shouldRender = open || isMounted;
 
   useEffect(() => {
     const newParentNode = getAttachNode(getContainer);
@@ -46,7 +42,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   }, [getContainer]);
 
   const createContainerNode = () => {
-    if (!isBrowser) return null;
+    if (!isBrowser || containerWrapper) return null;
 
     const node = document.createElement('div');
     if (prefixCls) {
@@ -58,13 +54,13 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     }
 
     node.setAttribute('data-portal', 'true');
-    return node;
+    setContainerWrapper(node);
   };
 
   useIsomorphicLayoutEffect(() => {
     if (!isBrowser) return;
     if (open) {
-      if (!containerWrapper) setContainerWrapper(() => createContainerNode());
+      createContainerNode();
     } else {
       setContainerWrapper(null);
     }
@@ -73,45 +69,24 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
 
   useIsomorphicLayoutEffect(() => {
-    // 兼容显示隐藏时（非销毁）的滚动条状态
-    // Portal 暂时没做 cache 节点，因此使用此方式来兼容和 CSSMotion 的隐藏交互
-    if (autoLockScroll === false) {
-      document.body.style.overflow = '';
-    } else if (autoLockScroll && containerWrapper) {
-      document.body.style.overflow = 'hidden';
-    }
-  }, [autoLockScroll, containerWrapper]);
-
-  useIsomorphicLayoutEffect(() => {
     if (!isBrowser || !containerWrapper) return;
 
-    const attachToParent = () => {
-      if (!containerWrapper.parentNode) {
-        mergedParentNode.appendChild(containerWrapper);
-        // if (autoLockScroll) document.body.style.overflow = 'hidden';
-        setIsMounted(true);
-      }
-    };
+    const attachToParent = () => !containerWrapper.parentNode && mergedParentNode.appendChild(containerWrapper);
 
-    const detachFromParent = () => {
-      if (containerWrapper.parentNode) {
-        containerWrapper.parentNode.removeChild(containerWrapper);
-        if (autoLockScroll) document.body.style.overflow = '';
-        setIsMounted(false);
-      }
-    };
+    const detachFromParent = () => containerWrapper.parentNode?.removeChild(containerWrapper);
 
-    if (open) attachToParent();
-    else detachFromParent();
+    if (open) {
+      attachToParent();
+    } else {
+      detachFromParent();
+    }
 
     return () => {
-      if (containerWrapper.parentNode) {
-        detachFromParent();
-      }
+      detachFromParent();
     };
   }, [open, containerWrapper]);
 
-  if (!(shouldRender && children)) return null;
+  if (!(open && children)) return null;
 
   return containerWrapper ? createPortal(children, containerWrapper) : null;
 });
