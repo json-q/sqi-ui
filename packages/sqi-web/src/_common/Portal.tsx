@@ -70,7 +70,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     }
   }, [open]);
 
-  useImperativeHandle(ref, () => containerWrapper!);
+  useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
 
   useIsomorphicLayoutEffect(() => {
     // 兼容显示隐藏时（非销毁）的滚动条状态

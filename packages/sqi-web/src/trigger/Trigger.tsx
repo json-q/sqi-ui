@@ -64,7 +64,6 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const updatePosition = useCallback(
     (e?: Event) => {
       if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
-      console.log(arrowRef.current);
 
       computedPosition(
         { reference: referenceRef.current, popup: popupRef.current, arrow: arrowRef.current },
