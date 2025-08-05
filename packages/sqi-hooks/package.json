@@ -38,6 +38,6 @@
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
-    "@types/react": "^19.1.8"
+    "@types/react": "^19.1.9"
   }
 }
