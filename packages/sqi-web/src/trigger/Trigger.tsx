@@ -18,6 +18,7 @@ import { ConfigContext } from '../config-provider/context';
 
 import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
+import { collectScrollParentList } from './utils/collectScrollParentList';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
@@ -75,19 +76,27 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   useIsomorphicLayoutEffect(() => {
     updatePosition();
+  }, [direction, enableFlip, enableShift, offset]);
 
-    document.addEventListener('scroll', updatePosition, {
-      capture: true,
-      passive: true,
+  useIsomorphicLayoutEffect(() => {
+    const referenceParents = collectScrollParentList(referenceRef.current);
+    const popperParents = collectScrollParentList(popupRef.current);
+    const scrollPrents = [...referenceParents, ...popperParents];
+
+    scrollPrents.forEach((scrollParent) => {
+      scrollParent.addEventListener('scroll', updatePosition, { passive: true });
     });
 
-    window.addEventListener('resize', updatePosition);
+    window.addEventListener('resize', updatePosition, { passive: true });
 
     return () => {
-      document.removeEventListener('scroll', updatePosition);
+      scrollPrents.forEach((scrollParent) => {
+        scrollParent.removeEventListener('scroll', updatePosition);
+      });
+
       window.removeEventListener('resize', updatePosition);
     };
-  }, [direction, enableFlip, enableShift, offset]);
+  }, [referenceRef.current, popupRef.current]);
 
   return isElementChild ? (
     <>
