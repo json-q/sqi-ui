@@ -70,7 +70,9 @@ export default function Demo() {
       <Checkbox.Group value={detectEdge} onChange={changeDetectEdge} options={['flip', 'shift']} />
 
       <Divider style={{ margin: '8px 0' }} text="Arrow" align="left" />
-      <Checkbox checked={showArrow} onChange={(e) => setShowArrow(e.target.checked)} />
+      <Checkbox checked={showArrow} onChange={(e) => setShowArrow(e.target.checked)}>
+        Enable Arrow
+      </Checkbox>
 
       <Divider style={{ margin: '8px 0' }} text="Offset" align="left" />
       <Space>

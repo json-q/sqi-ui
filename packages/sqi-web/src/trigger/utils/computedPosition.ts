@@ -136,6 +136,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   }
 
   popperParentContainer.style.transform = genTransformStyle(x, y);
+  popperParentContainer.setAttribute('data-direction', currentSide);
 
   /** 边缘碰撞检测并调整位置 */
   function detectEdge(position: ElementPosition) {
@@ -310,11 +311,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
       }
     }
 
-    // arrow.setAttribute('direction', arrowDirection);
-    // arrow.style.height = arrowHeight + 'px';
-    // arrow.style.width = arrowWidth + 'px';
     arrow.style.transform = genTransformStyle(arrowX, arrowY);
-    // arrow.style.visibility = 'visible';
-    // arrow.style.zIndex = zIndex + 1;
+    arrow.setAttribute('data-direction', currentSide);
   }
 }
