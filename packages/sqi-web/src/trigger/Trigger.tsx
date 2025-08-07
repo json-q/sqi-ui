@@ -76,9 +76,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   useIsomorphicLayoutEffect(() => {
     updatePosition();
-  }, [direction, enableFlip, enableShift, offset]);
 
-  useIsomorphicLayoutEffect(() => {
     const referenceParents = collectScrollParentList(referenceRef.current);
     const popperParents = collectScrollParentList(popupRef.current);
     const scrollPrents = [...referenceParents, ...popperParents];
@@ -96,7 +94,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
       window.removeEventListener('resize', updatePosition);
     };
-  }, [referenceRef.current, popupRef.current]);
+  }, [direction, enableFlip, enableShift, offset]);
 
   return isElementChild ? (
     <>
