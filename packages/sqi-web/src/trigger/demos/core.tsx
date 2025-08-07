@@ -50,6 +50,7 @@ export default function Demo() {
             direction={direction}
             getContainer={() => containerRef.current}
             arrow={showArrow ? <div style={{ width: 12, height: 12, backgroundColor: 'red' }}></div> : undefined}
+            motion={{ initialEntered: true }}
             popper={
               <Component size={110} backgroundColor="var(--sqi-bg-color-container)">
                 Popper Element

@@ -10,7 +10,15 @@ group:
 
 # Trigger 触发器
 
-## Popper 核心功能
+严格意义上说，Trigger 组件也是内部使用的，外部使用会让代码组织变得更复杂。
+
+我们推荐使用 Popover 组件（规划中）来替代 Trigger 组件
+
+## Popper
+
+实现一个 popperjs 的基础功能（逻辑实现很脏，且很多情况未考虑，比如 `table th tr` 下的定位父元素，css `will-change transform` 等的定位父元素）
+
+后续可能会对定位功能进行重写，如果有能力重写的话，I am very vegetable :)
 
 <code src="./demos/core.tsx"></code>
 

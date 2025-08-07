@@ -311,6 +311,16 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
       }
     }
 
+    if (vertical) {
+      arrowY += currentSide === 'bottom' ? offsetY : -offsetY;
+      // 同时 x y轴偏移的支持有待商酌，因为视觉上看起来很奇怪
+      arrowX += offsetX;
+    }
+    if (horizontal) {
+      arrowX += currentSide === 'right' ? offsetX : -offsetX;
+      arrowY += offsetY;
+    }
+
     arrow.style.transform = genTransformStyle(arrowX, arrowY);
     arrow.setAttribute('data-direction', currentSide);
   }

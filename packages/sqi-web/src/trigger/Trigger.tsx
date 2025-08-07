@@ -19,6 +19,7 @@ import { ConfigContext } from '../config-provider/context';
 import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
 import { collectScrollParentList } from './utils/collectScrollParentList';
+import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
@@ -26,15 +27,13 @@ const defaultProps: TriggerProps = {
   enableShift: true,
   offset: 0,
   zIndex: 0,
+  motion: {},
 };
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { children, popper, enableShift, arrow, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
-    baseProps,
-    defaultProps,
-    componentConfig?.Trigger,
-  );
+  const { children, popper, enableShift, arrow, motion, enableFlip, zIndex, offset, direction, getContainer } =
+    useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
 
   const isElementChild = isValidElement(children);
 
@@ -43,6 +42,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const originPopperRef = getReactNodeRef(popper);
   const popperRef = useRef<HTMLDivElement>(null);
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
+  const motionRef = useRef<CSSMotionInstance>(null);
 
   useImperativeHandle(ref, () => {});
 
@@ -101,24 +101,26 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popper ? (
-        <Portal getContainer={getContainer}>
-          {arrow && (
-            <div
-              style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
-              ref={arrowRef}
-              className={`${prefixCls}-trigger-arrow`}
-            >
-              {arrow}
-            </div>
-          )}
+        <CSSMotion ref={motionRef} {...motionRef} {...motion}>
+          <Portal getContainer={getContainer}>
+            {arrow && (
+              <div
+                style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
+                ref={arrowRef}
+                className={`${prefixCls}-trigger-arrow`}
+              >
+                {arrow}
+              </div>
+            )}
 
-          <div
-            className={`${prefixCls}-trigger`}
-            style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
-          >
-            {cloneElement(popper as any, { ref: mergedPopperRef })}
-          </div>
-        </Portal>
+            <div
+              className={`${prefixCls}-trigger`}
+              style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
+            >
+              {cloneElement(popper as any, { ref: mergedPopperRef })}
+            </div>
+          </Portal>
+        </CSSMotion>
       ) : null}
     </>
   ) : null;

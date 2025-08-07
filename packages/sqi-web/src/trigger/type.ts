@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import type { Prettify } from '../_util/type';
 import type { PortalContainer } from '../_common/Portal';
+import type { CSSMotionProps } from '../_common/CSSMotion';
 
 export type Alignment = 'start' | 'end';
 export type Side = 'top' | 'right' | 'bottom' | 'left';
@@ -12,7 +13,7 @@ export interface TriggerProps {
   children?: ReactElement;
   popper?: ReactElement;
   arrow?: ReactElement;
-  closeArrow?: boolean;
+  motion?: Omit<CSSMotionProps, 'children'>;
   /**
    * @description popper 位置
    * @default bottom
