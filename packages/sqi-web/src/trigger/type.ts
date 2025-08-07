@@ -10,9 +10,9 @@ export type TriggerDirection = Prettify<Side | AlignedPlacement>;
 
 export interface TriggerProps {
   children?: ReactElement;
-  popup?: ReactElement;
+  popper?: ReactElement;
   /**
-   * @description popup 位置
+   * @description popper 位置
    * @default bottom
    */
   direction?: TriggerDirection;
@@ -27,16 +27,16 @@ export interface TriggerProps {
    */
   enableShift?: boolean;
   /**
-   * @description popup 偏移量
+   * @description popper 偏移量
    */
   offset?: number | { x: number; y: number };
   /**
-   * @description popup 元素层级
+   * @description popper 元素层级
    * @default 0
    */
   zIndex?: number;
   /**
-   * @description 指定 popup 挂载的位置
+   * @description 指定 popper 挂载的位置
    * @default document.body
    */
   getContainer?: PortalContainer;

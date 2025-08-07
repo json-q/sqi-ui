@@ -26,7 +26,7 @@ export interface PositionOptions {
 
 interface ElementCollection {
   reference?: HTMLElement | null;
-  popup?: HTMLElement | null;
+  popper?: HTMLElement | null;
   arrow?: HTMLElement | null;
 }
 
@@ -37,12 +37,12 @@ const defaultOptions: PositionOptions = {
 };
 
 export default function computedPosition(doms: ElementCollection, baseOptions: PositionOptions) {
-  const { reference, popup, arrow } = doms;
-  if (!reference || !popup) return;
+  const { reference, popper, arrow } = doms;
+  if (!reference || !popper) return;
 
   const options = { ...defaultOptions, ...baseOptions };
 
-  const popupParentContainer = popup.parentNode as HTMLElement;
+  const popupParentContainer = popper.parentNode as HTMLElement;
   const [translateX, translateY] = getTranslateValue(popupParentContainer);
 
   // Compatible scrollY see: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY#notes
@@ -52,14 +52,14 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
   // 定位元素及浮动元素的坐标
   const referencePosition = getElementPosition(reference, scrollLeft, scrollTop);
-  const popupPosition = getElementPosition(popup, scrollLeft, scrollTop);
+  const popupPosition = getElementPosition(popper, scrollLeft, scrollTop);
 
   // 两个元素的宽高差，当定位到居中时，popup 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
   const widthDifference = referencePosition.width - popupPosition.width;
   const heightDifference = referencePosition.height - popupPosition.height;
 
   //  ================================================ 计算 x y 的基本偏移 ==================================
-  // popup 现有的坐标，需要相对定位父容器偏移的距离（所以需要 + translate 父容器已偏移的值）
+  // popper 现有的坐标，需要相对定位父容器偏移的距离（所以需要 + translate 父容器已偏移的值）
   let x = referencePosition.left - popupPosition.left + translateX;
   let y = referencePosition.top - popupPosition.top + translateY;
 
@@ -97,17 +97,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     ? getElementPosition(arrow, scrollLeft, scrollTop)
     : {};
 
-  if (vertical) {
-    y += currentSide === 'bottom' ? offsetY : -offsetY;
-    // 当处于 vertical 时，x 轴偏移的支持有待商酌（暂不支持）
-    // 这种会造成一种问题：当 popup 开始平移时，实际上距离两侧还有 offsetX 的距离，会造成偏移误差
-    // x += offsetX;
-  }
-  if (horizontal) {
-    x += currentSide === 'right' ? offsetX : -offsetX;
-    // y += offsetY;
-  }
-
   while (scrollableParentEl) {
     // scrollableParents.push(scrollableParentEl);
     parentPosition = getElementPosition(scrollableParentEl, scrollLeft, scrollTop);
@@ -126,6 +115,17 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     height: clientHeight,
     width: clientWidth,
   });
+
+  // 外部传入的固定偏移必须在 detect 边缘碰撞之后再偏移，不然无法适应各个方向的正确偏移位置
+  if (vertical) {
+    y += currentSide === 'bottom' ? offsetY : -offsetY;
+    // 同时 x y轴偏移的支持有待商酌，因为视觉上看起来很奇怪
+    x += offsetX;
+  }
+  if (horizontal) {
+    x += currentSide === 'right' ? offsetX : -offsetX;
+    y += offsetY;
+  }
 
   x = x - distanceX;
   y = y - distanceY;

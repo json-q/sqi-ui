@@ -48,7 +48,7 @@ export default function Demo() {
             offset={{ x: Number(offsetX), y: Number(offsetY) }}
             direction={direction}
             getContainer={() => containerRef.current}
-            popup={
+            popper={
               <Component size={110} backgroundColor="var(--sqi-bg-color-container)">
                 Popper Element
               </Component>
@@ -73,13 +73,13 @@ export default function Demo() {
           prefix="offsetX"
           value={offsetX}
           onChange={setOffsetX}
-          disabled={direction.startsWith('top') || direction.startsWith('bottom')}
+          // disabled={direction.startsWith('top') || direction.startsWith('bottom')}
         />
         <Input
           prefix="offsetY"
           value={offsetY}
           onChange={setOffsetY}
-          disabled={direction.startsWith('left') || direction.startsWith('right')}
+          // disabled={direction.startsWith('left') || direction.startsWith('right')}
         />
       </Space>
     </>

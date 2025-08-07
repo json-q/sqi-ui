@@ -30,7 +30,7 @@ const defaultProps: TriggerProps = {
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { children, popup, enableShift, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
+  const { children, popper, enableShift, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
     baseProps,
     defaultProps,
     componentConfig?.Trigger,
@@ -40,34 +40,35 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   const referenceRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
-  const originPopupRef = getReactNodeRef(popup);
-  const popupRef = useRef<HTMLDivElement>(null);
-  const mergedPopupRef = useComposeRef(originPopupRef, popupRef);
+  const originPopperRef = getReactNodeRef(popper);
+  const popperRef = useRef<HTMLDivElement>(null);
+  const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
 
   useImperativeHandle(ref, () => {});
 
   // =============== Warning ===============
   const canUseChildrenRef = supportNodeRef(children);
-  const canUsePopupRef = supportNodeRef(popup);
+  const canUsePopperRef = supportNodeRef(popper);
   if (isElementChild && process.env.NODE_ENV !== 'production') {
     if (!canUseChildrenRef) {
       console.error(
         '[@sqi-ui/web]: The `children` not support ref. Please use `React.forwardRef` to wrap your component.',
       );
     }
-    if (!canUsePopupRef) {
+    if (!canUsePopperRef) {
       console.error(
-        '[@sqi-ui/web]: The `popup` not support ref. Please use `React.forwardRef` to wrap your component.',
+        '[@sqi-ui/web]: The `popper` not support ref. Please use `React.forwardRef` to wrap your component.',
       );
     }
   }
 
+  // ======================== Position Update ===========================
   const updatePosition = useCallback(
     (e?: Event) => {
       if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
 
       computedPosition(
-        { reference: referenceRef.current, popup: popupRef.current, arrow: arrowRef.current },
+        { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
         { direction: direction!, enableFlip, enableShift, offset },
       );
     },
@@ -78,7 +79,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     updatePosition();
 
     const referenceParents = collectScrollParentList(referenceRef.current);
-    const popperParents = collectScrollParentList(popupRef.current);
+    const popperParents = collectScrollParentList(popperRef.current);
     const scrollPrents = [...referenceParents, ...popperParents];
 
     scrollPrents.forEach((scrollParent) => {
@@ -99,14 +100,14 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
-      {popup ? (
+      {popper ? (
         <Portal getContainer={getContainer}>
           {/* {<div ref={arrowRef} className={`${prefixCls}-trigger-arrow`}></div>} */}
           <div
             className={`${prefixCls}-trigger`}
             style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
           >
-            {cloneElement(popup as any, { ref: mergedPopupRef })}
+            {cloneElement(popper as any, { ref: mergedPopperRef })}
           </div>
         </Portal>
       ) : null}
