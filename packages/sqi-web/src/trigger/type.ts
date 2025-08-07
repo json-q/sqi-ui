@@ -11,6 +11,8 @@ export type TriggerDirection = Prettify<Side | AlignedPlacement>;
 export interface TriggerProps {
   children?: ReactElement;
   popper?: ReactElement;
+  arrow?: ReactElement;
+  closeArrow?: boolean;
   /**
    * @description popper 位置
    * @default bottom

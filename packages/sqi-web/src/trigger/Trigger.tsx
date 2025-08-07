@@ -30,7 +30,7 @@ const defaultProps: TriggerProps = {
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { children, popper, enableShift, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
+  const { children, popper, enableShift, arrow, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
     baseProps,
     defaultProps,
     componentConfig?.Trigger,
@@ -95,14 +95,23 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
       window.removeEventListener('resize', updatePosition);
     };
-  }, [direction, enableFlip, enableShift, offset]);
+  }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
 
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
       {popper ? (
         <Portal getContainer={getContainer}>
-          {/* {<div ref={arrowRef} className={`${prefixCls}-trigger-arrow`}></div>} */}
+          {arrow && (
+            <div
+              style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
+              ref={arrowRef}
+              className={`${prefixCls}-trigger-arrow`}
+            >
+              {arrow}
+            </div>
+          )}
+
           <div
             className={`${prefixCls}-trigger`}
             style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}

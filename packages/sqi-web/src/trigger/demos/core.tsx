@@ -25,6 +25,7 @@ export default function Demo() {
   const [detectEdge, setDetectEdge] = React.useState<string[]>(['flip', 'shift']);
   const [offsetX, setOffsetX] = React.useState<string>();
   const [offsetY, setOffsetY] = React.useState<string>();
+  const [showArrow, setShowArrow] = React.useState(true);
 
   React.useLayoutEffect(() => {
     containerRef.current?.scrollTo(containerRef.current.clientWidth + 115, containerRef.current.clientHeight);
@@ -48,6 +49,7 @@ export default function Demo() {
             offset={{ x: Number(offsetX), y: Number(offsetY) }}
             direction={direction}
             getContainer={() => containerRef.current}
+            arrow={showArrow ? <div style={{ width: 12, height: 12, backgroundColor: 'red' }}></div> : undefined}
             popper={
               <Component size={110} backgroundColor="var(--sqi-bg-color-container)">
                 Popper Element
@@ -66,6 +68,9 @@ export default function Demo() {
 
       <Divider style={{ margin: '8px 0' }} text="Detect Edge" align="left" />
       <Checkbox.Group value={detectEdge} onChange={changeDetectEdge} options={['flip', 'shift']} />
+
+      <Divider style={{ margin: '8px 0' }} text="Arrow" align="left" />
+      <Checkbox checked={showArrow} onChange={(e) => setShowArrow(e.target.checked)} />
 
       <Divider style={{ margin: '8px 0' }} text="Offset" align="left" />
       <Space>

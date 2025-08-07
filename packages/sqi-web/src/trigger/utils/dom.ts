@@ -46,7 +46,7 @@ export function calcMaxDistance(currentDistance: number, previousDistance: numbe
   return previousDistance;
 }
 
-export const genTransformStyle = (x: number, y: number) => `translate(${x}px, ${y}px)`;
+export const genTransformStyle = (x: number, y: number) => `translate3d(${x}px, ${y}px, 0)`;
 
 export function getTranslateValue(element: Element): [number, number] {
   if (!element) return [0, 0];
