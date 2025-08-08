@@ -1,0 +1,17 @@
+.sqi-trigger-demo-motion {
+  /* overflow: hidden; */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.sqi-trigger-demo-motion.sqi-trigger-demo-motion-preEnter,
+.sqi-trigger-demo-motion.sqi-trigger-demo-motion-exiting {
+  opacity: 0;
+}
+
+.sqi-trigger-demo-motion.sqi-trigger-demo-motion-entered {
+  opacity: 1;
+}
+
+.sqi-trigger-demo-motion.sqi-trigger-demo-motion-exited {
+  display: none;
+}

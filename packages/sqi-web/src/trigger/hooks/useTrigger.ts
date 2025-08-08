@@ -2,16 +2,9 @@
 
 import { useEffect, useRef, type ReactElement } from 'react';
 import type { TriggerType } from '../type';
-import { getDOM } from '../../_util/dom';
 
-// export interface UseTriggerStateProps {
-//   trigger?: TriggerProps['trigger'];
-//   hoverDelay?: number;
-//   clickOutsideClose?: boolean;
-//   onVisibleChange?: (visible: boolean) => void;
-// }
 interface Options {
-  triggerRef?: React.RefObject<HTMLDivElement | null>;
+  triggeEl?: HTMLDivElement | null;
   trigger?: TriggerType | TriggerType[];
   delay?: number;
   clickOutsideClose?: boolean;
@@ -23,7 +16,7 @@ interface Options {
 const ESC_KEY = 'Escape';
 
 const useTrigger = (props: Options) => {
-  const { trigger, delay, disabled, visible, clickOutsideClose, triggerRef, onVisibleChange } = props;
+  const { trigger, delay, disabled, visible, clickOutsideClose, triggeEl, onVisibleChange } = props;
 
   const hasPopupMouseDown = useRef(false);
   const leaveFlag = useRef(false); // 防止多次触发显隐
@@ -36,9 +29,10 @@ const useTrigger = (props: Options) => {
 
     // 区域外点击关闭
     const handleDocumentClick = (e: Event) => {
-      if (getDOM(triggerRef)?.contains?.(e.target as Node) || hasPopupMouseDown.current) {
+      if (triggeEl?.contains?.(e.target as Node) || hasPopupMouseDown.current) {
         return;
       }
+
       if (visible && clickOutsideClose) {
         onVisibleChange?.(false, { e, trigger: 'document' });
       }
@@ -50,7 +44,7 @@ const useTrigger = (props: Options) => {
       document.removeEventListener('mousedown', handleDocumentClick);
       document.removeEventListener('touchend', handleDocumentClick);
     };
-  }, [disabled, visible, triggerRef?.current]);
+  }, [disabled, visible, triggeEl]);
 
   function delayFn(cb: () => void) {
     if (delay) {
@@ -101,46 +95,48 @@ const useTrigger = (props: Options) => {
     const triggerProps = {
       onMouseDown: (e: MouseEvent) => {
         if (trigger === 'mousedown') {
-          delayFn(() => onVisibleChange?.(!visible, { e, trigger: 'trigger-element-mousedown' }));
+          delayFn(() => onVisibleChange?.(!visible, { e, trigger: 'mousedown' }));
         }
         (triggerNode.props as any).onMouseDown?.(e);
       },
       onClick: (e: MouseEvent) => {
         if (trigger === 'click') {
-          delayFn(() => onVisibleChange?.(!visible, { e, trigger: 'trigger-element-click' }));
+          e.preventDefault();
+          e.stopPropagation();
+          delayFn(() => onVisibleChange?.(!visible, { e, trigger: 'click' }));
         }
         (triggerNode.props as any).onClick?.(e);
       },
       onTouchStart: (e: TouchEvent) => {
         if (trigger === 'hover' || trigger === 'mousedown') {
           leaveFlag.current = false;
-          delayFn(() => onVisibleChange?.(true, { e, trigger: 'trigger-element-hover' }));
+          delayFn(() => onVisibleChange?.(true, { e, trigger: 'hover' }));
         }
         (triggerNode.props as any).onTouchStart?.(e);
       },
       onMouseEnter: (e: MouseEvent) => {
         if (trigger === 'hover') {
           leaveFlag.current = false;
-          delayFn(() => onVisibleChange?.(true, { e, trigger: 'trigger-element-hover' }));
+          delayFn(() => onVisibleChange?.(true, { e, trigger: 'hover' }));
         }
         (triggerNode.props as any).onMouseEnter?.(e);
       },
       onMouseLeave: (e: MouseEvent) => {
         if (trigger === 'hover') {
           leaveFlag.current = false;
-          delayFn(() => onVisibleChange?.(false, { e, trigger: 'trigger-element-hover' }));
+          delayFn(() => onVisibleChange?.(false, { e, trigger: 'hover' }));
         }
         (triggerNode.props as any).onMouseLeave?.(e);
       },
       onFocus: (e: FocusEvent) => {
         if (trigger === 'focus') {
-          delayFn(() => onVisibleChange?.(true, { e, trigger: 'trigger-element-focus' }));
+          delayFn(() => onVisibleChange?.(true, { e, trigger: 'focus' }));
         }
         (triggerNode.props as any).onFocus?.(e);
       },
       onBlur: (e: FocusEvent) => {
         if (trigger === 'focus') {
-          delayFn(() => onVisibleChange?.(false, { e, trigger: 'trigger-element-blur' }));
+          delayFn(() => onVisibleChange?.(false, { e, trigger: 'blur' }));
         }
         (triggerNode.props as any).onBlur?.(e);
       },
