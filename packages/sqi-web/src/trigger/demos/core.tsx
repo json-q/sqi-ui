@@ -81,13 +81,13 @@ export default function Demo() {
           prefix="offsetX"
           value={offsetX}
           onChange={setOffsetX}
-          // disabled={direction.startsWith('top') || direction.startsWith('bottom')}
+          disabled={direction.startsWith('top') || direction.startsWith('bottom')}
         />
         <Input
           prefix="offsetY"
           value={offsetY}
           onChange={setOffsetY}
-          // disabled={direction.startsWith('left') || direction.startsWith('right')}
+          disabled={direction.startsWith('left') || direction.startsWith('right')}
         />
       </Space>
     </>

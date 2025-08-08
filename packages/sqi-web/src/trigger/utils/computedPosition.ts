@@ -128,11 +128,11 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   if (vertical) {
     y += currentSide === 'bottom' ? offsetY : -offsetY;
     // 同时 x y轴偏移的支持有待商酌，因为视觉上看起来很奇怪
-    x += offsetX;
+    // x += offsetX;
   }
   if (horizontal) {
     x += currentSide === 'right' ? offsetX : -offsetX;
-    y += offsetY;
+    // y += offsetY;
   }
 
   popperParentContainer.style.transform = genTransformStyle(x, y);
@@ -233,10 +233,8 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   function genArrow() {
     if (!arrow) return;
 
-    let isElementSmaller: boolean;
-
     if (vertical) {
-      isElementSmaller = referencePosition.width < popperPosition.width;
+      const isElementSmaller = referencePosition.width < popperPosition.width;
 
       if (isElementSmaller) {
         arrowX += referencePosition.width / 2;
@@ -274,7 +272,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     }
 
     if (horizontal) {
-      isElementSmaller = referencePosition.height < popperPosition.height;
+      const isElementSmaller = referencePosition.height < popperPosition.height;
 
       if (isElementSmaller) {
         arrowY += referencePosition.height / 2;
@@ -313,12 +311,9 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
     if (vertical) {
       arrowY += currentSide === 'bottom' ? offsetY : -offsetY;
-      // 同时 x y轴偏移的支持有待商酌，因为视觉上看起来很奇怪
-      arrowX += offsetX;
     }
     if (horizontal) {
       arrowX += currentSide === 'right' ? offsetX : -offsetX;
-      arrowY += offsetY;
     }
 
     arrow.style.transform = genTransformStyle(arrowX, arrowY);

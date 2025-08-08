@@ -27,13 +27,39 @@ const defaultProps: TriggerProps = {
   enableShift: true,
   offset: 0,
   zIndex: 0,
-  motion: {},
+  trigger: 'hover',
+  delay: 100,
+  clickOutsideClose: true,
+  disabled: false,
+};
+
+const positionStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  willChange: 'transform',
 };
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { children, popper, enableShift, arrow, motion, enableFlip, zIndex, offset, direction, getContainer } =
-    useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
+  const {
+    children,
+    popper,
+    enableShift,
+    arrow,
+    motion,
+    enableFlip,
+    offset,
+    direction,
+    getContainer,
+    zIndex,
+    // trigger,
+    // delay,
+    // disabled,
+    // visible,
+    // clickOutsideClose,
+    // onVisibleChange,
+  } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
 
   const isElementChild = isValidElement(children);
 
@@ -43,6 +69,26 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const popperRef = useRef<HTMLDivElement>(null);
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
   const motionRef = useRef<CSSMotionInstance>(null);
+
+  // const [innerVisible, setInnerVisible] = useMergeState(visible!, { onChange: onVisibleChange });
+
+  // const { genPopupProps, genTriggerProps } = useTrigger({
+  //   clickOutsideClose,
+  //   delay,
+  //   disabled,
+  //   visible: innerVisible,
+  //   onVisibleChange: setInnerVisible,
+  //   trigger,
+  //   triggerRef: referenceRef,
+  // });
+
+  // useEffect(() => {
+  //   if (innerVisible === undefined) return;
+  //   console.log(innerVisible);
+
+  //   motionRef.current?.toggle();
+  //   // isMountedRef.current = true;
+  // }, [innerVisible, motionRef.current]);
 
   useImperativeHandle(ref, () => {});
 
@@ -97,25 +143,25 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     };
   }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
 
+  console.log(motion);
+
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
+
       {popper ? (
-        <CSSMotion ref={motionRef} {...motionRef} {...motion}>
+        <CSSMotion ref={motionRef} {...motion} unmountOnExit>
           <Portal getContainer={getContainer}>
             {arrow && (
-              <div
-                style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
-                ref={arrowRef}
-                className={`${prefixCls}-trigger-arrow`}
-              >
+              <div style={{ ...positionStyle, zIndex }} ref={arrowRef} className={`${prefixCls}-trigger-arrow`}>
                 {arrow}
               </div>
             )}
 
             <div
+              // {...genPopupProps()}
               className={`${prefixCls}-trigger`}
-              style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
+              style={{ ...positionStyle, zIndex }}
             >
               {cloneElement(popper as any, { ref: mergedPopperRef })}
             </div>
