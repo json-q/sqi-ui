@@ -8,7 +8,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import { useIsomorphicLayoutEffect, useMergeProps } from '@sqi-ui/hooks';
+import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
 
 import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
@@ -20,6 +20,9 @@ import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
 import { collectScrollParentList } from './utils/collectScrollParentList';
 import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
+
+import useTrigger from './hooks/useTrigger';
+import clsx from 'clsx';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
@@ -47,18 +50,18 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     popper,
     enableShift,
     arrow,
-    motion,
+    motion = {},
     enableFlip,
     offset,
     direction,
     getContainer,
     zIndex,
-    // trigger,
-    // delay,
-    // disabled,
-    // visible,
-    // clickOutsideClose,
-    // onVisibleChange,
+    trigger,
+    delay,
+    disabled,
+    visible,
+    clickOutsideClose,
+    onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
 
   const isElementChild = isValidElement(children);
@@ -70,25 +73,17 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
   const motionRef = useRef<CSSMotionInstance>(null);
 
-  // const [innerVisible, setInnerVisible] = useMergeState(visible!, { onChange: onVisibleChange });
+  const [innerVisible, setInnerVisible] = useMergeState(visible!, { onChange: onVisibleChange });
 
-  // const { genPopupProps, genTriggerProps } = useTrigger({
-  //   clickOutsideClose,
-  //   delay,
-  //   disabled,
-  //   visible: innerVisible,
-  //   onVisibleChange: setInnerVisible,
-  //   trigger,
-  //   triggerRef: referenceRef,
-  // });
-
-  // useEffect(() => {
-  //   if (innerVisible === undefined) return;
-  //   console.log(innerVisible);
-
-  //   motionRef.current?.toggle();
-  //   // isMountedRef.current = true;
-  // }, [innerVisible, motionRef.current]);
+  const { genPopupProps, genTriggerProps } = useTrigger({
+    clickOutsideClose,
+    delay,
+    disabled,
+    visible: innerVisible,
+    onVisibleChange: setInnerVisible,
+    trigger,
+    triggeEl: referenceRef.current,
+  });
 
   useImperativeHandle(ref, () => {});
 
@@ -113,17 +108,32 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     (e?: Event) => {
       if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
 
-      computedPosition(
-        { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
-        { direction: direction!, enableFlip, enableShift, offset },
-      );
+      setTimeout(() => {
+        computedPosition(
+          { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
+          { direction: direction!, enableFlip, enableShift, offset },
+        );
+      });
     },
     [direction, enableFlip, enableShift, offset],
   );
 
   useIsomorphicLayoutEffect(() => {
+    if (innerVisible === undefined) return;
     updatePosition();
 
+    // Toggle Motion
+    if (innerVisible === true) {
+      motionRef.current?.toggle(true);
+    } else if (innerVisible === false) {
+      motionRef.current?.toggle(false);
+    }
+  }, [innerVisible]);
+
+  useIsomorphicLayoutEffect(() => {
+    updatePosition();
+
+    // Parent scroll listener
     const referenceParents = collectScrollParentList(referenceRef.current);
     const popperParents = collectScrollParentList(popperRef.current);
     const scrollPrents = [...referenceParents, ...popperParents];
@@ -147,25 +157,37 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   return isElementChild ? (
     <>
-      <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
+      <ResizeObserverComponent ref={referenceRef} onResize={() => updatePosition()}>
+        {cloneElement(children, {
+          ...genTriggerProps(children),
+        })}
+      </ResizeObserverComponent>
 
       {popper ? (
-        <CSSMotion ref={motionRef} {...motion} unmountOnExit>
-          <Portal getContainer={getContainer}>
-            {arrow && (
-              <div style={{ ...positionStyle, zIndex }} ref={arrowRef} className={`${prefixCls}-trigger-arrow`}>
-                {arrow}
-              </div>
-            )}
+        <CSSMotion ref={motionRef} {...motion} unmountOnExit={motion.unmountOnExit || true}>
+          {({ className }) => {
+            return (
+              <Portal getContainer={getContainer}>
+                {arrow && (
+                  <div
+                    style={{ ...positionStyle, zIndex }}
+                    ref={arrowRef}
+                    className={clsx(`${prefixCls}-trigger-arrow`, className)}
+                  >
+                    {arrow}
+                  </div>
+                )}
 
-            <div
-              // {...genPopupProps()}
-              className={`${prefixCls}-trigger`}
-              style={{ ...positionStyle, zIndex }}
-            >
-              {cloneElement(popper as any, { ref: mergedPopperRef })}
-            </div>
-          </Portal>
+                <div
+                  {...genPopupProps()}
+                  className={clsx(`${prefixCls}-trigger`, className)}
+                  style={{ ...positionStyle, zIndex }}
+                >
+                  {cloneElement(popper as any, { ref: mergedPopperRef })}
+                </div>
+              </Portal>
+            );
+          }}
         </CSSMotion>
       ) : null}
     </>
