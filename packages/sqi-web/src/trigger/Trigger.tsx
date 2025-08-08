@@ -18,6 +18,8 @@ import { ConfigContext } from '../config-provider/context';
 
 import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
+import { collectScrollParentList } from './utils/collectScrollParentList';
+import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
@@ -25,48 +27,94 @@ const defaultProps: TriggerProps = {
   enableShift: true,
   offset: 0,
   zIndex: 0,
+  trigger: 'hover',
+  delay: 100,
+  clickOutsideClose: true,
+  disabled: false,
+};
+
+const positionStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  willChange: 'transform',
 };
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { children, popup, enableShift, enableFlip, zIndex, offset, direction, getContainer } = useMergeProps(
-    baseProps,
-    defaultProps,
-    componentConfig?.Trigger,
-  );
+  const {
+    children,
+    popper,
+    enableShift,
+    arrow,
+    motion,
+    enableFlip,
+    offset,
+    direction,
+    getContainer,
+    zIndex,
+    // trigger,
+    // delay,
+    // disabled,
+    // visible,
+    // clickOutsideClose,
+    // onVisibleChange,
+  } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
 
   const isElementChild = isValidElement(children);
 
   const referenceRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
-  const originPopupRef = getReactNodeRef(popup);
-  const popupRef = useRef<HTMLDivElement>(null);
-  const mergedPopupRef = useComposeRef(originPopupRef, popupRef);
+  const originPopperRef = getReactNodeRef(popper);
+  const popperRef = useRef<HTMLDivElement>(null);
+  const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
+  const motionRef = useRef<CSSMotionInstance>(null);
+
+  // const [innerVisible, setInnerVisible] = useMergeState(visible!, { onChange: onVisibleChange });
+
+  // const { genPopupProps, genTriggerProps } = useTrigger({
+  //   clickOutsideClose,
+  //   delay,
+  //   disabled,
+  //   visible: innerVisible,
+  //   onVisibleChange: setInnerVisible,
+  //   trigger,
+  //   triggerRef: referenceRef,
+  // });
+
+  // useEffect(() => {
+  //   if (innerVisible === undefined) return;
+  //   console.log(innerVisible);
+
+  //   motionRef.current?.toggle();
+  //   // isMountedRef.current = true;
+  // }, [innerVisible, motionRef.current]);
 
   useImperativeHandle(ref, () => {});
 
   // =============== Warning ===============
   const canUseChildrenRef = supportNodeRef(children);
-  const canUsePopupRef = supportNodeRef(popup);
+  const canUsePopperRef = supportNodeRef(popper);
   if (isElementChild && process.env.NODE_ENV !== 'production') {
     if (!canUseChildrenRef) {
       console.error(
         '[@sqi-ui/web]: The `children` not support ref. Please use `React.forwardRef` to wrap your component.',
       );
     }
-    if (!canUsePopupRef) {
+    if (!canUsePopperRef) {
       console.error(
-        '[@sqi-ui/web]: The `popup` not support ref. Please use `React.forwardRef` to wrap your component.',
+        '[@sqi-ui/web]: The `popper` not support ref. Please use `React.forwardRef` to wrap your component.',
       );
     }
   }
 
+  // ======================== Position Update ===========================
   const updatePosition = useCallback(
     (e?: Event) => {
       if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
 
       computedPosition(
-        { reference: referenceRef.current, popup: popupRef.current, arrow: arrowRef.current },
+        { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
         { direction: direction!, enableFlip, enableShift, offset },
       );
     },
@@ -76,32 +124,49 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   useIsomorphicLayoutEffect(() => {
     updatePosition();
 
-    document.addEventListener('scroll', updatePosition, {
-      capture: true,
-      passive: true,
+    const referenceParents = collectScrollParentList(referenceRef.current);
+    const popperParents = collectScrollParentList(popperRef.current);
+    const scrollPrents = [...referenceParents, ...popperParents];
+
+    scrollPrents.forEach((scrollParent) => {
+      scrollParent.addEventListener('scroll', updatePosition, { passive: true });
     });
 
-    window.addEventListener('resize', updatePosition);
+    window.addEventListener('resize', updatePosition, { passive: true });
 
     return () => {
-      document.removeEventListener('scroll', updatePosition);
+      scrollPrents.forEach((scrollParent) => {
+        scrollParent.removeEventListener('scroll', updatePosition);
+      });
+
       window.removeEventListener('resize', updatePosition);
     };
-  }, [direction, enableFlip, enableShift, offset]);
+  }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
+
+  console.log(motion);
 
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef}>{children}</ResizeObserverComponent>
-      {popup ? (
-        <Portal getContainer={getContainer}>
-          {/* {<div ref={arrowRef} className={`${prefixCls}-trigger-arrow`}></div>} */}
-          <div
-            className={`${prefixCls}-trigger`}
-            style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform', zIndex }}
-          >
-            {cloneElement(popup as any, { ref: mergedPopupRef })}
-          </div>
-        </Portal>
+
+      {popper ? (
+        <CSSMotion ref={motionRef} {...motion} unmountOnExit>
+          <Portal getContainer={getContainer}>
+            {arrow && (
+              <div style={{ ...positionStyle, zIndex }} ref={arrowRef} className={`${prefixCls}-trigger-arrow`}>
+                {arrow}
+              </div>
+            )}
+
+            <div
+              // {...genPopupProps()}
+              className={`${prefixCls}-trigger`}
+              style={{ ...positionStyle, zIndex }}
+            >
+              {cloneElement(popper as any, { ref: mergedPopperRef })}
+            </div>
+          </Portal>
+        </CSSMotion>
       ) : null}
     </>
   ) : null;
