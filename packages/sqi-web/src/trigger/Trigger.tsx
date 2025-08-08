@@ -20,6 +20,7 @@ import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
 import { collectScrollParentList } from './utils/collectScrollParentList';
 import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
+
 import useTrigger from './hooks/useTrigger';
 import clsx from 'clsx';
 
@@ -150,7 +151,9 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
       window.removeEventListener('resize', updatePosition);
     };
-  }, [direction, enableFlip, enableShift, offset]);
+  }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
+
+  console.log(motion);
 
   return isElementChild ? (
     <>
