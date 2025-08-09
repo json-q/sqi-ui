@@ -63,9 +63,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   let x = referencePosition.left - popperPosition.left + translateX;
   let y = referencePosition.top - popperPosition.top + translateY;
 
-  let arrowX = x;
-  let arrowY = y;
-
   const [side, align, vertical, horizontal] = formatDirection(options.direction);
   let currentSide = side;
   // 当定位到居中时，popper 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
@@ -121,8 +118,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
   x = x - distanceX;
   y = y - distanceY;
-
-  genArrow();
 
   // 外部传入的固定偏移必须在 detect 边缘碰撞之后再偏移，不然无法适应各个方向的正确偏移位置
   if (vertical) {
@@ -228,95 +223,5 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
         }
       }
     }
-  }
-
-  function genArrow() {
-    if (!arrow) return;
-
-    if (vertical) {
-      const isElementSmaller = referencePosition.width < popperPosition.width;
-
-      if (isElementSmaller) {
-        arrowX += referencePosition.width / 2;
-      } else {
-        arrowX = x + popperPosition.width / 2;
-      }
-
-      arrowX -= arrowWidth / 2;
-
-      if (currentSide === 'bottom') {
-        arrowY = y;
-        y += arrowHeight;
-      }
-
-      if (currentSide === 'top') {
-        y -= arrowHeight;
-        arrowY = y + popperPosition.height;
-      }
-
-      if (distanceX < 0 && distanceX - leftCorner < 0) {
-        if (isElementSmaller) {
-          arrowX += (leftCorner - distanceX) / 2;
-        } else if (referencePosition.width - leftCorner + distanceX < popperPosition.width) {
-          arrowX += (referencePosition.width - leftCorner + distanceX - popperPosition.width) / 2;
-        }
-      }
-
-      if (distanceX > 0 && distanceX + rightCorner > 0) {
-        if (isElementSmaller) {
-          arrowX -= (distanceX + rightCorner) / 2;
-        } else if (referencePosition.width - distanceX - rightCorner < popperPosition.width) {
-          arrowX -= (referencePosition.width - distanceX - rightCorner - popperPosition.width) / 2;
-        }
-      }
-    }
-
-    if (horizontal) {
-      const isElementSmaller = referencePosition.height < popperPosition.height;
-
-      if (isElementSmaller) {
-        arrowY += referencePosition.height / 2;
-      } else {
-        arrowY = y + popperPosition.height / 2;
-      }
-
-      arrowY -= arrowHeight / 2;
-
-      if (currentSide === 'left') {
-        x -= arrowWidth;
-        arrowX = x + popperPosition.width;
-      }
-
-      if (currentSide === 'right') {
-        arrowX = x;
-        x += arrowWidth;
-      }
-
-      if (distanceY < 0 && distanceY - topCorner < 0) {
-        if (isElementSmaller) {
-          arrowY += (topCorner - distanceY) / 2;
-        } else if (referencePosition.height - topCorner + distanceY < popperPosition.height) {
-          arrowY += (referencePosition.height - topCorner + distanceY - popperPosition.height) / 2;
-        }
-      }
-
-      if (distanceY > 0 && distanceY + bottomCorner > 0) {
-        if (isElementSmaller) {
-          arrowY -= (distanceY + bottomCorner) / 2;
-        } else if (referencePosition.height - distanceY - bottomCorner < popperPosition.height) {
-          arrowY -= (referencePosition.height - distanceY - bottomCorner - popperPosition.height) / 2;
-        }
-      }
-    }
-
-    if (vertical) {
-      arrowY += currentSide === 'bottom' ? offsetY : -offsetY;
-    }
-    if (horizontal) {
-      arrowX += currentSide === 'right' ? offsetX : -offsetX;
-    }
-
-    arrow.style.transform = genTransformStyle(arrowX, arrowY);
-    arrow.setAttribute('data-direction', currentSide);
   }
 }

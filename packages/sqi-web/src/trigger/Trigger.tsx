@@ -49,7 +49,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     children,
     popper,
     enableShift,
-    arrow,
+    // arrow,
     motion = {},
     enableFlip,
     offset,
@@ -166,16 +166,6 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
           {({ className }) => {
             return (
               <Portal getContainer={getContainer}>
-                {arrow && (
-                  <div
-                    style={{ ...positionStyle, zIndex }}
-                    ref={arrowRef}
-                    className={clsx(`${prefixCls}-trigger-arrow`, className)}
-                  >
-                    {arrow}
-                  </div>
-                )}
-
                 <div
                   {...genPopupProps()}
                   className={clsx(`${prefixCls}-trigger`, className)}
