@@ -25,7 +25,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
 
   const [innerChecked, setInnerChecked] = useState(false);
   const mergedDisabled = 'disabled' in restProps ? restProps.disabled : checkboxGroup.disabled;
-  let prevValue = usePrevious(restProps.value);
+  const prevValue = usePrevious(restProps.value);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -33,10 +33,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
   }, []);
 
   useEffect(() => {
-    if (restProps.value !== prevValue) {
-      checkboxGroup.unregisterValue?.(prevValue!);
+    if (restProps.value !== prevValue.current) {
+      checkboxGroup.unregisterValue?.(prevValue.current!);
       checkboxGroup.registerValue?.(restProps.value!);
-      prevValue = restProps.value;
+      prevValue.current = restProps.value;
     }
 
     return () => checkboxGroup.unregisterValue?.(restProps.value!);

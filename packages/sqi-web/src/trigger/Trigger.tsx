@@ -153,8 +153,6 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     };
   }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
 
-  console.log(motion);
-
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef} onResize={() => updatePosition()}>
