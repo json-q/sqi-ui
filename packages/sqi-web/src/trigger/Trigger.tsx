@@ -12,6 +12,7 @@ import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui
 
 import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
+import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 import { getReactNodeRef } from '../_util/dom';
 import { supportNodeRef, useComposeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
@@ -19,7 +20,6 @@ import { ConfigContext } from '../config-provider/context';
 import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
 import { collectScrollParentList } from './utils/collectScrollParentList';
-import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 
 import useTrigger from './hooks/useTrigger';
 import clsx from 'clsx';
@@ -151,12 +151,12 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
       window.removeEventListener('resize', updatePosition);
     };
-  }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
+  }, [direction, enableFlip, enableShift, offset, popperRef.current, arrowRef.current]);
 
   return isElementChild ? (
     <>
       <ResizeObserverComponent ref={referenceRef} onResize={() => updatePosition()}>
-        {cloneElement(children, {
+        {cloneElement(children as any, {
           ...genTriggerProps(children),
         })}
       </ResizeObserverComponent>
@@ -183,5 +183,4 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 });
 
 Trigger.displayName = 'Trigger';
-
 export default Trigger;

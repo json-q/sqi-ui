@@ -26,6 +26,7 @@ export default function Demo() {
   const [offsetX, setOffsetX] = React.useState<string>();
   const [offsetY, setOffsetY] = React.useState<string>();
   const [showArrow, setShowArrow] = React.useState(true);
+  const [count, setCount] = React.useState(0);
 
   React.useLayoutEffect(() => {
     containerRef.current?.scrollTo(containerRef.current.clientWidth + 115, containerRef.current.clientHeight);
@@ -58,7 +59,7 @@ export default function Demo() {
             }
           >
             <Component size={80} backgroundColor="var(--sqi-success-color)">
-              Reference Element
+              <div onClick={() => setCount(count + 1)}>Reference Element</div>
             </Component>
           </Trigger>
         </div>
