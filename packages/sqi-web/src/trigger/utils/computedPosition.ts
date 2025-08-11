@@ -67,7 +67,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   let currentSide = side;
   // 当定位到居中时，popper 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
   const leftCorner = align === 'left' ? 0 : align === 'right' ? widthDifference : widthDifference / 2;
-  // 浮popper 的 right 与 reference 的 right 之间的距离
+  // popper 的 right 与 reference 的 right 之间的距离
   const rightCorner = widthDifference - leftCorner;
 
   const topCorner = align === 'top' ? 0 : align === 'bottom' ? heightDifference : heightDifference / 2;
@@ -118,6 +118,9 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
   x = x - distanceX;
   y = y - distanceY;
+
+  // 箭头的位置一定要在算完 flip 之后
+  compatibleArrow();
 
   // 外部传入的固定偏移必须在 detect 边缘碰撞之后再偏移，不然无法适应各个方向的正确偏移位置
   if (vertical) {
@@ -223,5 +226,45 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
         }
       }
     }
+  }
+
+  function compatibleArrow() {
+    if (!arrow) return;
+    if (vertical) {
+      // 垂直方向：添加箭头高度偏移
+      y += currentSide === 'bottom' ? arrowHeight : -arrowHeight;
+    } else if (horizontal) {
+      // 水平方向：添加箭头宽度偏移
+      x += currentSide === 'right' ? arrowWidth : -arrowWidth;
+    }
+
+    const mainAlignment = options.direction.split('-')[1] || 'center';
+    const transformCoords = { x: 0, y: 0 };
+
+    if (vertical) {
+      transformCoords.y = currentSide === 'top' ? popperPosition.height : -arrowHeight;
+
+      if (mainAlignment === 'start') {
+        transformCoords.x = 0;
+      } else if (mainAlignment === 'center') {
+        transformCoords.x = (popperPosition.width - arrowWidth) / 2;
+      } else if (mainAlignment === 'end') {
+        transformCoords.x = popperPosition.width - arrowWidth;
+      }
+    }
+
+    if (horizontal) {
+      transformCoords.x = currentSide === 'left' ? popperPosition.width : -arrowWidth;
+
+      if (mainAlignment === 'start') {
+        transformCoords.y = 0;
+      } else if (mainAlignment === 'center') {
+        transformCoords.y = (popperPosition.height - arrowHeight) / 2;
+      } else if (mainAlignment === 'end') {
+        transformCoords.y = popperPosition.height - arrowHeight;
+      }
+    }
+
+    arrow.style.transform = genTransformStyle(transformCoords.x, transformCoords.y);
   }
 }

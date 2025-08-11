@@ -36,7 +36,14 @@ const defaultProps: TriggerProps = {
   disabled: false,
 };
 
-const positionStyle: React.CSSProperties = {
+const popperStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  willChange: 'transform',
+};
+
+const arrowStyle: React.CSSProperties = {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -49,7 +56,6 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     children,
     popper,
     enableShift,
-    // arrow,
     motion = {},
     enableFlip,
     offset,
@@ -60,6 +66,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     delay,
     disabled,
     visible,
+    arrow,
     clickOutsideClose,
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
@@ -169,8 +176,17 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
                 <div
                   {...genPopupProps()}
                   className={clsx(`${prefixCls}-trigger`, className)}
-                  style={{ ...positionStyle, zIndex }}
+                  style={{ ...popperStyle, zIndex }}
                 >
+                  {arrow ? (
+                    <div className={`${prefixCls}-trigger-arrow`}>
+                      {cloneElement(arrow as any, {
+                        ref: arrowRef,
+                        style: { ...arrowStyle, ...((arrow.props as any).style || {}) },
+                      })}
+                    </div>
+                  ) : null}
+
                   {cloneElement(popper as any, { ref: mergedPopperRef })}
                 </div>
               </Portal>
