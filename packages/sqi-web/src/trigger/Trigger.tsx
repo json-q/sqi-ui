@@ -37,19 +37,19 @@ const defaultProps: TriggerProps = {
   disabled: false,
 };
 
-const popperStyle: React.CSSProperties = {
+const basePositionStyle: React.CSSProperties = {
   position: 'absolute',
   top: 0,
   left: 0,
+  bottom: 'auto',
+  right: 'auto',
+  margin: 0,
   willChange: 'transform',
 };
 
-const arrowStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  willChange: 'transform',
-};
+const popperStyle = { ...basePositionStyle };
+
+const arrowStyle = { ...basePositionStyle };
 
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
