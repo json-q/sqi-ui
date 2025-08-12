@@ -128,7 +128,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   const asyncUpdatePosition = debounce<any>(() => {
     return new Promise<any>((resolve) => {
-      requestAnimationFrame(() => updatePosition());
+      updatePosition();
       resolve(undefined);
     });
   });

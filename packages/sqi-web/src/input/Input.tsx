@@ -27,9 +27,9 @@ function formatValueToString(value: unknown, maxLength?: number, errorOnly?: boo
   return str;
 }
 
-export interface InputRef extends React.RefObject<unknown> {
-  currentElement: HTMLDivElement;
-  inputElement: HTMLInputElement;
+export interface InputRef {
+  currentElement: HTMLDivElement | null;
+  inputElement: HTMLInputElement | null;
   focus: () => void;
   blur: () => void;
   select: () => void;
@@ -67,7 +67,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useImperativeHandle(ref as InputRef, () => ({
+  useImperativeHandle(ref, () => ({
     currentElement: wrapperRef.current,
     inputElement: inputRef.current,
     focus: () => inputRef.current?.focus(),

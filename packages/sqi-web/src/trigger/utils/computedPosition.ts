@@ -115,8 +115,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     width: clientWidth,
   });
 
-  console.log(distanceX, distanceY);
-
   x = x - distanceX;
   y = y - distanceY;
 

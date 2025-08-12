@@ -36,7 +36,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
     if (restProps.value !== prevValue.current) {
       checkboxGroup.unregisterValue?.(prevValue.current!);
       checkboxGroup.registerValue?.(restProps.value!);
-      prevValue.current = restProps.value;
+      // prevValue.current = restProps.value;
     }
 
     return () => checkboxGroup.unregisterValue?.(restProps.value!);
