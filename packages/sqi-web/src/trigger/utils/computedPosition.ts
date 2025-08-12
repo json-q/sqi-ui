@@ -88,15 +88,14 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   // const scrollableParents: HTMLElement[] = [];
   let parentPosition: ElementPosition;
 
-  let distanceX = 0;
-  let distanceY = 0;
-
   const [offsetX, offsetY] = formatOffset(options.offset);
 
   const { height: arrowHeight = 0, width: arrowWidth = 0 } = arrow
     ? getElementPosition(arrow, scrollLeft, scrollTop)
     : {};
 
+  let distanceX = 0;
+  let distanceY = 0;
   while (scrollableParentEl) {
     // scrollableParents.push(scrollableParentEl);
     parentPosition = getElementPosition(scrollableParentEl, scrollLeft, scrollTop);
@@ -230,6 +229,8 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
   function compatibleArrow() {
     if (!arrow) return;
+
+    // 箭头存在的情况下，popper 元素需再额外偏移箭头的宽/高
     if (vertical) {
       // 垂直方向：添加箭头高度偏移
       y += currentSide === 'bottom' ? arrowHeight : -arrowHeight;
@@ -240,7 +241,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
     const mainAlignment = options.direction.split('-')[1] || 'center';
     const transformCoords = { x: 0, y: 0 };
-
+    // 根据翻转后的方向进行箭头的位置偏移
     if (vertical) {
       transformCoords.y = currentSide === 'top' ? popperPosition.height : -arrowHeight;
 
@@ -251,9 +252,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
       } else if (mainAlignment === 'end') {
         transformCoords.x = popperPosition.width - arrowWidth;
       }
-    }
-
-    if (horizontal) {
+    } else if (horizontal) {
       transformCoords.x = currentSide === 'left' ? popperPosition.width : -arrowWidth;
 
       if (mainAlignment === 'start') {
