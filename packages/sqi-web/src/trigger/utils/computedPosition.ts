@@ -259,7 +259,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     // 根据翻转后的方向进行箭头的位置偏移
     if (vertical) {
       transformCoords.y = currentSide === 'top' ? popperPosition.height : -arrowHeight;
-      // 比如向右移，在 arrow 能固定在 reference 中间时，需要不断偏移使其指向中间，当无法指向时，需要不断向左偏移
+      // 比如向右移，在 arrow 能固定在 reference 中间时，需要不断偏移使其指向中间，当无法指向时，需要不断向左偏移尽量保证在视图内
       const shouldOnCenter = Math.abs(referencePosition.width - popperPosition.width) > Math.abs(distanceX);
       const shouldStaticArrow = distanceX === 0;
 
@@ -292,7 +292,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     } else if (horizontal) {
       transformCoords.x = currentSide === 'left' ? popperPosition.width : -arrowWidth;
 
-      // 计算 shouldStaticArrow 和 shouldOnCenter
       const shouldStaticArrow = distanceY === 0;
       const shouldOnCenter = Math.abs(referencePosition.height - popperPosition.height) > Math.abs(distanceY);
 
