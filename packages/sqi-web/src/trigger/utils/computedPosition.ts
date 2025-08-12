@@ -140,46 +140,15 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     const { top, bottom, left, right, height, width } = position;
 
     if (vertical) {
-      // 目标元素相对最近的父元素的垂直中心点
       const referenceCenterY = Math.round(referencePosition.top - top + referencePosition.height / 2);
       const parentCenterY = Math.round(height / 2);
 
       if (options.enableFlip) {
-        if (
-          referencePosition.top - (popperPosition.height + offsetY + arrowHeight) < top &&
-          referenceCenterY <= parentCenterY &&
-          currentSide === 'top'
-        ) {
-          y += popperPosition.height + referencePosition.height;
-          currentSide = 'bottom';
-        } else if (
-          referencePosition.bottom + popperPosition.height + offsetY + arrowHeight > height + top &&
-          referenceCenterY >= parentCenterY &&
-          currentSide === 'bottom'
-        ) {
-          y -= popperPosition.height + referencePosition.height;
-          currentSide = 'top';
-        }
+        handleVerticalFlip(referenceCenterY, parentCenterY);
       }
 
       if (options.enableShift) {
-        if (referencePosition.left + leftCorner < left) {
-          distanceX = calcMaxDistance(
-            referencePosition.right - arrowWidth > left
-              ? referencePosition.left + leftCorner - left
-              : -referencePosition.width + leftCorner + arrowWidth,
-            distanceX,
-          );
-        }
-
-        if (referencePosition.right - rightCorner > right) {
-          distanceX = calcMaxDistance(
-            referencePosition.left + arrowWidth < right
-              ? referencePosition.right - rightCorner - right
-              : referencePosition.width - rightCorner - arrowWidth,
-            distanceX,
-          );
-        }
+        handleVerticalShift();
       }
     }
 
@@ -188,41 +157,85 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
       const parentCenterX = Math.round(width / 2);
 
       if (options.enableFlip) {
-        if (
-          referencePosition.left - (popperPosition.width + offsetX + arrowWidth) < left &&
-          elementCenterX < parentCenterX &&
-          currentSide === 'left'
-        ) {
-          x += referencePosition.width + popperPosition.width;
-          currentSide = 'right';
-        } else if (
-          referencePosition.right + popperPosition.width + offsetX + arrowWidth > right &&
-          elementCenterX > parentCenterX &&
-          currentSide === 'right'
-        ) {
-          x -= referencePosition.width + popperPosition.width;
-          currentSide = 'left';
-        }
+        handleHorizontalFlip(elementCenterX, parentCenterX);
       }
 
       if (options.enableShift) {
-        if (referencePosition.top + topCorner < top) {
-          distanceY = calcMaxDistance(
-            referencePosition.bottom - arrowHeight > top
-              ? referencePosition.top + topCorner - top
-              : -referencePosition.height + topCorner + arrowHeight,
-            distanceY,
-          );
-        }
+        handleHorizontalShift();
+      }
+    }
 
-        if (referencePosition.bottom - bottomCorner > bottom) {
-          distanceY = calcMaxDistance(
-            referencePosition.top + arrowHeight < bottom
-              ? referencePosition.bottom - bottomCorner - bottom
-              : referencePosition.height - bottomCorner - arrowHeight,
-            distanceY,
-          );
-        }
+    function handleVerticalFlip(refCenterY: number, parentCenterY: number) {
+      const isTopEdge = referencePosition.top - (popperPosition.height + offsetY + arrowHeight) < top;
+      const isBottomEdge = referencePosition.bottom + popperPosition.height + offsetY + arrowHeight > height + top;
+
+      if (isTopEdge && refCenterY <= parentCenterY && currentSide === 'top') {
+        y += popperPosition.height + referencePosition.height;
+        currentSide = 'bottom';
+      } else if (isBottomEdge && refCenterY >= parentCenterY && currentSide === 'bottom') {
+        y -= popperPosition.height + referencePosition.height;
+        currentSide = 'top';
+      }
+    }
+
+    function handleVerticalShift() {
+      // 左边界检测
+      if (referencePosition.left + leftCorner < left) {
+        const overflowLeft = referencePosition.left + leftCorner - left;
+        const safeOverflow =
+          referencePosition.right - arrowWidth > left
+            ? overflowLeft
+            : -referencePosition.width + leftCorner + arrowWidth;
+
+        distanceX = calcMaxDistance(safeOverflow, distanceX);
+      }
+
+      // 右边界检测
+      if (referencePosition.right - rightCorner > right) {
+        const overflowRight = referencePosition.right - rightCorner - right;
+        const safeOverflow =
+          referencePosition.left + arrowWidth < right
+            ? overflowRight
+            : referencePosition.width - rightCorner - arrowWidth;
+
+        distanceX = calcMaxDistance(safeOverflow, distanceX);
+      }
+    }
+
+    function handleHorizontalFlip(refCenterX: number, parentCenterX: number) {
+      const isLeftEdge = referencePosition.left - (popperPosition.width + offsetX + arrowWidth) < left;
+      const isRightEdge = referencePosition.right + popperPosition.width + offsetX + arrowWidth > right;
+
+      if (isLeftEdge && refCenterX < parentCenterX && currentSide === 'left') {
+        x += referencePosition.width + popperPosition.width;
+        currentSide = 'right';
+      } else if (isRightEdge && refCenterX > parentCenterX && currentSide === 'right') {
+        x -= referencePosition.width + popperPosition.width;
+        currentSide = 'left';
+      }
+    }
+
+    function handleHorizontalShift() {
+      // 上边界检测
+      if (referencePosition.top + topCorner < top) {
+        const overflowTop = referencePosition.top + topCorner - top;
+        const safeOverflow =
+          referencePosition.bottom - arrowHeight > top
+            ? overflowTop
+            : -referencePosition.height + topCorner + arrowHeight;
+
+        distanceY = calcMaxDistance(safeOverflow, distanceY);
+      }
+
+      // 下边界检测
+      if (referencePosition.bottom - bottomCorner > bottom) {
+        const overflowBottom = referencePosition.bottom - bottomCorner - bottom;
+        const safeOverflow =
+          referencePosition.top + arrowHeight < bottom
+            ? overflowBottom
+            : referencePosition.height - bottomCorner - arrowHeight;
+
+        distanceY = calcMaxDistance(safeOverflow, distanceY);
       }
     }
   }
