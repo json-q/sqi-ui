@@ -259,16 +259,16 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     // 根据翻转后的方向进行箭头的位置偏移
     if (vertical) {
       transformCoords.y = currentSide === 'top' ? popperPosition.height : -arrowHeight;
-      // 比如向右移，在 arrow 能固定在 reference 中间时，需要不断偏移使其指向中间，当无法指向时，需要不断向左偏移尽量保证在视图内
+      // 比如处于 bottom-center 时向右移，在 arrow 能固定（视觉上）指向在 reference 中间时，需要不断偏移使其指向中间
+      // 当无法指向时，需要不断向左（相对于 popper）偏移尽量保证在视图内直至 reference 彻底离开视图区域
       const shouldOnCenter = Math.abs(referencePosition.width - popperPosition.width) > Math.abs(distanceX);
-      const shouldStaticArrow = distanceX === 0;
+      const shouldStaticArrow = distanceX === 0; // 仅副轴为 center 时使用
 
       if (mainAlignment === 'start') {
         if (shouldStaticArrow) {
           transformCoords.x = 0;
         } else {
-          transformCoords.x = Math.max(0, distanceX);
-          transformCoords.x = Math.min(transformCoords.x, popperPosition.width - arrowWidth);
+          transformCoords.x = Math.min(Math.max(0, distanceX), popperPosition.width - arrowWidth);
         }
       } else if (mainAlignment === 'center') {
         if (shouldStaticArrow) {
@@ -277,16 +277,20 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
           if (shouldOnCenter) {
             transformCoords.x = (popperPosition.width - arrowWidth) / 2 + distanceX;
           } else {
-            transformCoords.x = (popperPosition.width - arrowWidth) / 2 + distanceX;
-            transformCoords.x = Math.max(0, Math.min(popperPosition.width - arrowWidth, transformCoords.x));
+            transformCoords.x = Math.max(
+              0,
+              Math.min(popperPosition.width - arrowWidth, (popperPosition.width - arrowWidth) / 2 + distanceX),
+            );
           }
         }
       } else if (mainAlignment === 'end') {
         if (shouldStaticArrow) {
           transformCoords.x = popperPosition.width - arrowWidth;
         } else {
-          transformCoords.x = popperPosition.width - arrowWidth + distanceX;
-          transformCoords.x = Math.max(0, Math.min(popperPosition.width - arrowWidth, transformCoords.x));
+          transformCoords.x = Math.max(
+            0,
+            Math.min(popperPosition.width - arrowWidth, popperPosition.width - arrowWidth + distanceX),
+          );
         }
       }
     } else if (horizontal) {
@@ -300,8 +304,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
           transformCoords.y = 0;
         } else {
           // 动态偏移：根据 distanceY 向下移动箭头
-          transformCoords.y = Math.max(0, distanceY);
-          transformCoords.y = Math.min(transformCoords.y, popperPosition.height - arrowHeight);
+          transformCoords.y = Math.min(Math.max(0, distanceY), popperPosition.height - arrowHeight);
         }
       } else if (mainAlignment === 'center') {
         if (shouldStaticArrow) {
@@ -310,16 +313,20 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
           if (shouldOnCenter) {
             transformCoords.y = (popperPosition.height - arrowHeight) / 2 + distanceY;
           } else {
-            transformCoords.y = (popperPosition.height - arrowHeight) / 2 + distanceY;
-            transformCoords.y = Math.max(0, Math.min(popperPosition.height - arrowHeight, transformCoords.y));
+            transformCoords.y = Math.max(
+              0,
+              Math.min(popperPosition.height - arrowHeight, (popperPosition.height - arrowHeight) / 2 + distanceY),
+            );
           }
         }
       } else if (mainAlignment === 'end') {
         if (shouldStaticArrow) {
           transformCoords.y = popperPosition.height - arrowHeight;
         } else {
-          transformCoords.y = popperPosition.height - arrowHeight + distanceY;
-          transformCoords.y = Math.max(0, Math.min(popperPosition.height - arrowHeight, transformCoords.y));
+          transformCoords.y = Math.max(
+            0,
+            Math.min(popperPosition.height - arrowHeight, popperPosition.height - arrowHeight + distanceY),
+          );
         }
       }
     }
