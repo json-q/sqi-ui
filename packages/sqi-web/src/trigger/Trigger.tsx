@@ -190,7 +190,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
                     <div className={`${prefixCls}-trigger-arrow`}>
                       {cloneElement(arrow as any, {
                         ref: arrowRef,
-                        style: { ...arrowStyle, ...((arrow.props as any).style || {}) },
+                        style: { ...arrowStyle, zIndex, ...((arrow.props as any).style || {}) },
                       })}
                     </div>
                   ) : null}
