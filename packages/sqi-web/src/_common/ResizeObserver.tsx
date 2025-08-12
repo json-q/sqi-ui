@@ -2,7 +2,7 @@ import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, u
 import { throttle } from '@sqi-ui/utils';
 import { useResizeObserver } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
-import { getDOM, getReactNodeRef } from '../_util/dom';
+import { getReactNodeRef, getRefDom } from '../_util/dom';
 import { useComposeRef } from '../_util/ref';
 
 export interface ResizeObserverProps {
@@ -44,14 +44,14 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
   }
 
   const getDomElement = () => {
-    return getDOM(elementRef.current) as HTMLElement;
+    return getRefDom(elementRef) as HTMLElement;
   };
 
   useImperativeHandle(ref, () => getDomElement());
 
   const throttleResize = onResize ? throttle(onResize, throttleMs) : undefined;
 
-  useResizeObserver(elementRef, throttleResize, !disabled);
+  useResizeObserver(getDomElement(), throttleResize, !disabled);
 
   return isElement ? cloneElement(children as any, { ref: mergedRef }) : children;
 });

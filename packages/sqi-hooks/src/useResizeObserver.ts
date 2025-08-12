@@ -4,7 +4,7 @@ import { canUseDom } from '@sqi-ui/utils';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
 export function useResizeObserver(
-  container: React.RefObject<Element | null>,
+  container: Element,
   callback?: (data: ResizeObserverEntry[]) => void,
   enabled = true,
 ) {
@@ -12,20 +12,19 @@ export function useResizeObserver(
   callbackRef.current = callback;
 
   useIsomorphicLayoutEffect(() => {
-    const element = container.current;
     let observer: ResizeObserverPolyfill | null = null;
 
-    if (!enabled || !canUseDom() || !element) return;
+    if (!enabled || !canUseDom() || !container) return;
 
     const resizeCallback: ResizeObserverCallback = (entries) => {
       callbackRef.current?.(entries);
     };
     observer = new ResizeObserverPolyfill(resizeCallback);
-    observer.observe(element);
+    observer.observe(container);
 
     return () => {
-      if (observer && element) {
-        observer.unobserve(element);
+      if (observer && container) {
+        observer.unobserve(container);
         observer.disconnect?.();
         observer = null;
       }

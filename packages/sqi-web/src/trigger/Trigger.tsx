@@ -12,6 +12,7 @@ import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui
 
 import ResizeObserverComponent from '../_common/ResizeObserver';
 import Portal from '../_common/Portal';
+import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 import { getReactNodeRef } from '../_util/dom';
 import { supportNodeRef, useComposeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
@@ -19,10 +20,10 @@ import { ConfigContext } from '../config-provider/context';
 import { computedPosition } from './utils';
 import type { TriggerProps } from './type';
 import { collectScrollParentList } from './utils/collectScrollParentList';
-import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 
 import useTrigger from './hooks/useTrigger';
 import clsx from 'clsx';
+import debounce from './utils/debounce';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
@@ -36,7 +37,14 @@ const defaultProps: TriggerProps = {
   disabled: false,
 };
 
-const positionStyle: React.CSSProperties = {
+const popperStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  willChange: 'transform',
+};
+
+const arrowStyle: React.CSSProperties = {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -49,7 +57,6 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     children,
     popper,
     enableShift,
-    arrow,
     motion = {},
     enableFlip,
     offset,
@@ -60,6 +67,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     delay,
     disabled,
     visible,
+    arrow,
     clickOutsideClose,
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
@@ -118,6 +126,13 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     [direction, enableFlip, enableShift, offset],
   );
 
+  const asyncUpdatePosition = debounce<any>(() => {
+    return new Promise<any>((resolve) => {
+      updatePosition();
+      resolve(undefined);
+    });
+  });
+
   useIsomorphicLayoutEffect(() => {
     if (innerVisible === undefined) return;
     updatePosition();
@@ -131,7 +146,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   }, [innerVisible]);
 
   useIsomorphicLayoutEffect(() => {
-    updatePosition();
+    asyncUpdatePosition();
 
     // Parent scroll listener
     const referenceParents = collectScrollParentList(referenceRef.current);
@@ -139,26 +154,24 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     const scrollPrents = [...referenceParents, ...popperParents];
 
     scrollPrents.forEach((scrollParent) => {
-      scrollParent.addEventListener('scroll', updatePosition, { passive: true });
+      scrollParent.addEventListener('scroll', asyncUpdatePosition, { passive: true });
     });
 
-    window.addEventListener('resize', updatePosition, { passive: true });
+    window.addEventListener('resize', asyncUpdatePosition, { passive: true });
 
     return () => {
       scrollPrents.forEach((scrollParent) => {
-        scrollParent.removeEventListener('scroll', updatePosition);
+        scrollParent.removeEventListener('scroll', asyncUpdatePosition);
       });
 
-      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('resize', asyncUpdatePosition);
     };
-  }, [direction, enableFlip, enableShift, offset, referenceRef.current, mergedPopperRef, arrowRef.current]);
-
-  console.log(motion);
+  }, [direction, enableFlip, enableShift, offset, popperRef.current, arrowRef.current]);
 
   return isElementChild ? (
     <>
-      <ResizeObserverComponent ref={referenceRef} onResize={() => updatePosition()}>
-        {cloneElement(children, {
+      <ResizeObserverComponent ref={referenceRef} onResize={() => asyncUpdatePosition()}>
+        {cloneElement(children as any, {
           ...genTriggerProps(children),
         })}
       </ResizeObserverComponent>
@@ -168,21 +181,20 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
           {({ className }) => {
             return (
               <Portal getContainer={getContainer}>
-                {arrow && (
-                  <div
-                    style={{ ...positionStyle, zIndex }}
-                    ref={arrowRef}
-                    className={clsx(`${prefixCls}-trigger-arrow`, className)}
-                  >
-                    {arrow}
-                  </div>
-                )}
-
                 <div
                   {...genPopupProps()}
                   className={clsx(`${prefixCls}-trigger`, className)}
-                  style={{ ...positionStyle, zIndex }}
+                  style={{ ...popperStyle, zIndex }}
                 >
+                  {arrow ? (
+                    <div className={`${prefixCls}-trigger-arrow`}>
+                      {cloneElement(arrow as any, {
+                        ref: arrowRef,
+                        style: { ...arrowStyle, ...((arrow.props as any).style || {}) },
+                      })}
+                    </div>
+                  ) : null}
+
                   {cloneElement(popper as any, { ref: mergedPopperRef })}
                 </div>
               </Portal>
@@ -195,5 +207,4 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 });
 
 Trigger.displayName = 'Trigger';
-
 export default Trigger;

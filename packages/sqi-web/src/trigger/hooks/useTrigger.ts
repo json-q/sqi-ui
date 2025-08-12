@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactElement } from 'react';
 import type { TriggerType } from '../type';
 
 interface Options {
-  triggeEl?: HTMLDivElement | null;
+  triggeEl?: HTMLElement | null;
   trigger?: TriggerType | TriggerType[];
   delay?: number;
   clickOutsideClose?: boolean;

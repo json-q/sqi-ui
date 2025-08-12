@@ -38,7 +38,7 @@ export function useMergeState<T>(
      *  严格模式下 useEffect 执行两次，所以存在 propsValue 将 defaultValue 覆盖的严重 bug。
      *  解决方法来源: https://github.com/arco-design/arco-design/blob/main/components/_util/hooks/useMergeValue.ts
      */
-    if (isUndefined(propsValue) && prevPropsValue !== propsValue) {
+    if (isUndefined(propsValue) && prevPropsValue.current !== propsValue) {
       setInnerValue(propsValue!);
     }
   }, [propsValue]);

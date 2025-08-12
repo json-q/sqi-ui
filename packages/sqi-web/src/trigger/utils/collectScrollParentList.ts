@@ -23,7 +23,7 @@ export function collectScrollParentList(
 }
 
 function getParentNode(element: Element): Element {
-  if (element.nodeName.toLowerCase() === 'html') {
+  if (getNodeName(element) === 'html') {
     return element;
   }
 
@@ -41,7 +41,7 @@ const lastTraversableNodeNames = new Set(['html', 'body', '#document']);
 
 function getScrollParent(node: Element): Element {
   // 若元素本身是根节点，则统一以 body 为滚动容器
-  if (lastTraversableNodeNames.has(node.nodeName.toLowerCase())) {
+  if (lastTraversableNodeNames.has(getNodeName(node) as any)) {
     return node.ownerDocument.body;
   }
 
@@ -50,4 +50,8 @@ function getScrollParent(node: Element): Element {
   }
 
   return getScrollParent(getParentNode(node));
+}
+
+function getNodeName(element: Node): string | null {
+  return element ? (element.nodeName || '').toLowerCase() : null;
 }

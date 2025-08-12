@@ -1,10 +1,9 @@
-import React, { forwardRef, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
 import type { FocusEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
 import { isFunction, isNumber, isObject, isString, isUndefined } from '@sqi-ui/utils';
 import { CloseCircleFilledIcon, BrowseOffIcon, BrowseIcon } from '@sqi-ui/icons';
-import { composeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
 import type { InputProps, VisibilityToggle } from './type';
 
@@ -28,7 +27,15 @@ function formatValueToString(value: unknown, maxLength?: number, errorOnly?: boo
   return str;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
+export interface InputRef {
+  currentElement: HTMLDivElement | null;
+  inputElement: HTMLInputElement | null;
+  focus: () => void;
+  blur: () => void;
+  select: () => void;
+}
+
+const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const {
     size,
@@ -57,7 +64,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(ref, () => ({
+    currentElement: wrapperRef.current,
+    inputElement: inputRef.current,
+    focus: () => inputRef.current?.focus(),
+    blur: () => inputRef.current?.blur(),
+    select: () => inputRef.current?.select(),
+  }));
 
   // =========== Input Focus ============
   const [isFocused, toggleIsFocused] = useState(false);
@@ -179,12 +195,20 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
       let content = children;
       if (hasCoreWrapper) {
         // 这层主要是针对 input 同一行的各种 dom 进行扩展，因此为 flex
-        content = <div className={`${prefixCls}-input-group`}>{content}</div>;
+        content = (
+          <div ref={wrapperRef} className={`${prefixCls}-input-group`}>
+            {content}
+          </div>
+        );
       }
 
       if (tips) {
         // tips 是单独的一行，不能放在 group 中，需格外的一层元素包裹
-        content = <div className={`${prefixCls}-input-group-extra`}>{content}</div>;
+        content = (
+          <div ref={wrapperRef} className={`${prefixCls}-input-group-extra`}>
+            {content}
+          </div>
+        );
       }
 
       return content;
@@ -221,27 +245,30 @@ const Input = forwardRef<HTMLInputElement, InputProps>((baseProps, ref) => {
 
   // input core element
   const inputElement = (
-    <>
-      <span className={wrapperClasses} style={style} onClick={handleClickInputWrapper}>
-        {prefixElement}
-        <input
-          ref={composeRef(ref, inputRef)}
-          {...restProps}
-          type={renderType}
-          value={formatValue}
-          readOnly={readOnly}
-          className={inputClasses}
-          placeholder={placeholder}
-          disabled={disabled}
-          onChange={handleChange}
-          onFocus={internalFocus}
-          onBlur={internalBlur}
-        />
-        {clearElement}
-        {suffixElement}
-        {limitLengthElement}
-      </span>
-    </>
+    <span
+      ref={addonBefore || addonAfter ? undefined : wrapperRef}
+      className={wrapperClasses}
+      style={style}
+      onClick={handleClickInputWrapper}
+    >
+      {prefixElement}
+      <input
+        ref={inputRef}
+        {...restProps}
+        type={renderType}
+        value={formatValue}
+        readOnly={readOnly}
+        className={inputClasses}
+        placeholder={placeholder}
+        disabled={disabled}
+        onChange={handleChange}
+        onFocus={internalFocus}
+        onBlur={internalBlur}
+      />
+      {clearElement}
+      {suffixElement}
+      {limitLengthElement}
+    </span>
   );
 
   const addBeforeElement = addonBefore && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonBefore}</span>;
