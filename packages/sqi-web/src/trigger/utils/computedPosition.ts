@@ -11,7 +11,15 @@ import { formatDirection, formatOffset } from './format';
 
 export interface PositionOptions {
   direction: TriggerDirection;
+  /**
+   * @description 开启自动翻转
+   * @default true
+   */
   enableFlip?: boolean;
+  /**
+   * @description 开启自动位移
+   * @default true
+   */
   enableShift?: boolean;
   offset?: number | { x?: number; y?: number };
 }
@@ -22,11 +30,10 @@ interface ElementCollection {
   arrow?: HTMLElement | null;
 }
 
-const defaultOptions: Required<PositionOptions> = {
+const defaultOptions: PositionOptions = {
   direction: 'bottom',
   enableFlip: true,
   enableShift: true,
-  offset: 0,
 };
 
 export default function computedPosition(doms: ElementCollection, baseOptions: PositionOptions) {
@@ -34,106 +41,72 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   if (!reference || !popper) return;
 
   const options = { ...defaultOptions, ...baseOptions };
-  const popperParent = popper.parentNode as HTMLElement;
-  const [translateX, translateY] = getTranslateValue(popperParent);
 
+  const popperParentContainer = popper.parentNode as HTMLElement;
+  const [translateX, translateY] = getTranslateValue(popperParentContainer);
+
+  // Compatible scrollY see: https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollY#notes
+  // 😓 Are you sure support IE9 ?
   const scrollTop = window.pageYOffset;
   const scrollLeft = window.pageXOffset;
 
-  // 获取元素位置（缓存结果）
-  const referencePos = getElementPosition(reference, scrollLeft, scrollTop);
-  const popperPos = getElementPosition(popper, scrollLeft, scrollTop);
-  const arrowSize = arrow ? getElementPosition(arrow, scrollLeft, scrollTop) : { width: 0, height: 0 };
+  // 定位元素及浮动元素的坐标
+  const referencePosition = getElementPosition(reference, scrollLeft, scrollTop);
+  const popperPosition = getElementPosition(popper, scrollLeft, scrollTop);
 
-  // 计算基础偏移量
-  let { x, y, currentSide } = calculateBasePosition(referencePos, popperPos, options, translateX, translateY);
+  // 两个元素的宽高差，当定位到居中时，popper 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
+  const widthDifference = referencePosition.width - popperPosition.width;
+  const heightDifference = referencePosition.height - popperPosition.height;
+
+  //  ================================================ 计算 x y 的基本偏移 ==================================
+  // popper 现有的坐标，需要相对定位父容器偏移的距离（所以需要 + translate 父容器已偏移的值）
+  let x = referencePosition.left - popperPosition.left + translateX;
+  let y = referencePosition.top - popperPosition.top + translateY;
+
+  const [side, align, vertical, horizontal] = formatDirection(options.direction);
+  let currentSide = side;
+  // 当定位到居中时，popper 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
+  const leftCorner = align === 'left' ? 0 : align === 'right' ? widthDifference : widthDifference / 2;
+  // popper 的 right 与 reference 的 right 之间的距离
+  const rightCorner = widthDifference - leftCorner;
+
+  const topCorner = align === 'top' ? 0 : align === 'bottom' ? heightDifference : heightDifference / 2;
+  const bottomCorner = heightDifference - topCorner;
+
+  if (vertical) {
+    x += leftCorner;
+    // 垂直且 top 情况下，popper 元素在 reference 元素上方，所以 top 值需要 - reference 元素高度，bottom 类推
+    y += side === 'top' ? -popperPosition.height : referencePosition.height;
+  }
+
+  if (horizontal) {
+    x += side === 'left' ? -popperPosition.width : referencePosition.width;
+    y += topCorner;
+  }
+
+  let scrollableParentEl = getScrollableParent(reference);
+  // const scrollableParents: HTMLElement[] = [];
+  let parentPosition: ElementPosition;
+
   const [offsetX, offsetY] = formatOffset(options.offset);
 
-  // 边界检测和位置调整
-  const { distanceX, distanceY } = detectBoundaries(
-    reference,
-    referencePos,
-    popperPos,
-    arrowSize,
-    options,
-    currentSide,
-  );
+  const { height: arrowHeight = 0, width: arrowWidth = 0 } = arrow
+    ? getElementPosition(arrow, scrollLeft, scrollTop)
+    : {};
 
-  // 应用边界偏移
-  x -= distanceX;
-  y -= distanceY;
-
-  // 箭头定位
-  const arrowCoords = positionArrow(
-    arrowSize,
-    referencePos,
-    popperPos,
-    options.direction,
-    currentSide,
-    distanceX,
-    distanceY,
-  );
-
-  // 应用最终位置
-  applyFinalPosition(popperParent, x, y, currentSide, arrow, arrowCoords, offsetX, offsetY, options.direction);
-}
-
-// 计算基础位置
-function calculateBasePosition(
-  referencePos: ElementPosition,
-  popperPos: ElementPosition,
-  options: Required<PositionOptions>,
-  translateX: number,
-  translateY: number,
-) {
-  let x = referencePos.left - popperPos.left + translateX;
-  let y = referencePos.top - popperPos.top + translateY;
-  const currentSide = options.direction.split('-')[0] as 'top' | 'bottom' | 'left' | 'right';
-
-  const widthDiff = referencePos.width - popperPos.width;
-  const heightDiff = referencePos.height - popperPos.height;
-  const [side, align] = formatDirection(options.direction);
-
-  // 计算对齐偏移
-  const alignOffsetX = align === 'left' ? 0 : align === 'right' ? widthDiff : widthDiff / 2;
-  const alignOffsetY = align === 'top' ? 0 : align === 'bottom' ? heightDiff : heightDiff / 2;
-
-  if (side === 'top' || side === 'bottom') {
-    x += alignOffsetX;
-    y += side === 'top' ? -popperPos.height : referencePos.height;
-  } else {
-    x += side === 'left' ? -popperPos.width : referencePos.width;
-    y += alignOffsetY;
-  }
-
-  return { x, y, currentSide };
-}
-
-// 边界检测
-function detectBoundaries(
-  reference: HTMLElement,
-  referencePos: ElementPosition,
-  popperPos: ElementPosition,
-  arrowSize: { width: number; height: number },
-  options: Required<PositionOptions>,
-  currentSide: string,
-) {
-  const scrollTop = window.pageYOffset;
-  const scrollLeft = window.pageXOffset;
   let distanceX = 0;
   let distanceY = 0;
-
-  // 收集所有滚动容器
-  const containers: ElementPosition[] = [];
-  let parent = getScrollableParent(reference);
-  while (parent) {
-    containers.push(getElementPosition(parent, scrollLeft, scrollTop));
-    parent = getScrollableParent(parent.parentNode as HTMLElement);
+  while (scrollableParentEl) {
+    // scrollableParents.push(scrollableParentEl);
+    parentPosition = getElementPosition(scrollableParentEl, scrollLeft, scrollTop);
+    detectEdge(parentPosition);
+    scrollableParentEl = getScrollableParent(scrollableParentEl.parentNode as HTMLElement);
   }
 
-  // 添加视口边界
   const { clientHeight, clientWidth } = document.documentElement;
-  containers.push({
+
+  // 每次渲染需要结合可见的 document 的宽高
+  detectEdge({
     top: scrollTop,
     bottom: scrollTop + clientHeight,
     left: scrollLeft,
@@ -142,149 +115,216 @@ function detectBoundaries(
     width: clientWidth,
   });
 
-  // 处理每个容器
-  containers.forEach((container) => {
-    if (currentSide === 'top' || currentSide === 'bottom') {
+  console.log(distanceX, distanceY);
+
+  x = x - distanceX;
+  y = y - distanceY;
+
+  // 箭头的位置一定要在算完 flip 之后
+  compatibleArrow();
+
+  // 外部传入的固定偏移必须在 detect 边缘碰撞之后再偏移，不然无法适应各个方向的正确偏移位置
+  if (vertical) {
+    y += currentSide === 'bottom' ? offsetY : -offsetY;
+    // 同时 x y轴偏移的支持有待商酌，因为视觉上看起来很奇怪
+    // x += offsetX;
+  }
+  if (horizontal) {
+    x += currentSide === 'right' ? offsetX : -offsetX;
+    // y += offsetY;
+  }
+
+  popperParentContainer.style.transform = genTransformStyle(x, y);
+  popperParentContainer.setAttribute('data-direction', currentSide);
+
+  /** 边缘碰撞检测并调整位置 */
+  function detectEdge(position: ElementPosition) {
+    const { top, bottom, left, right, height, width } = position;
+
+    if (vertical) {
+      const referenceCenterY = Math.round(referencePosition.top - top + referencePosition.height / 2);
+      const parentCenterY = Math.round(height / 2);
+
       if (options.enableFlip) {
-        handleVerticalFlip(referencePos, popperPos, container, options, arrowSize, currentSide);
+        handleVerticalFlip(referenceCenterY, parentCenterY);
       }
+
       if (options.enableShift) {
-        distanceX = handleHorizontalShift(referencePos, container, arrowSize, distanceX);
+        handleVerticalShift();
       }
-    } else {
+    }
+
+    if (horizontal) {
+      const elementCenterX = Math.round(referencePosition.left - left + referencePosition.width / 2);
+      const parentCenterX = Math.round(width / 2);
+
       if (options.enableFlip) {
-        handleHorizontalFlip(referencePos, popperPos, container, options, arrowSize, currentSide);
+        handleHorizontalFlip(elementCenterX, parentCenterX);
       }
+
       if (options.enableShift) {
-        distanceY = handleVerticalShift(referencePos, container, arrowSize, distanceY);
+        handleHorizontalShift();
       }
     }
-  });
 
-  return { distanceX, distanceY };
-}
+    function handleVerticalFlip(refCenterY: number, parentCenterY: number) {
+      const isTopEdge = referencePosition.top - (popperPosition.height + offsetY + arrowHeight) < top;
+      const isBottomEdge = referencePosition.bottom + popperPosition.height + offsetY + arrowHeight > height + top;
 
-// 垂直方向翻转处理
-function handleVerticalFlip(
-  referencePos: ElementPosition,
-  popperPos: ElementPosition,
-  container: ElementPosition,
-  options: Required<PositionOptions>,
-  arrowSize: { width: number; height: number },
-  currentSide: string,
-) {
-  const refCenterY = referencePos.top - container.top + referencePos.height / 2;
-  const containerCenterY = container.height / 2;
-  const isTopEdge = referencePos.top - (popperPos.height + options.offset + arrowSize.height) < container.top;
-  const isBottomEdge = referencePos.bottom + popperPos.height + options.offset + arrowSize.height > container.bottom;
-
-  if (isTopEdge && refCenterY <= containerCenterY && currentSide === 'top') {
-    currentSide = 'bottom';
-  } else if (isBottomEdge && refCenterY >= containerCenterY && currentSide === 'bottom') {
-    currentSide = 'top';
-  }
-}
-
-// 水平方向翻转处理（类似垂直处理，省略具体实现）
-function handleHorizontalFlip() {
-  /* 类似垂直翻转逻辑 */
-}
-
-// 水平位移处理
-function handleHorizontalShift(
-  referencePos: ElementPosition,
-  container: ElementPosition,
-  arrowSize: { width: number; height: number },
-  currentDistance: number,
-) {
-  let distance = currentDistance;
-
-  // 左边界检测
-  if (referencePos.left < container.left) {
-    const overflow = container.left - referencePos.left;
-    distance += calcMaxDistance(overflow, distance);
-  }
-
-  // 右边界检测
-  if (referencePos.right > container.right) {
-    const overflow = referencePos.right - container.right;
-    distance -= calcMaxDistance(overflow, distance);
-  }
-
-  return distance;
-}
-
-// 垂直位移处理（类似水平位移，省略具体实现）
-function handleVerticalShift() {
-  /* 类似水平位移逻辑 */
-}
-
-// 箭头定位
-function positionArrow(
-  arrowSize: { width: number; height: number },
-  referencePos: ElementPosition,
-  popperPos: ElementPosition,
-  direction: string,
-  currentSide: string,
-  distanceX: number,
-  distanceY: number,
-) {
-  const [_, align] = formatDirection(direction);
-  const transform = { x: 0, y: 0 };
-  const arrowOffset = 5; // 箭头与边缘的最小间距
-
-  if (currentSide === 'top' || currentSide === 'bottom') {
-    transform.y = currentSide === 'top' ? popperPos.height : -arrowSize.height;
-
-    // 根据对齐方式计算X位置
-    switch (align) {
-      case 'start':
-        transform.x = Math.max(arrowOffset, distanceX);
-        break;
-      case 'end':
-        transform.x = popperPos.width - arrowSize.width - Math.max(arrowOffset, -distanceX);
-        break;
-      default: // center
-        transform.x = (popperPos.width - arrowSize.width) / 2 + distanceX;
+      if (isTopEdge && refCenterY <= parentCenterY && currentSide === 'top') {
+        y += popperPosition.height + referencePosition.height;
+        currentSide = 'bottom';
+      } else if (isBottomEdge && refCenterY >= parentCenterY && currentSide === 'bottom') {
+        y -= popperPosition.height + referencePosition.height;
+        currentSide = 'top';
+      }
     }
-  } else {
-    transform.x = currentSide === 'left' ? popperPos.width : -arrowSize.width;
 
-    // 根据对齐方式计算Y位置
-    switch (align) {
-      case 'start':
-        transform.y = Math.max(arrowOffset, distanceY);
-        break;
-      case 'end':
-        transform.y = popperPos.height - arrowSize.height - Math.max(arrowOffset, -distanceY);
-        break;
-      default: // center
-        transform.y = (popperPos.height - arrowSize.height) / 2 + distanceY;
+    function handleVerticalShift() {
+      // 左边界检测
+      if (referencePosition.left + leftCorner < left) {
+        const overflowLeft = referencePosition.left + leftCorner - left;
+        const safeOverflow =
+          referencePosition.right - arrowWidth > left
+            ? overflowLeft
+            : -referencePosition.width + leftCorner + arrowWidth;
+
+        distanceX = calcMaxDistance(safeOverflow, distanceX);
+      }
+
+      // 右边界检测
+      if (referencePosition.right - rightCorner > right) {
+        const overflowRight = referencePosition.right - rightCorner - right;
+        const safeOverflow =
+          referencePosition.left + arrowWidth < right
+            ? overflowRight
+            : referencePosition.width - rightCorner - arrowWidth;
+
+        distanceX = calcMaxDistance(safeOverflow, distanceX);
+      }
+    }
+
+    function handleHorizontalFlip(refCenterX: number, parentCenterX: number) {
+      const isLeftEdge = referencePosition.left - (popperPosition.width + offsetX + arrowWidth) < left;
+      const isRightEdge = referencePosition.right + popperPosition.width + offsetX + arrowWidth > right;
+
+      if (isLeftEdge && refCenterX < parentCenterX && currentSide === 'left') {
+        x += referencePosition.width + popperPosition.width;
+        currentSide = 'right';
+      } else if (isRightEdge && refCenterX > parentCenterX && currentSide === 'right') {
+        x -= referencePosition.width + popperPosition.width;
+        currentSide = 'left';
+      }
+    }
+
+    function handleHorizontalShift() {
+      // 上边界检测
+      if (referencePosition.top + topCorner < top) {
+        const overflowTop = referencePosition.top + topCorner - top;
+        const safeOverflow =
+          referencePosition.bottom - arrowHeight > top
+            ? overflowTop
+            : -referencePosition.height + topCorner + arrowHeight;
+
+        distanceY = calcMaxDistance(safeOverflow, distanceY);
+      }
+
+      // 下边界检测
+      if (referencePosition.bottom - bottomCorner > bottom) {
+        const overflowBottom = referencePosition.bottom - bottomCorner - bottom;
+        const safeOverflow =
+          referencePosition.top + arrowHeight < bottom
+            ? overflowBottom
+            : referencePosition.height - bottomCorner - arrowHeight;
+
+        distanceY = calcMaxDistance(safeOverflow, distanceY);
+      }
     }
   }
 
-  return transform;
-}
+  function compatibleArrow() {
+    if (!arrow) return;
 
-// 应用最终位置
-function applyFinalPosition(
-  popperParent: HTMLElement,
-  x: number,
-  y: number,
-  currentSide: string,
-  arrow: HTMLElement | null,
-  arrowCoords: { x: number; y: number },
-  offsetX: number,
-  offsetY: number,
-  direction: string,
-) {
-  // 应用主偏移
-  popperParent.style.transform = genTransformStyle(x, y);
-  popperParent.dataset.direction = currentSide;
+    // 箭头存在的情况下，popper 元素需再额外偏移箭头的宽/高
+    if (vertical) {
+      // 垂直方向：添加箭头高度偏移
+      y += currentSide === 'bottom' ? arrowHeight : -arrowHeight;
+    } else if (horizontal) {
+      // 水平方向：添加箭头宽度偏移
+      x += currentSide === 'right' ? arrowWidth : -arrowWidth;
+    }
 
-  // 应用箭头位置
-  if (arrow) {
-    arrow.style.transform = genTransformStyle(arrowCoords.x, arrowCoords.y);
-    arrow.dataset.align = direction.split('-')[1] || 'center';
+    const mainAlignment = options.direction.split('-')[1] || 'center';
+    const transformCoords = { x: 0, y: 0 };
+    // 根据翻转后的方向进行箭头的位置偏移
+    if (vertical) {
+      transformCoords.y = currentSide === 'top' ? popperPosition.height : -arrowHeight;
+      // 比如向右移，在 arrow 能固定在 reference 中间时，需要不断偏移使其指向中间，当无法指向时，需要不断向左偏移
+      const shouldOnCenter = Math.abs(referencePosition.width - popperPosition.width) > Math.abs(distanceX);
+      const shouldStaticArrow = distanceX === 0;
+
+      if (mainAlignment === 'start') {
+        if (shouldStaticArrow) {
+          transformCoords.x = 0;
+        } else {
+          transformCoords.x = Math.max(0, distanceX);
+          transformCoords.x = Math.min(transformCoords.x, popperPosition.width - arrowWidth);
+        }
+      } else if (mainAlignment === 'center') {
+        if (shouldStaticArrow) {
+          transformCoords.x = (popperPosition.width - arrowWidth) / 2;
+        } else {
+          if (shouldOnCenter) {
+            transformCoords.x = (popperPosition.width - arrowWidth) / 2 + distanceX;
+          } else {
+            transformCoords.x = (popperPosition.width - arrowWidth) / 2 + distanceX;
+            transformCoords.x = Math.max(0, Math.min(popperPosition.width - arrowWidth, transformCoords.x));
+          }
+        }
+      } else if (mainAlignment === 'end') {
+        if (shouldStaticArrow) {
+          transformCoords.x = popperPosition.width - arrowWidth;
+        } else {
+          transformCoords.x = popperPosition.width - arrowWidth + distanceX;
+          transformCoords.x = Math.max(0, Math.min(popperPosition.width - arrowWidth, transformCoords.x));
+        }
+      }
+    } else if (horizontal) {
+      transformCoords.x = currentSide === 'left' ? popperPosition.width : -arrowWidth;
+
+      // 计算 shouldStaticArrow 和 shouldOnCenter
+      const shouldStaticArrow = distanceY === 0;
+      const shouldOnCenter = Math.abs(referencePosition.height - popperPosition.height) > Math.abs(distanceY);
+
+      if (mainAlignment === 'start') {
+        if (shouldStaticArrow) {
+          transformCoords.y = 0;
+        } else {
+          // 动态偏移：根据 distanceY 向下移动箭头
+          transformCoords.y = Math.max(0, distanceY);
+          transformCoords.y = Math.min(transformCoords.y, popperPosition.height - arrowHeight);
+        }
+      } else if (mainAlignment === 'center') {
+        if (shouldStaticArrow) {
+          transformCoords.y = (popperPosition.height - arrowHeight) / 2;
+        } else {
+          if (shouldOnCenter) {
+            transformCoords.y = (popperPosition.height - arrowHeight) / 2 + distanceY;
+          } else {
+            transformCoords.y = (popperPosition.height - arrowHeight) / 2 + distanceY;
+            transformCoords.y = Math.max(0, Math.min(popperPosition.height - arrowHeight, transformCoords.y));
+          }
+        }
+      } else if (mainAlignment === 'end') {
+        if (shouldStaticArrow) {
+          transformCoords.y = popperPosition.height - arrowHeight;
+        } else {
+          transformCoords.y = popperPosition.height - arrowHeight + distanceY;
+          transformCoords.y = Math.max(0, Math.min(popperPosition.height - arrowHeight, transformCoords.y));
+        }
+      }
+    }
+
+    arrow.style.transform = genTransformStyle(transformCoords.x, transformCoords.y);
   }
 }
