@@ -23,6 +23,7 @@ import { collectScrollParentList } from './utils/collectScrollParentList';
 
 import useTrigger from './hooks/useTrigger';
 import clsx from 'clsx';
+import debounce from './utils/debounce';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
@@ -125,6 +126,13 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     [direction, enableFlip, enableShift, offset],
   );
 
+  const asyncUpdatePosition = debounce<any>(() => {
+    return new Promise<any>((resolve) => {
+      requestAnimationFrame(() => updatePosition());
+      resolve(undefined);
+    });
+  });
+
   useIsomorphicLayoutEffect(() => {
     if (innerVisible === undefined) return;
     updatePosition();
@@ -138,7 +146,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   }, [innerVisible]);
 
   useIsomorphicLayoutEffect(() => {
-    updatePosition();
+    asyncUpdatePosition();
 
     // Parent scroll listener
     const referenceParents = collectScrollParentList(referenceRef.current);
@@ -146,23 +154,23 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     const scrollPrents = [...referenceParents, ...popperParents];
 
     scrollPrents.forEach((scrollParent) => {
-      scrollParent.addEventListener('scroll', updatePosition, { passive: true });
+      scrollParent.addEventListener('scroll', asyncUpdatePosition, { passive: true });
     });
 
-    window.addEventListener('resize', updatePosition, { passive: true });
+    window.addEventListener('resize', asyncUpdatePosition, { passive: true });
 
     return () => {
       scrollPrents.forEach((scrollParent) => {
-        scrollParent.removeEventListener('scroll', updatePosition);
+        scrollParent.removeEventListener('scroll', asyncUpdatePosition);
       });
 
-      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('resize', asyncUpdatePosition);
     };
   }, [direction, enableFlip, enableShift, offset, popperRef.current, arrowRef.current]);
 
   return isElementChild ? (
     <>
-      <ResizeObserverComponent ref={referenceRef} onResize={() => updatePosition()}>
+      <ResizeObserverComponent ref={referenceRef} onResize={() => asyncUpdatePosition()}>
         {cloneElement(children as any, {
           ...genTriggerProps(children),
         })}
