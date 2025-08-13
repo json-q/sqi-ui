@@ -96,7 +96,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     visible: innerVisible,
     onVisibleChange: setInnerVisible,
     trigger,
-    triggeEl: referenceRef.current,
+    triggerEl: referenceRef.current,
   });
 
   useImperativeHandle(ref, () => {});
@@ -157,16 +157,16 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     // Parent scroll listener
     const referenceParents = collectScrollParentList(referenceRef.current);
     const popperParents = collectScrollParentList(popperRef.current);
-    const scrollPrents = [...referenceParents, ...popperParents];
+    const scrollParents = [...referenceParents, ...popperParents];
 
-    scrollPrents.forEach((scrollParent) => {
+    scrollParents.forEach((scrollParent) => {
       scrollParent.addEventListener('scroll', asyncUpdatePosition, { passive: true });
     });
 
     window.addEventListener('resize', asyncUpdatePosition, { passive: true });
 
     return () => {
-      scrollPrents.forEach((scrollParent) => {
+      scrollParents.forEach((scrollParent) => {
         scrollParent.removeEventListener('scroll', asyncUpdatePosition);
       });
 

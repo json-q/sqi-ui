@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactElement } from 'react';
 import type { TriggerType } from '../type';
 
 interface Options {
-  triggeEl?: HTMLElement | null;
+  triggerEl?: HTMLElement | null;
   trigger?: TriggerType | TriggerType[];
   delay?: number;
   clickOutsideClose?: boolean;
@@ -16,7 +16,7 @@ interface Options {
 const ESC_KEY = 'Escape';
 
 const useTrigger = (props: Options) => {
-  const { trigger, delay, disabled, visible, clickOutsideClose, triggeEl, onVisibleChange } = props;
+  const { trigger, delay, disabled, visible, clickOutsideClose, triggerEl, onVisibleChange } = props;
 
   const hasPopupMouseDown = useRef(false);
   const leaveFlag = useRef(false); // 防止多次触发显隐
@@ -29,7 +29,7 @@ const useTrigger = (props: Options) => {
 
     // 区域外点击关闭
     const handleDocumentClick = (e: Event) => {
-      if (triggeEl?.contains?.(e.target as Node) || hasPopupMouseDown.current) {
+      if (triggerEl?.contains?.(e.target as Node) || hasPopupMouseDown.current) {
         return;
       }
 
@@ -44,7 +44,7 @@ const useTrigger = (props: Options) => {
       document.removeEventListener('mousedown', handleDocumentClick);
       document.removeEventListener('touchend', handleDocumentClick);
     };
-  }, [disabled, visible, triggeEl]);
+  }, [disabled, visible, triggerEl]);
 
   function delayFn(cb: () => void) {
     if (delay) {
