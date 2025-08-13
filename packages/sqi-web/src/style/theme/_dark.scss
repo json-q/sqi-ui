@@ -42,13 +42,13 @@
   --sqi-success-color-9: #b4e1d3;
   --sqi-success-color-10: #deede8;
   --sqi-gray-color-1: #f3f3f3;
-  --sqi-gray-color-2: #eee;
+  --sqi-gray-color-2: #eeeeee;
   --sqi-gray-color-3: #e8e8e8;
-  --sqi-gray-color-4: #ddd;
+  --sqi-gray-color-4: #dddddd;
   --sqi-gray-color-5: #c6c6c6;
   --sqi-gray-color-6: #a6a6a6;
   --sqi-gray-color-7: #8b8b8b;
-  --sqi-gray-color-8: #777;
+  --sqi-gray-color-8: #777777;
   --sqi-gray-color-9: #5e5e5e;
   --sqi-gray-color-10: #4b4b4b;
   --sqi-gray-color-11: #393939;
@@ -116,13 +116,16 @@
   --sqi-bg-color-component-hover: var(--sqi-gray-color-10); // 色彩 - 组件 - hover
   --sqi-bg-color-component-active: var(--sqi-gray-color-9); // 色彩 - 组件 - active
   --sqi-bg-color-component-disabled: var(--sqi-gray-color-12); // 色彩 - 组件 - disabled
+  --sqi-bg-color-secondary-component: var(--sqi-gray-color-10); // 色彩 - 次级组件
+  --sqi-bg-color-secondary-component-hover: var(--sqi-gray-color-9); // 色彩 - 次级组件 - hover
+  --sqi-bg-color-secondary-component-active: var(--sqi-gray-color-8); // 色彩 - 次级组件 - active
 
   // 文本颜色
   --sqi-text-color-primary: var(--sqi-font-white-1); // 色彩-文字-主要
   --sqi-text-color-secondary: var(--sqi-font-white-2); // 色彩-文字-次要
   --sqi-text-color-placeholder: var(--sqi-font-white-3); // 色彩-文字-占位符/说明
   --sqi-text-color-disabled: var(--sqi-font-white-4); // 色彩-文字-禁用
-  --sqi-text-color-anti: #fff; // 色彩-文字-反色
+  --sqi-text-color-anti: #ffffff; // 色彩-文字-反色
   --sqi-text-color-brand: var(--sqi-brand-color-8); // 色彩-文字-品牌
   --sqi-text-color-link: var(--sqi-brand-color-8); // 色彩-文字-链接
 
@@ -130,6 +133,14 @@
   --sqi-component-stroke: var(--sqi-gray-color-11);
   // 边框
   --sqi-component-border: var(--sqi-gray-color-9);
+
+  // 基础/下层 投影 hover 使用的组件包括：表格 /
+  --sqi-shadow-1: 0 4px 6px rgba(0, 0, 0, 6%), 0 1px 10px rgba(0, 0, 0, 8%), 0 2px 4px rgba(0, 0, 0, 12%);
+  // 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
+  --sqi-shadow-2: 0 8px 10px rgba(0, 0, 0, 12%), 0 3px 14px rgba(0, 0, 0, 10%), 0 5px 5px rgba(0, 0, 0, 16%);
+  // 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
+  --sqi-shadow-3: 0 16px 24px rgba(0, 0, 0, 14%), 0 6px 30px rgba(0, 0, 0, 12%), 0 8px 10px rgba(0, 0, 0, 20%);
+  // 内投影 用于弹窗类组件（气泡确认框 / 全局提示 / 消息通知）的内描边
 
   // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
   --sqi-bg-color-special-component: transparent;

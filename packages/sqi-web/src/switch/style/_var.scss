@@ -1,0 +1,54 @@
+@use '../../style/mixin' as *;
+
+$switch-checked-bg-color: $brand-color;
+$switch-checked-bg-color-hover: $brand-color-hover;
+$switch-checked-bg-color-loading: $brand-color-focus;
+$switch-checked-bg-color-disabled: $brand-color-disabled;
+
+$switch-unchecked-bg-color: $bg-color-secondary-component;
+$switch-unchecked-bg-color-hover: $bg-color-secondary-component-hover;
+$switch-unchecked-bg-color-loading: $bg-color-component-disabled;
+$switch-unchecked-bg-color-disabled: $bg-color-component-disabled;
+
+$switch-handle-bg-color: #ffffff;
+$switch-content-color-checked: $text-color-anti;
+$switch-content-color-unchecked: $text-color-anti;
+
+// 尺寸
+$switch-height-lg: $size-sm;
+$switch-height-md: $size-xs;
+$switch-height-sm: $size-xxs;
+
+$switch-min-width-lg: calc($switch-height-lg / 0.55);
+$switch-min-width-md: calc($switch-height-md / 0.55);
+$switch-min-width-sm: calc($switch-height-sm / 0.55);
+
+//change uncheck handle size
+$switch-width-border-base: 4px;
+$switch-width-border-value: 1px; //公差值
+
+$switch-width-border-lg: $switch-width-border-base;
+$switch-width-border-md: ($switch-width-border-base - $switch-width-border-value * 1);
+$switch-width-border-sm: ($switch-width-border-base - $switch-width-border-value * 2);
+
+// 字体
+$switch-content-font-size-lg: $font-size-lg;
+$switch-content-font-size-md: $font-size-sm;
+$switch-content-font-size-sm: 9px;
+
+// 间距
+$switch-content-margin-left-lg: calc($switch-min-width-lg / 2 + 4px);
+$switch-content-margin-right-lg: $margin-md;
+
+$switch-content-margin-left-md: calc($switch-min-width-md / 2 + 2px);
+$switch-content-margin-right-md: $margin-sm;
+
+$switch-content-margin-left-sm: calc($switch-min-width-sm / 2 + 2px);
+$switch-content-margin-right-sm: $margin-xs;
+
+// 动画
+$switch-transition: all $anim-duration-base $anim-time-fn-easing;
+$switch-handle-transition: all $anim-duration-base $anim-time-fn-easing;
+$switch-content-transition:
+  padding $anim-duration-base $anim-time-fn-easing,
+  opacity $anim-duration-base linear;
