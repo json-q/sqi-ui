@@ -24,7 +24,7 @@ $module: #{$prefix}-switch;
   cursor: pointer;
   user-select: none;
 
-  &:hover {
+  &:hover:not(.#{$module}-disabled):not(.#{$module}-loading) {
     background-color: $switch-unchecked-bg-color-hover;
   }
 
@@ -94,10 +94,11 @@ $module: #{$prefix}-switch;
     }
   }
 
+  // Checked
   &.#{$module}-checked {
     background-color: $switch-checked-bg-color;
 
-    &:hover {
+    &:hover:not(.#{$module}-disabled):not(.#{$module}-loading) {
       background-color: $switch-checked-bg-color-hover;
     }
 
@@ -112,6 +113,25 @@ $module: #{$prefix}-switch;
       color: $switch-content-color-checked;
       padding-left: $switch-content-margin-right-md;
       padding-right: $switch-content-margin-left-md;
+    }
+  }
+
+  // Loading & Disabled
+  &.#{$module}-loading,
+  &.#{$module}-disabled {
+    cursor: not-allowed;
+    background-color: $switch-unchecked-bg-color-loading;
+
+    .#{$prefix}-icon {
+      color: $switch-unchecked-bg-color-loading;
+    }
+
+    &.#{$module}-checked {
+      background-color: $switch-checked-bg-color-disabled;
+
+      .#{$prefix}-icon {
+        color: $switch-checked-bg-color-loading;
+      }
     }
   }
 }
