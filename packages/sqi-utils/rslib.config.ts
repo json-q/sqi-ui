@@ -34,20 +34,5 @@ export default defineConfig({
         },
       },
     },
-    {
-      format: 'umd',
-      syntax: 'es2016',
-      umdName: 'SqiUtils',
-      output: {
-        minify: true,
-        polyfill: 'usage',
-        distPath: {
-          root: './dist',
-        },
-        externals: {
-          react: 'React',
-        },
-      },
-    },
   ],
 });

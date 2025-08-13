@@ -11,13 +11,11 @@
       "import": "./es/index.js",
       "require": "./lib/index.js"
     },
-    "./dist/*": "./dist/*",
     "./es/*": "./es/*",
     "./lib/*": "./lib/*"
   },
   "sideEffects": false,
   "files": [
-    "dist",
     "es",
     "lib"
   ],

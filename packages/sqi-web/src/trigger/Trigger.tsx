@@ -37,6 +37,10 @@ const defaultProps: TriggerProps = {
   disabled: false,
 };
 
+const defaultMotionProps: TriggerProps['motion'] = {
+  unmountOnExit: true,
+};
+
 const basePositionStyle: React.CSSProperties = {
   position: 'absolute',
   top: 0,
@@ -71,6 +75,8 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     clickOutsideClose,
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
+  // useMergeProps 不处理嵌套对象的合并
+  const mergedMotion = useMergeProps(defaultMotionProps, motion);
 
   const isElementChild = isValidElement(children);
 
@@ -135,7 +141,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   useIsomorphicLayoutEffect(() => {
     if (innerVisible === undefined) return;
-    updatePosition();
+    asyncUpdatePosition();
 
     // Toggle Motion
     if (innerVisible === true) {
@@ -168,7 +174,40 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     };
   }, [direction, enableFlip, enableShift, offset, popperRef.current, arrowRef.current]);
 
-  return isElementChild ? (
+  if (!isElementChild) return;
+
+  const renderPopper = () => {
+    if (!popper) return null;
+
+    return (
+      <CSSMotion ref={motionRef} {...mergedMotion}>
+        {({ className }) => {
+          return (
+            <Portal getContainer={getContainer}>
+              <div
+                {...genPopupProps()}
+                className={clsx(`${prefixCls}-trigger`, className)}
+                style={{ ...popperStyle, zIndex }}
+              >
+                {arrow ? (
+                  <div className={`${prefixCls}-trigger-arrow`}>
+                    {cloneElement(arrow as any, {
+                      ref: arrowRef,
+                      style: { ...arrowStyle, zIndex, ...((arrow.props as any).style || {}) },
+                    })}
+                  </div>
+                ) : null}
+
+                {cloneElement(popper as any, { ref: mergedPopperRef })}
+              </div>
+            </Portal>
+          );
+        }}
+      </CSSMotion>
+    );
+  };
+
+  return (
     <>
       <ResizeObserverComponent ref={referenceRef} onResize={() => asyncUpdatePosition()}>
         {cloneElement(children as any, {
@@ -176,34 +215,9 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
         })}
       </ResizeObserverComponent>
 
-      {popper ? (
-        <CSSMotion ref={motionRef} {...motion} unmountOnExit={motion.unmountOnExit || true}>
-          {({ className }) => {
-            return (
-              <Portal getContainer={getContainer}>
-                <div
-                  {...genPopupProps()}
-                  className={clsx(`${prefixCls}-trigger`, className)}
-                  style={{ ...popperStyle, zIndex }}
-                >
-                  {arrow ? (
-                    <div className={`${prefixCls}-trigger-arrow`}>
-                      {cloneElement(arrow as any, {
-                        ref: arrowRef,
-                        style: { ...arrowStyle, zIndex, ...((arrow.props as any).style || {}) },
-                      })}
-                    </div>
-                  ) : null}
-
-                  {cloneElement(popper as any, { ref: mergedPopperRef })}
-                </div>
-              </Portal>
-            );
-          }}
-        </CSSMotion>
-      ) : null}
+      {renderPopper()}
     </>
-  ) : null;
+  );
 });
 
 Trigger.displayName = 'Trigger';
