@@ -61,6 +61,8 @@ $bg-color-component: var(--sqi-bg-color-component); // 色彩  - 组件
 $bg-color-component-hover: var(--sqi-bg-color-component-hover); // 色彩 - 组件 - hover
 $bg-color-component-active: var(--sqi-bg-color-component-active); // 色彩 - 组件 - active
 $bg-color-component-disabled: var(--sqi-bg-color-component-disabled); // 色彩 - 组件 - disabled
+$bg-color-secondary-component: var(--sqi-bg-color-secondary-component); // 色彩 - 次级组件
+$bg-color-secondary-component-hover: var(--sqi-bg-color-secondary-component-hover); // 色彩 - 次级组件 - hover
 
 // 文本颜色
 $text-color-primary: var(--sqi-text-color-primary); // 色彩-文字-主要
@@ -79,12 +81,15 @@ $component-border: var(--sqi-component-border);
 $bg-color-special-component: var(--sqi-bg-color-special-component);
 
 // component 组件尺寸高度相关 token
+$size-xxxs: var(--sqi-size-xxxs);
+$size-xxs: var(--sqi-size-xxs);
 $size-xs: var(--sqi-size-xs);
 $size-sm: var(--sqi-size-sm);
 $size-md: var(--sqi-size-md);
 $size-lg: var(--sqi-size-lg);
 $size-xl: var(--sqi-size-xl);
 $size-xxl: var(--sqi-size-xxl);
+$size-xxxl: var(--sqi-size-xxxl);
 
 // component 组件 padding token
 $padding-xxs: var(--sqi-padding-xxs);
@@ -96,6 +101,7 @@ $padding-xl: var(--sqi-padding-xl);
 $padding-xxl: var(--sqi-padding-xxl);
 
 // component 组件 margin token
+$margin-xxs: var(--sqi-margin-xxs);
 $margin-xs: var(--sqi-margin-xs);
 $margin-sm: var(--sqi-margin-sm);
 $margin-md: var(--sqi-margin-md);
@@ -131,6 +137,15 @@ $border-radius-lg: var(--sqi-radius-lg); // 圆角-6
 $border-radius-extra-lg: var(--sqi-radius-extra-lg); // 圆角-9
 $border-radius-round: var(--sqi-radius-round); // 圆角-999
 $border-radius-circle: var(--sqi-radius-circle); // 圆角-全圆角
+
+// shadow
+
+// 基础/下层 投影 hover 使用的组件包括：表格 /
+$shadow-1: var(--sqi-shadow-1);
+// 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
+$shadow-2: var(--sqi-shadow-2);
+// 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
+$shadow-3: var(--sqi-shadow-3);
 
 // 动画
 $anim-time-fn-easing: cubic-bezier(0.38, 0, 0.24, 1);

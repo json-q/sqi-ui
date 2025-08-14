@@ -12,9 +12,21 @@ export type TriggerDirection = Prettify<Side | AlignedPlacement>;
 export type TriggerType = 'hover' | 'click' | 'focus' | 'mousedown' | 'context-menu';
 
 export interface TriggerProps {
+  /**
+   * @description 触发的目标元素
+   */
   children?: ReactElement;
+  /**
+   * @description 悬浮元素
+   */
   popper?: ReactElement;
+  /**
+   * @description 箭头元素
+   */
   arrow?: ReactElement;
+  /**
+   * @description 动画 props 继承自 [react-transition-state](https://szhsin.github.io/react-transition-state)
+   */
   motion?: Omit<CSSMotionProps, 'children'>;
   /**
    * @description popper 位置
@@ -61,7 +73,16 @@ export interface TriggerProps {
    * @default true
    */
   clickOutsideClose?: boolean;
+  /**
+   * @description 受控显示隐藏状态
+   */
   visible?: boolean;
+  /**
+   * @description 状态更改触发
+   */
   onVisibleChange?: (visible: boolean, events?: { e: Event; trigger: string }) => void;
+  /**
+   * @description 禁用行为
+   */
   disabled?: boolean;
 }

@@ -1,0 +1,82 @@
+@use 'sass:map';
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-switch;
+
+@mixin switch-base {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  background-color: map.get(map.get($switch-bg-color, 'unchecked'), 'default');
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: $border-radius-round;
+  outline: none;
+  transition: $switch-transition;
+  cursor: pointer;
+  user-select: none;
+}
+
+@mixin switch-size($size) {
+  $map-size: map.get($switch-size, $size);
+
+  &.#{$module}-#{$size} {
+    min-width: map.get($map-size, 'min-w');
+    height: map.get($map-size, 'h');
+    line-height: map.get($map-size, 'leading');
+
+    // switch 点的按压动画：点宽 + 3px偏移，内容透明
+    &:active:not(.#{$module}-disabled):not(.#{$module}-loading) {
+      .#{$module}-handle::before {
+        left: 0;
+        right: map.get($map-size, 'stretch-w');
+      }
+
+      &.#{$module}-checked {
+        .#{$module}-handle::before {
+          left: map.get($map-size, 'stretch-w');
+          right: 0;
+        }
+      }
+    }
+
+    .#{$module}-handle {
+      width: calc(map.get($map-size, 'h') - 2 * map.get($map-size, 'b'));
+      height: calc(map.get($map-size, 'h') - 2 * map.get($map-size, 'b'));
+      top: map.get($map-size, 'b');
+      left: map.get($map-size, 'b');
+
+      .#{$prefix}-icon {
+        font-size: calc(map.get($map-size, 'h') - 8px);
+      }
+    }
+
+    .#{$module}-content {
+      min-width: map.get($map-size, 'min-w');
+      padding-left: map.get($map-size, 'ml');
+      padding-right: map.get($map-size, 'mr');
+      font-size: map.get($map-size, 'content-size');
+
+      .#{$prefix}-icon {
+        font-size: calc(map.get($map-size, 'h') - 8px);
+      }
+    }
+
+    // Checked
+    &.#{$module}-checked {
+      // 点反方向移动
+      .#{$module}-handle {
+        top: map.get($map-size, 'b');
+        left: calc(100% - map.get($map-size, 'b'));
+      }
+
+      .#{$module}-content {
+        padding-left: map.get($map-size, 'mr');
+        padding-right: map.get($map-size, 'ml');
+      }
+    }
+  }
+}

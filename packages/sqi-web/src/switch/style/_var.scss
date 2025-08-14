@@ -1,0 +1,93 @@
+@use '../../style/mixin' as *;
+
+// Switch 背景色
+$switch-bg-color: (
+  checked: (
+    default: $brand-color,
+    hover: $brand-color-hover,
+    loading: $brand-color-focus,
+    disabled: $brand-color-disabled,
+  ),
+  unchecked: (
+    default: $bg-color-secondary-component,
+    hover: $bg-color-secondary-component-hover,
+    loading: $bg-color-component-disabled,
+    disabled: $bg-color-component-disabled,
+  ),
+);
+
+// 尺寸 - 按钮
+$switch-height-sm: $size-xxs;
+$switch-height-md: $size-xs;
+$switch-height-lg: $size-sm;
+
+$switch-min-width-sm: calc($switch-height-sm / 0.55);
+$switch-min-width-md: calc($switch-height-md / 0.55);
+$switch-min-width-lg: calc($switch-height-lg / 0.55);
+
+// 间距 - 内容
+$switch-content-margin-left-lg: calc($switch-min-width-lg / 2 + 4px);
+$switch-content-margin-right-lg: $margin-md;
+
+$switch-content-margin-left-md: calc($switch-min-width-md / 2 + 2px);
+$switch-content-margin-right-md: $margin-sm;
+
+$switch-content-margin-left-sm: calc($switch-min-width-sm / 2 + 2px);
+$switch-content-margin-right-sm: $margin-xs;
+
+// active handle
+$switch-width-border-base: 4px;
+$switch-width-border-value: 1px; //公差值
+
+$switch-width-border-lg: $switch-width-border-base;
+$switch-width-border-md: ($switch-width-border-base - $switch-width-border-value * 1);
+$switch-width-border-sm: ($switch-width-border-base - $switch-width-border-value * 2);
+
+// 字体
+$switch-content-font-size-lg: $font-size-lg;
+$switch-content-font-size-md: $font-size-sm;
+$switch-content-font-size-sm: 10px;
+
+$switch-size: (
+  sm: (
+    min-w: $switch-min-width-sm,
+    h: $switch-height-sm,
+    leading: $switch-height-sm,
+    stretch-w: -2px,
+    b: $switch-width-border-sm,
+    mr: $switch-content-margin-right-sm,
+    ml: $switch-content-margin-left-sm,
+    content-size: $switch-content-font-size-sm,
+  ),
+  md: (
+    min-w: $switch-min-width-md,
+    h: $switch-height-md,
+    leading: $switch-height-md,
+    stretch-w: -4px,
+    b: $switch-width-border-md,
+    mr: $switch-content-margin-right-md,
+    ml: $switch-content-margin-left-md,
+    content-size: $switch-content-font-size-md,
+  ),
+  lg: (
+    min-w: $switch-min-width-lg,
+    h: $switch-height-lg,
+    leading: $switch-height-lg,
+    stretch-w: -6px,
+    b: $switch-width-border-lg,
+    mr: $switch-content-margin-right-lg,
+    ml: $switch-content-margin-left-lg,
+    content-size: $switch-content-font-size-lg,
+  ),
+);
+
+$switch-handle-bg-color: #ffffff;
+$switch-content-color-checked: $text-color-anti;
+$switch-content-color-unchecked: $text-color-anti;
+
+// 动画
+$switch-transition: all $anim-duration-base $anim-time-fn-easing;
+$switch-handle-transition: all $anim-duration-base $anim-time-fn-easing;
+$switch-content-transition:
+  padding $anim-duration-base $anim-time-fn-easing,
+  opacity $anim-duration-base linear;

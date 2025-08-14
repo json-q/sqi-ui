@@ -1,0 +1,104 @@
+@use 'sass:map';
+@use '../../style/mixin' as *;
+@use './var' as *;
+@use './mixin' as *;
+
+$module: #{$prefix}-switch;
+
+.#{$module} {
+  @include reset;
+
+  @include switch-base;
+
+  &:hover:not(.#{$module}-disabled):not(.#{$module}-loading) {
+    background-color: map.get(map.get($switch-bg-color, 'unchecked'), 'hover');
+  }
+
+  &-handle {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius-round;
+    transition: $switch-handle-transition;
+    box-shadow: $shadow-1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: $border-radius-round;
+      background-color: $switch-handle-bg-color;
+      transition: $switch-handle-transition;
+    }
+  }
+
+  &-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    color: $switch-content-color-unchecked;
+    transition: $switch-content-transition;
+  }
+
+  // Active Common
+  &:active:not(.#{$module}-disabled):not(.#{$module}-loading) {
+    .#{$module}-content {
+      opacity: 0;
+    }
+  }
+
+  // Checked Common
+  &.#{$module}-checked {
+    background-color: map.get(map.get($switch-bg-color, 'checked'), 'default');
+
+    &:hover:not(.#{$module}-disabled):not(.#{$module}-loading) {
+      background-color: map.get(map.get($switch-bg-color, 'checked'), 'hover');
+    }
+
+    // 点反方向移动
+    .#{$module}-handle {
+      transform: translate(-100%, 0);
+    }
+
+    .#{$module}-content {
+      color: $switch-content-color-checked;
+    }
+  }
+
+  // Loading Behavior
+  &.#{$module}-loading {
+    pointer-events: none;
+  }
+
+  // Disabled Behavior
+  &.#{$module}-disabled {
+    cursor: not-allowed;
+  }
+
+  // Loading & Disabled Common
+  &.#{$module}-loading,
+  &.#{$module}-disabled {
+    background-color: map.get(map.get($switch-bg-color, 'unchecked'), 'loading');
+
+    .#{$module}-handle .#{$prefix}-icon {
+      color: map.get(map.get($switch-bg-color, 'unchecked'), 'loading');
+    }
+
+    &.#{$module}-checked {
+      background-color: map.get(map.get($switch-bg-color, 'checked'), 'disabled');
+
+      .#{$module}-handle .#{$prefix}-icon {
+        color: map.get(map.get($switch-bg-color, 'checked'), 'loading');
+      }
+    }
+  }
+
+  @include switch-size('sm');
+  @include switch-size('md');
+  @include switch-size('lg');
+}

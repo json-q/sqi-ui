@@ -7,6 +7,7 @@ import type { ColProps, RowProps } from '../grid/type';
 import type { InputProps } from '../input/type';
 import type { RadioGroupProps, RadioProps } from '../radio/type';
 import type { SpaceProps } from '../space';
+import type { SwitchProps } from '../switch/type';
 import type { TriggerProps } from '../trigger';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
@@ -46,5 +47,6 @@ export type ComponentConfig = {
   RadioGroup?: RadioGroupProps;
   Row?: RowProps;
   Space?: SpaceProps;
+  Switch?: SwitchProps;
   Trigger?: TriggerProps;
 };
