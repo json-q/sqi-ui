@@ -22,6 +22,30 @@ export function getElementPosition(el: HTMLElement, scrollLeft: number, scrollTo
   };
 }
 
+export function getElementPositionWithScrollbar(
+  el: HTMLElement,
+  scrollLeft: number,
+  scrollTop: number,
+): ElementPosition {
+  // 获取元素的整体位置（包括边框）
+  const rect = getElementPosition(el, scrollLeft, scrollTop);
+
+  // 计算滚动容器的内容区域（减去滚动条）
+  const contentWidth = el.clientWidth;
+  const contentHeight = el.clientHeight;
+
+  // 计算内容区域的位置（考虑滚动条）
+  return {
+    ...rect,
+    width: contentWidth,
+    height: contentHeight,
+    // 右边界 = 左边界 + 内容宽度
+    right: rect.left + contentWidth,
+    // 下边界 = 上边界 + 内容高度
+    bottom: rect.top + contentHeight,
+  };
+}
+
 export function getScrollableParent(element: HTMLElement) {
   if (!element || element.tagName === 'HTML') return;
 
