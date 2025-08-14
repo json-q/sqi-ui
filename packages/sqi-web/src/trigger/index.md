@@ -37,6 +37,35 @@ group:
 
 <code src="./demos/basic-trigger.tsx"></code>
 
-## 多个触发行为
+## API
 
-<!-- <code src="./demos/motion.tsx"></code> -->
+| 属性 | 描述 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| children | 触发的目标元素 | `ReactElement` | - |
+| popper | 悬浮元素 | `ReactElement` | - |
+| arrow | 箭头元素 | `ReactElement` | - |
+| motion | 动画 props 继承自 [react-transition-state](https://szhsin.github.io/react-transition-state) | `Omit<CSSMotionProps, 'children'>` | - |
+| direction | popper 位置 | `TriggerDirection` | `bottom` |
+| enableFlip | 开启自动翻转 | `boolean` | `true` |
+| enableShift | 开启自动位移 | `boolean` | `true` |
+| offset | popper 偏移量 | `number \| { x: number; y: number }` | - |
+| zIndex | popper 元素层级 | `number` | `0` |
+| getContainer | 指定 popper 挂载的位置 | `string \| () => HTMLElement` | `document.body` |
+| trigger | 触发方式 | `TriggerType \| TriggerType[]` | `"hover"` |
+| delay | 触发延迟的时间 ms 仅 hover 生效 | `number` | `100` |
+| clickOutsideClose | 点击外部是否可关闭 | `boolean` | `true` |
+| visible | 受控显示隐藏状态 | `boolean` | - |
+| onVisibleChange | 状态更改触发 | `(visible: boolean, events?: { e: Event; trigger: string }) => void` | - |
+| disabled | 禁用行为 | `boolean` | - |
+
+### TriggerDirection
+
+共 12 个方位
+
+`top` | `right` | `bottom` | `left` | `top-start` | `top-end` | `right-start` | `right-end` | `bottom-start` | `bottom-end` | `left-start` | `left-end`
+
+### TriggerType
+
+对应 eventListener 的事件名称
+
+`hover` | `click` | `focus` | `mousedown` | `context-menu`

@@ -30,7 +30,7 @@ group:
 
 | 属性           | 描述                     | 类型                                           | 默认值  |
 | -------------- | ------------------------ | ---------------------------------------------- | ------- |
-| defaultChecked | 非受控 是否选中          | `boolean`                                      | `false` |
+| defaultChecked | 非受控 是否选中          | `boolean`                                      |         |
 | checked        | 受控 是否选中            | `boolean`                                      |         |
 | disabled       | 是否禁用                 | `boolean`                                      | `false` |
 | size           | 尺寸                     | `sm`\|`md`\|`lg`                               | `md`    |
