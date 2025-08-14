@@ -27,22 +27,21 @@ export function getElementPositionWithScrollbar(
   scrollLeft: number,
   scrollTop: number,
 ): ElementPosition {
-  // 获取元素的整体位置（包括边框）
   const rect = getElementPosition(el, scrollLeft, scrollTop);
 
-  // 计算滚动容器的内容区域（减去滚动条）
-  const contentWidth = el.clientWidth;
-  const contentHeight = el.clientHeight;
+  const contentWidth = el.clientWidth; // 内容宽度：实际内容宽度 + pl + pr
+  const contentHeight = el.clientHeight; // 内容宽度：实际内容宽度 + pt + pb
 
-  // 计算内容区域的位置（考虑滚动条）
+  const contentLeft = rect.left + el.clientLeft; // 左坐标 + border-left
+  const contentTop = rect.top + el.clientTop; // 上坐标 + border-top
+
   return {
-    ...rect,
     width: contentWidth,
     height: contentHeight,
-    // 右边界 = 左边界 + 内容宽度
-    right: rect.left + contentWidth,
-    // 下边界 = 上边界 + 内容高度
-    bottom: rect.top + contentHeight,
+    top: contentTop,
+    bottom: contentTop + contentHeight,
+    left: contentLeft,
+    right: contentLeft + contentWidth,
   };
 }
 
