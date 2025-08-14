@@ -3,8 +3,8 @@ import React, { forwardRef, useContext } from 'react';
 import clsx from 'clsx';
 import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
 import { LoadingIcon } from '@sqi-ui/icons';
-import type { SwitchProps } from './type';
 import { ConfigContext } from '../config-provider/context';
+import type { SwitchProps } from './type';
 
 const defaultProps: SwitchProps = {
   label: [],

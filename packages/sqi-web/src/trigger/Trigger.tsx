@@ -8,6 +8,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
+import clsx from 'clsx';
 import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
 
 import ResizeObserverComponent from '../_common/ResizeObserver';
@@ -17,13 +18,11 @@ import { getReactNodeRef } from '../_util/dom';
 import { supportNodeRef, useComposeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
 
-import { computedPosition } from './utils';
-import type { TriggerProps } from './type';
-import { collectScrollParentList } from './utils/collectScrollParentList';
-
 import useTrigger from './hooks/useTrigger';
-import clsx from 'clsx';
+import { computedPosition } from './utils';
+import { collectScrollParentList } from './utils/collectScrollParentList';
 import debounce from './utils/debounce';
+import type { TriggerProps } from './type';
 
 const defaultProps: TriggerProps = {
   direction: 'bottom',
