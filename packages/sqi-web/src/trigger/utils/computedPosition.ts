@@ -6,6 +6,7 @@ import {
   getScrollableParent,
   genTransformStyle,
   calcMaxDistance,
+  getElementPositionWithScrollbar,
 } from './dom';
 import { formatDirection, formatOffset } from './format';
 
@@ -85,8 +86,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   }
 
   let scrollableParentEl = getScrollableParent(reference);
-  // const scrollableParents: HTMLElement[] = [];
-  let parentPosition: ElementPosition;
 
   const [offsetX, offsetY] = formatOffset(options.offset);
 
@@ -96,9 +95,9 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
   let distanceX = 0;
   let distanceY = 0;
+  // const scrollableParents: HTMLElement[] = [];
   while (scrollableParentEl) {
-    // scrollableParents.push(scrollableParentEl);
-    parentPosition = getElementPosition(scrollableParentEl, scrollLeft, scrollTop);
+    const parentPosition = getElementPositionWithScrollbar(scrollableParentEl, scrollLeft, scrollTop);
     detectEdge(parentPosition);
     scrollableParentEl = getScrollableParent(scrollableParentEl.parentNode as HTMLElement);
   }

@@ -22,6 +22,29 @@ export function getElementPosition(el: HTMLElement, scrollLeft: number, scrollTo
   };
 }
 
+export function getElementPositionWithScrollbar(
+  el: HTMLElement,
+  scrollLeft: number,
+  scrollTop: number,
+): ElementPosition {
+  const rect = getElementPosition(el, scrollLeft, scrollTop);
+
+  const contentWidth = el.clientWidth; // 内容宽度：实际内容宽度 + pl + pr
+  const contentHeight = el.clientHeight; // 内容宽度：实际内容宽度 + pt + pb
+
+  const contentLeft = rect.left + el.clientLeft; // 左坐标 + border-left
+  const contentTop = rect.top + el.clientTop; // 上坐标 + border-top
+
+  return {
+    width: contentWidth,
+    height: contentHeight,
+    top: contentTop,
+    bottom: contentTop + contentHeight,
+    left: contentLeft,
+    right: contentLeft + contentWidth,
+  };
+}
+
 export function getScrollableParent(element: HTMLElement) {
   if (!element || element.tagName === 'HTML') return;
 
