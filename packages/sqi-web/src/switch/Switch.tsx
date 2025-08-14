@@ -1,11 +1,10 @@
 'use client';
 import React, { forwardRef, useContext } from 'react';
+import clsx from 'clsx';
+import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
+import { LoadingIcon } from '@sqi-ui/icons';
 import type { SwitchProps } from './type';
 import { ConfigContext } from '../config-provider/context';
-import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
-import clsx from 'clsx';
-import { LoadingIcon } from '@sqi-ui/icons';
-import { isElement } from 'react-is';
 
 const defaultProps: SwitchProps = {
   label: [],
@@ -54,7 +53,7 @@ const Switch = forwardRef<HTMLButtonElement, SwitchProps>((baseProps, ref) => {
     className,
   );
 
-  const loadingNode: React.ReactNode = isElement(loadingIcon) ? loadingIcon : <LoadingIcon spin />;
+  const loadingNode: React.ReactNode = loadingIcon || <LoadingIcon spin />;
 
   return (
     <button

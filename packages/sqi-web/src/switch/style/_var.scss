@@ -52,8 +52,7 @@ $switch-size: (
   sm: (
     min-w: $switch-min-width-sm,
     h: $switch-height-sm,
-    l-h: $switch-height-sm,
-    left: 0,
+    leading: $switch-height-sm,
     stretch-w: -2px,
     b: $switch-width-border-sm,
     mr: $switch-content-margin-right-sm,
@@ -74,7 +73,6 @@ $switch-size: (
     min-w: $switch-min-width-lg,
     h: $switch-height-lg,
     leading: $switch-height-lg,
-    left: 0,
     stretch-w: -6px,
     b: $switch-width-border-lg,
     mr: $switch-content-margin-right-lg,

@@ -50,12 +50,12 @@ group:
 | enableShift | 开启自动位移 | `boolean` | `true` |
 | offset | popper 偏移量 | `number \| { x: number; y: number }` | - |
 | zIndex | popper 元素层级 | `number` | `0` |
-| getContainer | 指定 popper 挂载的位置 | `string \| () => HTMLElement` | `document.body` |
+| getContainer | 指定 popper 挂载的位置 | `string \| HTMLElement \| () => HTMLElement` | `document.body` |
 | trigger | 触发方式 | `TriggerType \| TriggerType[]` | `"hover"` |
 | delay | 触发延迟的时间 ms 仅 hover 生效 | `number` | `100` |
 | clickOutsideClose | 点击外部是否可关闭 | `boolean` | `true` |
 | visible | 受控显示隐藏状态 | `boolean` | - |
-| onVisibleChange | 状态更改触发 | `(visible: boolean, events?: { e: Event; trigger: string }) => void` | - |
+| onVisibleChange | 状态更改触发 | `(visible: boolean, events?: { e: Event; trigger: TriggerType }) => void` | - |
 | disabled | 禁用行为 | `boolean` | - |
 
 ### TriggerDirection
