@@ -37,7 +37,6 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   const [element, setElement] = useState<HTMLElement | null>(null);
 
-  // 创建稳定的回调Ref
   const refCallback = useCallback(
     (node: HTMLElement | null) => {
       elementRef.current = node;
