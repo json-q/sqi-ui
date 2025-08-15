@@ -1,4 +1,12 @@
-import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef } from 'react';
+import React, {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { throttle } from '@sqi-ui/utils';
 import { useResizeObserver } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
@@ -23,12 +31,23 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
   const { children, disabled, throttleMs = 100, onResize } = props;
 
   const isElement = isValidElement(children);
-
   const childNodes = isElement ? toArray(children) : [];
-
   const originRef = isElement ? getReactNodeRef<Element>(children!) : null;
   const elementRef = useRef<Element>(null);
-  const mergedRef = useComposeRef(originRef, elementRef);
+
+  const [element, setElement] = useState<HTMLElement | null>(null);
+
+  // 创建稳定的回调Ref
+  const refCallback = useCallback(
+    (node: HTMLElement | null) => {
+      elementRef.current = node;
+      setElement(node);
+    },
+    [originRef],
+  );
+
+  // 合并ref
+  const mergedRef = useComposeRef(originRef, refCallback);
 
   if (process.env.NODE_ENV !== 'production') {
     if (!isElement) {
@@ -47,11 +66,13 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
     return getRefDom(elementRef) as HTMLElement;
   };
 
-  useImperativeHandle(ref, () => getDomElement());
+  useImperativeHandle(ref, () => element as HTMLElement);
 
   const throttleResize = onResize ? throttle(onResize, throttleMs) : undefined;
 
   useResizeObserver(getDomElement(), throttleResize, !disabled);
+
+  console.log(getRefDom(elementRef));
 
   return isElement ? cloneElement(children as any, { ref: mergedRef }) : children;
 });
