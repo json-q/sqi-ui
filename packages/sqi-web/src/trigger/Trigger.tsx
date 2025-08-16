@@ -36,6 +36,8 @@ const defaultProps: TriggerProps = {
   disabled: false,
 };
 
+const a = 1;
+
 const defaultMotionProps: TriggerProps['motion'] = {
   unmountOnExit: true,
 };
