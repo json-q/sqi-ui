@@ -25,6 +25,7 @@ export function useMergeState<T>(
   const prevPropsValue = usePrevious(propsValue);
   const isFirstRender = useRef(true);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `prevPropsValue.current`
   useEffect(() => {
     // 初始化时，props.value 已经在 useState 里赋值
     if (isFirstRender.current) {
@@ -58,7 +59,7 @@ export function useMergeState<T>(
 
       onChange?.(nextValue);
     },
-    [innerValue, mergedValue],
+    [propsValue, mergedValue, onChange],
   );
 
   return [mergedValue as T, triggerChange];
