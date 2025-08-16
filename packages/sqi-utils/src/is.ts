@@ -34,5 +34,5 @@ export const isEmptyObject = (val: unknown): val is boolean => {
 
 export const isNumber = (val: unknown): val is number => {
   // val === val 目的是排除 NaN , NaN 也是 [object Number]
-  return opt.call(val) === '[object Number]' && val === val;
+  return opt.call(val) === '[object Number]' && !Number.isNaN(val);
 };
