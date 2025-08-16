@@ -1,5 +1,12 @@
-import type React from 'react';
-import { cloneElement, forwardRef, isValidElement, useCallback, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { throttle } from '@sqi-ui/utils';
 import { useResizeObserver } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
@@ -30,13 +37,10 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   const [element, setElement] = useState<HTMLElement | null>(null);
 
-  const refCallback = useCallback(
-    (node: HTMLElement | null) => {
-      elementRef.current = node;
-      setElement(node);
-    },
-    [originRef],
-  );
+  const refCallback = useCallback((node: HTMLElement | null) => {
+    elementRef.current = node;
+    setElement(node);
+  }, []);
 
   // 合并ref
   const mergedRef = useComposeRef(originRef, refCallback);

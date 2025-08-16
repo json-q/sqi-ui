@@ -30,8 +30,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
 
   useEffect(() => {
     checkboxGroup.registerValue?.(restProps.value!);
-  }, []);
+  }, [checkboxGroup, restProps.value]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `prevValue.current`
   useEffect(() => {
     if (restProps.value !== prevValue.current) {
       checkboxGroup.unregisterValue?.(prevValue.current!);
@@ -40,7 +41,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((baseProps, ref) =>
     }
 
     return () => checkboxGroup.unregisterValue?.(restProps.value!);
-  }, [restProps.value]);
+  }, [checkboxGroup, restProps.value]);
 
   useEffect(() => {
     if (inputRef.current) {

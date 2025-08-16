@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect, useImperativeHandle } from 'react';
+import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 import { canUseDom, isFunction, isString } from '@sqi-ui/utils';
@@ -29,14 +29,14 @@ function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement |
   return document.body;
 }
 
-const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
+const Portal = React.forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
   const { getContainer, prefixCls, children, open = true, rootStyle } = props;
 
-  const [containerWrapper, setContainerWrapper] = useState<HTMLDivElement | null>(null);
-  const [customizeParent, setCustomizeParent] = useState<HTMLElement | null>(null);
+  const [containerWrapper, setContainerWrapper] = React.useState<HTMLDivElement | null>(null);
+  const [customizeParent, setCustomizeParent] = React.useState<HTMLElement | null>(null);
   const mergedParentNode = customizeParent || document.body;
 
-  useEffect(() => {
+  React.useEffect(() => {
     const newParentNode = getAttachNode(getContainer);
     setCustomizeParent(newParentNode || null);
   }, [getContainer]);
@@ -66,7 +66,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     }
   }, [open]);
 
-  useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
+  React.useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
 
   useIsomorphicLayoutEffect(() => {
     if (!isBrowser || !containerWrapper) return;

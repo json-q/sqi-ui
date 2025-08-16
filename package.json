@@ -9,7 +9,6 @@
     "dev": "turbo dev --filter=./packages/**",
     "build": "turbo build --filter=./packages/**",
     "lint": "turbo lint --filter=./packages/**",
-    "check": "turbo check --filter=./packages/**",
     "clean": "turbo clean --filter=./packages/**"
   },
   "keywords": [],

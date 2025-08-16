@@ -41,7 +41,7 @@ const Row = forwardRef<HTMLDivElement, RowProps>((baseProps, ref) => {
     });
 
     return () => ResponsiveObserve.unsubscribe(token);
-  }, []);
+  }, [gutter]);
 
   const gutterArray = getGutter();
   function getGutter() {

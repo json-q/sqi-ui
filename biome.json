@@ -18,11 +18,33 @@
     "lineWidth": 120,
     "bracketSameLine": false
   },
-  "linter": { "enabled": true, "rules": { "recommended": true } },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off",
+        "noLabelWithoutControl": {
+          "level": "error",
+          "options": {
+            "inputComponents": ["BaseCheckbox"]
+          }
+        },
+        "useSemanticElements": "off"
+      }
+    }
+  },
   "javascript": {
+    "jsxRuntime": "reactClassic",
     "formatter": {
-      "jsxQuoteStyle": "single",
-      "trailingCommas": "none",
+      "jsxQuoteStyle": "double",
+      "trailingCommas": "all",
       "bracketSameLine": false,
       "quoteStyle": "single"
     }
