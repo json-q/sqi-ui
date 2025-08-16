@@ -1,12 +1,5 @@
-import React, {
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  useCallback,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
+import type React from 'react';
+import { cloneElement, forwardRef, isValidElement, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { throttle } from '@sqi-ui/utils';
 import { useResizeObserver } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
