@@ -36,7 +36,9 @@ const responsiveObserve = {
   handlers: {} as ResponseHandler,
   dispatch(breakpointMatchStatus: ScreenMap) {
     screens = breakpointMatchStatus;
-    subscribers.forEach((cb) => cb(screens));
+    subscribers.forEach((cb) => {
+      cb(screens);
+    });
     return subscribers.size >= 1;
   },
   subscribe(cb: SubscribeFunc): number {

@@ -31,7 +31,7 @@ function compilerResetScss() {
   return gulp
     .src('./src/style/reset.scss')
     .pipe(
-      through2.obj(function (file, encoding, next) {
+      through2.obj(function (file, _encoding, next) {
         file.path = file.path.replace(/\.scss/g, '.css');
         this.push(file);
         next();
@@ -82,7 +82,7 @@ function copyRenameStyleIndex() {
   return gulp
     .src('./src/**/style/index.ts')
     .pipe(
-      through2.obj(function (file, encoding, next) {
+      through2.obj(function (file, _encoding, next) {
         file.path = file.path.replace(/index\.ts$/, 'index.js');
         this.push(file);
         next();

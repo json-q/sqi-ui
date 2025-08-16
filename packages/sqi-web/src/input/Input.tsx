@@ -5,7 +5,7 @@ import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
 import { isFunction, isNumber, isObject, isString, isUndefined } from '@sqi-ui/utils';
 import { CloseCircleFilledIcon, BrowseOffIcon, BrowseIcon } from '@sqi-ui/icons';
 import { ConfigContext } from '../config-provider/context';
-import type { InputProps, VisibilityToggle } from './type';
+import type { InputProps } from './type';
 
 const defaultProps: InputProps = {
   type: 'text',
@@ -154,13 +154,15 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   const visibilityIsControlled = isObject(visibilityToggle) && !isUndefined(visibilityToggle.visible);
   const [renderType, setRenderType] = useState(type);
 
+  const isVisiblePassword = isObject(visibilityToggle) ? visibilityToggle.visible : visibilityToggle;
+
   useEffect(() => {
     if (visibilityIsControlled) {
-      setRenderType(visibilityToggle.visible ? 'text' : 'password');
+      setRenderType(isVisiblePassword ? 'text' : 'password');
     } else {
       setRenderType(type);
     }
-  }, [type, visibilityIsControlled, (visibilityToggle as VisibilityToggle)?.visible]);
+  }, [type, visibilityIsControlled, isVisiblePassword]);
 
   const togglePasswordVisible = () => {
     if (disabled) return;
@@ -213,7 +215,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
 
       return content;
     };
-  }, [addonBefore, addonAfter, tips]);
+  }, [prefixCls, addonBefore, addonAfter, tips]);
 
   const prefixElement = prefix && <span className={`${prefixCls}-input-prefix`}>{prefix}</span>;
 
@@ -246,6 +248,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   // input core element
   const inputElement = (
     <span
+      role="group"
       ref={addonBefore || addonAfter ? undefined : wrapperRef}
       className={wrapperClasses}
       style={style}

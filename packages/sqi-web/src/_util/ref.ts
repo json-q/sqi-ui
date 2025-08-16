@@ -36,7 +36,7 @@ export const supportRef = (nodeOrComponent: any): boolean => {
     return false;
   }
 
-  const ReactMajorVersion = parseInt(version);
+  const ReactMajorVersion = parseInt(version, 10);
 
   // React 19 no need `forwardRef` anymore. So just pass if is a React element.
   if (isReactElement(nodeOrComponent) && ReactMajorVersion >= 19) {

@@ -29,7 +29,7 @@ export default function Demo() {
 
   React.useLayoutEffect(() => {
     containerRef.current?.scrollTo(containerRef.current.clientWidth + 115, containerRef.current.clientHeight);
-  }, [containerRef]);
+  }, []);
 
   function changeDirection(e: RadioChangeEvent) {
     setDirection(e.target.value as TriggerDirection);

@@ -61,7 +61,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
         {action && <div className={`${prefixCls}-alert-action`}>{action}</div>}
 
         {closable && (
-          <button className={`${prefixCls}-alert-close`} onClick={handleClose}>
+          <button type="button" className={`${prefixCls}-alert-close`} onClick={handleClose}>
             <CloseIcon />
           </button>
         )}

@@ -41,6 +41,7 @@ export const BaseCheckbox = forwardRef<HTMLInputElement, BaseCheckboxProps>((pro
     value: checked,
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `_getCheckedValue`
   useEffect(() => {
     _getCheckedValue?.(innerValue);
   }, [innerValue]);

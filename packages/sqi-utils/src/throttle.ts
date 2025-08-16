@@ -10,7 +10,7 @@ export function throttle<F extends (...args: any[]) => void>(fn: F, throttleMs: 
 
   const debounced = debounce(fn, throttleMs);
 
-  const throttled = function (...args: Parameters<F>) {
+  const throttled = (...args: Parameters<F>) => {
     if (pendingAt === null) {
       pendingAt = Date.now();
     } else {

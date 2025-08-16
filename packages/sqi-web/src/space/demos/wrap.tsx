@@ -5,7 +5,7 @@ export default function Demo() {
   return (
     <Space wrap>
       {Array.from({ length: 20 }).map((_, index) => (
-        <Button key={index} type="primary">
+        <Button key={index.toString()} type="primary">
           Item{index + 1}
         </Button>
       ))}

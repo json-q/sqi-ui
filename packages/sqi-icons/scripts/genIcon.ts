@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 import type { Config } from '@svgr/core';
-import { type PluginConfig } from 'svgo';
+import type { PluginConfig } from 'svgo';
 import decamelize from 'decamelize';
 import transSvgToComponent from './transSvgToComponent';
 import { iconPrefix, iconSuffix } from './constants';

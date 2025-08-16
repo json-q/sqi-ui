@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect, useImperativeHandle } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
 import { canUseDom, isFunction, isString } from '@sqi-ui/utils';
@@ -66,7 +66,7 @@ const Portal = forwardRef<HTMLDivElement, PortalProps>((props, ref) => {
     }
   }, [open]);
 
-  useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
+  React.useImperativeHandle(ref, () => containerWrapper as HTMLDivElement, [containerWrapper]);
 
   useIsomorphicLayoutEffect(() => {
     if (!isBrowser || !containerWrapper) return;

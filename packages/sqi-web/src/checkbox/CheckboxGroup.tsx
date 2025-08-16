@@ -26,13 +26,10 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.CheckboxGroup);
 
-  // const [registeredValues, setRegisteredValues] = useMergeState<CheckboxValue[]>(defaultValue!, {
-  //   value: restProps.value,
-  // });
-
   const [innerValue, setInnerValue] = useState<CheckboxValue[]>(restProps.value || defaultValue || []);
   const [registeredValues, setRegisteredValues] = useState<CheckboxValue[]>([]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `restProps`
   useEffect(() => {
     if ('value' in restProps) {
       setInnerValue(restProps.value || []);
@@ -58,6 +55,7 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
     [options],
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `restProps`
   const toggleOption = useCallback(
     (changeValue: CheckboxValue) => {
       const copyValue = [...innerValue];
@@ -76,7 +74,7 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
 
       onChange?.(checkedValues);
     },
-    [innerValue, registeredValues, restProps, onChange],
+    [innerValue, registeredValues, restProps.value, onChange],
   );
 
   let renderChildren = children;

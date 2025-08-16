@@ -41,6 +41,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
     value,
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `props` `setControlValue`
   const onRadioChange = useCallback(
     (e: RadioChangeEvent) => {
       const val = e.target.value;
@@ -51,7 +52,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
         onChange?.(e);
       }
     },
-    [controlValue, onChange],
+    [props.value, controlValue, onChange],
   );
 
   let renderChildren = children;
@@ -96,7 +97,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((baseProps, ref) 
 
   const memoizedState = useMemo(() => {
     return { name, value: controlValue, disabled, size, buttonVariant, onChange: onRadioChange };
-  }, [name, value, disabled, size, buttonVariant, onRadioChange]);
+  }, [name, controlValue, disabled, size, buttonVariant, onRadioChange]);
 
   return (
     <div ref={ref} className={clsx(`${prefixCls}-radio-group`, className)} style={style}>
