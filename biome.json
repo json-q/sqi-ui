@@ -27,7 +27,8 @@
         "noPrototypeBuiltins": "off"
       },
       "style": {
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useTemplate": "off"
       },
       "a11y": {
         "useKeyWithClickEvents": "off",
@@ -37,7 +38,8 @@
             "inputComponents": ["BaseCheckbox"]
           }
         },
-        "useSemanticElements": "off"
+        "useSemanticElements": "off",
+        "noSvgWithoutTitle": "off"
       },
       "complexity": {
         "noImportantStyles": "off"

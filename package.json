@@ -8,7 +8,8 @@
     "prepare": "lefthook install",
     "dev": "turbo dev --filter=./packages/**",
     "build": "turbo build --filter=./packages/**",
-    "lint": "turbo lint --filter=./packages/**",
+    "format": "turbo format --filter=./packages/**",
+    "format-staged": "turbo format-staged --filter=./packages/**",
     "clean": "turbo clean --filter=./packages/**"
   },
   "keywords": [],

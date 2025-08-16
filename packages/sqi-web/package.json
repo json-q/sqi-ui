@@ -15,7 +15,9 @@
     "gulp:dev": "gulp watch",
     "gulp:build": "gulp",
     "build": "rslib build && gulp",
-    "clean": "rimraf dist .turbo"
+    "clean": "rimraf dist .turbo",
+    "format": "biome check --write .",
+    "format-staged": "biome check --staged --write ."
   },
   "exports": {
     ".": {

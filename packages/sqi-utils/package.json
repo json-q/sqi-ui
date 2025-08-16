@@ -25,7 +25,9 @@
   "scripts": {
     "dev": "rslib build --watch",
     "build": "rslib build",
-    "clean": "rimraf dist .turbo"
+    "clean": "rimraf dist .turbo",
+    "format": "biome check --write .",
+    "format-staged": "biome check --staged --write ."
   },
   "dependencies": {
     "@swc/helpers": "^0.5.17"

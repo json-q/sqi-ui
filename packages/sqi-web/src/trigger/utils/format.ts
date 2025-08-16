@@ -8,7 +8,7 @@ export function formatDirection(direction: TriggerDirection): [Side, AlignRelati
   const side = splitDirection[0] as Side;
   const align = splitDirection[1] as Alignment;
 
-  let relativeAlign: AlignRelative | undefined = undefined;
+  let relativeAlign: AlignRelative | undefined;
 
   const isVertical = side === 'top' || side === 'bottom';
   const isHorizontal = side === 'left' || side === 'right';

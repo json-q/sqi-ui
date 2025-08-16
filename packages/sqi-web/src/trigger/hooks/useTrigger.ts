@@ -44,7 +44,7 @@ const useTrigger = (props: Options) => {
       document.removeEventListener('mousedown', handleDocumentClick);
       document.removeEventListener('touchend', handleDocumentClick);
     };
-  }, [disabled, visible, triggerEl]);
+  }, [disabled, visible, triggerEl, clickOutsideClose, onVisibleChange]);
 
   function delayFn(cb: () => void) {
     if (delay) {
