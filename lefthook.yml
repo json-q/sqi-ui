@@ -3,4 +3,4 @@ pre-commit:
   commands:
     format:
       run: pnpm format-staged
-      staged_fixed: true
+      stage_fixed: true
