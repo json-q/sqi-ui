@@ -68,8 +68,6 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   useResizeObserver(getDomElement(), throttleResize, !disabled);
 
-  console.log(getRefDom(elementRef));
-
   return isElement ? cloneElement(children as any, { ref: mergedRef }) : children;
 });
 
