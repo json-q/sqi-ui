@@ -2,4 +2,4 @@
 - react + typescript + scss
 - dumi
 - rslib + gulp
-- eslint + prettier
+- lefthook + biome

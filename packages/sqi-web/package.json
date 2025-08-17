@@ -17,7 +17,7 @@
     "build": "rslib build && gulp",
     "clean": "rimraf dist .turbo",
     "format": "biome check --write .",
-    "format-staged": "biome check --staged --write ."
+    "format-staged": "biome check --staged --no-errors-on-unmatched --write ."
   },
   "exports": {
     ".": {
