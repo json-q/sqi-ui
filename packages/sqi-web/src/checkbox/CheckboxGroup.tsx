@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useContext, useEffect, useId, useMemo, useState } from 'react';
+import React, { forwardRef, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { isArray, isFunction, isNumber, isString } from '@sqi-ui/utils';
@@ -28,6 +28,11 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
 
   const [innerValue, setInnerValue] = useState<CheckboxValue[]>(restProps.value || defaultValue || []);
   const [registeredValues, setRegisteredValues] = useState<CheckboxValue[]>([]);
+  const registeredValuesRef = useRef<CheckboxValue[]>([]);
+
+  useEffect(() => {
+    registeredValuesRef.current = registeredValues;
+  }, [registeredValues]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> ignore `restProps`
   useEffect(() => {
@@ -70,11 +75,11 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((baseProps,
         setInnerValue(copyValue);
       }
 
-      const checkedValues = copyValue.filter((val) => registeredValues.includes(val));
+      const checkedValues = copyValue.filter((val) => registeredValuesRef.current.includes(val));
 
       onChange?.(checkedValues);
     },
-    [innerValue, registeredValues, restProps.value, onChange],
+    [innerValue, onChange],
   );
 
   let renderChildren = children;
