@@ -1,5 +1,5 @@
 'use client';
-import React, { forwardRef, isValidElement, useContext, useImperativeHandle } from 'react';
+import React, { forwardRef, isValidElement, useContext, useImperativeHandle, useRef } from 'react';
 import type { PopupProps } from './type';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { ConfigContext } from '../config-provider/context';
@@ -14,7 +14,7 @@ const defaultProps: PopupProps = {
   offset: 0,
 };
 
-const Popup = forwardRef<any, PopupProps>((baseProps, ref) => {
+const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const { children, content, destroyOnClose, showArrow, styles, classNames, ...restProps } = useMergeProps(
     baseProps,
@@ -22,7 +22,9 @@ const Popup = forwardRef<any, PopupProps>((baseProps, ref) => {
     componentConfig?.Popup,
   );
 
-  useImperativeHandle(ref, () => {});
+  const wrapperChildrenRef = useRef<HTMLElement>(null);
+
+  useImperativeHandle(ref, () => wrapperChildrenRef.current as HTMLElement);
 
   if (!children) return null;
 
@@ -31,6 +33,7 @@ const Popup = forwardRef<any, PopupProps>((baseProps, ref) => {
   return (
     <Trigger
       {...restProps}
+      ref={wrapperChildrenRef}
       className={`${prefixCls}-popup`}
       motion={{
         timeout: 200,

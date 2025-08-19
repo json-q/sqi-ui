@@ -66,7 +66,7 @@ export interface TriggerProps {
    * @description 触发方式
    * @default "hover"
    */
-  trigger?: TriggerType | TriggerType[];
+  trigger?: TriggerType;
   /**
    * @description 禁用行为
    */

@@ -55,7 +55,7 @@ const popperStyle = { ...basePositionStyle };
 
 const arrowStyle = { ...basePositionStyle };
 
-const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
+const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const {
     className,
@@ -103,7 +103,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     triggerEl: referenceRef.current,
   });
 
-  useImperativeHandle(ref, () => {});
+  useImperativeHandle(ref, () => referenceRef.current as HTMLElement);
 
   // =============== Warning ===============
   const canUseChildrenRef = supportNodeRef(children);
@@ -189,6 +189,7 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
           return (
             <Portal getContainer={getContainer}>
               <div
+                role="tooltip"
                 {...genPopupProps()}
                 className={clsx(`${prefixCls}-trigger`, motionCls, className)}
                 style={{ ...popperStyle, zIndex }}
