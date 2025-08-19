@@ -93,12 +93,6 @@ const useTrigger = (props: Options) => {
     if (disabled) return {};
 
     const triggerProps = {
-      onMouseDown: (e: MouseEvent) => {
-        if (trigger === 'mousedown') {
-          delayFn(() => onVisibleChange?.(!visible, { e, trigger: 'mousedown' }));
-        }
-        (triggerNode.props as any).onMouseDown?.(e);
-      },
       onClick: (e: MouseEvent) => {
         if (trigger === 'click') {
           e.preventDefault();
@@ -108,7 +102,7 @@ const useTrigger = (props: Options) => {
         (triggerNode.props as any).onClick?.(e);
       },
       onTouchStart: (e: TouchEvent) => {
-        if (trigger === 'hover' || trigger === 'mousedown') {
+        if (trigger === 'hover') {
           leaveFlag.current = false;
           delayFn(() => onVisibleChange?.(true, { e, trigger: 'hover' }));
         }

@@ -114,6 +114,10 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
     width: clientWidth,
   });
 
+  // 设置 attribute 必须在箭头计算前边，因为箭头的样式依赖此方向
+  const normalAlign = options.direction.split('-')[1];
+  popperParentContainer.setAttribute('data-direction', `${currentSide}${normalAlign ? `-${normalAlign}` : ''}`);
+
   x = x - distanceX;
   y = y - distanceY;
 
@@ -132,7 +136,6 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   }
 
   popperParentContainer.style.transform = genTransformStyle(x, y);
-  popperParentContainer.setAttribute('data-direction', currentSide);
 
   /** 边缘碰撞检测并调整位置 */
   function detectEdge(position: ElementPosition) {
@@ -242,6 +245,9 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   function compatibleArrow() {
     if (!arrow) return;
 
+    // 获取最新的箭头宽高（在匹配到对应方向的 css 后重新得到最新宽高）
+    const { height: arrowHeight, width: arrowWidth } = getElementPosition(arrow, scrollLeft, scrollTop);
+
     // 箭头存在的情况下，popper 元素需再额外偏移箭头的宽/高
     if (vertical) {
       // 垂直方向：添加箭头高度偏移
@@ -253,78 +259,36 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
     const mainAlignment = options.direction.split('-')[1] || 'center';
     const transformCoords = { x: 0, y: 0 };
-    // 根据翻转后的方向进行箭头的位置偏移
+
     if (vertical) {
       transformCoords.y = currentSide === 'top' ? popperPosition.height : -arrowHeight;
-      // 比如处于 bottom-center 时向右移，在 arrow 能固定（视觉上）指向在 reference 中间时，需要不断偏移使其指向中间
-      // 当无法指向时，需要不断向左（相对于 popper）偏移尽量保证在视图内直至 reference 彻底离开视图区域
-      const shouldOnCenter = Math.abs(referencePosition.width - popperPosition.width) > Math.abs(distanceX);
-      const shouldStaticArrow = distanceX === 0; // 仅副轴为 center 时使用
+
+      const maxX = popperPosition.width - arrowWidth;
+      const minX = 0;
 
       if (mainAlignment === 'start') {
-        if (shouldStaticArrow) {
-          transformCoords.x = 0;
-        } else {
-          transformCoords.x = Math.min(Math.max(0, distanceX), popperPosition.width - arrowWidth);
-        }
+        transformCoords.x = Math.max(minX, Math.min(maxX, distanceX));
       } else if (mainAlignment === 'center') {
-        if (shouldStaticArrow) {
-          transformCoords.x = (popperPosition.width - arrowWidth) / 2;
-        } else {
-          if (shouldOnCenter) {
-            transformCoords.x = (popperPosition.width - arrowWidth) / 2 + distanceX;
-          } else {
-            transformCoords.x = Math.max(
-              0,
-              Math.min(popperPosition.width - arrowWidth, (popperPosition.width - arrowWidth) / 2 + distanceX),
-            );
-          }
-        }
+        const centerX = (popperPosition.width - arrowWidth) / 2;
+        transformCoords.x = Math.max(minX, Math.min(maxX, centerX + distanceX));
       } else if (mainAlignment === 'end') {
-        if (shouldStaticArrow) {
-          transformCoords.x = popperPosition.width - arrowWidth;
-        } else {
-          transformCoords.x = Math.max(
-            0,
-            Math.min(popperPosition.width - arrowWidth, popperPosition.width - arrowWidth + distanceX),
-          );
-        }
+        const endX = popperPosition.width - arrowWidth;
+        transformCoords.x = Math.max(minX, Math.min(maxX, endX + distanceX));
       }
     } else if (horizontal) {
       transformCoords.x = currentSide === 'left' ? popperPosition.width : -arrowWidth;
 
-      const shouldStaticArrow = distanceY === 0;
-      const shouldOnCenter = Math.abs(referencePosition.height - popperPosition.height) > Math.abs(distanceY);
+      const maxY = popperPosition.height - arrowHeight;
+      const minY = 0;
 
       if (mainAlignment === 'start') {
-        if (shouldStaticArrow) {
-          transformCoords.y = 0;
-        } else {
-          // 动态偏移：根据 distanceY 向下移动箭头
-          transformCoords.y = Math.min(Math.max(0, distanceY), popperPosition.height - arrowHeight);
-        }
+        transformCoords.y = Math.max(minY, Math.min(maxY, distanceY));
       } else if (mainAlignment === 'center') {
-        if (shouldStaticArrow) {
-          transformCoords.y = (popperPosition.height - arrowHeight) / 2;
-        } else {
-          if (shouldOnCenter) {
-            transformCoords.y = (popperPosition.height - arrowHeight) / 2 + distanceY;
-          } else {
-            transformCoords.y = Math.max(
-              0,
-              Math.min(popperPosition.height - arrowHeight, (popperPosition.height - arrowHeight) / 2 + distanceY),
-            );
-          }
-        }
+        const centerY = (popperPosition.height - arrowHeight) / 2;
+        transformCoords.y = Math.max(minY, Math.min(maxY, centerY + distanceY));
       } else if (mainAlignment === 'end') {
-        if (shouldStaticArrow) {
-          transformCoords.y = popperPosition.height - arrowHeight;
-        } else {
-          transformCoords.y = Math.max(
-            0,
-            Math.min(popperPosition.height - arrowHeight, popperPosition.height - arrowHeight + distanceY),
-          );
-        }
+        const endY = popperPosition.height - arrowHeight;
+        transformCoords.y = Math.max(minY, Math.min(maxY, endY + distanceY));
       }
     }
 

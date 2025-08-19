@@ -29,16 +29,17 @@ const defaultProps: TriggerProps = {
   enableFlip: true,
   enableShift: true,
   offset: 0,
-  zIndex: 0,
+  zIndex: 1,
   trigger: 'hover',
   delay: 100,
   clickOutsideClose: true,
   disabled: false,
+  defaultVisible: false,
 };
 
-const defaultMotionProps: TriggerProps['motion'] = {
-  unmountOnExit: true,
-};
+// const defaultMotionProps: TriggerProps['motion'] = {
+//   unmountOnExit: true,
+// };
 
 const basePositionStyle: React.CSSProperties = {
   position: 'absolute',
@@ -57,6 +58,7 @@ const arrowStyle = { ...basePositionStyle };
 const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const {
+    className,
     children,
     popper,
     enableShift,
@@ -69,13 +71,12 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     trigger,
     delay,
     disabled,
+    defaultVisible,
     visible,
     arrow,
     clickOutsideClose,
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
-  // useMergeProps 不处理嵌套对象的合并
-  const mergedMotion = useMergeProps(defaultMotionProps, motion);
 
   const isElementChild = isValidElement(children);
 
@@ -86,7 +87,11 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
   const motionRef = useRef<CSSMotionInstance>(null);
 
-  const [innerVisible, setInnerVisible] = useMergeState(visible!, { onChange: onVisibleChange });
+  const [innerVisible, setInnerVisible] = useMergeState(false, {
+    defaultValue: defaultVisible,
+    value: visible,
+    onChange: onVisibleChange,
+  });
 
   const { genPopupProps, genTriggerProps } = useTrigger({
     clickOutsideClose,
@@ -179,21 +184,18 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     if (!popper) return null;
 
     return (
-      <CSSMotion ref={motionRef} {...mergedMotion}>
-        {({ className }) => {
+      <CSSMotion ref={motionRef} {...motion}>
+        {({ className: motionCls }) => {
           return (
             <Portal getContainer={getContainer}>
               <div
                 {...genPopupProps()}
-                className={clsx(`${prefixCls}-trigger`, className)}
+                className={clsx(`${prefixCls}-trigger`, motionCls, className)}
                 style={{ ...popperStyle, zIndex }}
               >
                 {arrow ? (
-                  <div className={`${prefixCls}-trigger-arrow`}>
-                    {cloneElement(arrow as any, {
-                      ref: arrowRef,
-                      style: { ...arrowStyle, zIndex, ...((arrow.props as any).style || {}) },
-                    })}
+                  <div className={`${prefixCls}-trigger-arrow`} ref={arrowRef} style={{ ...arrowStyle, zIndex }}>
+                    {arrow}
                   </div>
                 ) : null}
 

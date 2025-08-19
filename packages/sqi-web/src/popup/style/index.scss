@@ -1,0 +1,150 @@
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-popup;
+
+.#{$module} {
+  @include reset;
+
+  color: $popup-text-color;
+  display: inline-block;
+  z-index: $z-index-popup;
+
+  &-content {
+    position: relative;
+    background-color: $popup-bg;
+    box-shadow: $popup-shadow;
+    border-radius: $border-radius-md;
+    padding: $popup-padding;
+    font-size: $popup-content-font-size;
+    line-height: $popup-content-line-height;
+    box-sizing: border-box;
+    word-break: break-all;
+  }
+
+  &-arrow {
+    position: relative;
+    width: $popup-arrow-width;
+    height: $popup-arrow-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: $popup-arrow-width;
+      height: $popup-arrow-height;
+      background-color: $arrow-bg;
+      transform-origin: 50% 50% 0;
+    }
+  }
+
+  // Arrow Directions Adaption
+  & {
+    &[data-direction^='top'],
+    &[data-direction^='bottom'] {
+      .#{$module}-arrow {
+        padding: 0 calc($popup-arrow-size / 2);
+      }
+    }
+
+    &[data-direction^='left'],
+    &[data-direction^='right'] {
+      .#{$module}-arrow {
+        padding: calc($popup-arrow-size / 2) 0;
+      }
+    }
+
+    // Top
+    &[data-direction^='top'] &-arrow::before {
+      transform: translateY(-50%) rotate(45deg);
+      box-shadow: $popup-top-arrow-shadow;
+    }
+
+    &[data-direction='top-start'] &-arrow::before {
+      transform: translate(100%, -50%) rotate(45deg);
+    }
+    &[data-direction='top-end'] &-arrow::before {
+      transform: translate(-100%, -50%) rotate(45deg);
+    }
+
+    // Bottom
+    &[data-direction^='bottom'] &-arrow::before {
+      transform: translateY(50%) rotate(45deg);
+      box-shadow: $popup-bottom-arrow-shadow;
+    }
+
+    &[data-direction='bottom-start'] &-arrow::before {
+      transform: translate(100%, 50%) rotate(45deg);
+    }
+    &[data-direction='bottom-end'] &-arrow::before {
+      transform: translate(-100%, 50%) rotate(45deg);
+    }
+
+    // Left
+    &[data-direction^='left'] &-arrow::before {
+      transform: translateX(-50%) rotate(45deg);
+      box-shadow: $popup-left-arrow-shadow;
+    }
+
+    &[data-direction='left-start'] &-arrow::before {
+      transform: translate(-50%, 100%) rotate(45deg);
+    }
+    &[data-direction='left-end'] &-arrow::before {
+      transform: translate(-50%, -100%) rotate(45deg);
+    }
+
+    // Right
+    &[data-direction^='right'] &-arrow::before {
+      transform: translateX(50%) rotate(45deg);
+      box-shadow: $popup-right-arrow-shadow;
+    }
+
+    &[data-direction='right-start'] &-arrow::before {
+      transform: translate(50%, 100%) rotate(45deg);
+    }
+    &[data-direction='right-end'] &-arrow::before {
+      transform: translate(50%, -100%) rotate(45deg);
+    }
+  }
+
+  // Motion
+  &-motion {
+    transition: $popup-flow-transition-enter;
+
+    &.#{$module}-motion-preEnter {
+      opacity: 0;
+    }
+
+    &.#{$module}-motion-entered {
+      opacity: 1;
+      transition: none;
+    }
+
+    &.#{$module}-motion-exiting {
+      transition: $popup-flow-transition-leave;
+      opacity: 0;
+    }
+
+    &.#{$module}-motion-exited {
+      display: none;
+      transition: none;
+    }
+  }
+
+  // .sqi-demo-motion.sqi-demo-motion-preEnter,
+  // .sqi-demo-motion.sqi-demo-motion-exiting {
+  //   opacity: 0;
+  //   transform: scale(0.5);
+  // }
+
+  // .sqi-demo-motion.sqi-demo-motion-entered {
+  //   opacity: 1;
+  //   transform: scale(1);
+  // }
+
+  // .sqi-demo-motion.sqi-demo-motion-exited {
+  //   display: none;
+  // }
+}
