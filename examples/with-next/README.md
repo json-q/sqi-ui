@@ -1,6 +1,6 @@
 # React Nextjs Template
 
-The `transpilePackages` need to be configured in `next.config.ts`
+Need to be configured in `next.config.ts`
 
 ```ts
 import type { NextConfig } from 'next';
