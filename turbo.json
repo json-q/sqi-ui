@@ -26,12 +26,6 @@
       "cache": false,
       "persistent": true
     },
-    "format": {
-      "dependsOn": ["^format"]
-    },
-    "format-staged": {
-      "dependsOn": ["^format-staged"]
-    },
     "clean": {
       "cache": false
     }

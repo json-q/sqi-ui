@@ -28,7 +28,7 @@
     "gen:icon": "tsx  ./scripts/genIcon",
     "dev": "rslib build --watch",
     "build": "rslib build",
-    "clean": "rimraf dist .turbo",
+    "clean": "rimraf dist es lib .turbo",
     "format": "biome check --write .",
     "format-staged": "biome check --staged --no-errors-on-unmatched --write ."
   },
