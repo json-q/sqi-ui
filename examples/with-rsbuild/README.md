@@ -1,6 +1,6 @@
 # React Rsbuild Template
 
-`babel-plugin-import` can be replaced with the `source.transformImport` configuration in Rsbuild
+In Rsbuild, you can replace `babel-plugin-import` with the `source.transformImport` configuration:
 
 ```ts
 export default defineConfig({

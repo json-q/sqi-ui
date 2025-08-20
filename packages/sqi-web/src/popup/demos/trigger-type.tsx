@@ -7,7 +7,7 @@ export default function Demo() {
         <Button type="primary">Hover me</Button>
       </Popup>
 
-      <Popup direction="top-start" trigger="click" content="This is a hover popup">
+      <Popup trigger="click" content="This is a hover popup">
         <Button type="primary">Click me</Button>
       </Popup>
 
