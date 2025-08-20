@@ -1,29 +1,25 @@
-# Rsbuild project
+# React Rsbuild Template
 
-## Setup
+`babel-plugin-import` can be replaced with the `source.transformImport` configuration in Rsbuild
 
-Install the dependencies:
-
-```bash
-pnpm install
+```ts
+export default defineConfig({
+  source: {
+    transformImport: [
+      {
+        libraryName: '@sqi-ui/web',
+        libraryDirectory: 'es',
+        style: 'css',
+      },
+    ],
+  },
+});
 ```
 
-## Get started
+import style in `index.tsx`
 
-Start the dev server:
-
-```bash
-pnpm dev
+```ts
+import '@sqi-ui/web/es/style/index.css';
 ```
 
-Build the app for production:
-
-```bash
-pnpm build
-```
-
-Preview the production build locally:
-
-```bash
-pnpm preview
-```
+You can build this template and check dist folder
