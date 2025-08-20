@@ -1,17 +1,16 @@
-.sqi-trigger-demo-motion {
-  /* overflow: hidden; */
+.sqi-demo-trigger-motion {
   transition: opacity 0.25s ease-in-out;
 }
 
-.sqi-trigger-demo-motion.sqi-trigger-demo-motion-preEnter,
-.sqi-trigger-demo-motion.sqi-trigger-demo-motion-exiting {
+.sqi-demo-trigger-motion.sqi-demo-trigger-motion-preEnter,
+.sqi-demo-trigger-motion.sqi-demo-trigger-motion-exiting {
   opacity: 0;
 }
 
-.sqi-trigger-demo-motion.sqi-trigger-demo-motion-entered {
+.sqi-demo-trigger-motion.sqi-demo-trigger-motion-entered {
   opacity: 1;
 }
 
-.sqi-trigger-demo-motion.sqi-trigger-demo-motion-exited {
+.sqi-demo-trigger-motion.sqi-demo-trigger-motion-exited {
   display: none;
 }

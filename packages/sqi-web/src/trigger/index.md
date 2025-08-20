@@ -12,7 +12,7 @@ group:
 
 通常情况下，不建议直接使用 Trigger 组件。严格意义上说，Trigger 组件也是内部使用的，且不携带任何样式，外部使用会让代码组织变得更复杂。
 
-推荐使用 `Popup` 组件来替代 `Trigger` 组件
+推荐使用 `Popup` 组件来替代 `Trigger` 组件，更完整的使用请查看 `Popup` 组件
 
 ## Popper 定位
 
@@ -36,6 +36,16 @@ group:
 动画无法添加 transform，因为 position 的定位使用 `transform`，会有冲突
 
 <code src="./demos/basic-trigger.tsx"></code>
+
+## 点击 popper 元素使 trigger 失焦不关闭
+
+<code src="./demos/focus-outside-click.tsx"></code>
+
+## 关闭销毁
+
+默认情况下，当 popper 关闭时，相关 dom 会被隐藏，通过设置 `motion.unmountOnExit` 为 true 可以在关闭时销毁 dom
+
+<code src="./demos/destroy-exit.tsx"></code>
 
 ## API
 
