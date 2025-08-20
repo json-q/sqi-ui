@@ -37,10 +37,6 @@ const defaultProps: TriggerProps = {
   clickOutsideClose: true,
 };
 
-// const defaultMotionProps: TriggerProps['motion'] = {
-//   unmountOnExit: true,
-// };
-
 const basePositionStyle: React.CSSProperties = {
   position: 'absolute',
   top: 0,
