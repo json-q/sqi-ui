@@ -1,9 +1,9 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useIsomorphicLayoutEffect } from '@sqi-ui/hooks';
-import { canUseDom, isFunction, isString } from '@sqi-ui/utils';
+import { canUseDom, isFunction } from '@sqi-ui/utils';
 
-export type PortalContainer = string | (() => HTMLElement | null) | HTMLElement | null;
+export type PortalContainer = (() => HTMLElement | null) | null;
 
 export interface PortalProps {
   prefixCls?: string;
@@ -21,10 +21,7 @@ const isBrowser = canUseDom();
 
 function getAttachNode(getContainer: PortalProps['getContainer']): HTMLElement | null {
   if (!isBrowser) return null;
-
-  if (isString(getContainer)) return document.querySelector(getContainer);
   if (isFunction(getContainer)) return getContainer();
-  if (getContainer instanceof HTMLElement) return getContainer;
 
   return document.body;
 }

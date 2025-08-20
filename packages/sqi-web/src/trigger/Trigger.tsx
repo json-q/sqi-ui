@@ -7,6 +7,7 @@ import React, {
   useContext,
   useImperativeHandle,
   useRef,
+  useState,
 } from 'react';
 import clsx from 'clsx';
 import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
@@ -20,7 +21,7 @@ import { ConfigContext } from '../config-provider/context';
 
 import useTrigger from './hooks/useTrigger';
 import { computedPosition } from './utils';
-import { collectScrollParentList } from './utils/collectScrollParentList';
+import { collectScrollParentList, type ElementCollection } from './utils/collectScrollParentList';
 import debounce from './utils/debounce';
 import type { TriggerProps } from './type';
 
@@ -29,15 +30,11 @@ const defaultProps: TriggerProps = {
   enableFlip: true,
   enableShift: true,
   offset: 0,
-  zIndex: 0,
+  zIndex: 1,
   trigger: 'hover',
   delay: 100,
+  outFocusToClose: true,
   clickOutsideClose: true,
-  disabled: false,
-};
-
-const defaultMotionProps: TriggerProps['motion'] = {
-  unmountOnExit: true,
 };
 
 const basePositionStyle: React.CSSProperties = {
@@ -54,9 +51,10 @@ const popperStyle = { ...basePositionStyle };
 
 const arrowStyle = { ...basePositionStyle };
 
-const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
+const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
   const {
+    className,
     children,
     popper,
     enableShift,
@@ -68,14 +66,14 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     zIndex,
     trigger,
     delay,
+    outFocusToClose,
     disabled,
+    defaultVisible,
     visible,
     arrow,
     clickOutsideClose,
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
-  // useMergeProps 不处理嵌套对象的合并
-  const mergedMotion = useMergeProps(defaultMotionProps, motion);
 
   const isElementChild = isValidElement(children);
 
@@ -86,7 +84,11 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
   const motionRef = useRef<CSSMotionInstance>(null);
 
-  const [innerVisible, setInnerVisible] = useMergeState(visible!, { onChange: onVisibleChange });
+  const [innerVisible, setInnerVisible] = useMergeState(false, {
+    defaultValue: defaultVisible,
+    value: visible,
+    onChange: onVisibleChange,
+  });
 
   const { genPopupProps, genTriggerProps } = useTrigger({
     clickOutsideClose,
@@ -96,9 +98,10 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     onVisibleChange: setInnerVisible,
     trigger,
     triggerEl: referenceRef.current,
+    outFocusToClose,
   });
 
-  useImperativeHandle(ref, () => {});
+  useImperativeHandle(ref, () => referenceRef.current as HTMLElement);
 
   // =============== Warning ===============
   const canUseChildrenRef = supportNodeRef(children);
@@ -121,57 +124,71 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     (e?: Event) => {
       if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
 
-      setTimeout(() => {
-        computedPosition(
-          { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
-          { direction: direction!, enableFlip, enableShift, offset },
-        );
-      });
+      computedPosition(
+        { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
+        { direction: direction!, enableFlip, enableShift, offset },
+      );
     },
     [direction, enableFlip, enableShift, offset],
   );
 
-  const asyncUpdatePosition = debounce<any>(() => {
-    return new Promise<any>((resolve) => {
-      updatePosition();
-      resolve(undefined);
+  const [scrollParents, setScrollParents] = useState<ElementCollection>([]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> `updatePosition` need props effect
+  const asyncUpdatePosition = useCallback(
+    debounce<any>(() => {
+      return new Promise<any>((resolve) => {
+        updatePosition();
+        resolve(undefined);
+      });
+    }),
+    [direction, enableFlip, enableShift, offset],
+  );
+
+  useIsomorphicLayoutEffect(() => {
+    const referenceParents = collectScrollParentList(referenceRef.current);
+    const popperParents = collectScrollParentList(popperRef.current);
+    const scrollParents = [...referenceParents, ...popperParents];
+    setScrollParents(scrollParents);
+  }, []);
+
+  const registerListener = () => {
+    scrollParents.forEach((scrollParent) => {
+      scrollParent.addEventListener('scroll', asyncUpdatePosition, { passive: true });
     });
-  });
+    window.addEventListener('resize', asyncUpdatePosition, { passive: true });
+  };
+
+  const cleanListener = () => {
+    scrollParents.forEach((scrollParent) => {
+      scrollParent.removeEventListener('scroll', asyncUpdatePosition);
+    });
+    window.removeEventListener('resize', asyncUpdatePosition);
+  };
 
   useIsomorphicLayoutEffect(() => {
     if (innerVisible === undefined) return;
-    asyncUpdatePosition();
 
-    // Toggle Motion
+    // 只有当展示时才注册监听事件，不展示后移除
     if (innerVisible === true) {
       motionRef.current?.toggle(true);
+      asyncUpdatePosition();
+      registerListener();
     } else if (innerVisible === false) {
       motionRef.current?.toggle(false);
+      cleanListener();
     }
   }, [innerVisible]);
 
   useIsomorphicLayoutEffect(() => {
+    if (!innerVisible) return;
+
     asyncUpdatePosition();
+    cleanListener();
+    registerListener();
 
-    // Parent scroll listener
-    const referenceParents = collectScrollParentList(referenceRef.current);
-    const popperParents = collectScrollParentList(popperRef.current);
-    const scrollParents = [...referenceParents, ...popperParents];
-
-    scrollParents.forEach((scrollParent) => {
-      scrollParent.addEventListener('scroll', asyncUpdatePosition, { passive: true });
-    });
-
-    window.addEventListener('resize', asyncUpdatePosition, { passive: true });
-
-    return () => {
-      scrollParents.forEach((scrollParent) => {
-        scrollParent.removeEventListener('scroll', asyncUpdatePosition);
-      });
-
-      window.removeEventListener('resize', asyncUpdatePosition);
-    };
-  }, [direction, enableFlip, enableShift, offset, popperRef.current, arrowRef.current]);
+    return () => cleanListener();
+  }, [direction, innerVisible, scrollParents, enableFlip, enableShift, offset]);
 
   if (!isElementChild) return;
 
@@ -179,21 +196,19 @@ const Trigger = forwardRef<any, TriggerProps>((baseProps, ref) => {
     if (!popper) return null;
 
     return (
-      <CSSMotion ref={motionRef} {...mergedMotion}>
-        {({ className }) => {
+      <CSSMotion ref={motionRef} {...motion}>
+        {({ className: motionCls }) => {
           return (
             <Portal getContainer={getContainer}>
               <div
+                role="tooltip"
                 {...genPopupProps()}
-                className={clsx(`${prefixCls}-trigger`, className)}
+                className={clsx(`${prefixCls}-trigger`, motionCls, className)}
                 style={{ ...popperStyle, zIndex }}
               >
                 {arrow ? (
-                  <div className={`${prefixCls}-trigger-arrow`}>
-                    {cloneElement(arrow as any, {
-                      ref: arrowRef,
-                      style: { ...arrowStyle, zIndex, ...((arrow.props as any).style || {}) },
-                    })}
+                  <div className={`${prefixCls}-trigger-arrow`} ref={arrowRef} style={{ ...arrowStyle, zIndex }}>
+                    {arrow}
                   </div>
                 ) : null}
 

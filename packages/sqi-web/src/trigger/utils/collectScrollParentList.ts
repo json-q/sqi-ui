@@ -22,16 +22,18 @@ export function collectScrollParentList(
   return [...list, scrollParent, ...nextScrollParent];
 }
 
-function getParentNode(element: Element): Element {
+function getParentNode(element: Element): Element | null {
   if (getNodeName(element) === 'html') {
     return element;
   }
 
-  return element.parentNode as HTMLElement;
+  return element?.parentNode as HTMLElement;
 }
 
 function isScrollParent(element: Element): boolean {
-  const { overflow, overflowX, overflowY, display } = getComputedStyle(element);
+  if (!element) return false;
+
+  const { overflow, overflowX, overflowY, display } = window.getComputedStyle(element);
   // hidden clip 虽然隐藏了滚动条，但仍是滚动容器，其中 hidden 可以使用 js 去操控滚动
   // display: contents 会使元素自身不生成任何盒子，即该元素本身在布局中不存在，因此 contents 的元素无法视为滚动容器
   return /auto|scroll|overlay|hidden|clip/.test(overflow + overflowY + overflowX) && !['contents'].includes(display);
@@ -39,17 +41,24 @@ function isScrollParent(element: Element): boolean {
 
 const lastTraversableNodeNames = new Set(['html', 'body', '#document']);
 
-function getScrollParent(node: Element): Element {
+function getScrollParent(node: Element | null): Element {
+  // 嵌套 Trigger 时，往上查找会出现 null 用 body 兜底
+  if (!node) return document.body;
+
   // 若元素本身是根节点，则统一以 body 为滚动容器
   if (lastTraversableNodeNames.has(getNodeName(node) as any)) {
     return node.ownerDocument.body;
   }
 
-  if (isScrollParent(node)) {
+  if (isHTMLElement(node) && isScrollParent(node)) {
     return node;
   }
 
   return getScrollParent(getParentNode(node));
+}
+
+export function isHTMLElement(value: unknown): value is HTMLElement {
+  return value instanceof HTMLElement;
 }
 
 function getNodeName(element: Node): string | null {
