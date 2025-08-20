@@ -44,6 +44,7 @@ export default function Demo() {
       <div ref={containerRef} className={styles.container}>
         <div className={styles['container-scroll']}>
           <Trigger
+            visible
             enableFlip={detectEdge.includes('flip')}
             enableShift={detectEdge.includes('shift')}
             offset={{ x: Number(offsetX), y: Number(offsetY) }}
