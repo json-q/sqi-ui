@@ -8,9 +8,9 @@
     "prepare": "lefthook install",
     "dev": "turbo dev --filter=./packages/**",
     "build": "turbo build --filter=./packages/**",
-    "format": "turbo format --filter=./packages/**",
-    "format-staged": "turbo format-staged --filter=./packages/**",
-    "clean": "turbo clean --filter=./packages/**"
+    "format": "pnpm -r --filter=./packages/** format",
+    "format-staged": "pnpm -r --filter=./packages/** format-staged",
+    "clean": "pnpm -r --filter=./packages/** run clean"
   },
   "keywords": [],
   "author": "jsonq",
