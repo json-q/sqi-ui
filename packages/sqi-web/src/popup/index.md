@@ -54,9 +54,9 @@ group:
 | -------------- | ------------------------ | ---------------------------------------------------- | ------ |
 | children       | 触发元素                 | `ReactNode`                                          | -      |
 | content        | Popup 内容               | `ReactNode`                                          | -      |
-| showArrow      | 是否展示箭头             | `ReactNode`                                          | true   |
-| destroyOnClose | 隐藏时是否销毁           | `boolean`                                            | true   |
-| offset         | 元素相对于触发元素的距离 | `ReactNode`                                          | 4      |
+| showArrow      | 是否展示箭头             | `boolean`                                            | `true` |
+| destroyOnClose | 隐藏时是否销毁           | `boolean`                                            | `true` |
+| offset         | 元素相对于触发元素的距离 | `number`                                             | `4`    |
 | styles         | style 语法糖             | `{ content?: CSSProperties; arrow?: CSSProperties;}` | -      |
 | classNames     | className 语法糖         | `{ content?: string; arrow?: string;}`               | -      |
 

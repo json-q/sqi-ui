@@ -8,7 +8,6 @@ $module: #{$prefix}-popup;
 
   color: $popup-text-color;
   display: inline-block;
-  z-index: $z-index-popup;
 
   &-content {
     position: relative;
