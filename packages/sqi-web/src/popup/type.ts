@@ -17,6 +17,7 @@ export type PickTriggerProps = Pick<
   | 'enableShift'
   // popper style
   | 'zIndex'
+  | 'outFocusToClose'
 >;
 
 export interface PopupProps extends PickTriggerProps {
@@ -40,7 +41,7 @@ export interface PopupProps extends PickTriggerProps {
   destroyOnClose?: boolean;
   /**
    * @description popper 元素相对于触发元素的距离
-   * @default 6
+   * @default 4
    */
   offset?: number;
   styles?: {

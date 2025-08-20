@@ -77,6 +77,11 @@ export interface TriggerProps {
    */
   delay?: number;
   /**
+   * @description 目标失去焦点时触发的是对应的 Popup 是否关闭 Popup。默认只要失焦就会关闭，如果你想在聚焦后可以操作弹出的 Popup，则设置 false（通常用于 Input 聚焦后需要操作 Popup 的情况）
+   * @default true
+   */
+  outFocusToClose?: boolean;
+  /**
    * @description 点击外部是否可关闭
    * @default true
    */

@@ -32,6 +32,7 @@ const defaultProps: TriggerProps = {
   zIndex: 1,
   trigger: 'hover',
   delay: 100,
+  outFocusToClose: true,
   clickOutsideClose: true,
   disabled: false,
   defaultVisible: false,
@@ -70,6 +71,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     zIndex,
     trigger,
     delay,
+    outFocusToClose,
     disabled,
     defaultVisible,
     visible,
@@ -101,6 +103,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     onVisibleChange: setInnerVisible,
     trigger,
     triggerEl: referenceRef.current,
+    outFocusToClose,
   });
 
   useImperativeHandle(ref, () => referenceRef.current as HTMLElement);

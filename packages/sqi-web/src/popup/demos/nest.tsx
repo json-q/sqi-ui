@@ -1,17 +1,23 @@
 import React from 'react';
-import { Button, Input, Popup, Space } from '@sqi-ui/web';
+import { Button, Input, Popup } from '@sqi-ui/web';
 export default function Demo() {
   return (
-    <Space>
-      <Popup
-        content={
-          <Popup trigger="focus" content="This is a nest popup">
-            <Input placeholder="Focus me" />
-          </Popup>
-        }
-      >
-        <Button type="primary">Hover me</Button>
-      </Popup>
-    </Space>
+    <Popup
+      content={
+        <Popup
+          trigger="click"
+          direction="right"
+          content={
+            <Popup trigger="focus" outFocusToClose={false} direction="right" content={<h4>Three Popup</h4>}>
+              <Input placeholder="Focus Me" />
+            </Popup>
+          }
+        >
+          <Button>Click Me</Button>
+        </Popup>
+      }
+    >
+      <Button>Hover Me</Button>
+    </Popup>
   );
 }

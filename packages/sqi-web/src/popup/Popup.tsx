@@ -11,7 +11,7 @@ const defaultProps: PopupProps = {
   direction: 'top',
   showArrow: true,
   destroyOnClose: true,
-  offset: 0,
+  offset: 4,
 };
 
 const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {

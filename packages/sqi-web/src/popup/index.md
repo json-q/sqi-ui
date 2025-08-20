@@ -56,7 +56,7 @@ group:
 | content        | Popup 内容               | `ReactNode`                                          | -      |
 | showArrow      | 是否展示箭头             | `ReactNode`                                          | true   |
 | destroyOnClose | 隐藏时是否销毁           | `boolean`                                            | true   |
-| offset         | 元素相对于触发元素的距离 | `ReactNode`                                          | 6      |
+| offset         | 元素相对于触发元素的距离 | `ReactNode`                                          | 4      |
 | styles         | style 语法糖             | `{ content?: CSSProperties; arrow?: CSSProperties;}` | -      |
 | classNames     | className 语法糖         | `{ content?: string; arrow?: string;}`               | -      |
 
@@ -67,12 +67,12 @@ group:
 | direction | popper 位置 | `TriggerDirection` | `bottom` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
-| offset | popper 偏移量 | `number \| { x: number; y: number }` | - |
 | zIndex | popper 元素层级 | `number` | `1` |
 | getContainer | 指定 popper 挂载的位置 | `string \| HTMLElement \| () => HTMLElement` | `document.body` |
 | trigger | 触发方式 | `TriggerType \| TriggerType[]` | `"hover"` |
 | disabled | 禁用行为 | `boolean` | - |
 | delay | 触发延迟的时间 ms 仅 hover 生效 | `number` | `100` |
+| outFocusToClose | 目标失去焦点时触发的是对应的 Popup 是否关闭 Popup | `boolean` | `true` |
 | defaultVisible | 非受控显示隐藏状态 | `boolean` | - |
 | visible | 受控显示隐藏状态 | `boolean` | - |
 | onVisibleChange | 状态更改触发 | `(visible: boolean, events?: { e: Event; trigger: TriggerType }) => void` | - |

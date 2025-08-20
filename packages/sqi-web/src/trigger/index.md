@@ -57,6 +57,7 @@ group:
 | trigger | 触发方式 | `TriggerType \| TriggerType[]` | `"hover"` |
 | disabled | 禁用行为 | `boolean` | - |
 | delay | 触发延迟的时间 ms 仅 hover 生效 | `number` | `100` |
+| outFocusToClose | 目标失去焦点时触发的是对应的 Popup 是否关闭 Popup | `boolean` | `true` |
 | clickOutsideClose | 点击外部是否可关闭 | `boolean` | `true` |
 | defaultVisible | 非受控显示隐藏状态 | `boolean` | - |
 | visible | 受控显示隐藏状态 | `boolean` | - |

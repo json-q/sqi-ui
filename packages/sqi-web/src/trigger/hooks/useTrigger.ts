@@ -11,12 +11,22 @@ interface Options {
   visible?: boolean;
   onVisibleChange?: (visible: boolean, events?: { e: Event; trigger: string }) => void;
   disabled?: boolean;
+  outFocusToClose?: boolean;
 }
 
 const ESC_KEY = 'Escape';
 
 const useTrigger = (props: Options) => {
-  const { trigger, delay, disabled, visible, clickOutsideClose, triggerEl, onVisibleChange } = props;
+  const {
+    trigger,
+    delay,
+    disabled,
+    visible,
+    clickOutsideClose,
+    triggerEl,
+    outFocusToClose = true,
+    onVisibleChange,
+  } = props;
 
   const hasPopupMouseDown = useRef(false);
   const leaveFlag = useRef(false); // 防止多次触发显隐
@@ -130,6 +140,8 @@ const useTrigger = (props: Options) => {
       },
       onBlur: (e: FocusEvent) => {
         if (trigger === 'focus') {
+          // 如果当前有弹出层内部鼠标按下，且设置了失焦不关闭 Popup，则不关闭
+          if (hasPopupMouseDown.current && !outFocusToClose) return;
           delayFn(() => onVisibleChange?.(false, { e, trigger: 'blur' }));
         }
         (triggerNode.props as any).onBlur?.(e);
