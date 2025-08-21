@@ -30,7 +30,7 @@ group:
 
 <code src="./demos/css-motion-base.tsx"></code>
 
-> 当设置 `unmountOnExit` 为 `false` 时，组件不会销毁，你需要使用 css 隐藏组件
+> 当设置 `unmountOnExit` 为 `false` 时，组件不会销毁，你需要主动设置相关 css 隐藏组件
 
 ### 切换显示
 
@@ -41,5 +41,7 @@ group:
 <code src="./demos/css-motion-portal.tsx"></code>
 
 ## ResizeObserver
+
+此处的 `ResizeObserver` 仅关注目标元素尺寸变化
 
 <code src="./demos/resize-observer.tsx"></code>
