@@ -11,10 +11,8 @@ export default function App() {
     console.log('Ref:', textareaRef.current);
   }, []);
 
-  const onResize: ResizeObserverProps['onResize'] = (entries) => {
-    const entry = entries[0];
-    const { width, height } = entry.target.getBoundingClientRect();
-    const { offsetWidth, offsetHeight } = entry.target as HTMLElement;
+  const onResize: ResizeObserverProps['onResize'] = (sizeInfo) => {
+    const { width, height, offsetWidth, offsetHeight } = sizeInfo;
 
     setTimes((prevTimes) => prevTimes + 1);
     console.log('Resize:', '\n', 'BoundingBox', width, height, '\n', 'Offset', offsetWidth, offsetHeight);

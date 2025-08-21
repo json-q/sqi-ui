@@ -1,12 +1,12 @@
 import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef } from 'react';
 import { throttle } from '@sqi-ui/utils';
-import { useResizeObserver } from '@sqi-ui/hooks';
+import { useResizeObserver, type ObserverSizeInfo } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
 import { getReactNodeRef, getRefDom } from '../_util/dom';
 import { useComposeRef } from '../_util/ref';
 
 export interface ResizeObserverProps {
-  onResize?: (entry: ResizeObserverEntry[]) => void;
+  onResize?: (sizeInfo: ObserverSizeInfo, target: ResizeObserverEntry) => void;
   children?: React.ReactElement;
   /**
    * @description 是否禁用 observer
