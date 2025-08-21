@@ -6,7 +6,7 @@ export default function Demo() {
   return (
     <Space>
       <Checkbox checked={disabled} onChange={(e) => setDisabled(e.target.checked)}>
-        Disable Popup
+        {disabled ? 'Enable' : 'Disable'}
       </Checkbox>
 
       <Popup disabled={disabled} content="This is a popup">
