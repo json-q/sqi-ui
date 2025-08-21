@@ -8,7 +8,6 @@ export default defineConfig({
     {
       externalHelpers: true,
       format: 'esm',
-      syntax: 'es2016',
       dts: true,
       bundle: false,
       output: {
@@ -23,7 +22,6 @@ export default defineConfig({
     {
       externalHelpers: true,
       format: 'cjs',
-      syntax: 'es2016',
       bundle: false,
       output: {
         distPath: {

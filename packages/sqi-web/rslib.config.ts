@@ -1,6 +1,5 @@
 import { defineConfig } from '@rslib/core';
 import { pluginReact } from '@rsbuild/plugin-react';
-import { pluginBabel } from '@rsbuild/plugin-babel';
 
 export default defineConfig({
   source: {
@@ -13,13 +12,13 @@ export default defineConfig({
     // compat umd in browser
     pluginReact({ swcReactOptions: { runtime: 'classic' } }),
 
-    pluginBabel({
-      include: /\.(?:jsx|tsx)$/,
-      babelLoaderOptions(opts) {
-        // compat react18
-        opts.plugins?.unshift(['babel-plugin-react-compiler', { target: '18' }]);
-      },
-    }),
+    // pluginBabel({
+    //   include: /\.(?:jsx|tsx)$/,
+    //   babelLoaderOptions(opts) {
+    //     // compat react18
+    //     opts.plugins?.unshift(['babel-plugin-react-compiler', { target: '18' }]);
+    //   },
+    // }),
   ],
   lib: [
     {
@@ -29,7 +28,6 @@ export default defineConfig({
         },
       },
       format: 'esm',
-      syntax: 'es2016',
       dts: true,
       bundle: false,
       externalHelpers: true,
@@ -45,7 +43,6 @@ export default defineConfig({
         },
       },
       format: 'cjs',
-      syntax: 'es2016',
       bundle: false,
       externalHelpers: true,
       output: {
@@ -55,7 +52,7 @@ export default defineConfig({
     },
     {
       format: 'umd',
-      syntax: 'es2016',
+      syntax: 'es5',
       umdName: 'SqiWeb',
       source: {
         entry: {
