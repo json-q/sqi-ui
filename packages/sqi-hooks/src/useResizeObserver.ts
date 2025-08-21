@@ -40,9 +40,9 @@ export function useResizeObserver(
        */
       if (
         sizes.current.width !== width ||
-        sizes.current.width !== height ||
-        sizes.current.width !== offsetWidth ||
-        sizes.current.width !== offsetHeight
+        sizes.current.height !== height ||
+        sizes.current.offsetWidth !== offsetWidth ||
+        sizes.current.offsetHeight !== offsetHeight
       ) {
         sizes.current = { width, height, offsetWidth, offsetHeight };
         callbackRef.current?.(sizes.current, target);
