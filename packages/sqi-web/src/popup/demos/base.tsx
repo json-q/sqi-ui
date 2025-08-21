@@ -13,7 +13,7 @@ export default function Demo() {
         <Button type="primary">Default open</Button>
       </Popup>
 
-      <Popup visible={visible} content="This is a Control popup. You must click button to close">
+      <Popup visible={visible} content="This is a control popup. You must click button to close">
         <Button type="primary" onClick={() => setVisible(!visible)}>
           Click me
         </Button>
