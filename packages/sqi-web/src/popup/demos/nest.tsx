@@ -6,18 +6,18 @@ export default function Demo() {
       content={
         <Popup
           trigger="click"
-          direction="right"
+          placement="right"
           content={
-            <Popup trigger="focus" outFocusToClose={false} direction="right" content={<h4>Three Popup</h4>}>
+            <Popup trigger="focus" outFocusToClose={false} placement="right" content={<h4>Three Popup</h4>}>
               <Input placeholder="Focus Me" />
             </Popup>
           }
         >
-          <Button>Click Me</Button>
+          <Button type="primary">Click Me</Button>
         </Popup>
       }
     >
-      <Button>Hover Me</Button>
+      <Button type="primary">Hover Me</Button>
     </Popup>
   );
 }

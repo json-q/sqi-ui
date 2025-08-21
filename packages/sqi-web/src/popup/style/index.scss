@@ -41,69 +41,69 @@ $module: #{$prefix}-popup;
 
   // Arrow Directions Adaption
   & {
-    &[data-direction^='top'],
-    &[data-direction^='bottom'] {
+    &[data-trigger-placement^='top'],
+    &[data-trigger-placement^='bottom'] {
       .#{$module}-arrow {
         padding: 0 calc($popup-arrow-size / 2);
       }
     }
 
-    &[data-direction^='left'],
-    &[data-direction^='right'] {
+    &[data-trigger-placement^='left'],
+    &[data-trigger-placement^='right'] {
       .#{$module}-arrow {
         padding: calc($popup-arrow-size / 2) 0;
       }
     }
 
     // Top
-    &[data-direction^='top'] &-arrow::before {
+    &[data-trigger-placement^='top'] &-arrow::before {
       transform: translateY(-50%) rotate(45deg);
       box-shadow: $popup-top-arrow-shadow;
     }
 
-    &[data-direction='top-start'] &-arrow::before {
+    &[data-trigger-placement='top-start'] &-arrow::before {
       transform: translate(100%, -50%) rotate(45deg);
     }
-    &[data-direction='top-end'] &-arrow::before {
+    &[data-trigger-placement='top-end'] &-arrow::before {
       transform: translate(-100%, -50%) rotate(45deg);
     }
 
     // Bottom
-    &[data-direction^='bottom'] &-arrow::before {
+    &[data-trigger-placement^='bottom'] &-arrow::before {
       transform: translateY(50%) rotate(45deg);
       box-shadow: $popup-bottom-arrow-shadow;
     }
 
-    &[data-direction='bottom-start'] &-arrow::before {
+    &[data-trigger-placement='bottom-start'] &-arrow::before {
       transform: translate(100%, 50%) rotate(45deg);
     }
-    &[data-direction='bottom-end'] &-arrow::before {
+    &[data-trigger-placement='bottom-end'] &-arrow::before {
       transform: translate(-100%, 50%) rotate(45deg);
     }
 
     // Left
-    &[data-direction^='left'] &-arrow::before {
+    &[data-trigger-placement^='left'] &-arrow::before {
       transform: translateX(-50%) rotate(45deg);
       box-shadow: $popup-left-arrow-shadow;
     }
 
-    &[data-direction='left-start'] &-arrow::before {
+    &[data-trigger-placement='left-start'] &-arrow::before {
       transform: translate(-50%, 100%) rotate(45deg);
     }
-    &[data-direction='left-end'] &-arrow::before {
+    &[data-trigger-placement='left-end'] &-arrow::before {
       transform: translate(-50%, -100%) rotate(45deg);
     }
 
     // Right
-    &[data-direction^='right'] &-arrow::before {
+    &[data-trigger-placement^='right'] &-arrow::before {
       transform: translateX(50%) rotate(45deg);
       box-shadow: $popup-right-arrow-shadow;
     }
 
-    &[data-direction='right-start'] &-arrow::before {
+    &[data-trigger-placement='right-start'] &-arrow::before {
       transform: translate(50%, 100%) rotate(45deg);
     }
-    &[data-direction='right-end'] &-arrow::before {
+    &[data-trigger-placement='right-end'] &-arrow::before {
       transform: translate(50%, -100%) rotate(45deg);
     }
   }

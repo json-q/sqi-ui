@@ -1,4 +1,4 @@
-import type { TriggerDirection } from '../type';
+import type { TriggerPlacement } from '../type';
 import {
   getTranslateValue,
   getElementPosition,
@@ -11,7 +11,7 @@ import {
 import { formatDirection, formatOffset } from './format';
 
 export interface PositionOptions {
-  direction: TriggerDirection;
+  placement: TriggerPlacement;
   /**
    * @description 开启自动翻转
    * @default true
@@ -32,7 +32,7 @@ interface ElementCollection {
 }
 
 const defaultOptions: PositionOptions = {
-  direction: 'bottom',
+  placement: 'bottom',
   enableFlip: true,
   enableShift: true,
 };
@@ -64,7 +64,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   let x = referencePosition.left - popperPosition.left + translateX;
   let y = referencePosition.top - popperPosition.top + translateY;
 
-  const [side, align, vertical, horizontal] = formatDirection(options.direction);
+  const [side, align, vertical, horizontal] = formatDirection(options.placement);
   let currentSide = side;
   // 当定位到居中时，popper 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
   const leftCorner = align === 'left' ? 0 : align === 'right' ? widthDifference : widthDifference / 2;
@@ -115,8 +115,8 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   });
 
   // 设置 attribute 必须在箭头计算前边，因为箭头的样式依赖此方向
-  const normalAlign = options.direction.split('-')[1];
-  popperParentContainer.setAttribute('data-direction', `${currentSide}${normalAlign ? `-${normalAlign}` : ''}`);
+  const normalAlign = options.placement.split('-')[1];
+  popperParentContainer.setAttribute('data-trigger-placement', `${currentSide}${normalAlign ? `-${normalAlign}` : ''}`);
 
   x = x - distanceX;
   y = y - distanceY;
@@ -257,7 +257,7 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
       x += currentSide === 'right' ? arrowWidth : -arrowWidth;
     }
 
-    const mainAlignment = options.direction.split('-')[1] || 'center';
+    const mainAlignment = options.placement.split('-')[1] || 'center';
     const transformCoords = { x: 0, y: 0 };
 
     if (vertical) {

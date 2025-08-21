@@ -51,7 +51,6 @@ export default function Demo() {
             visible
             content="This is a popup, you can scroll to view"
             getContainer={() => containerRef.current}
-            styles={{ arrow: { backgroundColor: 'red' } }} // debug arrow
           >
             <Button type="primary">Scroll the window</Button>
           </Popup>

@@ -1,11 +1,9 @@
-// import type { TriggerProps } from '../type';
-
 import { useEffect, useRef, type ReactElement } from 'react';
 import type { TriggerType } from '../type';
 
 interface Options {
   triggerEl?: HTMLElement | null;
-  trigger?: TriggerType | TriggerType[];
+  trigger?: TriggerType;
   delay?: number;
   clickOutsideClose?: boolean;
   visible?: boolean;

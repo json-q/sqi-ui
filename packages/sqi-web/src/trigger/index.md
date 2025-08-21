@@ -12,7 +12,7 @@ group:
 
 通常情况下，不建议直接使用 Trigger 组件。严格意义上说，Trigger 组件也是内部使用的，且不携带任何样式，外部使用会让代码组织变得更复杂。
 
-推荐使用 `Popup` 组件来替代 `Trigger` 组件，更完整的使用请查看 `Popup` 组件
+推荐使用 `Popup` 组件来替代 `Trigger` 组件，`Popup` 组件提供了兼容度更好的集成并对样式进行美化。更完整的使用示例请查看 `Popup` 组件
 
 ## Popper 定位
 
@@ -58,7 +58,7 @@ group:
 | popper | 悬浮元素 | `ReactElement` | - |
 | arrow | 箭头元素 | `ReactElement` | - |
 | motion | 动画 props 继承自 [react-transition-state](https://szhsin.github.io/react-transition-state) | `Omit<CSSMotionProps, 'children'>` | - |
-| direction | popper 位置 | `TriggerDirection` | `bottom` |
+| direction | popper 位置 | `TriggerPlacement` | `bottom` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
 | offset | popper 偏移量 | `number \| { x: number; y: number }` | `0` |
@@ -73,7 +73,7 @@ group:
 | visible | 受控显示隐藏状态 | `boolean` | - |
 | onVisibleChange | 状态更改触发 | `(visible: boolean, events?: { e: Event; trigger: TriggerType }) => void` | - |
 
-### TriggerDirection
+### TriggerPlacement
 
 共 12 个方位
 
@@ -83,4 +83,4 @@ group:
 
 对应 eventListener 的事件名称
 
-`hover` | `click` | `focus` | `mousedown` | `context-menu`
+`hover` | `click` | `focus` | `context-menu`

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trigger, Radio, Divider, Space, Input, Checkbox } from '@sqi-ui/web';
-import type { RadioChangeEvent, TriggerDirection, CheckboxValue } from '@sqi-ui/web';
+import type { RadioChangeEvent, TriggerPlacement, CheckboxValue } from '@sqi-ui/web';
 import { Component } from './_wrapper';
 import styles from './demo.module.css';
 
@@ -21,7 +21,7 @@ const positions = [
 
 export default function Demo() {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const [direction, setDirection] = React.useState<TriggerDirection>('bottom');
+  const [placement, setPlacement] = React.useState<TriggerPlacement>('bottom');
   const [detectEdge, setDetectEdge] = React.useState<string[]>(['flip', 'shift']);
   const [offsetX, setOffsetX] = React.useState<string>();
   const [offsetY, setOffsetY] = React.useState<string>();
@@ -32,7 +32,7 @@ export default function Demo() {
   }, []);
 
   function changeDirection(e: RadioChangeEvent) {
-    setDirection(e.target.value as TriggerDirection);
+    setPlacement(e.target.value as TriggerPlacement);
   }
 
   function changeDetectEdge(value: CheckboxValue[]) {
@@ -48,7 +48,7 @@ export default function Demo() {
             enableFlip={detectEdge.includes('flip')}
             enableShift={detectEdge.includes('shift')}
             offset={{ x: Number(offsetX), y: Number(offsetY) }}
-            direction={direction}
+            placement={placement}
             getContainer={() => containerRef.current}
             arrow={showArrow ? <div style={{ width: 12, height: 12, backgroundColor: 'red' }}></div> : undefined}
             motion={{ initialEntered: true }}
@@ -66,7 +66,7 @@ export default function Demo() {
       </div>
 
       <Divider style={{ margin: '8px 0' }} text="Position" align="left" />
-      <Radio.Group value={direction} onChange={changeDirection} options={positions} style={{ marginBottom: 10 }} />
+      <Radio.Group value={placement} onChange={changeDirection} options={positions} style={{ marginBottom: 10 }} />
 
       <Divider style={{ margin: '8px 0' }} text="Detect Edge" align="left" />
       <Checkbox.Group value={detectEdge} onChange={changeDetectEdge} options={['flip', 'shift']} />
@@ -82,13 +82,13 @@ export default function Demo() {
           prefix="offsetX"
           value={offsetX}
           onChange={setOffsetX}
-          disabled={direction.startsWith('top') || direction.startsWith('bottom')}
+          disabled={placement.startsWith('top') || placement.startsWith('bottom')}
         />
         <Input
           prefix="offsetY"
           value={offsetY}
           onChange={setOffsetY}
-          disabled={direction.startsWith('left') || direction.startsWith('right')}
+          disabled={placement.startsWith('left') || placement.startsWith('right')}
         />
       </Space>
     </>

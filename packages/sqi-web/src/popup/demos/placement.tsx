@@ -85,62 +85,62 @@ export default function Demo() {
         Show arrow
       </Checkbox>
       <div style={styles.container}>
-        <Popup showArrow={showArrow} direction="top-start" content={content}>
+        <Popup showArrow={showArrow} placement="top-start" content={content}>
           <Button type="primary" style={styles.topStart}>
             top-start
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="top" content={content}>
+        <Popup showArrow={showArrow} placement="top" content={content}>
           <Button type="primary" style={styles.top}>
             top
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="top-end" content={content}>
+        <Popup showArrow={showArrow} placement="top-end" content={content}>
           <Button type="primary" style={styles.topEnd}>
             top-end
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="left-start" content={content}>
+        <Popup showArrow={showArrow} placement="left-start" content={content}>
           <Button type="primary" style={styles.leftStart}>
             left-start
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="left" content={content}>
+        <Popup showArrow={showArrow} placement="left" content={content}>
           <Button type="primary" style={styles.left}>
             left
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="left-end" content={content}>
+        <Popup showArrow={showArrow} placement="left-end" content={content}>
           <Button type="primary" style={styles.leftEnd}>
             left-end
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="right-start" content={content}>
+        <Popup showArrow={showArrow} placement="right-start" content={content}>
           <Button type="primary" style={styles.rightStart}>
             right-start
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="right" content={content}>
+        <Popup showArrow={showArrow} placement="right" content={content}>
           <Button type="primary" style={styles.right}>
             right
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="right-end" content={content}>
+        <Popup showArrow={showArrow} placement="right-end" content={content}>
           <Button type="primary" style={styles.rightEnd}>
             right-end
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="bottom-start" content={content}>
+        <Popup showArrow={showArrow} placement="bottom-start" content={content}>
           <Button type="primary" style={styles.bottomStart}>
             bottom-start
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="bottom" content={content}>
+        <Popup showArrow={showArrow} placement="bottom" content={content}>
           <Button type="primary" style={styles.bottom}>
             bottom
           </Button>
         </Popup>
-        <Popup showArrow={showArrow} direction="bottom-end" content={content}>
+        <Popup showArrow={showArrow} placement="bottom-end" content={content}>
           <Button type="primary" style={styles.bottomEnd}>
             bottom-end
           </Button>

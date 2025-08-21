@@ -8,10 +8,10 @@ import clsx from 'clsx';
 
 const defaultProps: PopupProps = {
   trigger: 'hover',
-  direction: 'top',
+  placement: 'top',
   showArrow: true,
   destroyOnClose: true,
-  offset: 4,
+  offset: 2,
 };
 
 const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {

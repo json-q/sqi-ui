@@ -24,15 +24,13 @@ group:
 
 ## 方向
 
-设置 `direction` 指定 Popup 弹出位置，通过 `showArrow` 来选择是否显示箭头
+设置 `placement` 指定 Popup 弹出位置，通过 `showArrow` 来选择是否显示箭头
 
-<code src="./demos/direction.tsx"></code>
+<code src="./demos/placement.tsx"></code>
 
 ## 自动翻转偏移
 
 默认会进行边缘检测偏移以及自动翻转，如果你不需要或者想减少计算带来的开销，可以设置 `enableFlip=false` 或 `enableShift=false` 来选择性关闭不需要的功能
-
-箭头的额外样式是 demo 中为了更方便观察原本的边缘碰撞效果而添加的，并非组件自带
 
 <code src="./demos/shift.tsx"></code>
 
@@ -45,6 +43,12 @@ group:
 禁用弹出，将不会触发任何弹出层相关的行为
 
 <code src="./demos/disabled.tsx"></code>
+
+## 动态自适应
+
+当目标元素尺寸变化时会自动检测，并重新更新弹出层的位置
+
+<code src="./demos/rect-observer.tsx"></code>
 
 ## API
 
@@ -64,7 +68,7 @@ group:
 
 | 属性 | 描述 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| direction | popper 位置 | `TriggerDirection` | `bottom` |
+| direction | popper 位置 | `TriggerPlacement` | `top` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
 | zIndex | popper 元素层级 | `number` | `1` |

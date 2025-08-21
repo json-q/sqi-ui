@@ -7,7 +7,7 @@ export type Alignment = 'start' | 'end';
 export type Side = 'top' | 'right' | 'bottom' | 'left';
 type AlignedPlacement = `${Side}-${Alignment}`;
 
-export type TriggerDirection = Prettify<Side | AlignedPlacement>;
+export type TriggerPlacement = Prettify<Side | AlignedPlacement>;
 
 export type TriggerType = 'hover' | 'click' | 'focus' | 'context-menu';
 
@@ -36,7 +36,7 @@ export interface TriggerProps {
    * @description popper 位置
    * @default bottom
    */
-  direction?: TriggerDirection;
+  placement?: TriggerPlacement;
   /**
    * @description 开启自动翻转
    * @default true

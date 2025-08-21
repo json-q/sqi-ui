@@ -1,10 +1,10 @@
 import { isObject } from '@sqi-ui/utils';
-import type { Alignment, Side, TriggerDirection } from '../type';
+import type { Alignment, Side, TriggerPlacement } from '../type';
 
 type AlignRelative = 'left' | 'right' | 'top' | 'bottom';
 
-export function formatDirection(direction: TriggerDirection): [Side, AlignRelative, boolean, boolean] {
-  const splitDirection = direction.split('-');
+export function formatDirection(placement: TriggerPlacement): [Side, AlignRelative, boolean, boolean] {
+  const splitDirection = placement.split('-');
   const side = splitDirection[0] as Side;
   const align = splitDirection[1] as Alignment;
 

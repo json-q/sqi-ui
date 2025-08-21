@@ -26,7 +26,7 @@ import debounce from './utils/debounce';
 import type { TriggerProps } from './type';
 
 const defaultProps: TriggerProps = {
-  direction: 'bottom',
+  placement: 'bottom',
   enableFlip: true,
   enableShift: true,
   offset: 0,
@@ -61,7 +61,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     motion = {},
     enableFlip,
     offset,
-    direction,
+    placement,
     getContainer,
     zIndex,
     trigger,
@@ -126,10 +126,10 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
 
       computedPosition(
         { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
-        { direction: direction!, enableFlip, enableShift, offset },
+        { placement: placement!, enableFlip, enableShift, offset },
       );
     },
-    [direction, enableFlip, enableShift, offset],
+    [placement, enableFlip, enableShift, offset],
   );
 
   const [scrollParents, setScrollParents] = useState<ElementCollection>([]);
@@ -142,7 +142,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
         resolve(undefined);
       });
     }),
-    [direction, enableFlip, enableShift, offset],
+    [placement, enableFlip, enableShift, offset],
   );
 
   useIsomorphicLayoutEffect(() => {
@@ -188,7 +188,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     registerListener();
 
     return () => cleanListener();
-  }, [direction, innerVisible, scrollParents, enableFlip, enableShift, offset]);
+  }, [placement, innerVisible, scrollParents, enableFlip, enableShift, offset]);
 
   if (!isElementChild) return;
 
