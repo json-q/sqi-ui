@@ -1,17 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
-// https://react.dev/reference/react/useRef
-// https://github.com/childrentime/reactuse/issues/115
-// https://github.com/streamich/react-use/issues/2605
-// https://github.com/alibaba/hooks/issues/2162
-export function usePrevious<T>(value: T): T | undefined {
-  const [current, setCurrent] = useState<T>(value);
-  const [previous, setPrevious] = useState<T>();
+export function usePrevious<T>(state: T): React.RefObject<T | undefined> {
+  const ref = useRef<T>(undefined);
 
-  if (value !== current) {
-    setPrevious(current);
-    setCurrent(value);
-  }
+  useEffect(() => {
+    ref.current = state;
+  }, [state]);
 
-  return previous;
+  return ref;
 }

@@ -8,6 +8,8 @@ interface UseMergeStateOptions<T> {
   onChange?: (value: T) => void;
 }
 
+type Fn = (...args: any[]) => any;
+
 export function useMergeState<T>(
   defaultStateValue: T,
   props?: UseMergeStateOptions<T>,
@@ -16,8 +18,8 @@ export function useMergeState<T>(
 
   const [innerValue, setInnerValue] = useState<T>(() => {
     if (!isUndefined(propsValue)) return propsValue;
-    else if (!isUndefined(defaultValue)) return isFunction(defaultValue) ? defaultValue() : defaultValue;
-    else return isFunction(defaultStateValue) ? defaultStateValue() : defaultStateValue;
+    else if (!isUndefined(defaultValue)) return isFunction(defaultValue) ? (defaultValue as Fn)() : defaultValue;
+    else return isFunction(defaultStateValue) ? (defaultStateValue as Fn)() : defaultStateValue;
   });
 
   const prevPropsValue = usePrevious(propsValue);
@@ -37,7 +39,7 @@ export function useMergeState<T>(
      *  严格模式下 useEffect 执行两次，所以存在 propsValue 将 defaultValue 覆盖的严重 bug。
      *  解决方法来源: https://github.com/arco-design/arco-design/blob/main/components/_util/hooks/useMergeValue.ts
      */
-    if (isUndefined(propsValue) && prevPropsValue !== propsValue) {
+    if (isUndefined(propsValue) && prevPropsValue.current !== propsValue) {
       setInnerValue(propsValue!);
     }
   }, [propsValue]);
@@ -46,7 +48,7 @@ export function useMergeState<T>(
 
   const triggerChange = useCallback(
     (value: SetStateAction<T>) => {
-      const nextValue = isFunction(value) ? value(mergedValue) : value;
+      const nextValue = isFunction(value) ? (value as Fn)(mergedValue) : value;
 
       if (isUndefined(propsValue)) {
         setInnerValue(nextValue);
@@ -60,5 +62,5 @@ export function useMergeState<T>(
     [propsValue, mergedValue, onChange],
   );
 
-  return [mergedValue, triggerChange];
+  return [mergedValue as T, triggerChange];
 }
