@@ -10,6 +10,8 @@ export interface ObserverSizeInfo {
   offsetHeight: number;
 }
 
+const SafeResizeObserver = window.ResizeObserver || ResizeObserverPolyfill;
+
 export function useResizeObserver(
   container: HTMLElement,
   callback?: (sizeInfo: ObserverSizeInfo, target: ResizeObserverEntry) => void,
@@ -49,7 +51,7 @@ export function useResizeObserver(
       }
     };
 
-    const observer = new ResizeObserverPolyfill(resizeCallback);
+    const observer = new SafeResizeObserver(resizeCallback);
     observer.observe(container);
 
     return () => {
