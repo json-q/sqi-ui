@@ -7,7 +7,6 @@ export default defineConfig({
   lib: [
     {
       format: 'esm',
-      syntax: 'es2016',
       dts: true,
       bundle: false,
       externalHelpers: true,
@@ -22,7 +21,6 @@ export default defineConfig({
     },
     {
       format: 'cjs',
-      syntax: 'es2016',
       bundle: false,
       externalHelpers: true,
       output: {

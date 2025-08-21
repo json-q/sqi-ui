@@ -13,7 +13,6 @@ export default defineConfig({
   lib: [
     {
       format: 'esm',
-      syntax: 'es6',
       dts: true,
       bundle: false,
       externalHelpers: true,
@@ -28,7 +27,6 @@ export default defineConfig({
     },
     {
       format: 'cjs',
-      syntax: 'es6',
       bundle: false,
       externalHelpers: true,
       output: {
@@ -42,7 +40,7 @@ export default defineConfig({
     },
     {
       format: 'umd',
-      syntax: 'es2016',
+      syntax: 'es5',
       umdName: 'SqiIcons',
       output: {
         minify: true,
