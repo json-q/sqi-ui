@@ -41,7 +41,7 @@ export interface PopupProps extends PickTriggerProps {
   destroyOnClose?: boolean;
   /**
    * @description popper 元素相对于触发元素的距离
-   * @default 2
+   * @default 4
    */
   offset?: number;
   styles?: {
