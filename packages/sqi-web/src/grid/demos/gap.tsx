@@ -41,7 +41,7 @@ export default function Demo() {
       </Row>
 
       <Divider text="Responsive (try resize or zoom window)" align="left" />
-      <Row gutter={{ xs: 4, sm: 8, md: 16, lg: 32, xl: 64, xxl: 128 }}>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32, xl: 40, xxl: 48 }}>
         <Col span={8}>
           <BoxDemo>col-8</BoxDemo>
         </Col>
