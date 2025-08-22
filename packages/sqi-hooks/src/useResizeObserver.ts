@@ -27,6 +27,8 @@ export function useResizeObserver(
   });
 
   useIsomorphicLayoutEffect(() => {
+    let observer: ResizeObserver | null = null;
+
     if (!enabled || !canUseDom() || !container) return;
 
     const resizeCallback: ResizeObserverCallback = (entries) => {
@@ -52,13 +54,14 @@ export function useResizeObserver(
       }
     };
 
-    const observer = new SafeResizeObserver(resizeCallback);
+    observer = new SafeResizeObserver(resizeCallback);
     observer.observe(container);
 
     return () => {
       if (observer && container) {
         observer.unobserve(container);
         observer.disconnect();
+        observer = null;
       }
     };
   }, [container, enabled]);
