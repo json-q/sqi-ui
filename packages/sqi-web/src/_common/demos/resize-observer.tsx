@@ -26,8 +26,8 @@ export default function App() {
         <span>Resize times: {times}</span>
       </div>
 
-      <ResizeObserver onResize={onResize} disabled={disabled}>
-        <textarea ref={textareaRef} placeholder="I'm a textarea!" />
+      <ResizeObserver ref={textareaRef} onResize={onResize} disabled={disabled}>
+        <textarea placeholder="I'm a textarea!" />
       </ResizeObserver>
     </>
   );

@@ -12,8 +12,8 @@ export function isDOM(node: any): node is HTMLElement | SVGElement {
  */
 export function getDOM(node: any): HTMLElement | SVGElement | null {
   // object ==> ref object
-  if (node && typeof node === 'object' && isDOM(node.nativeElement)) {
-    return node.nativeElement;
+  if (node && typeof node === 'object' && isDOM(node.currentElement)) {
+    return node.currentElement;
   }
 
   // real dom

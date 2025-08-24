@@ -1,8 +1,8 @@
-import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef } from 'react';
+import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef, useState } from 'react';
 import { throttle } from '@sqi-ui/utils';
 import { useResizeObserver, type ObserverSizeInfo } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
-import { getReactNodeRef, getRefDom } from '../_util/dom';
+import { getDOM, getReactNodeRef, getRefDom } from '../_util/dom';
 import { useComposeRef } from '../_util/ref';
 
 export interface ResizeObserverProps {
@@ -24,10 +24,15 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   const isElement = isValidElement(children);
   const childNodes = isElement ? toArray(children) : [];
-  const originRef = isElement ? getReactNodeRef<Element>(children!) : null;
-  const elementRef = useRef<Element>(null);
+  const originRef = isElement ? getReactNodeRef<HTMLElement>(children!) : null;
+  const elementRef = useRef<HTMLElement>(null);
 
-  const mergedRef = useComposeRef(originRef, elementRef);
+  const [elementState, setElementState] = useState<HTMLElement | null>(null);
+
+  const mergedRef = useComposeRef<HTMLElement>(originRef, elementRef, (node) => {
+    // elementRef 在初次挂载时 useResizeObserver 无法获取到值，使用 state
+    setElementState(getDOM(node) as HTMLElement);
+  });
 
   if (process.env.NODE_ENV !== 'production') {
     if (!isElement) {
@@ -42,15 +47,11 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
     }
   }
 
-  const getDomElement = () => {
-    return getRefDom(elementRef) as HTMLElement;
-  };
-
   useImperativeHandle(ref, () => getRefDom(elementRef) as HTMLElement);
 
   const throttleResize = onResize ? throttle(onResize, throttleMs) : undefined;
 
-  useResizeObserver(getDomElement(), throttleResize, !disabled);
+  useResizeObserver(elementState, throttleResize, !disabled);
 
   return isElement ? cloneElement(children as any, { ref: mergedRef }) : children;
 });
