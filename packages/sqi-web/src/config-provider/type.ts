@@ -9,6 +9,7 @@ import type { PopupProps } from '../popup';
 import type { RadioGroupProps, RadioProps } from '../radio';
 import type { SpaceProps } from '../space';
 import type { SwitchProps } from '../switch';
+import type { TooltipProps } from '../tooltip/type';
 import type { TriggerProps } from '../trigger';
 
 export type ConfigSize = 'sm' | 'md' | 'lg';
@@ -50,5 +51,6 @@ export type ComponentConfig = {
   Row?: RowProps;
   Space?: SpaceProps;
   Switch?: SwitchProps;
+  Tooltip?: TooltipProps;
   Trigger?: TriggerProps;
 };

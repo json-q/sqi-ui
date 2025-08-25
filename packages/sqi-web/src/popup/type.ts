@@ -44,6 +44,7 @@ export interface PopupProps extends PickTriggerProps {
    * @default 6
    */
   offset?: number;
+  rootClassName?: string;
   styles?: {
     content?: CSSProperties;
     arrow?: CSSProperties;

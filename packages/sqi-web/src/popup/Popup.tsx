@@ -16,11 +16,8 @@ const defaultProps: PopupProps = {
 
 const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const { children, content, destroyOnClose, showArrow, styles, classNames, ...restProps } = useMergeProps(
-    baseProps,
-    defaultProps,
-    componentConfig?.Popup,
-  );
+  const { children, content, destroyOnClose, showArrow, styles, classNames, rootClassName, ...restProps } =
+    useMergeProps(baseProps, defaultProps, componentConfig?.Popup);
 
   const wrapperChildrenRef = useRef<HTMLElement>(null);
 
@@ -34,7 +31,7 @@ const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {
     <Trigger
       {...restProps}
       ref={wrapperChildrenRef}
-      className={`${prefixCls}-popup`}
+      className={clsx(`${prefixCls}-popup`, rootClassName)}
       motion={{
         timeout: 200,
         name: 'popup',

@@ -52,7 +52,7 @@ const popperStyle = { ...basePositionStyle };
 const arrowStyle = { ...basePositionStyle };
 
 const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
-  const { prefixCls, componentConfig } = useContext(ConfigContext);
+  const { componentConfig } = useContext(ConfigContext);
   const {
     className,
     children,
@@ -203,11 +203,11 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
               <div
                 role="tooltip"
                 {...genPopupProps()}
-                className={clsx(`${prefixCls}-trigger`, motionCls, className)}
+                className={clsx(motionCls, className)}
                 style={{ ...popperStyle, zIndex }}
               >
                 {arrow ? (
-                  <div className={`${prefixCls}-trigger-arrow`} ref={arrowRef} style={{ ...arrowStyle, zIndex }}>
+                  <div ref={arrowRef} style={{ ...arrowStyle, zIndex }}>
                     {arrow}
                   </div>
                 ) : null}

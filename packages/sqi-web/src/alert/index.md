@@ -5,7 +5,7 @@ nav:
   order: 2
 group:
   title: 反馈
-  order: 4
+  order: 5
 ---
 
 # Alert 提示

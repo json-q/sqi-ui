@@ -9,4 +9,5 @@ export * from './popup';
 export * from './radio';
 export * from './space';
 export * from './switch';
+export * from './tooltip';
 export * from './trigger';
