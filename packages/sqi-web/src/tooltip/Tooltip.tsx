@@ -15,7 +15,7 @@ const defaultProps: TooltipProps = {
   offset: 6,
 };
 
-const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((baseProps, ref) => {
+const Tooltip = forwardRef<HTMLElement, TooltipProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
 
   const { classNames, theme, ...restProps } = useMergeProps(baseProps, defaultProps, componentConfig?.Tooltip);
