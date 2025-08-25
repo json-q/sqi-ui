@@ -18,7 +18,7 @@ const defaultProps: TooltipProps = {
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
 
-  const { classNames, theme, ...restProps } = useMergeProps(baseProps, defaultProps, componentConfig?.Popup);
+  const { classNames, theme, ...restProps } = useMergeProps(baseProps, defaultProps, componentConfig?.Tooltip);
 
   return (
     <Popup
