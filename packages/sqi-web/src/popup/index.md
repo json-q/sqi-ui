@@ -5,7 +5,7 @@ nav:
   order: 2
 group:
   title: 反馈
-  order: 4
+  order: 5
 ---
 
 # Popup 弹出层
@@ -61,6 +61,7 @@ group:
 | showArrow      | 是否展示箭头             | `boolean`                                            | `true` |
 | destroyOnClose | 隐藏时是否销毁           | `boolean`                                            | `true` |
 | offset         | 元素相对于触发元素的距离 | `number`                                             | `6`    |
+| rootClassName  | 根节点 className         | `string`                                             | -      |
 | styles         | style 语法糖             | `{ content?: CSSProperties; arrow?: CSSProperties;}` | -      |
 | classNames     | className 语法糖         | `{ content?: string; arrow?: string;}`               | -      |
 
