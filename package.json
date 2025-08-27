@@ -2,7 +2,7 @@
   "name": "sqi-ui",
   "version": "0.0.1",
   "description": "",
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.15.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "prepare": "lefthook install",
@@ -10,24 +10,24 @@
     "build": "turbo build --filter=./packages/**",
     "format": "pnpm -r --filter=./packages/** format",
     "format-staged": "pnpm -r --filter=./packages/** format-staged",
-    "clean": "pnpm -r --filter=./packages/** run clean"
+    "clean": "pnpm -r --filter=./packages/** clean"
   },
   "keywords": [],
   "author": "jsonq",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "2.2.0",
-    "@rslib/core": "^0.11.1",
+    "@biomejs/biome": "2.2.2",
+    "@rslib/core": "^0.11.2",
     "@sqi-ui/tsconfig": "workspace:*",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.15.30",
-    "fs-extra": "^11.3.0",
+    "@types/node": "^22.18.0",
+    "fs-extra": "^11.3.1",
     "lefthook": "^1.12.3",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
-    "tsx": "^4.20.3",
-    "turbo": "^2.5.5",
+    "tsx": "^4.20.5",
+    "turbo": "^2.5.6",
     "typescript": "^5.9.2"
   }
 }
