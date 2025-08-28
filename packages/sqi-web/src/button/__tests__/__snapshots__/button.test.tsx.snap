@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button > renders correctly 1`] = `
+<button
+  class="sqi-btn sqi-btn-default sqi-btn-size-md sqi-btn-variant-default"
+  type="button"
+>
+  <span>
+    Follow
+  </span>
+</button>
+`;

@@ -6,7 +6,8 @@
     "paths": {
       "@sqi-ui/web": ["./src/index.ts"],
       "@sqi-ui/web/es/*": ["./src/*"]
-    }
+    },
+    "types": ["@testing-library/jest-dom"]
   },
   "include": ["src", "shims.d.ts"]
 }
