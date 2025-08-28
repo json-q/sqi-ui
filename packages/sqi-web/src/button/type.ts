@@ -1,7 +1,10 @@
 import type { ButtonHTMLAttributes, HTMLProps, MouseEventHandler, ReactNode } from 'react';
 import type { ConfigSize } from '@sqi-ui/web';
+import type { HTMLDataAttributes } from '../_util/type';
 
-export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
+type HTMLButtonElementWithAttr = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type'> & HTMLDataAttributes;
+
+export interface ButtonProps extends HTMLButtonElementWithAttr {
   /**
    * @description 按钮内容
    */
@@ -32,6 +35,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
    * @description 按钮是否禁用
    */
   disabled?: boolean;
+  loadingIcon?: ReactNode;
   /**
    * @description 按钮图标
    */
@@ -52,7 +56,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   /**
    * @description a 标签属性，href 存在时生效
    */
-  anchorProps?: HTMLProps<HTMLAnchorElement>;
+  anchorProps?: Omit<HTMLProps<HTMLAnchorElement>, 'href' | 'target'> & HTMLDataAttributes;
   /**
    * @description 点击按钮的回调
    */

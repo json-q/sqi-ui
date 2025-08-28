@@ -43,6 +43,9 @@
       },
       "complexity": {
         "noImportantStyles": "off"
+      },
+      "correctness": {
+        "useUniqueElementIds": "off"
       }
     }
   },

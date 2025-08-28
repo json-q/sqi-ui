@@ -48,6 +48,7 @@ group:
 | htmlType | 原生 `button` 标签的 type 属性 | `button`\| `submit`\| `reset` | `button` |
 | disabled | 按钮是否禁用 | `boolean` | `false` |
 | icon | 按钮图标 | `ReactNode` |  |
+| loadingIcon | loading 图标 | `ReactNode` |  |
 | size | 按钮尺寸 | `ConfigSize` | `md` |
 | href | 与 a 标签 href 行为一致 | `string` |  |
 | target | a 标签 target 属性，href 存在时生效 | `string` |  |
