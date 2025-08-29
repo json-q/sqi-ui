@@ -26,6 +26,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>((b
     disabled,
     variant,
     icon,
+    loadingIcon,
     href,
     target,
     onClick,
@@ -33,7 +34,9 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>((b
     ...restProps
   } = props;
 
-  const iconNode = loading ? <LoadingIcon spin={loading} /> : icon;
+  const loadingIconNode = loadingIcon || <LoadingIcon spin={loading} />;
+
+  const iconNode = loading ? loadingIconNode : icon;
   const _type = href ? 'link' : type;
 
   const classes = clsx(`${prefixCls}-btn`, `${prefixCls}-btn-${_type}`, {
@@ -58,7 +61,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>((b
         {...anchorProps}
         href={href}
         target={target}
-        className={classes}
+        className={clsx(classes, anchorProps.className)}
         onClick={handleClick}
         ref={ref as Ref<HTMLAnchorElement>}
       >

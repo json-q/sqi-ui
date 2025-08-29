@@ -34,7 +34,7 @@ export default function Demo() {
         </div>
       </Portal>
 
-      <Portal open={open2} getContainer={btnRef.current}>
+      <Portal open={open2} getContainer={() => btnRef.current}>
         <div
           style={{
             position: 'absolute',

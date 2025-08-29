@@ -24,7 +24,7 @@ export default defineConfig({
     {
       source: {
         entry: {
-          index: ['./src/**/*.{ts,tsx}', '!src/**/demos/**'],
+          index: ['./src/**/*.{ts,tsx}', '!src/**/demos/**', '!src/**/__tests__/**'],
         },
       },
       format: 'esm',
@@ -39,7 +39,7 @@ export default defineConfig({
     {
       source: {
         entry: {
-          index: ['./src/**/*.{ts,tsx}', '!src/**/demos/**'],
+          index: ['./src/**/*.{ts,tsx}', '!src/**/demos/**', '!src/**/__tests__/**'],
         },
       },
       format: 'cjs',

@@ -1,0 +1,60 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BaseCheckbox > should be callback when pass _getCheckedValue and click it 1`] = `
+<span
+  class="undefined-checked"
+>
+  <input
+    class="undefined-input"
+    type="checkbox"
+  />
+  <span
+    class="undefined-inner"
+  />
+</span>
+`;
+
+exports[`BaseCheckbox > should control checked when pass checked and click it 1`] = `
+<span
+  class="test test-checked"
+>
+  <input
+    checked=""
+    class="test-input"
+    type="checkbox"
+  />
+  <span
+    class="test-inner"
+  />
+</span>
+`;
+
+exports[`BaseCheckbox > should render correct className 1`] = `
+<span
+  class="test test-checked"
+>
+  <input
+    checked=""
+    class="test-input"
+    type="checkbox"
+  />
+  <span
+    class="test-inner"
+  />
+</span>
+`;
+
+exports[`BaseCheckbox > should render correct className 2`] = `
+<span
+  class="test test-checked"
+>
+  <input
+    checked=""
+    class="test-input"
+    type="checkbox"
+  />
+  <span
+    class="test-inner"
+  />
+</span>
+`;

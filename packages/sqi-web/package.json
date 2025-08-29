@@ -15,6 +15,9 @@
     "gulp:dev": "gulp watch",
     "gulp:build": "gulp",
     "build": "rslib build && gulp",
+    "test": "vitest run",
+    "test:u": "vitest run -u",
+    "coverage": "vitest run --coverage",
     "clean": "rimraf dist .turbo",
     "format": "biome check --write .",
     "format-staged": "biome check --staged --no-errors-on-unmatched --write ."
