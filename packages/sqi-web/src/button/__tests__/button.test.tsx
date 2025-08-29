@@ -56,8 +56,8 @@ describe('Button', () => {
 
     expect(container.querySelector('#test-icon')).toBeTruthy();
     expect(loadingContainer.querySelector('#test-loading-icon')).toBeFalsy();
-    expect(container).toMatchSnapshot();
-    expect(loadingContainer).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
+    expect(loadingContainer.firstChild).toMatchSnapshot();
   });
 
   it('should render custom loading icon when provided', () => {
@@ -68,7 +68,7 @@ describe('Button', () => {
     );
 
     expect(container.querySelector('#loading-icon')).toBeTruthy();
-    expect(container).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render anchor element when href is provided', () => {
@@ -92,6 +92,6 @@ describe('Button', () => {
 
     expect(container.firstChild).toHaveAttribute('data-testid', 'custom-anchor');
     expect(container.firstChild).toHaveClass('custom-class', 'sqi-btn');
-    expect(container).toMatchSnapshot();
+    expect(container.firstChild).toMatchSnapshot();
   });
 });

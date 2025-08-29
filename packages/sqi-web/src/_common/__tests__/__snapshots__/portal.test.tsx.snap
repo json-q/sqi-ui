@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Portal > default render content to body 1`] = `
+<div
+  data-portal="true"
+>
+  <div>
+    Portal in body
+  </div>
+</div>
+`;
+
+exports[`Portal > render content with custom container 1`] = `
+<button>
+  <div
+    data-portal="true"
+  >
+    <p>
+      Custom Render Content
+    </p>
+  </div>
+</button>
+`;
+
+exports[`Portal > should apply rootStyle and prefixCls to portal 1`] = `
+<div
+  class="test-portal-wrapper"
+  data-portal="true"
+  style="color: red;"
+>
+  <div>
+    样式测试
+  </div>
+</div>
+`;

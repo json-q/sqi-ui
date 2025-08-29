@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ResizeObserverComponent > should render single child element correctly 1`] = `
+<div
+  data-testid="child-element"
+>
+  Content
+</div>
+`;

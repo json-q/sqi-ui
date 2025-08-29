@@ -23,8 +23,8 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
   const { children, disabled, throttleMs = 100, onResize } = props;
 
   const isElement = isValidElement(children);
-  const childNodes = isElement ? toArray(children) : [];
-  const originRef = isElement ? getReactNodeRef<HTMLElement>(children!) : null;
+  const childNodes = children ? toArray(children) : [];
+  const originRef = children ? getReactNodeRef<HTMLElement>(children!) : null;
   const elementRef = useRef<HTMLElement>(null);
 
   const [elementState, setElementState] = useState<HTMLElement | null>(null);
@@ -34,16 +34,15 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
     setElementState(getDOM(node) as HTMLElement);
   });
 
-  if (process.env.NODE_ENV !== 'production') {
-    if (!isElement) {
-      console.error('[@sqi-ui/web]: The `children` of ResizeObserverComponent is invalid. Nothing is in observe.');
-    }
+  if (process.env.NODE_ENV !== 'production' && !isElement) {
     if (childNodes.length > 1) {
       console.error(
         '[@sqi-ui/web]: Find more than one child node with `children` in ResizeObserverComponent. Please ensure only one child node',
       );
     } else if (childNodes.length === 0) {
       console.error('[@sqi-ui/web]: `children` of ResizeObserverComponent is empty. Nothing is in observe.');
+    } else {
+      console.error('[@sqi-ui/web]: The `children` of ResizeObserverComponent is invalid. Nothing is in observe.');
     }
   }
 

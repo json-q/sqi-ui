@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CSSMotion > mounted renders correctly with element children 1`] = `
+<div
+  class="sqi-fade-motion sqi-fade-motion-entered"
+>
+  motion eLement child
+</div>
+`;
+
+exports[`CSSMotion > mounted renders correctly with function children 1`] = `
+<div
+  class="sqi-fade-motion sqi-fade-motion-entered"
+>
+  motion function child
+</div>
+`;
+
+exports[`CSSMotion > should correctly className when prefixCls is empty 1`] = `
+<div
+  class="sqi-fade-motion sqi-fade-motion-entered"
+>
+  motion eLement child
+</div>
+`;
+
+exports[`CSSMotion > should status is entering with motion when toggle process 1`] = `
+<div
+  class="sqi-fade-motion sqi-fade-motion-entering"
+>
+  motion element child
+</div>
+`;
+
+exports[`CSSMotion > should status is entering with motion when toggle process 2`] = `
+<div
+  class="sqi-fade-motion sqi-fade-motion-entering"
+>
+  motion function child
+</div>
+`;
