@@ -46,7 +46,7 @@ describe('Portal', () => {
   it('should apply rootStyle and prefixCls to portal', () => {
     render(
       <Portal open prefixCls="test" rootStyle={{ color: 'red' }}>
-        <div>样式测试</div>
+        <div>test rootStyle</div>
       </Portal>,
     );
 
@@ -62,7 +62,7 @@ describe('Portal', () => {
   it('should clean portal when unmount', () => {
     const { unmount } = render(
       <Portal open>
-        <div>清理测试</div>
+        <div>test unmount</div>
       </Portal>,
     );
 
