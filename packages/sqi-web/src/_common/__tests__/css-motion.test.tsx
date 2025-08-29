@@ -129,6 +129,6 @@ describe('CSSMotion', () => {
       </CSSMotion>,
     );
 
-    expect(container.firstChild).instanceOf(Text);
+    expect(container.firstChild).toBeInstanceOf(Text);
   });
 });

@@ -5,5 +5,5 @@ export type LiteralUnion<T extends U, U> = T | (U & Record<never, never>);
 export type Prettify<T> = T extends infer O ? { [K in keyof O]: O[K] } : NonNullable<never>;
 
 export type HTMLDataAttributes = {
-  [key: `data-${string}`]: string;
+  [key: `data-${string}`]: string | number | boolean | undefined;
 };

@@ -27,7 +27,7 @@ const CSSMotion = forwardRef<CSSMotionInstance, CSSMotionProps>((props: CSSMotio
 
   useImperativeHandle(ref, () => ({ toggle }));
 
-  const mergedPrefixCls = `${prefixCls || ctx.prefixCls}${`-${name}`}`;
+  const mergedPrefixCls = `${prefixCls || ctx.prefixCls}${name ? `-${name}` : ''}`;
 
   const className = clsx([`${mergedPrefixCls}-motion`], {
     [`${mergedPrefixCls}-motion-${state.status}`]: state.status,

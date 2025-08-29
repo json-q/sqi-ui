@@ -1,4 +1,10 @@
-import type { ButtonHTMLAttributes, HTMLProps, MouseEventHandler, ReactNode } from 'react';
+import type {
+  ButtonHTMLAttributes,
+  HTMLAttributeAnchorTarget,
+  AnchorHTMLAttributes,
+  MouseEventHandler,
+  ReactNode,
+} from 'react';
 import type { ConfigSize } from '@sqi-ui/web';
 import type { HTMLDataAttributes } from '../_util/type';
 
@@ -52,11 +58,11 @@ export interface ButtonProps extends HTMLButtonElementWithAttr {
   /**
    * @description a 标签 target 属性，href 存在时生效
    */
-  target?: string;
+  target?: HTMLAttributeAnchorTarget;
   /**
    * @description a 标签属性，href 存在时生效
    */
-  anchorProps?: Omit<HTMLProps<HTMLAnchorElement>, 'href' | 'target'> & HTMLDataAttributes;
+  anchorProps?: Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'target'> & HTMLDataAttributes;
   /**
    * @description 点击按钮的回调
    */

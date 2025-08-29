@@ -48,7 +48,7 @@ describe('BaseCheckbox', () => {
 
     const input = container.querySelector('input');
     fireEvent.click(input!);
-    expect(input).toHaveAttribute('checked');
+    expect(input).toBeChecked();
     expect(container.firstChild).toMatchSnapshot();
   });
 

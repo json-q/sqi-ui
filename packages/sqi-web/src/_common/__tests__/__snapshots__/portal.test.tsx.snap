@@ -29,7 +29,7 @@ exports[`Portal > should apply rootStyle and prefixCls to portal 1`] = `
   style="color: red;"
 >
   <div>
-    样式测试
+    test rootStyle
   </div>
 </div>
 `;

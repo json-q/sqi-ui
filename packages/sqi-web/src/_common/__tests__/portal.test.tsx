@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Portal from '../Portal';
 
@@ -94,9 +94,13 @@ describe('Portal', () => {
 
     // destroy
     fireEvent.click(btn!);
-    expect(document.querySelector('[data-portal=true]')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(document.querySelector('[data-portal=true]')).not.toBeInTheDocument();
+    });
     // mount
     fireEvent.click(btn!);
-    expect(document.querySelector('[data-portal=true]')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(document.querySelector('[data-portal=true]')).toBeInTheDocument();
+    });
   });
 });
