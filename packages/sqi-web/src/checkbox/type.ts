@@ -32,7 +32,7 @@ export interface CheckboxGroupProps {
   /**
    * @description 配置形式设置子元素
    */
-  options?: CheckboxOptions[] | string[] | number[];
+  options?: CheckboxOptions[] | string[] | number[] | (string | number)[];
   /**
    * @description 自定义渲染内容, 仅使用 options 时生效
    */

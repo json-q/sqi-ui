@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Alert Component > should display icons correctly 1`] = `
+exports[`Alert > should display icons correctly 1`] = `
 <div
   class="sqi-alert sqi-alert-success sqi-alert-motion sqi-alert-motion-entered"
   role="alert"
@@ -41,7 +41,7 @@ exports[`Alert Component > should display icons correctly 1`] = `
 </div>
 `;
 
-exports[`Alert Component > should display icons correctly 2`] = `
+exports[`Alert > should display icons correctly 2`] = `
 <div
   class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
   role="alert"
@@ -58,7 +58,7 @@ exports[`Alert Component > should display icons correctly 2`] = `
 </div>
 `;
 
-exports[`Alert Component > should render basic Alert correctly 1`] = `
+exports[`Alert > should render basic Alert correctly 1`] = `
 <div
   class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
   role="alert"
@@ -99,7 +99,7 @@ exports[`Alert Component > should render basic Alert correctly 1`] = `
 </div>
 `;
 
-exports[`Alert Component > should render different types of Alert correctly 1`] = `
+exports[`Alert > should render different types of Alert correctly 1`] = `
 <div
   class="sqi-alert sqi-alert-success sqi-alert-motion sqi-alert-motion-entered"
   role="alert"
@@ -140,7 +140,7 @@ exports[`Alert Component > should render different types of Alert correctly 1`] 
 </div>
 `;
 
-exports[`Alert Component > should render title and description correctly 1`] = `
+exports[`Alert > should render title and description correctly 1`] = `
 <div
   class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
   role="alert"

@@ -1,0 +1,103 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CheckboxGroup Component > should render correctly with children 1`] = `
+<div
+  class="sqi-checkbox-group"
+>
+  <label
+    class="sqi-checkbox-wrapper"
+  >
+    <span
+      class="sqi-checkbox"
+    >
+      <input
+        class="sqi-checkbox-input"
+        name="«r0»"
+        type="checkbox"
+        value="1"
+      />
+      <span
+        class="sqi-checkbox-inner"
+      />
+    </span>
+    <span
+      class="sqi-checkbox-label"
+    >
+      Option 1
+    </span>
+  </label>
+  <label
+    class="sqi-checkbox-wrapper"
+  >
+    <span
+      class="sqi-checkbox"
+    >
+      <input
+        class="sqi-checkbox-input"
+        name="«r0»"
+        type="checkbox"
+        value="2"
+      />
+      <span
+        class="sqi-checkbox-inner"
+      />
+    </span>
+    <span
+      class="sqi-checkbox-label"
+    >
+      Option 2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`CheckboxGroup Component > should support options prop 1`] = `
+<div
+  class="sqi-checkbox-group"
+>
+  <label
+    class="sqi-checkbox-wrapper"
+  >
+    <span
+      class="sqi-checkbox"
+    >
+      <input
+        class="sqi-checkbox-input"
+        name="«r4»"
+        type="checkbox"
+        value="1"
+      />
+      <span
+        class="sqi-checkbox-inner"
+      />
+    </span>
+    <span
+      class="sqi-checkbox-label"
+    >
+      Option 1
+    </span>
+  </label>
+  <label
+    class="sqi-checkbox-wrapper"
+  >
+    <span
+      class="sqi-checkbox"
+    >
+      <input
+        class="sqi-checkbox-input"
+        name="«r4»"
+        type="checkbox"
+        value="2"
+      />
+      <span
+        class="sqi-checkbox-inner"
+      />
+    </span>
+    <span
+      class="sqi-checkbox-label"
+    >
+      Option 2
+    </span>
+  </label>
+</div>
+`;

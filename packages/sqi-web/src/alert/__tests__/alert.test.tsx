@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import Alert from '../Alert';
 
-describe('Alert Component', () => {
+describe('Alert', () => {
   it('should render basic Alert correctly', () => {
     const { container, getByText } = render(<Alert description="This is an alert message" />);
     expect(container.firstChild).toBeInTheDocument();
