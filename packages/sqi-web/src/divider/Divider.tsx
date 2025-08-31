@@ -11,19 +11,25 @@ const defaultProps: DividerProps = {
 
 const Divider = forwardRef<HTMLDivElement, DividerProps>((baseProps: DividerProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
-  const props = useMergeProps(baseProps, defaultProps, componentConfig?.Divider);
-  const { direction, align, dashed, className, children, text, style } = props;
+  const { direction, align, dashed, className, children, text, style } = useMergeProps(
+    baseProps,
+    defaultProps,
+    componentConfig?.Divider,
+  );
 
   const mergeChildren = children || text;
   const hasText = direction !== 'vertical' && !!mergeChildren;
 
-  const classes = clsx(`${prefixCls}-divider`, {
-    [`${prefixCls}-divider-${direction}`]: direction,
-    [`${prefixCls}-divider-with-text`]: hasText,
-    [`${prefixCls}-divider-with-text-${align}`]: hasText,
-    [`${prefixCls}-divider-dashed`]: !!dashed,
+  const classes = clsx(
+    `${prefixCls}-divider`,
+    {
+      [`${prefixCls}-divider-${direction}`]: direction,
+      [`${prefixCls}-divider-with-text`]: hasText,
+      [`${prefixCls}-divider-with-text-${align}`]: hasText,
+      [`${prefixCls}-divider-dashed`]: !!dashed,
+    },
     className,
-  });
+  );
 
   return (
     <div className={classes} style={style} ref={ref}>
