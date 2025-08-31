@@ -1,0 +1,44 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Row > should render correctly with default props 1`] = `
+<div
+  class="sqi-row sqi-row-align-start sqi-row-justify-start"
+>
+  Row Content
+</div>
+`;
+
+exports[`Row > should support custom className and style 1`] = `
+<div
+  class="sqi-row sqi-row-align-start sqi-row-justify-start custom-row"
+  style="background-color: red;"
+>
+  Row Content
+</div>
+`;
+
+exports[`Row > should support gutter prop 1`] = `
+<div
+  class="sqi-row sqi-row-align-start sqi-row-justify-start"
+  style="margin-left: -8px; margin-right: -8px;"
+>
+  Row Content
+</div>
+`;
+
+exports[`Row > should support vertical gutter 1`] = `
+<div
+  class="sqi-row sqi-row-align-start sqi-row-justify-start"
+  style="margin: -12px -8px -12px -8px;"
+>
+  Row Content
+</div>
+`;
+
+exports[`Row > should support wrap prop 1`] = `
+<div
+  class="sqi-row sqi-row-nowrap sqi-row-align-start sqi-row-justify-start"
+>
+  Row Content
+</div>
+`;
