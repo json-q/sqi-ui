@@ -9,7 +9,7 @@ import type { ConfigProviderProps } from './type';
 export default function ConfigProvider(baseProps: ConfigProviderProps) {
   const props = useMergeProps(baseProps, defaultConfigProps);
   const { iconPrefix, children } = props;
-  const providerValue = omit(props, ['children', 'iconPrefix']);
+  const providerValue = omit(props, ['children']);
 
   const IconProviderPlaceholder = iconPrefix ? IconContext.Provider : Fragment;
 

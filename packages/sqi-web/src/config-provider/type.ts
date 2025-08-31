@@ -31,7 +31,7 @@ export interface ConfigProviderProps {
   prefixCls?: string;
   /**
    * @description 组件图标前缀
-   * @default 'sqi-icon'
+   * @default 'sqi'
    */
   iconPrefix?: string;
   children?: ReactNode;
