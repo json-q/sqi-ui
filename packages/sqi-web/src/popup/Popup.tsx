@@ -1,10 +1,10 @@
 'use client';
 import React, { forwardRef, isValidElement, useContext, useImperativeHandle, useRef } from 'react';
-import type { PopupProps } from './type';
-import { useMergeProps } from '@sqi-ui/hooks';
-import { ConfigContext } from '../config-provider/context';
-import Trigger from '../trigger';
 import clsx from 'clsx';
+import { useMergeProps } from '@sqi-ui/hooks';
+import Trigger from '../trigger';
+import { ConfigContext } from '../config-provider/context';
+import type { PopupProps } from './type';
 
 const defaultProps: PopupProps = {
   trigger: 'hover',
