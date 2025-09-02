@@ -1,0 +1,248 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Radio > should render correctly 1`] = `
+<label
+  class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+>
+  <span
+    class="sqi-radio"
+  >
+    <input
+      class="sqi-radio-input"
+      type="radio"
+    />
+    <span
+      class="sqi-radio-inner"
+    />
+  </span>
+  <span
+    class="sqi-radio-label"
+  >
+    Radio
+  </span>
+</label>
+`;
+
+exports[`Radio > should support button style when _IS_BUTTON_ is true 1`] = `
+<label
+  class="sqi-radio-button-wrapper sqi-radio-button-wrapper-size-md"
+>
+  <span
+    class="sqi-radio-button"
+  >
+    <input
+      class="sqi-radio-button-input"
+      type="radio"
+    />
+    <span
+      class="sqi-radio-button-inner"
+    />
+  </span>
+  <span
+    class="sqi-radio-button-label"
+  >
+    Button Radio
+  </span>
+</label>
+`;
+
+exports[`Radio > should support checked 1`] = `
+<label
+  class="sqi-radio-wrapper sqi-radio-wrapper-checked sqi-radio-wrapper-size-md"
+>
+  <span
+    class="sqi-radio sqi-radio-checked"
+  >
+    <input
+      checked=""
+      class="sqi-radio-input"
+      type="radio"
+    />
+    <span
+      class="sqi-radio-inner"
+    />
+  </span>
+  <span
+    class="sqi-radio-label"
+  >
+    Radio
+  </span>
+</label>
+`;
+
+exports[`Radio > should support defaultChecked 1`] = `
+<label
+  class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+>
+  <span
+    class="sqi-radio sqi-radio-checked"
+  >
+    <input
+      checked=""
+      class="sqi-radio-input"
+      type="radio"
+    />
+    <span
+      class="sqi-radio-inner"
+    />
+  </span>
+  <span
+    class="sqi-radio-label"
+  >
+    Radio
+  </span>
+</label>
+`;
+
+exports[`Radio > should support disabled 1`] = `
+<label
+  class="sqi-radio-wrapper sqi-radio-wrapper-disabled sqi-radio-wrapper-size-md"
+>
+  <span
+    class="sqi-radio sqi-radio-disabled"
+  >
+    <input
+      class="sqi-radio-input"
+      disabled=""
+      type="radio"
+    />
+    <span
+      class="sqi-radio-inner"
+    />
+  </span>
+  <span
+    class="sqi-radio-label"
+  >
+    Radio
+  </span>
+</label>
+`;
+
+exports[`Radio > should support function as children 1`] = `
+<div>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-checked sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-checked"
+      style="display: none;"
+    >
+      <input
+        checked=""
+        class="sqi-radio-input"
+        type="radio"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span>
+      Checked
+    </span>
+  </label>
+</div>
+`;
+
+exports[`Radio > should trigger onChange in group 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        checked=""
+        class="sqi-radio-input"
+        name="«r1»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-checked sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-checked"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r1»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`Radio > should work in group 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r0»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-checked sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-checked"
+    >
+      <input
+        checked=""
+        class="sqi-radio-input"
+        name="«r0»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;

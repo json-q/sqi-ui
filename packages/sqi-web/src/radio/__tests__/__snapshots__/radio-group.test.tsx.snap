@@ -1,0 +1,509 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RadioGroup > should render correctly 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r0»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r0»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support button appearance with options configuration 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-button-wrapper sqi-radio-button-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio-button"
+    >
+      <input
+        class="sqi-radio-button-input"
+        name="«r7»"
+        type="radio"
+        value="Radio1"
+      />
+      <span
+        class="sqi-radio-button-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-button-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-button-wrapper sqi-radio-button-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio-button"
+    >
+      <input
+        class="sqi-radio-button-input"
+        name="«r7»"
+        type="radio"
+        value="Radio2"
+      />
+      <span
+        class="sqi-radio-button-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-button-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support buttonVariant filled 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md sqi-radio-wrapper-filled"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«rb»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md sqi-radio-wrapper-filled"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«rb»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support defaultValue 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r1»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-checked sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-checked"
+    >
+      <input
+        checked=""
+        class="sqi-radio-input"
+        name="«r1»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support disabled 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-disabled sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-disabled"
+    >
+      <input
+        class="sqi-radio-input"
+        disabled=""
+        name="«r3»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-disabled sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-disabled"
+    >
+      <input
+        class="sqi-radio-input"
+        disabled=""
+        name="«r3»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support options prop 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r8»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r8»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-disabled sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-disabled"
+    >
+      <input
+        class="sqi-radio-input"
+        disabled=""
+        name="«r8»"
+        type="radio"
+        value="3"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support options with string values 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r9»"
+        type="radio"
+        value="Apple"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Apple
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r9»"
+        type="radio"
+        value="Banana"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Banana
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r9»"
+        type="radio"
+        value="Orange"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Orange
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support size attribute 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-lg"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r6»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-lg"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r6»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
+
+exports[`RadioGroup > should support value 1`] = `
+<div
+  class="sqi-radio-group"
+>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-checked sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio sqi-radio-checked"
+    >
+      <input
+        checked=""
+        class="sqi-radio-input"
+        name="«r2»"
+        type="radio"
+        value="1"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio1
+    </span>
+  </label>
+  <label
+    class="sqi-radio-wrapper sqi-radio-wrapper-size-md"
+  >
+    <span
+      class="sqi-radio"
+    >
+      <input
+        class="sqi-radio-input"
+        name="«r2»"
+        type="radio"
+        value="2"
+      />
+      <span
+        class="sqi-radio-inner"
+      />
+    </span>
+    <span
+      class="sqi-radio-label"
+    >
+      Radio2
+    </span>
+  </label>
+</div>
+`;
