@@ -1,0 +1,98 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Divider > should combine className correctly 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal custom-class"
+/>
+`;
+
+exports[`Divider > should not render text for vertical divider 1`] = `
+<div
+  class="sqi-divider sqi-divider-vertical"
+/>
+`;
+
+exports[`Divider > should prioritize children over text prop 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal sqi-divider-with-text sqi-divider-with-text-center"
+>
+  <span
+    class="sqi-divider-inner-text"
+  >
+    Children Text
+  </span>
+</div>
+`;
+
+exports[`Divider > should render correctly with default props 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal"
+/>
+`;
+
+exports[`Divider > should render dashed divider 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal sqi-divider-dashed"
+/>
+`;
+
+exports[`Divider > should render vertical divider 1`] = `
+<div
+  class="sqi-divider sqi-divider-vertical"
+/>
+`;
+
+exports[`Divider > should render with text content 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal sqi-divider-with-text sqi-divider-with-text-center"
+>
+  <span
+    class="sqi-divider-inner-text"
+  >
+    Text Content
+  </span>
+</div>
+`;
+
+exports[`Divider > should render with text prop 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal sqi-divider-with-text sqi-divider-with-text-center"
+>
+  <span
+    class="sqi-divider-inner-text"
+  >
+    Text Prop
+  </span>
+</div>
+`;
+
+exports[`Divider > should support custom className and style 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal custom-class"
+  style="color: red;"
+/>
+`;
+
+exports[`Divider > should support text alignment 1`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal sqi-divider-with-text sqi-divider-with-text-right"
+>
+  <span
+    class="sqi-divider-inner-text"
+  >
+    Right Text
+  </span>
+</div>
+`;
+
+exports[`Divider > should support text alignment 2`] = `
+<div
+  class="sqi-divider sqi-divider-horizontal sqi-divider-with-text sqi-divider-with-text-center"
+>
+  <span
+    class="sqi-divider-inner-text"
+  >
+    Center Text
+  </span>
+</div>
+`;

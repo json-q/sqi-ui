@@ -247,7 +247,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
 
   // input core element
   const inputElement = (
-    <span
+    <div
       role="group"
       ref={addonBefore || addonAfter ? undefined : wrapperRef}
       className={wrapperClasses}
@@ -271,7 +271,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
       {clearElement}
       {suffixElement}
       {limitLengthElement}
-    </span>
+    </div>
   );
 
   const addBeforeElement = addonBefore && <span className={clsx(`${prefixCls}-input-group-addon`)}>{addonBefore}</span>;

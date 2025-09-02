@@ -1,0 +1,310 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Alert > should display icons correctly 1`] = `
+<div
+  class="sqi-alert sqi-alert-success sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="check-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM7.49985 10.5858L10.4999 13.5858L16.4999 7.58578L17.9141 8.99999L10.4999 16.4142L6.08564 12L7.49985 10.5858Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      Success message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should display icons correctly 2`] = `
+<div
+  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      No icon message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should render basic Alert correctly 1`] = `
+<div
+  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="info-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM10.996 8.50002V6.49611H12.9999V8.50002H10.996ZM12.9999 10L12.9999 17.5H10.9999V10L12.9999 10Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      This is an alert message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should render different types of Alert correctly 1`] = `
+<div
+  class="sqi-alert sqi-alert-success sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="check-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM7.49985 10.5858L10.4999 13.5858L16.4999 7.58578L17.9141 8.99999L10.4999 16.4142L6.08564 12L7.49985 10.5858Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      Success message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should render different types of Alert correctly 2`] = `
+<div
+  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="info-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM10.996 8.50002V6.49611H12.9999V8.50002H10.996ZM12.9999 10L12.9999 17.5H10.9999V10L12.9999 10Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      Info message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should render different types of Alert correctly 3`] = `
+<div
+  class="sqi-alert sqi-alert-warning sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="warn-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1ZM11.0001 14H13.0001V6.49998H11.0001V14ZM13.004 15.5H11.0001V17.5039H13.004V15.5Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      Warning message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should render different types of Alert correctly 4`] = `
+<div
+  class="sqi-alert sqi-alert-error sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="close-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM8.81753 7.40346L11.9999 10.5858L15.1815 7.40414L16.5957 8.81835L13.4141 12L16.5957 15.1816L15.1815 16.5958L11.9999 13.4142L8.81753 16.5965L7.40332 15.1823L10.5856 12L7.40332 8.81767L8.81753 7.40346Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-description"
+    >
+      Error message
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Alert > should render title and description correctly 1`] = `
+<div
+  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  role="alert"
+>
+  <div
+    class="sqi-alert-icon"
+  >
+    <span
+      aria-label="info-circle-filled"
+      class="sqi-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM10.996 8.50002V6.49611H12.9999V8.50002H10.996ZM12.9999 10L12.9999 17.5H10.9999V10L12.9999 10Z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-alert-content"
+  >
+    <div
+      class="sqi-alert-title"
+    >
+      Alert Title
+    </div>
+    <div
+      class="sqi-alert-description"
+    >
+      Alert Description
+    </div>
+  </div>
+</div>
+`;

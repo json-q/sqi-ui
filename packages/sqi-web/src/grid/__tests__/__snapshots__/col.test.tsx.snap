@@ -1,0 +1,101 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Col > should render correctly with default props 1`] = `
+<div
+  class="sqi-col"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support custom className and style 1`] = `
+<div
+  class="sqi-col custom-col"
+  style="background-color: blue;"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support flex prop with basis string 1`] = `
+<div
+  class="sqi-col"
+  style="flex: 0 0 200px;"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support flex prop with flex string 1`] = `
+<div
+  class="sqi-col"
+  style="flex: 1 1 auto;"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support flex prop with number 1`] = `
+<div
+  class="sqi-col"
+  style="flex: 1 1 auto;"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support gutter from Row context 1`] = `
+<div>
+  <div
+    class="sqi-row sqi-row-align-start sqi-row-justify-start"
+    style="margin: -12px -8px -12px -8px;"
+  >
+    <div
+      class="sqi-col sqi-col-12"
+      style="padding: 12px 8px 12px 8px;"
+    >
+      Col Content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Col > should support offset prop 1`] = `
+<div
+  class="sqi-col sqi-col-offset-6"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support order prop 1`] = `
+<div
+  class="sqi-col sqi-col-order-2"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support responsive object props 1`] = `
+<div
+  class="sqi-col sqi-col-xs-12 sqi-col-xs-offset-2 sqi-col-sm-8 sqi-col-md-6 sqi-col-md-order-1"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support responsive props 1`] = `
+<div
+  class="sqi-col sqi-col-xs-12 sqi-col-sm-8 sqi-col-md-6 sqi-col-lg-4"
+>
+  Col Content
+</div>
+`;
+
+exports[`Col > should support span prop 1`] = `
+<div
+  class="sqi-col sqi-col-12"
+>
+  Col Content
+</div>
+`;

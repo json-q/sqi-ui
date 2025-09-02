@@ -1,0 +1,308 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Switch > renders correctly 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should apply different sizes 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-sm"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should apply different sizes 2`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should apply different sizes 3`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-lg"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should handle controlled component 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should handle controlled component 2`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should handle controlled component 3`] = `
+<button
+  aria-checked="true"
+  class="sqi-switch sqi-switch-checked sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should not trigger change event when disabled 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-disabled sqi-switch-md"
+  disabled=""
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should not trigger change event when loading 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-loading sqi-switch-md"
+  disabled=""
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  >
+    <span
+      aria-label="loading"
+      class="sqi-icon sqi-icon-spin"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 2.25C6.61556 2.25 2.25 6.61556 2.25 12C2.25 17.3844 6.61556 21.75 12 21.75V19.3125C7.96142 19.3125 4.6875 16.0386 4.6875 12C4.6875 7.96142 7.96142 4.6875 12 4.6875C16.0386 4.6875 19.3125 7.96142 19.3125 12H21.75C21.75 6.61556 17.3844 2.25 12 2.25Z"
+          fill="currentColor"
+          fill-opacity="0.9"
+        />
+      </svg>
+    </span>
+  </div>
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should render custom loading icon when provided 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-loading sqi-switch-md"
+  disabled=""
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  >
+    <div
+      data-testid="custom-loading"
+    >
+      loading
+    </div>
+  </div>
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should render unchecked label when switch is not checked 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  >
+    OFF
+  </div>
+</button>
+`;
+
+exports[`Switch > should render with custom className 1`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md custom-class"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should render with custom labels 1`] = `
+<button
+  aria-checked="true"
+  class="sqi-switch sqi-switch-checked sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  >
+    ON
+  </div>
+</button>
+`;
+
+exports[`Switch > should render with defaultChecked 1`] = `
+<button
+  aria-checked="true"
+  class="sqi-switch sqi-switch-checked sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should toggle between checked and unchecked states 1`] = `
+<button
+  aria-checked="true"
+  class="sqi-switch sqi-switch-checked sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should toggle between checked and unchecked states 2`] = `
+<button
+  aria-checked="false"
+  class="sqi-switch sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;
+
+exports[`Switch > should trigger change event when clicked 1`] = `
+<button
+  aria-checked="true"
+  class="sqi-switch sqi-switch-checked sqi-switch-md"
+  role="switch"
+  type="button"
+>
+  <div
+    class="sqi-switch-handle"
+  />
+  <div
+    class="sqi-switch-content"
+  />
+</button>
+`;

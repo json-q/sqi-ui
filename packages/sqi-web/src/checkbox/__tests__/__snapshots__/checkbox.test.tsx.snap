@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox > should render correctly 1`] = `
+<label
+  class="sqi-checkbox-wrapper"
+>
+  <span
+    class="sqi-checkbox"
+  >
+    <input
+      class="sqi-checkbox-input"
+      type="checkbox"
+    />
+    <span
+      class="sqi-checkbox-inner"
+    />
+  </span>
+  <span
+    class="sqi-checkbox-label"
+  >
+    Checkbox
+  </span>
+</label>
+`;

@@ -18,13 +18,21 @@ const defaultProps: TooltipProps = {
 const Tooltip = forwardRef<HTMLElement, TooltipProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = useContext(ConfigContext);
 
-  const { classNames, theme, ...restProps } = useMergeProps(baseProps, defaultProps, componentConfig?.Tooltip);
+  const { classNames, rootClassName, theme, ...restProps } = useMergeProps(
+    baseProps,
+    defaultProps,
+    componentConfig?.Tooltip,
+  );
 
   return (
     <Popup
-      rootClassName={clsx(`${prefixCls}-tooltip`, {
-        [`${prefixCls}-tooltip-${theme}`]: theme,
-      })}
+      rootClassName={clsx(
+        `${prefixCls}-tooltip`,
+        {
+          [`${prefixCls}-tooltip-${theme}`]: theme,
+        },
+        rootClassName,
+      )}
       classNames={{
         arrow: clsx(classNames?.arrow, `${prefixCls}-tooltip-arrow`),
         content: clsx(classNames?.content, `${prefixCls}-tooltip-content`),

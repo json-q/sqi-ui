@@ -1,0 +1,308 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Space > applies correct align classes 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-start"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > applies correct direction classes 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > applies correct direction classes 2`] = `
+<div
+  class="sqi-space sqi-space-direction-vertical sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-bottom: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+    style="margin-bottom: 16px;"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > applies correct spacing for different size values 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 8px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > applies correct spacing for different size values 2`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > applies correct spacing for different size values 3`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 24px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > applies wrap class when wrap is true 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center sqi-space-wrap"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px; margin-bottom: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+    style="margin-right: 16px; margin-bottom: 16px;"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > does not apply margin to last item 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > handles array size values for horizontal and vertical spacing 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center sqi-space-wrap"
+>
+  <div
+    class="space-item"
+    style="margin-right: 10px; margin-bottom: 20px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+    style="margin-right: 10px; margin-bottom: 20px;"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > handles numeric size values 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 30px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > renders children correctly 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > renders with custom className 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center custom-class"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Space > renders with split element 1`] = `
+<div
+  class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <span
+    class="sqi-space-item-split"
+  >
+    |
+  </span>
+  <div
+    class="space-item"
+    style="margin-right: 16px;"
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+  <span
+    class="sqi-space-item-split"
+  >
+    |
+  </span>
+  <div
+    class="space-item"
+  >
+    <div>
+      Item 3
+    </div>
+  </div>
+</div>
+`;
