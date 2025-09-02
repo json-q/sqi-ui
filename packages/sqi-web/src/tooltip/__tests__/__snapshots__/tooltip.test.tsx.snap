@@ -1,0 +1,43 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tooltip > renders with custom arrow and content className 1`] = `
+<div
+  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-default"
+  role="tooltip"
+  style="position: absolute; top: 0px; left: 0px; bottom: auto; right: auto; margin: 0px; will-change: transform; z-index: 1;"
+>
+  <div
+    style="position: absolute; top: 0px; left: 0px; bottom: auto; right: auto; margin: 0px; will-change: transform; z-index: 1;"
+  >
+    <div
+      class="sqi-popup-arrow custom-arrow sqi-tooltip-arrow"
+    />
+  </div>
+  <div
+    class="sqi-popup-content custom-content sqi-tooltip-content"
+  >
+    This is a tooltip
+  </div>
+</div>
+`;
+
+exports[`Tooltip > renders with different themes 1`] = `
+<div
+  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-default"
+  role="tooltip"
+  style="position: absolute; top: 0px; left: 0px; bottom: auto; right: auto; margin: 0px; will-change: transform; z-index: 1;"
+>
+  <div
+    style="position: absolute; top: 0px; left: 0px; bottom: auto; right: auto; margin: 0px; will-change: transform; z-index: 1;"
+  >
+    <div
+      class="sqi-popup-arrow sqi-tooltip-arrow"
+    />
+  </div>
+  <div
+    class="sqi-popup-content sqi-tooltip-content"
+  >
+    This is a tooltip
+  </div>
+</div>
+`;

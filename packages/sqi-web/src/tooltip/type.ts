@@ -1,6 +1,6 @@
 import type { PopupProps } from '../popup';
 
-export interface TooltipProps extends Omit<PopupProps, 'rootClassName'> {
+export interface TooltipProps extends PopupProps {
   /**
    * @description 文字提示风格
    * @default default
