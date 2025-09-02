@@ -8,19 +8,19 @@ describe('Tooltip', () => {
   it('renders with different themes', async () => {
     const themes: TooltipProps['theme'][] = ['default', 'primary', 'success', 'danger', 'warning', 'light'];
 
-    for (let i = 0; i < themes.length; i++) {
-      const theme = themes[i];
-      const { queryByText } = render(
+    for (const theme of themes) {
+      const { queryByText, unmount } = render(
         <Tooltip defaultVisible theme={theme} content="This is a tooltip">
           <button type="button">Hover me</button>
         </Tooltip>,
       );
 
-      waitFor(() => {
+      await waitFor(() => {
         const contentEl = queryByText('This is a tooltip');
         expect(contentEl?.parentNode).toHaveClass(`sqi-tooltip-${theme}`);
         expect(contentEl?.parentNode).toMatchSnapshot();
       });
+      unmount();
     }
   });
 

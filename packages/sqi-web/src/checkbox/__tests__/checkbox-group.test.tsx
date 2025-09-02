@@ -111,7 +111,7 @@ describe('CheckboxGroup Component', () => {
 
     expect(container.firstChild).toHaveClass('custom-group');
     // expect(container.firstChild).toHaveStyle('background-color: red');
-    expect((container.firstChild as HTMLInputElement)?.getAttribute('style')).toContain('color: red');
+    expect((container.firstChild as HTMLInputElement)?.getAttribute('style')).toContain('background-color: red');
   });
 
   it('should work with renderOption', () => {

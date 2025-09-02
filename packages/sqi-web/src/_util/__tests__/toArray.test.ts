@@ -24,14 +24,6 @@ describe('toArray', () => {
     expect((result[0] as any).props.children).toBe('Hello');
   });
 
-  it('should convert single React element to array with that element', () => {
-    const element = React.createElement('div', null, 'Hello');
-    const result = toArray(element);
-    expect(result).toHaveLength(1);
-    expect((result[0] as React.ReactElement).type).toBe('div');
-    expect((result[0] as any).props.children).toBe('Hello');
-  });
-
   it('should flatten arrays', () => {
     const element1 = React.createElement('div', null, 'First');
     const element2 = React.createElement('span', null, 'Second');

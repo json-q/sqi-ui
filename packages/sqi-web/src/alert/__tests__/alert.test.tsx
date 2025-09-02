@@ -26,9 +26,9 @@ describe('Alert', () => {
     expect(errorAlert.firstChild).toHaveClass('sqi-alert-error');
 
     expect(successAlert.firstChild).toMatchSnapshot();
-    expect(infoAlert.firstChild).toMatchSnapshot;
-    expect(warningAlert.firstChild).toMatchSnapshot;
-    expect(errorAlert.firstChild).toMatchSnapshot;
+    expect(infoAlert.firstChild).toMatchSnapshot();
+    expect(warningAlert.firstChild).toMatchSnapshot();
+    expect(errorAlert.firstChild).toMatchSnapshot();
   });
 
   it('should render title and description correctly', () => {

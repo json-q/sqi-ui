@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { render, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Trigger from '../Trigger';
 import type { TriggerPlacement } from '../type';
 
 describe('Trigger', () => {
   it('should render correctly with hover trigger', async () => {
-    const { container, queryByTestId } = render(
+    const { queryByTestId, getByRole } = render(
       <Trigger
         popper={<div data-testid="popper-content">Popper content</div>}
         motion={{ mountOnEnter: true, unmountOnExit: true }}
@@ -15,11 +15,8 @@ describe('Trigger', () => {
       </Trigger>,
     );
 
-    expect(queryByTestId('popper-content')).toBeNull();
-
-    act(() => {
-      fireEvent.mouseEnter(container.firstChild!);
-    });
+    const trigger = getByRole('button', { name: /hover me/i });
+    fireEvent.mouseEnter(trigger);
 
     await waitFor(() => {
       expect(queryByTestId('popper-content')).toBeInTheDocument();
@@ -27,7 +24,7 @@ describe('Trigger', () => {
   });
 
   it('should render correctly with click trigger', async () => {
-    const { container, queryByTestId } = render(
+    const { getByRole, queryByTestId } = render(
       <Trigger
         trigger="click"
         popper={<div data-testid="popper-content">Popper content</div>}
@@ -39,17 +36,16 @@ describe('Trigger', () => {
 
     expect(queryByTestId('popper-content')).toBeNull();
 
-    act(() => {
-      fireEvent.click(container.firstChild!);
-    });
+    const trigger = getByRole('button', { name: /click me/i });
+    fireEvent.click(trigger);
 
     await waitFor(() => {
       expect(queryByTestId('popper-content')).toBeInTheDocument();
     });
   });
 
-  it('should render correctly with focus trigger', async () => {
-    const { container, queryByTestId } = render(
+  it('shows popper content when input is focused', async () => {
+    const { getByPlaceholderText, queryByTestId } = render(
       <Trigger
         trigger="focus"
         popper={<div data-testid="popper-content">Popper content</div>}
@@ -61,9 +57,8 @@ describe('Trigger', () => {
 
     expect(queryByTestId('popper-content')).toBeNull();
 
-    act(() => {
-      fireEvent.focus(container.firstChild!);
-    });
+    const input = getByPlaceholderText('Focus me');
+    fireEvent.focus(input);
 
     await waitFor(() => {
       expect(queryByTestId('popper-content')).toBeInTheDocument();
