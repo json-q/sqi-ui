@@ -12,7 +12,7 @@ import React, {
 import clsx from 'clsx';
 import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
 
-import ResizeObserverComponent from '../_common/ResizeObserver';
+import ResizeObserverRect from '../_common/ResizeObserverRect';
 import Portal from '../_common/Portal';
 import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
 import { getReactNodeRef } from '../_util/dom';
@@ -223,11 +223,11 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
 
   return (
     <>
-      <ResizeObserverComponent ref={referenceRef} onResize={() => asyncUpdatePosition()}>
+      <ResizeObserverRect ref={referenceRef} onResize={() => asyncUpdatePosition()}>
         {cloneElement(children as any, {
           ...genTriggerProps(children),
         })}
-      </ResizeObserverComponent>
+      </ResizeObserverRect>
 
       {renderPopper()}
     </>

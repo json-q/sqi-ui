@@ -1,11 +1,11 @@
 import React, { cloneElement, forwardRef, isValidElement, useImperativeHandle, useRef, useState } from 'react';
 import { throttle } from '@sqi-ui/utils';
-import { useResizeObserver, type ObserverSizeInfo } from '@sqi-ui/hooks';
+import { useResizeObserverRect, type ObserverSizeInfo } from '@sqi-ui/hooks';
 import { toArray } from '../_util/toArray';
 import { getDOM, getReactNodeRef, getRefDom } from '../_util/dom';
 import { useComposeRef } from '../_util/ref';
 
-export interface ResizeObserverProps {
+export interface ResizeObserverRectProps {
   onResize?: (sizeInfo: ObserverSizeInfo, target: ResizeObserverEntry) => void;
   children?: React.ReactElement;
   /**
@@ -19,7 +19,7 @@ export interface ResizeObserverProps {
   throttleMs?: number;
 }
 
-const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((props, ref) => {
+const ResizeObserverRect = forwardRef<HTMLElement, ResizeObserverRectProps>((props, ref) => {
   const { children, disabled, throttleMs = 100, onResize } = props;
 
   const isElement = isValidElement(children);
@@ -30,19 +30,19 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
   const [elementState, setElementState] = useState<HTMLElement | null>(null);
 
   const mergedRef = useComposeRef<HTMLElement>(originRef, elementRef, (node) => {
-    // elementRef 在初次挂载时 useResizeObserver 无法获取到值，使用 state
+    // elementRef 在初次挂载时 useResizeObserverRect 无法获取到值，使用 state
     setElementState(getDOM(node) as HTMLElement);
   });
 
   if (process.env.NODE_ENV !== 'production' && !isElement) {
     if (childNodes.length > 1) {
       console.error(
-        '[@sqi-ui/web]: Find more than one child node with `children` in ResizeObserverComponent. Please ensure only one child node',
+        '[@sqi-ui/web]: Find more than one child node with `children` in ResizeObserverRect. Please ensure only one child node',
       );
     } else if (childNodes.length === 0) {
-      console.error('[@sqi-ui/web]: `children` of ResizeObserverComponent is empty. Nothing is in observe.');
+      console.error('[@sqi-ui/web]: `children` of ResizeObserverRect is empty. Nothing is in observe.');
     } else {
-      console.error('[@sqi-ui/web]: The `children` of ResizeObserverComponent is invalid. Nothing is in observe.');
+      console.error('[@sqi-ui/web]: The `children` of ResizeObserverRect is invalid. Nothing is in observe.');
     }
   }
 
@@ -50,11 +50,11 @@ const ResizeObserverComponent = forwardRef<HTMLElement, ResizeObserverProps>((pr
 
   const throttleResize = onResize ? throttle(onResize, throttleMs) : undefined;
 
-  useResizeObserver(elementState, throttleResize, !disabled);
+  useResizeObserverRect(elementState, throttleResize, !disabled);
 
   return isElement ? cloneElement(children as any, { ref: mergedRef }) : children;
 });
 
-ResizeObserverComponent.displayName = 'ResizeObserverComponent';
+ResizeObserverRect.displayName = 'ResizeObserverRect';
 
-export default ResizeObserverComponent;
+export default ResizeObserverRect;

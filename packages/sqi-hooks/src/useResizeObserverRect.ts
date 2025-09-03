@@ -12,7 +12,7 @@ export interface ObserverSizeInfo {
 
 const SafeResizeObserver = window.ResizeObserver || ResizeObserverPolyfill;
 
-export function useResizeObserver(
+export function useResizeObserverRect(
   container?: HTMLElement | null,
   callback?: (sizeInfo: ObserverSizeInfo, target: ResizeObserverEntry) => void,
   enabled = true,

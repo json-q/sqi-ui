@@ -1,14 +1,14 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render } from '@testing-library/react';
 import * as React from 'react';
-import ResizeObserverComponent from '../ResizeObserver';
+import ResizeObserverRect from '../ResizeObserverRect';
 
-describe('ResizeObserverComponent', () => {
+describe('ResizeObserverRect', () => {
   it('should render single child element correctly', () => {
     const { container } = render(
-      <ResizeObserverComponent>
+      <ResizeObserverRect>
         <div data-testid="child-element">Content</div>
-      </ResizeObserverComponent>,
+      </ResizeObserverRect>,
     );
 
     expect(container.firstChild).toBeInTheDocument();
@@ -20,11 +20,11 @@ describe('ResizeObserverComponent', () => {
 
     const { container } = render(
       // @ts-expect-error
-      <ResizeObserverComponent>Test</ResizeObserverComponent>,
+      <ResizeObserverRect>Test</ResizeObserverRect>,
     );
 
     expect(container.firstChild).instanceOf(Text);
-    expect(errorSpy).toBeCalledWith(expect.stringContaining('The `children` of ResizeObserverComponent is invalid'));
+    expect(errorSpy).toBeCalledWith(expect.stringContaining('The `children` of ResizeObserverRect is invalid'));
   });
 
   it('should console error with multiple children', () => {
@@ -32,21 +32,21 @@ describe('ResizeObserverComponent', () => {
 
     render(
       // @ts-expect-error
-      <ResizeObserverComponent>
+      <ResizeObserverRect>
         <div>1</div>
         <div>2</div>
-      </ResizeObserverComponent>,
+      </ResizeObserverRect>,
     );
 
     expect(errorSpy).toBeCalledWith(
-      expect.stringContaining('Find more than one child node with `children` in ResizeObserverComponent'),
+      expect.stringContaining('Find more than one child node with `children` in ResizeObserverRect'),
     );
   });
 
   it('should console error with empty children', () => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => null);
-    render(<ResizeObserverComponent></ResizeObserverComponent>);
+    render(<ResizeObserverRect></ResizeObserverRect>);
 
-    expect(errorSpy).toBeCalledWith(expect.stringContaining('`children` of ResizeObserverComponent is empty'));
+    expect(errorSpy).toBeCalledWith(expect.stringContaining('`children` of ResizeObserverRect is empty'));
   });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox } from '@sqi-ui/web';
-import ResizeObserver, { type ResizeObserverProps } from '../ResizeObserver';
+import ResizeObserver, { type ResizeObserverProps } from '../ResizeObserverRect';
 
 export default function App() {
   const [times, setTimes] = React.useState(0);
