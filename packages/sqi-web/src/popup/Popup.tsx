@@ -27,6 +27,19 @@ const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {
 
   const wrapperChildren = isValidElement(children) ? children : <span>{children}</span>;
 
+  const renderContent = () => {
+    return (
+      <div style={styles?.content} className={clsx(`${prefixCls}-popup-content`, classNames?.content)}>
+        {content}
+      </div>
+    );
+  };
+
+  const renderPopper = () => {
+    if (!showArrow) return;
+    return <div style={styles?.arrow} className={clsx(`${prefixCls}-popup-arrow`, classNames?.arrow)}></div>;
+  };
+
   return (
     <Trigger
       {...restProps}
@@ -39,16 +52,8 @@ const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {
         preEnter: true,
         unmountOnExit: destroyOnClose,
       }}
-      popper={
-        <div style={styles?.content} className={clsx(`${prefixCls}-popup-content`, classNames?.content)}>
-          {content}
-        </div>
-      }
-      arrow={
-        showArrow ? (
-          <div style={styles?.arrow} className={clsx(`${prefixCls}-popup-arrow`, classNames?.arrow)}></div>
-        ) : undefined
-      }
+      popper={renderContent()}
+      arrow={renderPopper()}
     >
       {wrapperChildren}
     </Trigger>

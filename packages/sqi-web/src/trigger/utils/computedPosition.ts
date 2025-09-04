@@ -53,6 +53,10 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
 
   // 定位元素及浮动元素的坐标
   const referencePosition = getElementPosition(reference, scrollLeft, scrollTop);
+  // 先设置 cssvar，因为 popper 可能会以来 reference 的宽度
+  popperParentContainer.style.setProperty('--reference-x', `${referencePosition.width}px`);
+  popperParentContainer.style.setProperty('--reference-y', `${referencePosition.height}px`);
+
   const popperPosition = getElementPosition(popper, scrollLeft, scrollTop);
 
   // 两个元素的宽高差，当定位到居中时，popper 的 left 会相对于 reference 的 left - 差值/2，靠左靠右类推
@@ -92,6 +96,9 @@ export default function computedPosition(doms: ElementCollection, baseOptions: P
   const { height: arrowHeight = 0, width: arrowWidth = 0 } = arrow
     ? getElementPosition(arrow, scrollLeft, scrollTop)
     : {};
+
+  popperParentContainer.style.setProperty('--arrow-x', `${arrowWidth}px`);
+  popperParentContainer.style.setProperty('--arrow-y', `${arrowWidth}px`);
 
   let distanceX = 0;
   let distanceY = 0;

@@ -14,13 +14,13 @@ export interface ResizeObserverRectProps {
   disabled?: boolean;
   /**
    * @description 节流时间
-   * @default 100
+   * @default 0
    */
   throttleMs?: number;
 }
 
 const ResizeObserverRect = forwardRef<HTMLElement, ResizeObserverRectProps>((props, ref) => {
-  const { children, disabled, throttleMs = 100, onResize } = props;
+  const { children, disabled, throttleMs = 0, onResize } = props;
 
   const isElement = isValidElement(children);
   const childNodes = children ? toArray(children) : [];
