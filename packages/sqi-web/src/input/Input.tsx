@@ -58,14 +58,19 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
     visibilityToggle,
     maxLength,
     tips,
+    onKeyDown,
     onFocus,
     onBlur,
     onChange,
+    onEnter,
+    onCompositionStart,
+    onCompositionEnd,
     ...restProps
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Input);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const composingRef = useRef(false);
 
   useImperativeHandle(ref, () => ({
     currentElement: wrapperRef.current,
@@ -75,7 +80,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
     select: () => inputRef.current?.select(),
   }));
 
-  // =========== Input Focus ============
+  // =========== Input Events Handler ============
   const [isFocused, toggleIsFocused] = useState(false);
 
   const internalFocus = (e: FocusEvent<HTMLInputElement, Element>) => {
@@ -90,6 +95,24 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
     onBlur?.(e);
   };
 
+  const internalKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.key === 'Enter' && onEnter?.(e);
+    onKeyDown?.(e);
+  };
+
+  const internalCompositionStart = (e: React.CompositionEvent<HTMLInputElement>) => {
+    composingRef.current = true;
+    onCompositionStart?.(e);
+  };
+
+  const internalCompositionEnd = (e: React.CompositionEvent<HTMLInputElement>) => {
+    if (composingRef.current) {
+      composingRef.current = false;
+      handleChange(e);
+    }
+    onCompositionEnd?.(e);
+  };
+
   // =========== Input State ============
   const mergedMaxLength = isNumber(maxLength) ? maxLength : maxLength?.length;
   const mergedErrorOnly = isNumber(maxLength) ? false : maxLength?.errorOnly;
@@ -100,8 +123,8 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   const formatValue = formatValueToString(innerValue, mergedMaxLength, mergedErrorOnly);
   const isErrorLength = isNumber(mergedMaxLength) ? formatValue.length > mergedMaxLength : false;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.CompositionEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
     setInnerValue(value);
     onChange?.(value, e);
   };
@@ -267,6 +290,9 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
         onChange={handleChange}
         onFocus={internalFocus}
         onBlur={internalBlur}
+        onKeyDown={internalKeyDown}
+        onCompositionStart={internalCompositionStart}
+        onCompositionEnd={internalCompositionEnd}
       />
       {clearElement}
       {suffixElement}

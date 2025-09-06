@@ -1,4 +1,11 @@
-import type { CompositionEvent, FormEvent, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
+import type {
+  CompositionEvent,
+  FormEvent,
+  InputHTMLAttributes,
+  KeyboardEventHandler,
+  MouseEvent,
+  ReactNode,
+} from 'react';
 import type { LiteralUnion } from '../_util/type';
 import type { ConfigSize } from '../config-provider';
 
@@ -131,4 +138,5 @@ export interface InputProps
    * @description 输入内容变化时触发
    */
   onChange?: (value: string, e: FormEvent<HTMLInputElement> | MouseEvent | CompositionEvent<HTMLDivElement>) => void;
+  onEnter?: KeyboardEventHandler<HTMLInputElement>;
 }
