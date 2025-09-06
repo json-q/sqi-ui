@@ -14,6 +14,10 @@ group:
 
 <code src="./demos/base.tsx"></code>
 
+## 尺寸
+
+<code src="./demos/size.tsx"></code>
+
 ## 动态增删
 
 <code src="./demos/edit.tsx"></code>

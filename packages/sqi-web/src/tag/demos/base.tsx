@@ -9,7 +9,7 @@ export default function Demo() {
   };
 
   return (
-    <Space size="lg" align="start">
+    <Space size="lg">
       <Tag>default</Tag>
       <Tag bordered>bordered</Tag>
       <Tag icon={<CheckCircleFilledIcon />}>with icon</Tag>
