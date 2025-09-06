@@ -1,0 +1,135 @@
+@use '../../style/mixin' as *;
+
+// $tag-default-background-color: $bg-color-component;
+// $tag-default-border-color: transparent;
+// $tag-default-hover-color: $brand-color-hover;
+// $tag-default-click-color: $brand-color-active;
+// $tag-default-disabled-color: $brand-color-disabled;
+// $tag-checked-color: $text-color-anti;
+// $tag-checked-background-color: $brand-color;
+// $tag-check-hover-bg: $bg-color-component-hover;
+// $tag-checked-hover-bg: $brand-color-hover;
+// $tag-default-click-bg: $bg-color-component-active;
+
+// $tag-grey-hover-color: $bg-color-component-hover;
+// $tag-grey-outline-disabled-color: $bg-color-component-disabled;
+// $tag-grey-outline-hover-color: $brand-color-hover;
+
+// disabled
+// $tag-disabled-color: $text-color-disabled;
+// $tag-disabled-bg: $bg-color-component-disabled;
+
+// bold color
+// $tag-primary-color: $brand-color;
+// $tag-success-color: $success-color;
+// $tag-warning-color: $warning-color;
+// $tag-danger-color: $error-color;
+
+// light color
+// $tag-default-color-light: $bg-color-secondary-container;
+// $tag-primary-color-light: $brand-color-light;
+// $tag-success-color-light: $success-color-light;
+// $tag-warning-color-light: $warning-color-light;
+// $tag-error-color-light: $error-color-light;
+
+// border
+// $tag-outline-default-border-color: $component-border;
+// $tag-outline-primary-border-color: $tag-primary-color;
+// $tag-outline-success-border-color: $tag-success-color;
+// $tag-outline-warning-border-color: $tag-warning-color;
+// $tag-outline-danger-border-color: $tag-danger-color;
+
+// font size
+// $tag-sm-font: $font-sm;
+// $tag-md-font: $font-sm;
+// $tag-lg-font: $font-md;
+
+// padding
+// $tag-sm-padding: 0px $padding-xs;
+// $tag-md-padding: 0px $padding-sm;
+// $tag-lg-padding: 0px $padding-md;
+
+// text color
+// $tag-text-color: $text-color-anti;
+// $tag-default-text-color: $text-color-primary;
+
+// shape
+// $tag-border-radius-square: $border-radius-md;
+// $tag-border-radius-round: $border-radius-extra-lg;
+
+// width
+// $tag-default-border-width: 1px;
+
+// height
+// $tag-height-sm: $size-xxs;
+// $tag-height-md: $size-xs;
+// $tag-height-lg: $size-md;
+
+// icon
+// $tag-icon-size: calc($font-size-md - 2px);
+// $tag-close-icon-color: $text-color-placeholder;
+// $tag-close-icon-hover-color: $text-color-primary;
+// $tag-close-icon-color--dark: $font-white-2;
+// $tag-close-icon-hover-color--dark: $font-white-1;
+
+// link
+// $link-tag-hover-bg: $bg-color-component-hover;
+// $link-tag-hover-color: $brand-color;
+// $link-tag-active-bg: $bg-color-component-active;
+// $link-tag-active-color: $brand-color-active;
+
+// margin
+// $tag-icon-margin-right: $margin-xs;
+// $tag-close-icon-margin-right: $margin-sm;
+// $check-tag-margin-left: $margin-sm;
+
+$tag-size: (
+  sm: (
+    padding: 0px $padding-xs,
+    font: $font-sm,
+    height: $size-xxs,
+  ),
+  md: (
+    padding: 0px $padding-sm,
+    font: $font-sm,
+    height: $size-xs,
+  ),
+  lg: (
+    padding: 0px $padding-xs,
+    font: $font-md,
+    height: $size-md,
+  ),
+);
+
+// tag color
+$tag-default-bg-color: $bg-color-secondary-container;
+$tag-default-text-color: $text-color-primary;
+$tag-default-border-color: $component-border;
+$tag-custom-color: $text-color-anti;
+$tag-custom-color-close-icon: $font-white-2;
+$tag-custom-color-close-icon-hover: $font-white-1;
+
+// left icon
+$tag-icon-size: calc($font-size-md + 2px);
+$tag-close-icon-color: $text-color-placeholder;
+$tag-icon-mr: $margin-xs;
+
+// close(right) icon
+$tag-close-icon-ml: $margin-sm;
+$tag-close-icon-color: $text-color-placeholder;
+$tag-close-icon-hover-color: $text-color-primary;
+
+// // size-padding
+// $tag-padding-sm: 0px $padding-xs;
+// $tag-padding-md: 0px $padding-sm;
+// $tag-padding-lg: 0px $padding-md;
+
+// // size-font
+// $tag-font-sm: $font-sm;
+// $tag-font-md: $font-sm;
+// $tag-font-lg: $font-md;
+
+// height
+// $tag-height-sm: $size-xxs;
+// $tag-height-md: $size-xs;
+// $tag-height-lg: $size-md;

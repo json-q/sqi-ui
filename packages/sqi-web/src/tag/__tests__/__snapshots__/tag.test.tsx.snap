@@ -1,0 +1,175 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Tag > should apply custom className 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md custom-class"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should apply custom style 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+  style="color: red;"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should get size from context 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-lg"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should handle click events 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should not be closable by default 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should not hide if close event is prevented 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag
+  <span
+    aria-label="close"
+    class="sqi-icon sqi-tag-close-icon"
+    role="img"
+  >
+    <svg
+      aria-hidden="true"
+      fill="none"
+      focusable="false"
+      height="1em"
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7.04996 5.63599L11.9997 10.5857L16.9494 5.63599L18.3637 7.0502L13.4139 11.9999L18.3637 16.9497L16.9494 18.3639L11.9997 13.4142L7.04996 18.3639L5.63574 16.9497L10.5855 11.9999L5.63574 7.0502L7.04996 5.63599Z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+</span>
+`;
+
+exports[`Tag > should render close icon when closable is true 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag
+  <span
+    aria-label="close"
+    class="sqi-icon sqi-tag-close-icon"
+    role="img"
+  >
+    <svg
+      aria-hidden="true"
+      fill="none"
+      focusable="false"
+      height="1em"
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7.04996 5.63599L11.9997 10.5857L16.9494 5.63599L18.3637 7.0502L13.4139 11.9999L18.3637 16.9497L16.9494 18.3639L11.9997 13.4142L7.04996 18.3639L5.63574 16.9497L10.5855 11.9999L5.63574 7.0502L7.04996 5.63599Z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+</span>
+`;
+
+exports[`Tag > should render correctly 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag Text
+</span>
+`;
+
+exports[`Tag > should render custom close icon 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag
+  <span
+    class="sqi-tag-close-icon"
+    data-testid="custom-close"
+  >
+    x
+  </span>
+</span>
+`;
+
+exports[`Tag > should render with border 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md sqi-tag-bordered"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should render with color 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md sqi-tag-has-color"
+  style="background-color: red;"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should render with different sizes 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should render with different sizes 2`] = `
+<span
+  class="sqi-tag sqi-tag-size-lg"
+>
+  Tag
+</span>
+`;
+
+exports[`Tag > should render with icon 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+>
+  <span
+    data-testid="tag-icon"
+  >
+    icon
+  </span>
+  Tag
+</span>
+`;
+
+exports[`Tag > should render with title 1`] = `
+<span
+  class="sqi-tag sqi-tag-size-md"
+  title="Tag Title"
+>
+  Tag
+</span>
+`;

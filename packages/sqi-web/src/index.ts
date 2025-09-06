@@ -9,5 +9,6 @@ export * from './popup';
 export * from './radio';
 export * from './space';
 export * from './switch';
+export * from './tag';
 export * from './tooltip';
 export * from './trigger';
