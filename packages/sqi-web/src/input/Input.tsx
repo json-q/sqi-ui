@@ -1,5 +1,4 @@
 import React, { forwardRef, useContext, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import type { FocusEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import { useMergeProps, useMergeState } from '@sqi-ui/hooks';
 import { isFunction, isNumber, isObject, isString, isUndefined } from '@sqi-ui/utils';
@@ -58,6 +57,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
     visibilityToggle,
     maxLength,
     tips,
+    composing,
     onKeyDown,
     onFocus,
     onBlur,
@@ -83,13 +83,13 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   // =========== Input Events Handler ============
   const [isFocused, toggleIsFocused] = useState(false);
 
-  const internalFocus = (e: FocusEvent<HTMLInputElement, Element>) => {
+  const internalFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     if (disabled || readOnly) return;
     toggleIsFocused(true);
     onFocus?.(e);
   };
 
-  const internalBlur = (e: FocusEvent<HTMLInputElement, Element>) => {
+  const internalBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     if (disabled || readOnly) return;
     toggleIsFocused(false);
     onBlur?.(e);
@@ -101,7 +101,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   };
 
   const internalCompositionStart = (e: React.CompositionEvent<HTMLInputElement>) => {
-    composingRef.current = true;
+    if (composing) composingRef.current = true;
     onCompositionStart?.(e);
   };
 
@@ -126,7 +126,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.CompositionEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     setInnerValue(value);
-    onChange?.(value, e);
+    !composingRef.current && onChange?.(value, e);
   };
 
   const handleClickInputWrapper = () => {
@@ -200,7 +200,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
   // =========== Input Suffix ============
   const isPassword = type === 'password';
 
-  const suffixBaseElement: ReactNode = useMemo(() => {
+  const suffixBaseElement: React.ReactNode = useMemo(() => {
     if (!isPassword) return suffix;
     if (isObject(visibilityToggle) && isFunction(visibilityToggle.renderIcon)) {
       return visibilityToggle.renderIcon(renderType === 'text');
@@ -214,7 +214,7 @@ const Input = forwardRef<InputRef, InputProps>((baseProps, ref) => {
 
   // fix: rerender 会重新渲染 `InputGroupWrapper`，导致无法正常聚焦失焦
   const InputGroupWrapper = useMemo(() => {
-    return function GroupWrapper({ children }: { children: ReactNode }) {
+    return function GroupWrapper({ children }: { children: React.ReactNode }) {
       const hasCoreWrapper = addonBefore || addonAfter;
 
       let content = children;
