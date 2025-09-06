@@ -1,0 +1,36 @@
+@use '../../style/mixin' as *;
+
+$tag-size: (
+  sm: (
+    padding: 0px $padding-xs,
+    font: $font-sm,
+    height: $size-xxs,
+  ),
+  md: (
+    padding: 0px $padding-sm,
+    font: $font-sm,
+    height: $size-xs,
+  ),
+  lg: (
+    padding: 0px $padding-xs,
+    font: $font-md,
+    height: $size-md,
+  ),
+);
+
+// tag color
+$tag-default-bg-color: $bg-color-secondary-container;
+$tag-default-text-color: $text-color-primary;
+$tag-default-border-color: $component-border;
+$tag-custom-color: $text-color-anti;
+$tag-custom-color-close-icon: $font-white-2;
+$tag-custom-color-close-icon-hover: $font-white-1;
+
+// left icon
+$tag-icon-size: calc($font-size-md + 2px);
+$tag-close-icon-color: $text-color-placeholder;
+$tag-icon-mr: $margin-xs;
+
+// close(right) icon
+$tag-close-icon-ml: $margin-sm;
+$tag-close-icon-hover-color: $text-color-primary;

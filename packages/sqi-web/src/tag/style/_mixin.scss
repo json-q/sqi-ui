@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use '../../style/mixin' as *;
+@use './var' as *;
+
+$module: #{$prefix}-tag;
+
+@mixin tag-size($size) {
+  $map-size: map.get($tag-size, $size);
+
+  &.#{$module}-size-#{$size} {
+    font: map.get($map-size, 'font');
+    height: map.get($map-size, 'height');
+    padding: map.get($map-size, 'padding');
+  }
+}

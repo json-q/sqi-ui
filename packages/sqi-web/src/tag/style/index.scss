@@ -1,0 +1,62 @@
+@use 'sass:map';
+@use '../../style/mixin' as *;
+@use './var' as *;
+@use './mixin' as *;
+
+$module: #{$prefix}-tag;
+
+.#{$module} {
+  @include reset;
+
+  display: inline-flex;
+  align-items: center;
+  border-radius: $border-radius-md;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  white-space: nowrap;
+
+  color: $tag-default-text-color;
+  background-color: $tag-default-bg-color;
+
+  &.#{$module}-has-color {
+    color: $tag-custom-color;
+
+    .#{$module}-close-icon {
+      color: $tag-custom-color-close-icon;
+
+      &:hover {
+        color: $tag-custom-color-close-icon-hover;
+      }
+    }
+  }
+
+  &.#{$module}-bordered {
+    border-color: $tag-default-border-color;
+  }
+
+  .#{$prefix}-icon {
+    margin-right: $tag-icon-mr;
+    width: $tag-icon-size;
+    height: $tag-icon-size;
+  }
+
+  // 增加权重
+  & &-close-icon {
+    margin-right: 0;
+    margin-left: $tag-close-icon-ml;
+    color: $tag-close-icon-color;
+    font: $font-md;
+    cursor: pointer;
+    transition: color $anim-duration-base $anim-time-fn-easing;
+
+    &:hover {
+      color: $tag-close-icon-hover-color;
+    }
+  }
+
+  // size
+  @include tag-size('sm');
+  @include tag-size('md');
+  @include tag-size('lg');
+}
