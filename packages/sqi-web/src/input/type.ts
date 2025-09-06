@@ -138,5 +138,8 @@ export interface InputProps
    * @description 输入内容变化时触发
    */
   onChange?: (value: string, e: FormEvent<HTMLInputElement> | MouseEvent | CompositionEvent<HTMLDivElement>) => void;
+  /**
+   * @description 键盘回车事件
+   */
   onEnter?: KeyboardEventHandler<HTMLInputElement>;
 }
