@@ -1,4 +1,11 @@
-import type { CompositionEvent, FormEvent, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
+import type {
+  ChangeEvent,
+  CompositionEvent,
+  InputHTMLAttributes,
+  KeyboardEventHandler,
+  MouseEvent,
+  ReactNode,
+} from 'react';
 import type { LiteralUnion } from '../_util/type';
 import type { ConfigSize } from '../config-provider';
 
@@ -130,5 +137,16 @@ export interface InputProps
   /**
    * @description 输入内容变化时触发
    */
-  onChange?: (value: string, e: FormEvent<HTMLInputElement> | MouseEvent | CompositionEvent<HTMLDivElement>) => void;
+  onChange?: (
+    value: string,
+    e: ChangeEvent<HTMLInputElement> | MouseEvent | CompositionEvent<HTMLInputElement>,
+  ) => void;
+  /**
+   * @description 键盘回车事件
+   */
+  onEnter?: KeyboardEventHandler<HTMLInputElement>;
+  /**
+   * @description IME 输入中文的过程中是否使用合成事件避免不必要的触发 onChange
+   */
+  composing?: boolean;
 }
