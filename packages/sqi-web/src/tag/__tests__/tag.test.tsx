@@ -64,7 +64,7 @@ describe('Tag', () => {
     const { container } = render(<Tag color="red">Tag</Tag>);
 
     expect(container.firstChild).toHaveClass('sqi-tag-has-color');
-    expect((container.firstChild as HTMLSpanElement).getAttribute('style')).toContain('color: red');
+    expect((container.firstChild as HTMLSpanElement).getAttribute('style')).toContain('background-color: red');
     expect(container.firstChild).toMatchSnapshot();
   });
 

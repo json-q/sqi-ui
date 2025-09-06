@@ -8,7 +8,7 @@ import { CloseIcon } from '@sqi-ui/icons';
 
 const defaultProps: TagProps = {};
 
-const Tag = forwardRef<HTMLDivElement, TagProps>((baseProps, ref) => {
+const Tag = forwardRef<HTMLSpanElement, TagProps>((baseProps, ref) => {
   const { prefixCls, size: ctxSize = 'md', componentConfig } = useContext(ConfigContext);
   const {
     children,
@@ -56,7 +56,10 @@ const Tag = forwardRef<HTMLDivElement, TagProps>((baseProps, ref) => {
     if (isValidElement(closable)) {
       return cloneElement(closable as any, {
         className: closeCls,
-        onClick: onInnerClose,
+        onClick: (e: React.MouseEvent<HTMLElement>) => {
+          (closable as any).props.onClick?.(e);
+          if (!e.defaultPrevented) onInnerClose(e);
+        },
       });
     }
     return <CloseIcon onClick={onInnerClose} className={closeCls} />;
@@ -65,7 +68,6 @@ const Tag = forwardRef<HTMLDivElement, TagProps>((baseProps, ref) => {
   if (innerVisible === false) return null;
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: <explanation> ignore
     <span
       {...restProps}
       ref={ref}
@@ -73,6 +75,9 @@ const Tag = forwardRef<HTMLDivElement, TagProps>((baseProps, ref) => {
       className={classes}
       style={{ ...style, backgroundColor: color }}
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      aria-label="close"
     >
       {icon}
       {children}
