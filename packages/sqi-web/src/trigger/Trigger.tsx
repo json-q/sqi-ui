@@ -223,7 +223,7 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
 
   return (
     <>
-      <ResizeObserverRect ref={referenceRef} onResize={() => asyncUpdatePosition()}>
+      <ResizeObserverRect ref={referenceRef} onResize={asyncUpdatePosition}>
         {cloneElement(children as any, {
           ...genTriggerProps(children),
         })}

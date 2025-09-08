@@ -1,10 +1,10 @@
 'use client';
 import React, { forwardRef, useContext } from 'react';
-import type { TooltipProps } from './type';
-import Popup from '../popup';
-import { ConfigContext } from '../config-provider/context';
-import { useMergeProps } from '@sqi-ui/hooks';
 import clsx from 'clsx';
+import { useMergeProps } from '@sqi-ui/hooks';
+import { ConfigContext } from '../config-provider/context';
+import Popup from '../popup';
+import type { TooltipProps } from './type';
 
 const defaultProps: TooltipProps = {
   theme: 'default',

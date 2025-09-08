@@ -1,10 +1,10 @@
 'use client';
 import React, { cloneElement, forwardRef, isValidElement, useContext, useState } from 'react';
-import type { TagProps } from './type';
-import { ConfigContext } from '../config-provider/context';
-import { useMergeProps } from '@sqi-ui/hooks';
 import clsx from 'clsx';
+import { useMergeProps } from '@sqi-ui/hooks';
 import { CloseIcon } from '@sqi-ui/icons';
+import { ConfigContext } from '../config-provider/context';
+import type { TagProps } from './type';
 
 const defaultProps: TagProps = {};
 

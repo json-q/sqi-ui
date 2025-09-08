@@ -77,9 +77,10 @@ const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
 
   const nodes = flatChildren.map<ReactNode>((item, index) => {
     const isLastChildren = index === flatChildren.length - 1;
+    const itemKey = (item as React.ReactElement)?.key || `space-item-${index.toString()}`;
 
     return (
-      <Fragment key={`space-item-${index.toString()}`}>
+      <Fragment key={itemKey}>
         <div className="space-item" style={renderItemStyle(isLastChildren)}>
           {item}
         </div>

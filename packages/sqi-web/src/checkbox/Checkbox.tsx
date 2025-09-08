@@ -1,3 +1,4 @@
+'use client';
 import React, { forwardRef, useContext, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import { useMergeProps, usePrevious } from '@sqi-ui/hooks';
