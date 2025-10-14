@@ -16,8 +16,8 @@ export function getClipMinBoundaryClientRect(boundary: Array<Element | Window>) 
   }, clipBoundary[0]);
 
   return rectToClientRect({
-    width: clipRect.right - clipRect.left,
-    height: clipRect.bottom - clipRect.top,
+    width: Math.max(0, clipRect.right - clipRect.left),
+    height: Math.max(0, clipRect.bottom - clipRect.top),
     x: clipRect.left,
     y: clipRect.top,
   });

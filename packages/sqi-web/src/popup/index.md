@@ -77,7 +77,7 @@ group:
 
 | 属性 | 描述 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| direction | popper 位置 | `TriggerPlacement` | `top` |
+| placement | popper 位置 | `TriggerPlacement` | `top` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
 | zIndex | popper 元素层级 | `number` | `1` |

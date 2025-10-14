@@ -51,7 +51,7 @@ group:
 | popper | 悬浮元素 | `ReactElement` | - |
 | arrow | 箭头元素 | `ReactElement` | - |
 | motion | 动画 props 继承自 [react-transition-state](https://szhsin.github.io/react-transition-state) | `Omit<CSSMotionProps, 'children'>` | - |
-| direction | popper 位置 | `TriggerPlacement` | `bottom` |
+| placement | popper 位置 | `TriggerPlacement` | `bottom` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
 | offset | popper 偏移量 | `number \| [mainAxis: number, crossAxis: number]` | `0` |
