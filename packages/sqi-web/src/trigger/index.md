@@ -16,20 +16,13 @@ group:
 
 ## Popper 定位
 
-实现一个 popper.js 的基础功能（逻辑实现并不优雅，且诸多情况未考虑，比如 `table th tr` 下的定位父元素，css `will-change transform` 等的定位父元素）
-
-目前采取把箭头相对于 popper 定位，进行小范围偏移可以减少非常多逻辑代码
-
-后续可能会对定位功能进行重写，如果有能力重写的话，I am very vegetable :)
+实现一个 popper.js 核心功能的组件，如果需要更多高度定制化的需求，请使用 [floating-ui](https://floating-ui.com)
 
 <code src="./demos/popper.tsx"></code>
 
 注意：
 
-- 当 `direction` 的主轴处于 `top` 和 `bottom` 时，`offset` **仅 y 轴** 的偏移可工作
-- 当 `direction` 的主轴处于 `left` 和 `right` 时，`offset` **仅 x 轴** 的偏移可工作。
-
-> Why? 当同时支持 x y 轴的偏移，由于直接对 popper 本身设置了偏移，在计算边界时则会对此偏移进行值累加，最终会导致边缘检测出现明显的误差（也不是误差，而是此时 popper 的边缘检测看上去会很奇怪）
+当设置 `offset` 属性时，如果设置成 `number`，则会根据主轴所在方向自动偏移**主轴**所在的距离，如果想要同时偏移主轴和副轴，请使用 `offset` 元组 `[number,number]`
 
 ## 触发行为
 
@@ -61,7 +54,7 @@ group:
 | direction | popper 位置 | `TriggerPlacement` | `bottom` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
-| offset | popper 偏移量 | `number \| { x: number; y: number }` | `0` |
+| offset | popper 偏移量 | `number \| [mainAxis: number, crossAxis: number]` | `0` |
 | zIndex | popper 元素层级 | `number` | `1` |
 | getContainer | 指定 popper 挂载的位置 | `() => HTMLElement` | `document.body` |
 | trigger | 触发方式 | `TriggerType` | `"hover"` |

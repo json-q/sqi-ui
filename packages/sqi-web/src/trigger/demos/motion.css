@@ -10,10 +10,6 @@
   transform: scale(0.8);
 }
 
-/* .sqi-demo-trigger-motion.sqi-demo-trigger-motion-entered {
-  opacity: 1;
-} */
-
 .sqi-demo-trigger-motion.sqi-demo-trigger-motion-exited {
   display: none;
 }
