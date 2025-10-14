@@ -51,7 +51,7 @@ export interface TriggerProps {
    * @description popper 偏移量
    * @default 0
    */
-  offset?: number | { x: number; y: number };
+  offset?: number | [mainAxis: number, crossAxis: number];
   /**
    * @description popper 元素层级
    * @default 1

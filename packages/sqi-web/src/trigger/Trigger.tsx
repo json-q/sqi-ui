@@ -1,14 +1,5 @@
 'use client';
-import React, {
-  cloneElement,
-  forwardRef,
-  isValidElement,
-  useCallback,
-  useContext,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
+import * as React from 'react';
 import clsx from 'clsx';
 import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
 
@@ -20,10 +11,16 @@ import { supportNodeRef, useComposeRef } from '../_util/ref';
 import { ConfigContext } from '../config-provider/context';
 
 import useTrigger from './hooks/useTrigger';
-import { computedPosition } from './utils';
-import { collectScrollParentList, type ElementCollection } from './utils/collectScrollParentList';
-import debounce from './utils/debounce';
 import type { TriggerProps } from './type';
+import {
+  computePosition,
+  flip,
+  shift,
+  offset as offsetMiddleware,
+  arrow as arrowMiddleware,
+  autoUpdate,
+  raf,
+} from './lite-position';
 
 const defaultProps: TriggerProps = {
   placement: 'bottom',
@@ -38,21 +35,20 @@ const defaultProps: TriggerProps = {
 };
 
 const basePositionStyle: React.CSSProperties = {
-  position: 'absolute',
+  position: 'fixed',
   top: 0,
   left: 0,
   bottom: 'auto',
   right: 'auto',
   margin: 0,
-  willChange: 'transform',
 };
 
-const popperStyle = { ...basePositionStyle };
+const popperStyle: React.CSSProperties = { ...basePositionStyle, willChange: 'transform' };
 
-const arrowStyle = { ...basePositionStyle };
+const arrowStyle: React.CSSProperties = { ...basePositionStyle, willChange: 'top,left' };
 
-const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
-  const { componentConfig } = useContext(ConfigContext);
+const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
+  const { componentConfig, prefixCls } = React.useContext(ConfigContext);
   const {
     className,
     children,
@@ -75,14 +71,21 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
 
-  const isElementChild = isValidElement(children);
+  const isElementChild = React.isValidElement(children);
 
-  const referenceRef = useRef<HTMLDivElement>(null);
-  const arrowRef = useRef<HTMLDivElement>(null);
+  // ============== Element State =================
+  const [referenceEl, setReferenceEl] = React.useState<HTMLElement | null>(null);
+  const [rootPopperEl, setRootPopperEl] = React.useState<HTMLElement | null>(null);
+  const [arrowEl, setArrowEl] = React.useState<HTMLElement | null>(null);
+
+  // ============== Element Ref =================
   const originPopperRef = getReactNodeRef(popper);
-  const popperRef = useRef<HTMLDivElement>(null);
+  const popperRef = React.useRef<HTMLElement>(null);
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
-  const motionRef = useRef<CSSMotionInstance>(null);
+
+  // ============== Handle Ref =================
+  const motionRef = React.useRef<CSSMotionInstance>(null);
+  const cleanup = React.useRef<() => void>(null);
 
   const [innerVisible, setInnerVisible] = useMergeState(false, {
     defaultValue: defaultVisible,
@@ -97,11 +100,15 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     visible: innerVisible,
     onVisibleChange: setInnerVisible,
     trigger,
-    triggerEl: referenceRef.current,
+    triggerEl: referenceEl,
     outFocusToClose,
   });
 
-  useImperativeHandle(ref, () => referenceRef.current as HTMLElement);
+  React.useImperativeHandle(ref, () => ({
+    reference: referenceEl,
+    popper: popperRef.current,
+    rootPopper: rootPopperEl,
+  }));
 
   // =============== Warning ===============
   const canUseChildrenRef = supportNodeRef(children);
@@ -119,52 +126,51 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     }
   }
 
-  // ======================== Position Update ===========================
-  const updatePosition = useCallback(
-    (e?: Event) => {
-      if (e && e.type !== 'resize' && !(e.target as Node)?.contains(referenceRef.current)) return;
+  const updatePosition = React.useCallback(() => {
+    if (!referenceEl || !rootPopperEl) return;
 
-      computedPosition(
-        { reference: referenceRef.current, popper: popperRef.current, arrow: arrowRef.current },
-        { placement: placement!, enableFlip, enableShift, offset },
-      );
-    },
-    [placement, enableFlip, enableShift, offset],
-  );
+    const {
+      middlewareData,
+      x,
+      y,
+      placement: latestPlacement,
+      rects,
+    } = computePosition(referenceEl, rootPopperEl!, {
+      placement: placement,
+      middleware: [
+        enableShift ? shift() : undefined,
+        arrowMiddleware({ element: arrowEl }),
+        offsetMiddleware({ offset: offset }),
+        enableFlip ? flip() : undefined,
+      ],
+    });
 
-  const [scrollParents, setScrollParents] = useState<ElementCollection>([]);
+    rootPopperEl.style.transform = `translate(${x}px, ${y}px)`;
+    rootPopperEl.setAttribute('data-trigger-placement', latestPlacement);
+    rootPopperEl.style.setProperty('--reference-width', `${rects.reference.width}px`);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation> `updatePosition` need props effect
-  const asyncUpdatePosition = useCallback(
-    debounce<any>(() => {
-      return new Promise<any>((resolve) => {
-        updatePosition();
-        resolve(undefined);
+    if (arrowEl) {
+      arrowEl.style.top = `${middlewareData.arrow!.y}px`;
+      arrowEl.style.left = `${middlewareData.arrow!.x}px`;
+    }
+  }, [placement, referenceEl, rootPopperEl, arrowEl, enableFlip, enableShift, offset]);
+
+  const registerListener = React.useCallback(() => {
+    cleanup.current?.();
+    if (referenceEl && rootPopperEl) {
+      cleanup.current = autoUpdate({
+        update: () => raf(updatePosition),
+        elements: { reference: referenceEl, popper: rootPopperEl },
       });
-    }),
-    [placement, enableFlip, enableShift, offset],
-  );
+    }
+  }, [updatePosition, referenceEl, rootPopperEl]);
 
   useIsomorphicLayoutEffect(() => {
-    const referenceParents = collectScrollParentList(referenceRef.current);
-    const popperParents = collectScrollParentList(popperRef.current);
-    const scrollParents = [...referenceParents, ...popperParents];
-    setScrollParents(scrollParents);
-  }, []);
+    updatePosition();
+    registerListener();
 
-  const registerListener = () => {
-    scrollParents.forEach((scrollParent) => {
-      scrollParent.addEventListener('scroll', asyncUpdatePosition, { passive: true });
-    });
-    window.addEventListener('resize', asyncUpdatePosition, { passive: true });
-  };
-
-  const cleanListener = () => {
-    scrollParents.forEach((scrollParent) => {
-      scrollParent.removeEventListener('scroll', asyncUpdatePosition);
-    });
-    window.removeEventListener('resize', asyncUpdatePosition);
-  };
+    return () => cleanup.current?.();
+  }, [updatePosition, registerListener]);
 
   useIsomorphicLayoutEffect(() => {
     if (innerVisible === undefined) return;
@@ -172,23 +178,17 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
     // 只有当展示时才注册监听事件，不展示后移除
     if (innerVisible === true) {
       motionRef.current?.toggle(true);
-      asyncUpdatePosition();
-      registerListener();
+      // 推迟到下一帧执行，不然位置计算有偏差
+      raf(() => {
+        updatePosition();
+        registerListener();
+      });
     } else if (innerVisible === false) {
       motionRef.current?.toggle(false);
-      cleanListener();
+      // 隐藏时不再监听
+      cleanup.current?.();
     }
-  }, [innerVisible]);
-
-  useIsomorphicLayoutEffect(() => {
-    if (!innerVisible) return;
-
-    asyncUpdatePosition();
-    cleanListener();
-    registerListener();
-
-    return () => cleanListener();
-  }, [placement, innerVisible, scrollParents, enableFlip, enableShift, offset]);
+  }, [innerVisible, updatePosition, registerListener]);
 
   if (!isElementChild) return;
 
@@ -200,19 +200,23 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
         {({ className: motionCls }) => {
           return (
             <Portal getContainer={getContainer}>
+              {/* position wrapper */}
               <div
-                role="tooltip"
                 {...genPopupProps()}
-                className={clsx(motionCls, className)}
+                ref={setRootPopperEl}
+                className={`${prefixCls}-trigger`}
                 style={{ ...popperStyle, zIndex }}
               >
-                {arrow ? (
-                  <div ref={arrowRef} style={{ ...arrowStyle, zIndex }}>
-                    {arrow}
-                  </div>
-                ) : null}
+                {/* motion wrapper */}
+                <div role="tooltip" className={clsx(motionCls, className)}>
+                  {arrow ? (
+                    <div ref={setArrowEl} style={{ ...arrowStyle, zIndex }}>
+                      {arrow}
+                    </div>
+                  ) : null}
 
-                {cloneElement(popper as any, { ref: mergedPopperRef })}
+                  {React.cloneElement(popper as any, { ref: mergedPopperRef })}
+                </div>
               </div>
             </Portal>
           );
@@ -223,8 +227,8 @@ const Trigger = forwardRef<HTMLElement, TriggerProps>((baseProps, ref) => {
 
   return (
     <>
-      <ResizeObserverRect ref={referenceRef} onResize={asyncUpdatePosition}>
-        {cloneElement(children as any, {
+      <ResizeObserverRect ref={setReferenceEl} onResize={() => raf(updatePosition)}>
+        {React.cloneElement(children as any, {
           ...genTriggerProps(children),
         })}
       </ResizeObserverRect>

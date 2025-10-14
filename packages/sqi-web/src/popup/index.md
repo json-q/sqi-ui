@@ -54,7 +54,7 @@ group:
 
 设置 `styles.content` 或者 `classNames.content` 来设置内容样式
 
-如果需要设置与触发元素等宽的弹出层宽度，则设置 `styles.content` 为 `{ width: 'var(--reference-x)' }` 即可。
+如果需要设置与触发元素等宽的弹出层宽度，则设置 `styles.content` 为 `{ width: 'var(--reference-width)' }` 即可。
 
 <code src="./demos/styles.tsx"></code>
 
@@ -77,7 +77,7 @@ group:
 
 | 属性 | 描述 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| direction | popper 位置 | `TriggerPlacement` | `top` |
+| placement | popper 位置 | `TriggerPlacement` | `top` |
 | enableFlip | 开启自动翻转 | `boolean` | `true` |
 | enableShift | 开启自动位移 | `boolean` | `true` |
 | zIndex | popper 元素层级 | `number` | `1` |

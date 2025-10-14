@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trigger, Radio, Divider, Space, Input, Checkbox } from '@sqi-ui/web';
+import { Trigger, Radio, Divider, Input, Checkbox } from '@sqi-ui/web';
 import type { RadioChangeEvent, TriggerPlacement, CheckboxValue } from '@sqi-ui/web';
 import { Component } from './_wrapper';
 import styles from './demo.module.css';
@@ -23,8 +23,7 @@ export default function Demo() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [placement, setPlacement] = React.useState<TriggerPlacement>('bottom');
   const [detectEdge, setDetectEdge] = React.useState<string[]>(['flip', 'shift']);
-  const [offsetX, setOffsetX] = React.useState<string>();
-  const [offsetY, setOffsetY] = React.useState<string>();
+  const [offset, setOffset] = React.useState<string>();
   const [showArrow, setShowArrow] = React.useState(true);
 
   React.useLayoutEffect(() => {
@@ -47,7 +46,7 @@ export default function Demo() {
             visible
             enableFlip={detectEdge.includes('flip')}
             enableShift={detectEdge.includes('shift')}
-            offset={{ x: Number(offsetX), y: Number(offsetY) }}
+            offset={offset ? Number(offset) : undefined}
             placement={placement}
             getContainer={() => containerRef.current}
             arrow={showArrow ? <div style={{ width: 12, height: 12, backgroundColor: 'red' }}></div> : undefined}
@@ -77,20 +76,7 @@ export default function Demo() {
       </Checkbox>
 
       <Divider style={{ margin: '8px 0' }} text="Offset" align="left" />
-      <Space>
-        <Input
-          prefix="offsetX"
-          value={offsetX}
-          onChange={setOffsetX}
-          disabled={placement.startsWith('top') || placement.startsWith('bottom')}
-        />
-        <Input
-          prefix="offsetY"
-          value={offsetY}
-          onChange={setOffsetY}
-          disabled={placement.startsWith('left') || placement.startsWith('right')}
-        />
-      </Space>
+      <Input prefix="offsetValue" value={offset} onChange={setOffset} placeholder="Please enter offset value" />
     </>
   );
 }
