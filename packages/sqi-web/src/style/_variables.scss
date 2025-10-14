@@ -223,6 +223,7 @@ $shadow-3-inset: $shadow-3, $shadow-inset;
 $anim-time-fn-easing: cubic-bezier(0.38, 0, 0.24, 1);
 $anim-time-fn-ease-out: cubic-bezier(0, 0, 0.15, 1);
 $anim-time-fn-ease-in: cubic-bezier(0.82, 0, 1, 0.9);
+$anim-duration-fast: 0.16s;
 $anim-duration-base: 0.2s;
 $anim-duration-moderate: 0.24s;
 $anim-duration-slow: 0.28s;

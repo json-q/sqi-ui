@@ -46,13 +46,13 @@ $trigger-module: #{$prefix}-trigger;
 
     &.#{$module}-motion-preEnter {
       opacity: 0;
-      transform: scale(0.6);
+      transform: scale($popup-flow-transition-scale);
     }
 
     &.#{$module}-motion-exiting {
       transition: $popup-flow-transition-leave;
       opacity: 0;
-      transform: scale(0.6);
+      transform: scale($popup-flow-transition-scale);
     }
 
     &.#{$module}-motion-exited {

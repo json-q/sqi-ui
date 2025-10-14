@@ -166,8 +166,6 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
   }, [updatePosition, referenceEl, rootPopperEl]);
 
   useIsomorphicLayoutEffect(() => {
-    cleanup.current?.();
-
     updatePosition();
     registerListener();
 
