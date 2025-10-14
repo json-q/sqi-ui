@@ -1,15 +1,18 @@
 .sqi-demo-trigger-motion {
-  transition: opacity 0.25s ease-in-out;
+  transition:
+    transform 150ms ease-in-out,
+    opacity 150ms ease-in-out;
 }
 
 .sqi-demo-trigger-motion.sqi-demo-trigger-motion-preEnter,
 .sqi-demo-trigger-motion.sqi-demo-trigger-motion-exiting {
   opacity: 0;
+  transform: scale(0.8);
 }
 
-.sqi-demo-trigger-motion.sqi-demo-trigger-motion-entered {
+/* .sqi-demo-trigger-motion.sqi-demo-trigger-motion-entered {
   opacity: 1;
-}
+} */
 
 .sqi-demo-trigger-motion.sqi-demo-trigger-motion-exited {
   display: none;
