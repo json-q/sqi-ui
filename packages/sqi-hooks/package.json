@@ -1,6 +1,7 @@
 {
   "name": "@sqi-ui/hooks",
   "version": "0.0.1",
+  "type": "module",
   "description": "",
   "main": "lib/index.js",
   "types": "es/index.d.ts",
