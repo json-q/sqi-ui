@@ -3,23 +3,13 @@ import type { ClientRectObject } from '../type';
 import getBoundingClientRect from './getBoundingClientRect';
 import rectToClientRect from './rectToClientRect';
 
-export function getClipMinBoundaryClientRect(boundary: Array<Element | Window>) {
-  const clipBoundary = boundary.map((el) => getInnerBoundingClientRect(el));
-
-  const clipRect = clipBoundary.reduce((accRect, rect) => {
-    accRect.top = Math.max(rect.top, accRect.top);
-    accRect.right = Math.min(rect.right, accRect.right);
-    accRect.bottom = Math.min(rect.bottom, accRect.bottom);
-    accRect.left = Math.max(rect.left, accRect.left);
-
-    return accRect;
-  }, clipBoundary[0]);
-
+export function getClipMinBoundaryClientRect(boundary: Element | Window) {
+  const rect = getInnerBoundingClientRect(boundary);
   return rectToClientRect({
-    width: Math.max(0, clipRect.right - clipRect.left),
-    height: Math.max(0, clipRect.bottom - clipRect.top),
-    x: clipRect.left,
-    y: clipRect.top,
+    width: Math.max(0, rect.right - rect.left),
+    height: Math.max(0, rect.bottom - rect.top),
+    x: rect.left,
+    y: rect.top,
   });
 }
 
@@ -27,10 +17,11 @@ function getInnerBoundingClientRect(element: Element | Window): ClientRectObject
   const rect = { ...EMPTYRect };
 
   if (element instanceof Window) {
-    rect.width = element.document.documentElement.clientWidth;
-    rect.height = element.document.documentElement.clientHeight;
-    rect.x = element.visualViewport?.offsetLeft || 0;
-    rect.y = element.visualViewport?.offsetTop || 0;
+    const vv = element.visualViewport;
+    rect.width = vv?.width ?? element.document.documentElement.clientWidth;
+    rect.height = vv?.height ?? element.document.documentElement.clientHeight;
+    rect.x = vv?.offsetLeft ?? 0;
+    rect.y = vv?.offsetTop ?? 0;
   } else {
     const clientRect = getBoundingClientRect(element);
     const top = clientRect.top + element.clientTop;
