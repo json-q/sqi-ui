@@ -156,7 +156,7 @@ exports[`Radio > should trigger onChange in group 1`] = `
       <input
         checked=""
         class="sqi-radio-input"
-        name="«r1»"
+        name="_r_1_"
         type="radio"
         value="1"
       />
@@ -178,7 +178,7 @@ exports[`Radio > should trigger onChange in group 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r1»"
+        name="_r_1_"
         type="radio"
         value="2"
       />
@@ -207,7 +207,7 @@ exports[`Radio > should work in group 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r0»"
+        name="_r_0_"
         type="radio"
         value="1"
       />
@@ -230,7 +230,7 @@ exports[`Radio > should work in group 1`] = `
       <input
         checked=""
         class="sqi-radio-input"
-        name="«r0»"
+        name="_r_0_"
         type="radio"
         value="2"
       />

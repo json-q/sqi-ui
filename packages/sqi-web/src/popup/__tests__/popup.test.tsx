@@ -6,7 +6,7 @@ import Popup from '../Popup';
 describe('Popup', () => {
   test('should render correctly with hover', async () => {
     const { container, queryByTestId } = render(
-      <Popup content={<div data-testid="popup-test-id">Popup content</div>}>
+      <Popup trigger="hover" content={<div data-testid="popup-test-id">Popup content</div>}>
         <button type="button">Hover me</button>
       </Popup>,
     );
@@ -20,7 +20,8 @@ describe('Popup', () => {
     });
 
     act(() => {
-      fireEvent.mouseEnter(container.firstChild!);
+      const a = fireEvent.mouseEnter(container.firstChild!);
+      console.log(a);
     });
 
     await waitFor(() => {

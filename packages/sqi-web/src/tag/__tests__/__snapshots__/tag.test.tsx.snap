@@ -2,7 +2,10 @@
 
 exports[`Tag > should apply custom className 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md custom-class"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -10,8 +13,11 @@ exports[`Tag > should apply custom className 1`] = `
 
 exports[`Tag > should apply custom style 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
   style="color: red;"
+  tabindex="0"
 >
   Tag
 </span>
@@ -19,7 +25,10 @@ exports[`Tag > should apply custom style 1`] = `
 
 exports[`Tag > should get size from context 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-lg"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -27,7 +36,10 @@ exports[`Tag > should get size from context 1`] = `
 
 exports[`Tag > should handle click events 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -35,7 +47,10 @@ exports[`Tag > should handle click events 1`] = `
 
 exports[`Tag > should not be closable by default 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -43,7 +58,10 @@ exports[`Tag > should not be closable by default 1`] = `
 
 exports[`Tag > should not hide if close event is prevented 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag
   <span
@@ -71,7 +89,10 @@ exports[`Tag > should not hide if close event is prevented 1`] = `
 
 exports[`Tag > should render close icon when closable is true 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag
   <span
@@ -99,7 +120,10 @@ exports[`Tag > should render close icon when closable is true 1`] = `
 
 exports[`Tag > should render correctly 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag Text
 </span>
@@ -107,7 +131,10 @@ exports[`Tag > should render correctly 1`] = `
 
 exports[`Tag > should render custom close icon 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag
   <span
@@ -121,7 +148,10 @@ exports[`Tag > should render custom close icon 1`] = `
 
 exports[`Tag > should render with border 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md sqi-tag-bordered"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -129,8 +159,11 @@ exports[`Tag > should render with border 1`] = `
 
 exports[`Tag > should render with color 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md sqi-tag-has-color"
+  role="button"
   style="background-color: red;"
+  tabindex="0"
 >
   Tag
 </span>
@@ -138,7 +171,10 @@ exports[`Tag > should render with color 1`] = `
 
 exports[`Tag > should render with different sizes 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -146,7 +182,10 @@ exports[`Tag > should render with different sizes 1`] = `
 
 exports[`Tag > should render with different sizes 2`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-lg"
+  role="button"
+  tabindex="0"
 >
   Tag
 </span>
@@ -154,7 +193,10 @@ exports[`Tag > should render with different sizes 2`] = `
 
 exports[`Tag > should render with icon 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
 >
   <span
     data-testid="tag-icon"
@@ -167,7 +209,10 @@ exports[`Tag > should render with icon 1`] = `
 
 exports[`Tag > should render with title 1`] = `
 <span
+  aria-label="close"
   class="sqi-tag sqi-tag-size-md"
+  role="button"
+  tabindex="0"
   title="Tag Title"
 >
   Tag

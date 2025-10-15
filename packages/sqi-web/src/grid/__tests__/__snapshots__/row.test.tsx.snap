@@ -29,7 +29,7 @@ exports[`Row > should support gutter prop 1`] = `
 exports[`Row > should support vertical gutter 1`] = `
 <div
   class="sqi-row sqi-row-align-start sqi-row-justify-start"
-  style="margin: -12px -8px -12px -8px;"
+  style="margin: -12px -8px;"
 >
   Row Content
 </div>

@@ -48,11 +48,11 @@ exports[`Col > should support gutter from Row context 1`] = `
 <div>
   <div
     class="sqi-row sqi-row-align-start sqi-row-justify-start"
-    style="margin: -12px -8px -12px -8px;"
+    style="margin: -12px -8px;"
   >
     <div
       class="sqi-col sqi-col-12"
-      style="padding: 12px 8px 12px 8px;"
+      style="padding: 12px 8px;"
     >
       Col Content
     </div>

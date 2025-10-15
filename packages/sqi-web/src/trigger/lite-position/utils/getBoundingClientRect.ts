@@ -1,7 +1,11 @@
+import { EMPTYRect } from '../constants';
 import type { ClientRectObject } from '../type';
 
 // source code & update from https://github.com/floating-ui/floating-ui/blob/v2.x/src/dom-utils/getBoundingClientRect.js
 export default function getBoundingClientRect(element: Element): ClientRectObject {
+  // In test environment, getBoundingClientRect in not defined
+  if (typeof element.getBoundingClientRect !== 'function') return { ...EMPTYRect };
+
   const clientRect = element.getBoundingClientRect();
   let scaleX = 1;
   let scaleY = 1;

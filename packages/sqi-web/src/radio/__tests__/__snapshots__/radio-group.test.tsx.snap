@@ -12,7 +12,7 @@ exports[`RadioGroup > should render correctly 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r0»"
+        name="_r_0_"
         type="radio"
         value="1"
       />
@@ -34,7 +34,7 @@ exports[`RadioGroup > should render correctly 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r0»"
+        name="_r_0_"
         type="radio"
         value="2"
       />
@@ -63,7 +63,7 @@ exports[`RadioGroup > should support button appearance with options configuratio
     >
       <input
         class="sqi-radio-button-input"
-        name="«r7»"
+        name="_r_7_"
         type="radio"
         value="Radio1"
       />
@@ -85,7 +85,7 @@ exports[`RadioGroup > should support button appearance with options configuratio
     >
       <input
         class="sqi-radio-button-input"
-        name="«r7»"
+        name="_r_7_"
         type="radio"
         value="Radio2"
       />
@@ -114,7 +114,7 @@ exports[`RadioGroup > should support buttonVariant filled 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«rb»"
+        name="_r_b_"
         type="radio"
         value="1"
       />
@@ -136,7 +136,7 @@ exports[`RadioGroup > should support buttonVariant filled 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«rb»"
+        name="_r_b_"
         type="radio"
         value="2"
       />
@@ -165,7 +165,7 @@ exports[`RadioGroup > should support defaultValue 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r1»"
+        name="_r_1_"
         type="radio"
         value="1"
       />
@@ -188,7 +188,7 @@ exports[`RadioGroup > should support defaultValue 1`] = `
       <input
         checked=""
         class="sqi-radio-input"
-        name="«r1»"
+        name="_r_1_"
         type="radio"
         value="2"
       />
@@ -218,7 +218,7 @@ exports[`RadioGroup > should support disabled 1`] = `
       <input
         class="sqi-radio-input"
         disabled=""
-        name="«r3»"
+        name="_r_3_"
         type="radio"
         value="1"
       />
@@ -241,7 +241,7 @@ exports[`RadioGroup > should support disabled 1`] = `
       <input
         class="sqi-radio-input"
         disabled=""
-        name="«r3»"
+        name="_r_3_"
         type="radio"
         value="2"
       />
@@ -270,7 +270,7 @@ exports[`RadioGroup > should support options prop 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r8»"
+        name="_r_8_"
         type="radio"
         value="1"
       />
@@ -292,7 +292,7 @@ exports[`RadioGroup > should support options prop 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r8»"
+        name="_r_8_"
         type="radio"
         value="2"
       />
@@ -315,7 +315,7 @@ exports[`RadioGroup > should support options prop 1`] = `
       <input
         class="sqi-radio-input"
         disabled=""
-        name="«r8»"
+        name="_r_8_"
         type="radio"
         value="3"
       />
@@ -344,7 +344,7 @@ exports[`RadioGroup > should support options with string values 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r9»"
+        name="_r_9_"
         type="radio"
         value="Apple"
       />
@@ -366,7 +366,7 @@ exports[`RadioGroup > should support options with string values 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r9»"
+        name="_r_9_"
         type="radio"
         value="Banana"
       />
@@ -388,7 +388,7 @@ exports[`RadioGroup > should support options with string values 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r9»"
+        name="_r_9_"
         type="radio"
         value="Orange"
       />
@@ -417,7 +417,7 @@ exports[`RadioGroup > should support size attribute 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r6»"
+        name="_r_6_"
         type="radio"
         value="1"
       />
@@ -439,7 +439,7 @@ exports[`RadioGroup > should support size attribute 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r6»"
+        name="_r_6_"
         type="radio"
         value="2"
       />
@@ -469,7 +469,7 @@ exports[`RadioGroup > should support value 1`] = `
       <input
         checked=""
         class="sqi-radio-input"
-        name="«r2»"
+        name="_r_2_"
         type="radio"
         value="1"
       />
@@ -491,7 +491,7 @@ exports[`RadioGroup > should support value 1`] = `
     >
       <input
         class="sqi-radio-input"
-        name="«r2»"
+        name="_r_2_"
         type="radio"
         value="2"
       />

@@ -85,8 +85,8 @@ describe('Trigger', () => {
         expect(popperEl).toBeInTheDocument();
       });
 
-      const tooltipEl = document.querySelector('[role="tooltip"]');
-      expect(tooltipEl).toHaveStyle('position: absolute');
+      const tooltipEl = document.querySelector('.sqi-trigger');
+      expect(tooltipEl).toHaveStyle('position: fixed');
     }
   });
 
