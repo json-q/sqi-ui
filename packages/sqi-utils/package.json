@@ -26,7 +26,7 @@
   "scripts": {
     "dev": "rslib build --watch",
     "build": "rslib build",
-    "clean": "rimraf dist es lib .turbo",
+    "clean": "rimraf es lib .turbo",
     "format": "biome check --write .",
     "format-staged": "biome check --staged --no-errors-on-unmatched --write ."
   },

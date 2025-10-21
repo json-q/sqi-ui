@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import ResizeObserverPolyfill from 'resize-observer-polyfill';
 import { canUseDom } from '@sqi-ui/utils';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 
@@ -9,8 +8,6 @@ export interface ObserverSizeInfo {
   offsetWidth: number;
   offsetHeight: number;
 }
-
-const SafeResizeObserver = window.ResizeObserver || ResizeObserverPolyfill;
 
 export function useResizeObserverRect(
   container?: HTMLElement | null,
@@ -54,7 +51,7 @@ export function useResizeObserverRect(
       }
     };
 
-    observer = new SafeResizeObserver(resizeCallback);
+    observer = new ResizeObserver(resizeCallback);
     observer.observe(container);
 
     return () => {

@@ -3,7 +3,7 @@ import { Button, Space } from '@sqi-ui/web';
 
 export default function Demo() {
   return (
-    <Space wrap>
+    <Space wrap size={[8, 16]}>
       {Array.from({ length: 20 }).map((_, index) => (
         <Button key={index.toString()} type="primary">
           Item{index + 1}

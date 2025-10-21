@@ -1,56 +1,69 @@
-import { defineConfig } from '@rslib/core';
+import { defineConfig, type LibConfig } from '@rslib/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 
+const browserslist = ['Chrome >= 84', 'Firefox >= 83', 'Safari >= 14.1'];
+
+const commonLibConfig: LibConfig = {
+  syntax: browserslist,
+  bundle: false,
+  externalHelpers: true,
+  output: {
+    filename: {
+      js: '[name].js',
+    },
+  },
+};
+
+const umdConfig: LibConfig = {
+  syntax: browserslist,
+  format: 'umd',
+  umdName: 'SqiIcons',
+  output: {
+    distPath: {
+      root: './dist',
+    },
+    externals: {
+      react: 'React',
+    },
+  },
+};
+
 export default defineConfig({
-  plugins: [
-    pluginReact({
-      swcReactOptions: { runtime: 'classic' },
-    }),
-  ],
+  plugins: [pluginReact({ swcReactOptions: { runtime: 'classic' } })],
   output: {
     target: 'web',
   },
   lib: [
     {
+      ...commonLibConfig,
       format: 'esm',
       dts: true,
-      bundle: false,
-      externalHelpers: true,
       output: {
-        distPath: {
-          root: './es',
-        },
-        filename: {
-          js: '[name].js',
-        },
+        ...commonLibConfig.output,
+        distPath: { root: './es' },
       },
     },
     {
+      ...commonLibConfig,
       format: 'cjs',
-      bundle: false,
-      externalHelpers: true,
       output: {
-        distPath: {
-          root: './lib',
-        },
-        filename: {
-          js: '[name].js',
-        },
+        ...commonLibConfig.output,
+        distPath: { root: './lib' },
       },
     },
     {
-      format: 'umd',
-      syntax: 'es5',
-      umdName: 'SqiIcons',
+      ...umdConfig,
       output: {
+        ...umdConfig.output,
+        filename: { js: '[name].js' },
+      },
+    },
+    {
+      ...umdConfig,
+      output: {
+        ...umdConfig.output,
         minify: true,
-        polyfill: 'usage',
-        distPath: {
-          root: './dist',
-        },
-        externals: {
-          react: 'React',
-        },
+        filename: { js: '[name].min.js' },
       },
     },
   ],

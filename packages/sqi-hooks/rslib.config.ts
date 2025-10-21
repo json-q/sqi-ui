@@ -1,4 +1,17 @@
-import { defineConfig } from '@rslib/core';
+import { defineConfig, type LibConfig } from '@rslib/core';
+
+const browserslist = ['Chrome >= 84', 'Firefox >= 83', 'Safari >= 14.1'];
+
+const commonLibConfig: LibConfig = {
+  syntax: browserslist,
+  bundle: false,
+  externalHelpers: true,
+  output: {
+    filename: {
+      js: '[name].js',
+    },
+  },
+};
 
 export default defineConfig({
   output: {
@@ -6,30 +19,20 @@ export default defineConfig({
   },
   lib: [
     {
-      externalHelpers: true,
+      ...commonLibConfig,
       format: 'esm',
       dts: true,
-      bundle: false,
       output: {
-        distPath: {
-          root: './es',
-        },
-        filename: {
-          js: '[name].js',
-        },
+        ...commonLibConfig.output,
+        distPath: { root: './es' },
       },
     },
     {
-      externalHelpers: true,
+      ...commonLibConfig,
       format: 'cjs',
-      bundle: false,
       output: {
-        distPath: {
-          root: './lib',
-        },
-        filename: {
-          js: '[name].js',
-        },
+        ...commonLibConfig.output,
+        distPath: { root: './lib' },
       },
     },
   ],

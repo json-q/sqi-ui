@@ -26,7 +26,7 @@
   "scripts": {
     "dev": "rslib build --watch",
     "build": "rslib build",
-    "clean": "rimraf dist es lib .turbo",
+    "clean": "rimraf es lib .turbo",
     "format": "biome check --write .",
     "format-staged": "biome check --staged --no-errors-on-unmatched --write ."
   },
@@ -35,8 +35,7 @@
   },
   "dependencies": {
     "@sqi-ui/utils": "workspace:*",
-    "@swc/helpers": "^0.5.17",
-    "resize-observer-polyfill": "^1.5.1"
+    "@swc/helpers": "^0.5.17"
   },
   "devDependencies": {
     "@types/react": "^19.2.2"

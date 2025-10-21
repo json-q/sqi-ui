@@ -1,5 +1,5 @@
 'use client';
-import React, { Fragment, useCallback, useContext, forwardRef } from 'react';
+import React, { Fragment, useContext, forwardRef, useMemo } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import clsx from 'clsx';
 import { isArray, isString } from '@sqi-ui/utils';
@@ -32,6 +32,7 @@ const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
     align,
     split,
     wrap = false,
+    style,
     ...restProps
   } = props;
 
@@ -49,31 +50,18 @@ const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
     className,
   );
 
-  const renderItemStyle = useCallback(
-    (isLastChildren: boolean): CSSProperties => {
-      // 若传入数组，以传入为主，若为字符串或数字，则分别设置水平和垂直方向的间距
-      const mergeSize = isArray(size) ? size : [size, size];
-      const [horizontalGap, verticalGap] = mergeSize.map((_size: SizeType) =>
-        isString(_size) ? spaceSize[_size] : _size || 0,
-      );
+  const gapStyle: React.CSSProperties = useMemo((): CSSProperties => {
+    // 若传入数组，以传入为主，若为字符串或数字，则分别设置水平和垂直方向的间距
+    const mergeSize = isArray(size) ? size : [size, size];
+    const [horizontalGap, verticalGap] = mergeSize.map((_size: SizeType) =>
+      isString(_size) ? spaceSize[_size] : _size || 0,
+    );
 
-      if (wrap) {
-        return {
-          marginRight: horizontalGap,
-          marginBottom: verticalGap,
-        };
-      }
-      if (direction === 'vertical') {
-        return {
-          marginBottom: verticalGap,
-        };
-      }
-      return {
-        marginRight: isLastChildren ? undefined : horizontalGap,
-      };
-    },
-    [size, direction, wrap],
-  );
+    return {
+      rowGap: verticalGap,
+      columnGap: horizontalGap,
+    };
+  }, [size]);
 
   const nodes = flatChildren.map<ReactNode>((item, index) => {
     const isLastChildren = index === flatChildren.length - 1;
@@ -81,16 +69,14 @@ const Space = forwardRef<HTMLDivElement, SpaceProps>((baseProps, ref) => {
 
     return (
       <Fragment key={itemKey}>
-        <div className="space-item" style={renderItemStyle(isLastChildren)}>
-          {item}
-        </div>
+        <div className="space-item">{item}</div>
         {!isLastChildren && split && <span className="sqi-space-item-split">{split}</span>}
       </Fragment>
     );
   });
 
   return (
-    <div className={classes} {...restProps} ref={ref}>
+    <div className={classes} {...restProps} ref={ref} style={{ ...style, ...gapStyle }}>
       {nodes}
     </div>
   );

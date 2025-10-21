@@ -16,7 +16,7 @@ group:
 
 ## Popper 定位
 
-实现一个 popper.js 核心功能的组件，如果需要更多高度定制化的需求，请使用 [floating-ui](https://floating-ui.com)
+实现一个 popper.js 核心功能的组件以供内部使用，如果需要更多 Feature 或者边界 case 友好，更推荐使用 [floating-ui](https://floating-ui.com)
 
 <code src="./demos/popper.tsx"></code>
 
