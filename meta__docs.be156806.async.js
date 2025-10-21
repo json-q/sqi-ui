@@ -303,4 +303,4 @@ export default function Home() {
     },
   ],
 ];
-`,paraId:15,tocIndex:6}]},55049:function(d,a,e){e.r(a),e.d(a,{texts:function(){return n}});const n=[]}}]);
+`,paraId:15,tocIndex:6},{value:" IE / Edge",paraId:16,tocIndex:7},{value:"Firefox",paraId:16,tocIndex:7},{value:"Chrome",paraId:16,tocIndex:7},{value:"Safari",paraId:16,tocIndex:7},{value:"Edge >= 84",paraId:16,tocIndex:7},{value:"Firefox >= 83",paraId:16,tocIndex:7},{value:"Chrome >= 84",paraId:16,tocIndex:7},{value:"Safari >= 14.1",paraId:16,tocIndex:7}]},55049:function(d,a,e){e.r(a),e.d(a,{texts:function(){return n}});const n=[]}}]);
