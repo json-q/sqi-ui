@@ -16,7 +16,7 @@ group:
 
 ## Popper 定位
 
-实现一个 popper.js 核心功能的组件以供内部使用，如果需要更多 Feature 或者边界 case 友好，更推荐使用 [floating-ui](https://floating-ui.com)
+Trigger 组件的定位使用 [lite-position](https://github.com/json-q/lite-position) ，该包实现了类似 [floating-ui](https://floating-ui.com) 的核心功能，其体积 Gzip 后不足 3kb
 
 <code src="./demos/popper.tsx"></code>
 
@@ -25,8 +25,6 @@ group:
 当设置 `offset` 属性时，如果设置成 `number`，则会根据主轴所在方向自动偏移**主轴**所在的距离，如果想要同时偏移主轴和副轴，请使用 `offset` 元组 `[number,number]`
 
 ## 触发行为
-
-动画无法添加 transform，因为 position 的定位使用 `transform`，会有冲突
 
 <code src="./demos/basic-trigger.tsx"></code>
 

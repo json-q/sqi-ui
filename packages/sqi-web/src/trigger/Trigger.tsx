@@ -19,8 +19,7 @@ import {
   offset as offsetMiddleware,
   arrow as arrowMiddleware,
   autoUpdate,
-  raf,
-} from './lite-position';
+} from 'lite-position';
 
 const defaultProps: TriggerProps = {
   placement: 'bottom',
@@ -159,7 +158,7 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
     cleanup.current?.();
     if (referenceEl && rootPopperEl) {
       cleanup.current = autoUpdate({
-        update: () => raf(updatePosition),
+        update: () => requestAnimationFrame(updatePosition),
         elements: { reference: referenceEl, popper: rootPopperEl },
       });
     }
@@ -179,7 +178,7 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
     if (innerVisible === true) {
       motionRef.current?.toggle(true);
       // 推迟到下一帧执行，不然位置计算有偏差
-      raf(() => {
+      requestAnimationFrame(() => {
         updatePosition();
         registerListener();
       });
@@ -227,7 +226,7 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
 
   return (
     <>
-      <ResizeObserverRect ref={setReferenceEl} onResize={() => raf(updatePosition)}>
+      <ResizeObserverRect ref={setReferenceEl} onResize={() => requestAnimationFrame(updatePosition)}>
         {React.cloneElement(children as any, {
           ...genTriggerProps(children),
         })}

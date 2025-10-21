@@ -53,6 +53,7 @@
     "@sqi-ui/icons": "workspace:*",
     "@sqi-ui/utils": "workspace:*",
     "@swc/helpers": "^0.5.17",
+    "lite-position": "^0.0.6",
     "react-is": "^19.2.0",
     "react-transition-state": "^2.3.1"
   },
