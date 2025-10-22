@@ -1,7 +1,10 @@
 {
   "name": "sqi-ui",
   "version": "0.0.1",
-  "description": "",
+  "description": "My react component library",
+  "keywords": [],
+  "author": "jsonq",
+  "license": "MIT",
   "packageManager": "pnpm@10.18.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -10,11 +13,8 @@
     "build": "turbo build --filter=./packages/**",
     "format": "pnpm -r --filter=./packages/** format",
     "format-staged": "pnpm -r --filter=./packages/** format-staged",
-    "clean": "pnpm -r --filter=./packages/** clean"
+    "clean": "rimraf .turbo && pnpm -r --filter=./packages/** clean"
   },
-  "keywords": [],
-  "author": "jsonq",
-  "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
     "@rslib/core": "^0.15.1",

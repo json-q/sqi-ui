@@ -56,8 +56,6 @@ group:
 
 ## API
 
-下面是将提供的关于栅格系统（Row和Col组件）的TypeScript接口属性转换成Markdown格式的表格介绍：
-
 ### RowProps
 
 | 属性    | 描述               | 类型                                                      | 默认值  |
