@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "dumi dev",
     "build": "dumi build",
-    "preview": "dumi preview"
+    "preview": "dumi preview",
+    "clean": "rimraf .turbo docs-dist"
   },
   "dependencies": {
     "react": "^19.2.0",
