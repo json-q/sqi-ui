@@ -10,6 +10,7 @@ import type { RadioGroupProps, RadioProps } from '../radio';
 import type { SpaceProps } from '../space';
 import type { SwitchProps } from '../switch';
 import type { TagProps } from '../tag';
+import type { ToasterProps } from '../toaster';
 import type { TooltipProps } from '../tooltip';
 import type { TriggerProps } from '../trigger';
 
@@ -53,6 +54,7 @@ export type ComponentConfig = {
   Space?: SpaceProps;
   Switch?: SwitchProps;
   Tag?: TagProps;
+  Toaster?: ToasterProps;
   Tooltip?: TooltipProps;
   Trigger?: TriggerProps;
 };

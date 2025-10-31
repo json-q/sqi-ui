@@ -1,0 +1,35 @@
+@use '../../style/mixin' as *;
+
+$module: #{$prefix}-toaster;
+
+.#{$module} {
+  @include reset;
+
+  position: fixed;
+  width: var(--width);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 999999999;
+
+  &[data-toaster-placement^='top'] {
+    top: var(--offset-top);
+  }
+
+  &[data-toaster-placement^='bottom'] {
+    bottom: var(--offset-bottom);
+  }
+
+  &[data-toaster-placement$='left'] {
+    left: var(--offset-left);
+  }
+
+  &[data-toaster-placement$='center'] {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &[data-toaster-placement$='right'] {
+    right: var(--offset-right);
+  }
+}
