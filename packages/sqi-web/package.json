@@ -58,8 +58,8 @@
     "react-transition-state": "^2.3.1"
   },
   "devDependencies": {
-    "@rsbuild/plugin-react": "^1.4.1",
-    "@types/gulp": "^4.0.17",
+    "@rsbuild/plugin-react": "^1.4.2",
+    "@types/gulp": "^4.0.18",
     "@types/gulp-autoprefixer": "^0.0.37",
     "@types/gulp-concat": "^0.0.37",
     "@types/gulp-sass": "^5.0.4",

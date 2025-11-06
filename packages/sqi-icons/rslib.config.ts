@@ -42,6 +42,9 @@ export default defineConfig({
         ...commonLibConfig.output,
         distPath: { root: './es' },
       },
+      experiments: {
+        advancedEsm: true,
+      },
     },
     {
       ...commonLibConfig,

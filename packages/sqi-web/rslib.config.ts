@@ -60,6 +60,9 @@ export default defineConfig({
         distPath: { root: './es' },
         filename: { js: '[name].js' },
       },
+      experiments: {
+        advancedEsm: true,
+      },
     },
     {
       ...commonLibConfig,
