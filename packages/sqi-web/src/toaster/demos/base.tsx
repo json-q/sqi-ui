@@ -9,11 +9,7 @@ export default function Demo() {
           type="primary"
           onClick={() =>
             toast.add((id) => {
-              return (
-                <div style={{ height: 100, backgroundColor: 'lightblue', border: '1px solid #e6e6e6' }}>
-                  toaster{id}
-                </div>
-              );
+              return <div style={{ width: 100, padding: 15, backgroundColor: 'lightblue' }}>toasterId: {id}</div>;
             })
           }
         >

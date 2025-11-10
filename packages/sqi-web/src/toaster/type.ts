@@ -18,4 +18,5 @@ export interface ToasterProps {
   className?: string;
   style?: React.CSSProperties;
   offset?: Offset;
+  duration?: number;
 }

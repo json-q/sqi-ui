@@ -5,7 +5,7 @@ export interface CoreToaster {
   toasterId?: string | number;
   placement?: Placement;
   duration?: number;
-  onClose?: () => void;
+  onClose?: (toast: ExternalToast) => void;
   close?: boolean;
   disableClose?: boolean;
   _isDelete?: boolean;

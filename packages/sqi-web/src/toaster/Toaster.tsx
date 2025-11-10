@@ -1,17 +1,18 @@
 'use client';
 import * as React from 'react';
 import { useMergeProps } from '@sqi-ui/hooks';
-import { ToastState, type CoreToaster } from './state';
+import { ToastState, type CoreToaster, type ExternalToast } from './state';
 import { ConfigContext } from '../config-provider/context';
 import clsx from 'clsx';
 import type { ToasterProps } from './type';
 import { isObject } from '@sqi-ui/utils';
+import SingleToast from './SingleToast';
 
 const defaultProps: ToasterProps = {
-  width: 356,
   placement: 'top-center',
-  gap: 14,
+  gap: 12,
   offset: 16,
+  duration: 3000,
 };
 
 function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
@@ -30,7 +31,7 @@ function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
 
 const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => {
   const { prefixCls, componentConfig } = React.useContext(ConfigContext);
-  const { id, placement, width, gap, offset, style, className } = useMergeProps(
+  const { id, placement, duration, gap, offset, style, className } = useMergeProps(
     baseProps,
     defaultProps,
     componentConfig?.Toaster,
@@ -68,6 +69,17 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
     };
   }, [handleSubscribe]);
 
+  const removeToast = React.useCallback((toastToRemove: ExternalToast) => {
+    setToasts((toasts) => {
+      const currentToast = toasts.find((toast) => toast.id === toastToRemove.id);
+      if (!currentToast?._isDelete) {
+        ToastState.remove(toastToRemove.id);
+      }
+      // return latest toasts
+      return toasts.filter(({ id }) => id !== toastToRemove.id);
+    });
+  }, []);
+
   const filteredToasts = React.useMemo(() => {
     if (id) return toasts.filter((toast) => toast.toasterId === id);
     return toasts.filter((toast) => !toast.toasterId);
@@ -83,7 +95,6 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
   // ====================== Merge Style ======================
   const classes = clsx(`${prefixCls}-toaster`, className);
   const styles = {
-    '--width': typeof width === 'string' ? width : `${width}px`,
     '--gap': `${gap}px`,
     ...genOffsetStyle(offset!),
     ...style,
@@ -99,7 +110,9 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
             {filteredToasts
               .filter((item) => (!item.placement && i === 0) || item.placement === p)
               .map((item) => {
-                return <React.Fragment key={item.id}>{item.jsx}</React.Fragment>;
+                return (
+                  <SingleToast key={item.id} removeToast={removeToast} duration={duration} placement={p} {...item} />
+                );
               })}
           </ol>
         );
