@@ -1,0 +1,10 @@
+@use './var' as *;
+
+@use './fade' as *;
+@use './collapse' as *;
+@use './slide' as *;
+@use './bounce' as *;
+
+.#{$module}-base-hidden {
+  display: none !important;
+}

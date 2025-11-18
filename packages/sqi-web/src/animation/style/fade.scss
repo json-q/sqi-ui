@@ -1,0 +1,24 @@
+@use './var' as *;
+@use '../../style/mixin' as *;
+
+.#{$module}-fade {
+  pointer-events: none;
+
+  &.#{$module}-fade-enter {
+    opacity: 0;
+  }
+
+  &.#{$module}-fade-enter-active {
+    opacity: 1;
+    transition: opacity $anim-duration-base linear;
+  }
+
+  &.#{$module}-fade-exit {
+    opacity: 1;
+  }
+
+  &.#{$module}-fade-exit-active {
+    opacity: 0;
+    transition: opacity $anim-duration-base linear;
+  }
+}
