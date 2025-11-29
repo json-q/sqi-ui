@@ -1,17 +1,7 @@
 'use client';
 import * as React from 'react';
 import clsx from 'clsx';
-import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
-
-import ResizeObserverRect from '../_common/ResizeObserverRect';
-import Portal from '../_common/Portal';
-import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
-import { getReactNodeRef } from '../_util/dom';
-import { supportNodeRef, useComposeRef } from '../_util/ref';
-import { ConfigContext } from '../config-provider/context';
-
-import useTrigger from './hooks/useTrigger';
-import type { TriggerProps } from './type';
+import { Transition } from 'react-transition-group';
 import {
   computePosition,
   flip,
@@ -20,6 +10,18 @@ import {
   arrow as arrowMiddleware,
   autoUpdate,
 } from 'lite-position';
+
+import { useIsomorphicLayoutEffect, useMergeProps, useMergeState } from '@sqi-ui/hooks';
+
+import ResizeObserverRect from '../_common/ResizeObserverRect';
+import Portal from '../_common/Portal';
+import { getReactNodeRef } from '../_util/dom';
+import { supportNodeRef, useComposeRef } from '../_util/ref';
+import { ConfigContext } from '../config-provider/context';
+
+import useTrigger from './hooks/useTrigger';
+import type { TriggerProps } from './type';
+import { omit } from '@sqi-ui/utils';
 
 const defaultProps: TriggerProps = {
   placement: 'bottom',
@@ -70,6 +72,13 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
     onVisibleChange,
   } = useMergeProps(baseProps, defaultProps, componentConfig?.Trigger);
 
+  const motionProps = React.useMemo(() => {
+    return {
+      ...omit(motion, ['name']),
+      timeout: motion.timeout || 0,
+    };
+  }, [motion]);
+
   const isElementChild = React.isValidElement(children);
 
   // ============== Element State =================
@@ -78,12 +87,12 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
   const [arrowEl, setArrowEl] = React.useState<HTMLElement | null>(null);
 
   // ============== Element Ref =================
+  const popperContainerRef = React.useRef<HTMLDivElement>(null);
   const originPopperRef = getReactNodeRef(popper);
   const popperRef = React.useRef<HTMLElement>(null);
   const mergedPopperRef = useComposeRef(originPopperRef, popperRef);
 
   // ============== Handle Ref =================
-  const motionRef = React.useRef<CSSMotionInstance>(null);
   const cleanup = React.useRef<() => void>(null);
 
   const [innerVisible, setInnerVisible] = useMergeState(false, {
@@ -176,14 +185,12 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
 
     // 只有当展示时才注册监听事件，不展示后移除
     if (innerVisible === true) {
-      motionRef.current?.toggle(true);
       // 推迟到下一帧执行，不然位置计算有偏差
       requestAnimationFrame(() => {
         updatePosition();
         registerListener();
       });
     } else if (innerVisible === false) {
-      motionRef.current?.toggle(false);
       // 隐藏时不再监听
       cleanup.current?.();
     }
@@ -195,8 +202,15 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
     if (!popper) return null;
 
     return (
-      <CSSMotion ref={motionRef} {...motion}>
-        {({ className: motionCls }) => {
+      <Transition in={innerVisible} {...motionProps} nodeRef={popperContainerRef}>
+        {(status, _childProps) => {
+          const name = motion.name || 'trigger';
+          const motionCls = clsx(
+            className,
+            `${prefixCls}-${name}-transition`,
+            `${prefixCls}-${name}-transition-${status}`,
+          );
+
           return (
             <Portal getContainer={getContainer}>
               {/* position wrapper */}
@@ -207,7 +221,7 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
                 style={{ ...popperStyle, zIndex }}
               >
                 {/* motion wrapper */}
-                <div role="tooltip" className={clsx(motionCls, className)}>
+                <div role="tooltip" ref={popperContainerRef} className={motionCls}>
                   {arrow ? (
                     <div ref={setArrowEl} style={{ ...arrowStyle, zIndex }}>
                       {arrow}
@@ -220,8 +234,37 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
             </Portal>
           );
         }}
-      </CSSMotion>
+      </Transition>
     );
+
+    // return (
+    //   <CSSMotion ref={motionRef} {...motion}>
+    //     {({ className: motionCls }) => {
+    //       return (
+    //         <Portal getContainer={getContainer}>
+    //           {/* position wrapper */}
+    //           <div
+    //             {...genPopupProps()}
+    //             ref={setRootPopperEl}
+    //             className={`${prefixCls}-trigger`}
+    //             style={{ ...popperStyle, zIndex }}
+    //           >
+    //             {/* motion wrapper */}
+    //             <div role="tooltip" className={clsx(motionCls, className)}>
+    //               {arrow ? (
+    //                 <div ref={setArrowEl} style={{ ...arrowStyle, zIndex }}>
+    //                   {arrow}
+    //                 </div>
+    //               ) : null}
+
+    //               {React.cloneElement(popper as any, { ref: mergedPopperRef })}
+    //             </div>
+    //           </div>
+    //         </Portal>
+    //       );
+    //     }}
+    //   </CSSMotion>
+    // );
   };
 
   return (

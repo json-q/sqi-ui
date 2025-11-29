@@ -3,10 +3,9 @@ import { Button, Space, Trigger, type TriggerProps } from '@sqi-ui/web';
 import { Component } from './_wrapper';
 
 const motionProps: TriggerProps['motion'] = {
-  timeout: 250,
+  timeout: 150,
   name: 'demo-trigger',
   mountOnEnter: true,
-  preEnter: true,
 };
 
 export default function Demo() {

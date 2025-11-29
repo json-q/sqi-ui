@@ -25,7 +25,7 @@ export default function Demo() {
 function Container({ trigger, children }: { trigger?: TriggerProps['trigger']; children: React.ReactElement }) {
   return (
     <Trigger
-      motion={{ timeout: 250, name: 'demo-trigger', mountOnEnter: true, preEnter: true }}
+      motion={{ timeout: 250, name: 'demo-trigger', mountOnEnter: true }}
       trigger={trigger}
       popper={
         <Component size={110} backgroundColor="var(--sqi-bg-color-container)">

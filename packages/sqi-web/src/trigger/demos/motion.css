@@ -1,15 +1,23 @@
-.sqi-demo-trigger-motion {
+.sqi-demo-trigger-transition {
   transition:
     transform 150ms ease-in-out,
     opacity 150ms ease-in-out;
 }
-
-.sqi-demo-trigger-motion.sqi-demo-trigger-motion-preEnter,
-.sqi-demo-trigger-motion.sqi-demo-trigger-motion-exiting {
+.sqi-demo-trigger-transition-entering {
   opacity: 0;
   transform: scale(0.8);
 }
 
-.sqi-demo-trigger-motion.sqi-demo-trigger-motion-exited {
+.sqi-demo-trigger-transition-entered {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sqi-demo-trigger-transition-exiting {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.sqi-demo-trigger-transition-exited {
   display: none;
 }

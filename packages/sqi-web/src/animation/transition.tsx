@@ -4,11 +4,12 @@ import { CSSTransition } from 'react-transition-group';
 import type { EndHandler } from 'react-transition-group/Transition';
 import type { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 
-import { omit } from '@sqi-ui/utils';
+import { isFunction, omit } from '@sqi-ui/utils';
 
 import { ConfigContext } from '../config-provider/context';
 import { useComposeRef } from '../_util/ref';
 import { getReactNodeRef } from '../_util/dom';
+import type { TransitionStatus } from 'react-transition-state';
 
 export interface TransitionProps {
   name?: string;
@@ -18,7 +19,13 @@ export interface TransitionProps {
   unmountOnExit?: boolean;
   classNames?: string | CSSTransitionClassNames;
   timeout?: number | { appear?: number; enter?: number; exit?: number };
-  children?: React.ReactElement;
+  children?:
+    | React.ReactElement
+    | ((status: TransitionStatus, motionClassName: string, childProps?: Record<string, unknown>) => React.ReactNode);
+  /**
+   * @description function children 必须手动传递 nodeRef
+   */
+  nodeRef?: React.Ref<HTMLElement>;
   onEnter?: (node: HTMLElement, isAppearing?: boolean) => void;
   onEntering?: (node: HTMLElement, isAppearing?: boolean) => void;
   onEntered?: (node: HTMLElement, isAppearing?: boolean) => void;
@@ -41,11 +48,13 @@ const Transition = React.forwardRef<HTMLElement, TransitionProps>((props, ref) =
     onExit,
     onExiting,
     onExited,
+    nodeRef: _nodeRef,
     ...restProps
   } = props;
 
   const nodeRef = React.useRef<HTMLElement>(null);
-  const mergedRef = useComposeRef(nodeRef, getReactNodeRef(children), ref);
+  const childNodeRef = _nodeRef || (isFunction(children) ? null : getReactNodeRef(children));
+  const mergedRef = useComposeRef(nodeRef, childNodeRef, ref);
 
   const normalizedTransitionCallback =
     (callback?: (el: HTMLElement, isAppearing?: boolean) => void) => (maybeIsAppearing?: boolean) => {
@@ -83,15 +92,18 @@ const Transition = React.forwardRef<HTMLElement, TransitionProps>((props, ref) =
       onExited={handleExited}
     >
       {(state, childrenProps: Record<string, any> = {}) => {
+        console.log(state, childrenProps);
+
         const shouldHidden = state === 'exited' && !inProp;
+        const motionClassName = clsx(shouldHidden && `${prefixCls}-anim-base-hidden`, `${prefixCls}-anim-${name}`);
+
+        if (isFunction(children)) {
+          return children(state, motionClassName, childrenProps);
+        }
 
         return React.cloneElement(children as any, {
           ref: mergedRef,
-          className: clsx(
-            (children.props as any).className,
-            shouldHidden && `${prefixCls}-anim-base-hidden`,
-            `${prefixCls}-anim-${name}`,
-          ),
+          className: clsx((children.props as any).className, motionClassName),
           // https://github.com/mui/material-ui/blob/57bd89297bd4b41bca3967c0df68cc2a9d848dd4/packages/mui-material/src/Fade/Fade.js#L131
           ...omit(childrenProps, ['ownerState']),
         });
