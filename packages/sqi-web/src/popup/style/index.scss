@@ -41,23 +41,43 @@ $trigger-module: #{$prefix}-trigger;
   }
 
   // Motion
-  &-motion {
-    transition: $popup-flow-transition-enter;
+  &-transition {
+    transition: $popup-flow-transition;
 
-    &.#{$module}-motion-preEnter {
+    &.#{$module}-transition-entering,
+    &.#{$module}-transition-exiting {
       opacity: 0;
       transform: scale($popup-flow-transition-scale);
     }
 
-    &.#{$module}-motion-exiting {
-      transition: $popup-flow-transition-leave;
-      opacity: 0;
-      transform: scale($popup-flow-transition-scale);
-    }
+    // &.#{$module}-transition-enter-active {
+    //   opacity: 1;
+    //   transition: scale(1);
+    // }
 
-    &.#{$module}-motion-exited {
-      display: none;
-    }
+    // &.#{$module}-transition-exit {
+    //   opacity: 1;
+    //   transition: scale(1);
+    // }
+
+    // &.#{$module}-transition-exit-active {
+    //   opacity: 0;
+    //   transform: scale($popup-flow-transition-scale);
+    // }
+
+    // &.#{$module}-motion-preEnter {
+    //   opacity: 0;
+    //   transform: scale($popup-flow-transition-scale);
+    // }
+
+    // &.#{$module}-motion-exiting {
+    //   opacity: 0;
+    //   transform: scale($popup-flow-transition-scale);
+    // }
+
+    // &.#{$module}-motion-exited {
+    //   display: none;
+    // }
   }
 }
 
