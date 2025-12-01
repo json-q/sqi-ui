@@ -3,10 +3,9 @@ import { Button, Space, Trigger, type TriggerProps } from '@sqi-ui/web';
 import { Component } from './_wrapper';
 
 const motionProps: TriggerProps['motion'] = {
-  timeout: 250,
+  timeout: 150,
   name: 'demo-trigger',
   mountOnEnter: true,
-  preEnter: true,
 };
 
 export default function Demo() {
@@ -16,11 +15,11 @@ export default function Demo() {
         motion={motionProps}
         popper={
           <Component size={110} backgroundColor="var(--sqi-bg-color-container)">
-            Undestroy Popper
+            UnDestroy Popper
           </Component>
         }
       >
-        <Button type="primary">Undestroy</Button>
+        <Button type="primary">UnDestroy</Button>
       </Trigger>
 
       <Trigger

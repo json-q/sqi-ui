@@ -74,7 +74,6 @@ describe('Trigger', () => {
           placement={placement}
           defaultVisible
           popper={<div data-testid={`popper-${placement}`}>Popper content</div>}
-          motion={{ initialEntered: true }}
         >
           <button type="button">Trigger</button>
         </Trigger>,
@@ -96,7 +95,6 @@ describe('Trigger', () => {
         defaultVisible
         arrow={<div data-testid="arrow-element" style={{ width: 12, height: 12 }} />}
         popper={<div data-testid="popper-content">Popper content</div>}
-        motion={{ initialEntered: true }}
       >
         <button type="button">Trigger</button>
       </Trigger>,

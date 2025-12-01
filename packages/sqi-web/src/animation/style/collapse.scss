@@ -1,0 +1,29 @@
+@use './var' as *;
+@use '../../style/mixin' as *;
+
+.#{$module}-collapse {
+  overflow: hidden;
+
+  &.#{$module}-collapse-enter {
+    display: block;
+  }
+
+  &.#{$module}-collapse-enter-active {
+    display: block;
+    transition:
+      height $anim-duration-base ease,
+      width $anim-duration-base ease,
+      visibility $anim-duration-base ease;
+  }
+
+  &.#{$module}-collapse-exit {
+    display: block;
+  }
+
+  &.#{$module}-collapse-exit-active {
+    transition:
+      height $anim-duration-base ease,
+      width $anim-duration-base ease,
+      visibility $anim-duration-base ease;
+  }
+}

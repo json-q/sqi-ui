@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import type { Prettify } from '../_util/type';
-import type { CSSMotionProps } from '../_common/CSSMotion';
 import type { PortalContainer } from '../_common/Portal';
+import type { TransitionProps } from '../animation/transition';
 
 export type Alignment = 'start' | 'end';
 export type Side = 'top' | 'right' | 'bottom' | 'left';
@@ -29,9 +29,9 @@ export interface TriggerProps {
    */
   arrow?: ReactElement;
   /**
-   * @description 动画 props 继承自 [react-transition-state](https://szhsin.github.io/react-transition-state)
+   * @description 动画 props
    */
-  motion?: Omit<CSSMotionProps, 'children'>;
+  motion?: Pick<TransitionProps, 'mountOnEnter' | 'unmountOnExit' | 'timeout' | 'name'>;
   /**
    * @description popper 位置
    * @default bottom
