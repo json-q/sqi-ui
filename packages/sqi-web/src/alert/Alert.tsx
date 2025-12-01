@@ -1,5 +1,5 @@
 'use client';
-import React, { createElement, forwardRef, isValidElement, useContext, useRef } from 'react';
+import React, { createElement, forwardRef, isValidElement, useContext } from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import {
@@ -9,7 +9,7 @@ import {
   InfoCircleFilledIcon,
   CloseIcon,
 } from '@sqi-ui/icons';
-import CSSMotion, { type CSSMotionInstance } from '../_common/CSSMotion';
+import Transition from '../animation/transition';
 import { ConfigContext } from '../config-provider/context';
 import type { AlertProps } from './type';
 
@@ -33,7 +33,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
     componentConfig?.Alert,
   );
 
-  const motionRef = useRef<CSSMotionInstance>(null);
+  const [inProp, setInProp] = React.useState(true);
 
   const renderIcon = () => {
     if (isValidElement(icon)) return icon;
@@ -44,12 +44,12 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
   const classes = clsx(`${prefixCls}-alert`, `${prefixCls}-alert-${type}`, className);
 
   const handleClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    motionRef.current?.toggle();
+    setInProp(false);
     onClose?.(e);
   };
 
   return (
-    <CSSMotion ref={motionRef} timeout={200} name="alert" unmountOnExit initialEntered>
+    <Transition in={inProp} timeout={200} name="alert" mountOnEnter unmountOnExit>
       <div role="alert" className={classes} style={style} ref={ref}>
         {showIcon && <div className={`${prefixCls}-alert-icon`}>{renderIcon()}</div>}
 
@@ -66,7 +66,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>((baseProps, ref) => {
           </button>
         )}
       </div>
-    </CSSMotion>
+    </Transition>
   );
 });
 

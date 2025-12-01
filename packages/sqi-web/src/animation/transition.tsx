@@ -92,8 +92,6 @@ const Transition = React.forwardRef<HTMLElement, TransitionProps>((props, ref) =
       onExited={handleExited}
     >
       {(state, childrenProps: Record<string, any> = {}) => {
-        console.log(state, childrenProps);
-
         const shouldHidden = state === 'exited' && !inProp;
         const motionClassName = clsx(shouldHidden && `${prefixCls}-anim-base-hidden`, `${prefixCls}-anim-${name}`);
 

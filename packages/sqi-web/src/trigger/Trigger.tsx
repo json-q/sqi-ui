@@ -236,35 +236,6 @@ const Trigger = React.forwardRef<any, TriggerProps>((baseProps, ref) => {
         }}
       </Transition>
     );
-
-    // return (
-    //   <CSSMotion ref={motionRef} {...motion}>
-    //     {({ className: motionCls }) => {
-    //       return (
-    //         <Portal getContainer={getContainer}>
-    //           {/* position wrapper */}
-    //           <div
-    //             {...genPopupProps()}
-    //             ref={setRootPopperEl}
-    //             className={`${prefixCls}-trigger`}
-    //             style={{ ...popperStyle, zIndex }}
-    //           >
-    //             {/* motion wrapper */}
-    //             <div role="tooltip" className={clsx(motionCls, className)}>
-    //               {arrow ? (
-    //                 <div ref={setArrowEl} style={{ ...arrowStyle, zIndex }}>
-    //                   {arrow}
-    //                 </div>
-    //               ) : null}
-
-    //               {React.cloneElement(popper as any, { ref: mergedPopperRef })}
-    //             </div>
-    //           </div>
-    //         </Portal>
-    //       );
-    //     }}
-    //   </CSSMotion>
-    // );
   };
 
   return (
