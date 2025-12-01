@@ -1,12 +1,14 @@
 'use client';
+
 import * as React from 'react';
-import { useMergeProps } from '@sqi-ui/hooks';
-import { ToastState, type CoreToaster, type ExternalToast } from './state';
-import { ConfigContext } from '../config-provider/context';
 import clsx from 'clsx';
-import type { ToasterProps } from './type';
+import { useMergeProps } from '@sqi-ui/hooks';
 import { isObject } from '@sqi-ui/utils';
+import CSSMotionList, { CSSMotionListItem, type CSSMotionListInstance } from '../_common/CSSMotionList';
+import { ConfigContext } from '../config-provider/context';
+import { ToastState, type CoreToaster, type ExternalToast } from './state';
 import SingleToast from './SingleToast';
+import type { ToasterProps } from './type';
 
 const defaultProps: ToasterProps = {
   placement: 'top-center',
@@ -14,6 +16,8 @@ const defaultProps: ToasterProps = {
   offset: 16,
   duration: 3000,
 };
+
+const MOTION_DURATION = 160;
 
 function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
   const offsetObject = isObject(offset) ? offset : { top: offset, right: offset, bottom: offset, left: offset };
@@ -39,6 +43,7 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
 
   const [toasts, setToasts] = React.useState<CoreToaster[]>([]);
   const listRef = React.useRef<HTMLOListElement>(null);
+  const motionRef = React.useRef<CSSMotionListInstance>(null);
 
   /**
    * @param toast 当前订阅者
@@ -51,12 +56,17 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
 
     const findI = prevStateToasts.findIndex((t) => t.id === toast.id);
 
-    // 若通知的该 id 已在活跃列表中，则更新，反之，则添加到首项
+    // 若通知的该 id 已在活跃列表中，则更新，反之则添加
     if (findI !== -1) {
       return prevStateToasts.map((item, index) => (index === findI ? { ...item, ...toast } : item));
     }
 
-    return [toast, ...prevStateToasts];
+    // 推迟到下一帧执行进入动画，否则执行顺序会变成 toggle -> setState 导致 key 此时并不存在
+    requestAnimationFrame(() => {
+      motionRef.current?.toggle(toast.id, true);
+    });
+
+    return [...prevStateToasts, toast];
   }, []);
 
   React.useEffect(() => {
@@ -70,14 +80,17 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
   }, [handleSubscribe]);
 
   const removeToast = React.useCallback((toastToRemove: ExternalToast) => {
-    setToasts((toasts) => {
-      const currentToast = toasts.find((toast) => toast.id === toastToRemove.id);
-      if (!currentToast?._isDelete) {
-        ToastState.remove(toastToRemove.id);
-      }
-      // return latest toasts
-      return toasts.filter(({ id }) => id !== toastToRemove.id);
-    });
+    motionRef.current?.toggle(toastToRemove.id!, false);
+    setTimeout(() => {
+      setToasts((toasts) => {
+        const currentToast = toasts.find((toast) => toast.id === toastToRemove.id);
+        if (!currentToast?._isDelete) {
+          ToastState.remove(toastToRemove.id);
+        }
+        // return latest toasts
+        return toasts.filter(({ id }) => id !== toastToRemove.id);
+      });
+    }, MOTION_DURATION);
   }, []);
 
   const filteredToasts = React.useMemo(() => {
@@ -107,13 +120,27 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
 
         return (
           <ol key={p} ref={listRef} data-toaster-placement={p} className={classes} style={styles}>
-            {filteredToasts
-              .filter((item) => (!item.placement && i === 0) || item.placement === p)
-              .map((item) => {
-                return (
-                  <SingleToast key={item.id} removeToast={removeToast} duration={duration} placement={p} {...item} />
-                );
-              })}
+            <CSSMotionList ref={motionRef} name="toaster" mountOnEnter preEnter unmountOnExit timeout={MOTION_DURATION}>
+              {({ ...options }) => {
+                return filteredToasts
+                  .filter((item) => (!item.placement && i === 0) || item.placement === p)
+                  .map((item) => {
+                    return (
+                      <CSSMotionListItem itemKey={item.id} key={item.id} {...options}>
+                        {({ className }) => (
+                          <SingleToast
+                            className={className}
+                            removeToast={removeToast}
+                            duration={duration}
+                            placement={p}
+                            {...item}
+                          />
+                        )}
+                      </CSSMotionListItem>
+                    );
+                  });
+              }}
+            </CSSMotionList>
           </ol>
         );
       })}

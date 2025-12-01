@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { omit } from '@sqi-ui/utils';
 import type { ExternalToast } from './state';
+import { composeRef } from '../_util/ref';
 
 interface SingleToastProps extends ExternalToast {
   removeToast: (toast: ExternalToast) => void;
   onAutoClose?: (toast: ExternalToast) => void;
   closeButton?: React.ReactElement;
+  className?: string;
 }
-const SingleToast = (props: SingleToastProps) => {
-  const originToast = React.useMemo(() => omit(props, ['removeToast', 'closeButton']), [props]);
+const SingleToast = React.forwardRef<HTMLLIElement, SingleToastProps>((props, ref) => {
+  const originToast = React.useMemo(() => omit(props, ['removeToast', 'closeButton', 'className']), [props]);
   const {
     jsx,
     _isDelete,
@@ -95,7 +97,8 @@ const SingleToast = (props: SingleToastProps) => {
 
   return (
     <li
-      ref={toastRef}
+      className={props.className}
+      ref={composeRef(ref, toastRef)}
       data-single-toast
       data-y-position={y}
       data-x-position={x}
@@ -105,7 +108,7 @@ const SingleToast = (props: SingleToastProps) => {
       {disableClose ? null : closeButton}
     </li>
   );
-};
+});
 
 SingleToast.displayName = 'SingleToast';
 

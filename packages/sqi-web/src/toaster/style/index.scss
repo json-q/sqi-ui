@@ -36,3 +36,23 @@ $module: #{$prefix}-toaster;
     right: var(--offset-right);
   }
 }
+
+.#{$module}-motion {
+  overflow: hidden;
+  transition:
+    opacity $anim-duration-fast $anim-time-fn-easing,
+    transform $anim-duration-fast $anim-time-fn-easing;
+
+  & {
+    &-preEnter,
+    &-exiting {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+
+    &-entered {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

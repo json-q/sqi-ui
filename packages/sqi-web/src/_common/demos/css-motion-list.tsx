@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Checkbox, Space } from '@sqi-ui/web';
-import CSSMotionList, { type CSSMotionListInstance } from '../CSSMotionList';
+import CSSMotionList, { CSSMotionListItem, type CSSMotionListInstance } from '../CSSMotionList';
 import './motion-list.css';
 
 export default function Demo() {
@@ -41,12 +41,14 @@ export default function Demo() {
         </Checkbox>
       </Space>
       <div className="list-item-container">
-        <CSSMotionList ref={motionRef} name="demo-list" mountOnEnter preEnter unmountOnExit timeout={250} allowMultiple>
-          {list.map((item) => (
-            <div className="list-item" key={item}>
-              {item}
-            </div>
-          ))}
+        <CSSMotionList ref={motionRef} name="demo-list" mountOnEnter preEnter unmountOnExit timeout={250}>
+          {({ prefixCls, ...transitionStatus }) => {
+            return list.map((item) => (
+              <CSSMotionListItem prefixCls={prefixCls} {...transitionStatus} itemKey={item} key={item}>
+                <div className="list-item">{item}</div>
+              </CSSMotionListItem>
+            ));
+          }}
         </CSSMotionList>
       </div>
     </>
