@@ -2,7 +2,6 @@
 @use './var' as *;
 @use './mixin' as *;
 
-// 定义方向和对应的动画映射
 $slide-directions: (
   left: (
     -100%,
@@ -68,7 +67,6 @@ $slide-directions: (
   }
 }
 
-// 生成 keyframes 集合
 @each $direction, $translate in $slide-directions {
   @include slide-keyframes($direction, list.nth($translate, 1), list.nth($translate, 2), list.nth($translate, 3));
 }

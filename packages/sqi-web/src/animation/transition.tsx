@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
-import type { EndHandler } from 'react-transition-group/Transition';
+import type { EndHandler, TransitionStatus } from 'react-transition-group/Transition';
 import type { CSSTransitionClassNames } from 'react-transition-group/CSSTransition';
 
 import { isFunction, omit } from '@sqi-ui/utils';
@@ -9,7 +9,6 @@ import { isFunction, omit } from '@sqi-ui/utils';
 import { ConfigContext } from '../config-provider/context';
 import { useComposeRef } from '../_util/ref';
 import { getReactNodeRef } from '../_util/dom';
-import type { TransitionStatus } from 'react-transition-state';
 
 export interface TransitionProps {
   name?: string;

@@ -49,35 +49,6 @@ $trigger-module: #{$prefix}-trigger;
       opacity: 0;
       transform: scale($popup-flow-transition-scale);
     }
-
-    // &.#{$module}-transition-enter-active {
-    //   opacity: 1;
-    //   transition: scale(1);
-    // }
-
-    // &.#{$module}-transition-exit {
-    //   opacity: 1;
-    //   transition: scale(1);
-    // }
-
-    // &.#{$module}-transition-exit-active {
-    //   opacity: 0;
-    //   transform: scale($popup-flow-transition-scale);
-    // }
-
-    // &.#{$module}-motion-preEnter {
-    //   opacity: 0;
-    //   transform: scale($popup-flow-transition-scale);
-    // }
-
-    // &.#{$module}-motion-exiting {
-    //   opacity: 0;
-    //   transform: scale($popup-flow-transition-scale);
-    // }
-
-    // &.#{$module}-motion-exited {
-    //   display: none;
-    // }
   }
 }
 

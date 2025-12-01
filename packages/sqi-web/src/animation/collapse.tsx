@@ -4,7 +4,7 @@ import Transition from './transition';
 import { createChainFn } from '../_util/createChainFn';
 
 export interface CollapseProps extends TransitionProps {
-  dimension: DIMENSION;
+  dimension?: DIMENSION;
   getDimensionValue?: (dimension: DIMENSION, el: Element) => number;
 }
 
@@ -28,7 +28,7 @@ function get(el: HTMLElement, property: string) {
 }
 
 function triggerBrowserReflow(element: HTMLElement) {
-  element.offsetHeight;
+  void element.offsetHeight;
 }
 
 function capitalizeDimension(dimension: DIMENSION): string {
@@ -92,7 +92,7 @@ const Collapse = React.forwardRef<HTMLElement, CollapseProps>((props, ref) => {
 
   const handleExit = React.useCallback(
     (el: HTMLElement) => {
-      const value = getDimensionValue ? getDimensionValue(dimension, el) : 0;
+      const value = getDimensionValue(dimension, el);
       addStyle(el, dimension, `${value}px`);
       triggerBrowserReflow(el);
     },

@@ -15,11 +15,11 @@ export default function Demo() {
         motion={motionProps}
         popper={
           <Component size={110} backgroundColor="var(--sqi-bg-color-container)">
-            Undestroy Popper
+            UnDestroy Popper
           </Component>
         }
       >
-        <Button type="primary">Undestroy</Button>
+        <Button type="primary">UnDestroy</Button>
       </Trigger>
 
       <Trigger
