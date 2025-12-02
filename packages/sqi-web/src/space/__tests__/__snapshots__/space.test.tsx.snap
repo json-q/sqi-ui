@@ -3,10 +3,10 @@
 exports[`Space > applies correct align classes 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-start"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -25,10 +25,10 @@ exports[`Space > applies correct align classes 1`] = `
 exports[`Space > applies correct direction classes 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -47,10 +47,10 @@ exports[`Space > applies correct direction classes 1`] = `
 exports[`Space > applies correct direction classes 2`] = `
 <div
   class="sqi-space sqi-space-direction-vertical sqi-space-align-center"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-bottom: 16px;"
   >
     <div>
       Item 1
@@ -58,7 +58,6 @@ exports[`Space > applies correct direction classes 2`] = `
   </div>
   <div
     class="space-item"
-    style="margin-bottom: 16px;"
   >
     <div>
       Item 2
@@ -70,10 +69,10 @@ exports[`Space > applies correct direction classes 2`] = `
 exports[`Space > applies correct spacing for different size values 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 8px; column-gap: 8px;"
 >
   <div
     class="space-item"
-    style="margin-right: 8px;"
   >
     <div>
       Item 1
@@ -92,10 +91,10 @@ exports[`Space > applies correct spacing for different size values 1`] = `
 exports[`Space > applies correct spacing for different size values 2`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -114,10 +113,10 @@ exports[`Space > applies correct spacing for different size values 2`] = `
 exports[`Space > applies correct spacing for different size values 3`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 24px; column-gap: 24px;"
 >
   <div
     class="space-item"
-    style="margin-right: 24px;"
   >
     <div>
       Item 1
@@ -136,10 +135,10 @@ exports[`Space > applies correct spacing for different size values 3`] = `
 exports[`Space > applies wrap class when wrap is true 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center sqi-space-wrap"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px; margin-bottom: 16px;"
   >
     <div>
       Item 1
@@ -147,7 +146,6 @@ exports[`Space > applies wrap class when wrap is true 1`] = `
   </div>
   <div
     class="space-item"
-    style="margin-right: 16px; margin-bottom: 16px;"
   >
     <div>
       Item 2
@@ -159,10 +157,10 @@ exports[`Space > applies wrap class when wrap is true 1`] = `
 exports[`Space > does not apply margin to last item 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -181,10 +179,10 @@ exports[`Space > does not apply margin to last item 1`] = `
 exports[`Space > handles array size values for horizontal and vertical spacing 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center sqi-space-wrap"
+  style="row-gap: 20px; column-gap: 10px;"
 >
   <div
     class="space-item"
-    style="margin-right: 10px; margin-bottom: 20px;"
   >
     <div>
       Item 1
@@ -192,7 +190,6 @@ exports[`Space > handles array size values for horizontal and vertical spacing 1
   </div>
   <div
     class="space-item"
-    style="margin-right: 10px; margin-bottom: 20px;"
   >
     <div>
       Item 2
@@ -204,10 +201,10 @@ exports[`Space > handles array size values for horizontal and vertical spacing 1
 exports[`Space > handles numeric size values 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 30px; column-gap: 30px;"
 >
   <div
     class="space-item"
-    style="margin-right: 30px;"
   >
     <div>
       Item 1
@@ -226,10 +223,10 @@ exports[`Space > handles numeric size values 1`] = `
 exports[`Space > renders children correctly 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -248,10 +245,10 @@ exports[`Space > renders children correctly 1`] = `
 exports[`Space > renders with custom className 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center custom-class"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -270,10 +267,10 @@ exports[`Space > renders with custom className 1`] = `
 exports[`Space > renders with split element 1`] = `
 <div
   class="sqi-space sqi-space-direction-horizontal sqi-space-align-center"
+  style="row-gap: 16px; column-gap: 16px;"
 >
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 1
@@ -286,7 +283,6 @@ exports[`Space > renders with split element 1`] = `
   </span>
   <div
     class="space-item"
-    style="margin-right: 16px;"
   >
     <div>
       Item 2

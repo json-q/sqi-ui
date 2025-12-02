@@ -2,7 +2,7 @@
 
 exports[`Alert > should display icons correctly 1`] = `
 <div
-  class="sqi-alert sqi-alert-success sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-success sqi-anim-alert"
   role="alert"
 >
   <div
@@ -43,7 +43,7 @@ exports[`Alert > should display icons correctly 1`] = `
 
 exports[`Alert > should display icons correctly 2`] = `
 <div
-  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-info sqi-anim-alert"
   role="alert"
 >
   <div
@@ -60,7 +60,7 @@ exports[`Alert > should display icons correctly 2`] = `
 
 exports[`Alert > should render basic Alert correctly 1`] = `
 <div
-  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-info sqi-anim-alert"
   role="alert"
 >
   <div
@@ -101,7 +101,7 @@ exports[`Alert > should render basic Alert correctly 1`] = `
 
 exports[`Alert > should render different types of Alert correctly 1`] = `
 <div
-  class="sqi-alert sqi-alert-success sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-success sqi-anim-alert"
   role="alert"
 >
   <div
@@ -142,7 +142,7 @@ exports[`Alert > should render different types of Alert correctly 1`] = `
 
 exports[`Alert > should render different types of Alert correctly 2`] = `
 <div
-  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-info sqi-anim-alert"
   role="alert"
 >
   <div
@@ -183,7 +183,7 @@ exports[`Alert > should render different types of Alert correctly 2`] = `
 
 exports[`Alert > should render different types of Alert correctly 3`] = `
 <div
-  class="sqi-alert sqi-alert-warning sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-warning sqi-anim-alert"
   role="alert"
 >
   <div
@@ -224,7 +224,7 @@ exports[`Alert > should render different types of Alert correctly 3`] = `
 
 exports[`Alert > should render different types of Alert correctly 4`] = `
 <div
-  class="sqi-alert sqi-alert-error sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-error sqi-anim-alert"
   role="alert"
 >
   <div
@@ -265,7 +265,7 @@ exports[`Alert > should render different types of Alert correctly 4`] = `
 
 exports[`Alert > should render title and description correctly 1`] = `
 <div
-  class="sqi-alert sqi-alert-info sqi-alert-motion sqi-alert-motion-entered"
+  class="sqi-alert sqi-alert-info sqi-anim-alert"
   role="alert"
 >
   <div

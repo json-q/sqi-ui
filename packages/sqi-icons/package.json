@@ -40,10 +40,10 @@
     "@swc/helpers": "^0.5.17"
   },
   "devDependencies": {
-    "@rsbuild/plugin-react": "^1.4.1",
+    "@rsbuild/plugin-react": "^1.4.2",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
-    "@types/react": "^19.2.0",
+    "@types/react": "^19.2.7",
     "camelcase": "^8.0.0",
     "clsx": "^2.1.1",
     "decamelize": "^6.0.1",

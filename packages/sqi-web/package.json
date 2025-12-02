@@ -53,19 +53,19 @@
     "@sqi-ui/icons": "workspace:*",
     "@sqi-ui/utils": "workspace:*",
     "@swc/helpers": "^0.5.17",
-    "lite-position": "^0.0.6",
+    "lite-position": "^0.0.7",
     "react-is": "^19.2.0",
     "react-transition-group": "^4.4.5",
     "react-transition-state": "^2.3.1"
   },
   "devDependencies": {
-    "@rsbuild/plugin-react": "^1.4.1",
-    "@types/gulp": "^4.0.17",
+    "@rsbuild/plugin-react": "^1.4.2",
+    "@types/gulp": "^4.0.18",
     "@types/gulp-autoprefixer": "^0.0.37",
     "@types/gulp-concat": "^0.0.37",
     "@types/gulp-sass": "^5.0.4",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "@types/react-is": "^19.2.0",
     "@types/react-transition-group": "^4.4.12",
     "clsx": "^2.1.1",
@@ -74,7 +74,7 @@
     "gulp-cleaner-css": "^4.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^6.0.1",
-    "sass": "^1.94.0",
+    "sass": "^1.94.2",
     "through2": "^4.0.2"
   }
 }
