@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@sqi-ui/dumi"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@sqi-ui/dumi"]||[]).push([["a7c0c670"],{a7c0c670:function(e,r,a){"use strict";var i,n;i=a("fc49a6d0"),n=a("6d1315c5"),r.version=i.version,r.renderToString=i.renderToString,r.renderToStaticMarkup=i.renderToStaticMarkup,r.renderToReadableStream=n.renderToReadableStream,r.resume=n.resume;}}]);
+//# sourceMappingURL=a7c0c670-async.8f543873.js.map
