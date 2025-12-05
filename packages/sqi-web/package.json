@@ -54,7 +54,7 @@
     "@sqi-ui/utils": "workspace:*",
     "@swc/helpers": "^0.5.17",
     "lite-position": "^0.0.7",
-    "react-is": "^19.2.0",
+    "react-is": "^19.2.1",
     "react-transition-group": "^4.4.5",
     "react-transition-state": "^2.3.1"
   },
