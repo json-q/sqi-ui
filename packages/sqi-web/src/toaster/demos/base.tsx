@@ -27,7 +27,7 @@ export default function Demo() {
                   </div>
                 );
               },
-              { id: 1, placement: 'top-left' },
+              { id: 1 },
             );
           }}
         >

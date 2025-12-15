@@ -4,11 +4,12 @@ import * as React from 'react';
 import clsx from 'clsx';
 import { useMergeProps } from '@sqi-ui/hooks';
 import { isObject } from '@sqi-ui/utils';
-import CSSMotionList, { CSSMotionListItem, type CSSMotionListInstance } from '../_common/CSSMotionList';
 import { ConfigContext } from '../config-provider/context';
 import { ToastState, type CoreToaster, type ExternalToast } from './state';
 import SingleToast from './SingleToast';
 import type { ToasterProps } from './type';
+import { TransitionGroup } from 'react-transition-group';
+import Transition from '../animation/transition';
 
 const defaultProps: ToasterProps = {
   placement: 'top-center',
@@ -33,7 +34,7 @@ function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
   return styles as React.CSSProperties;
 }
 
-const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => {
+const Toaster = (baseProps: ToasterProps) => {
   const { prefixCls, componentConfig } = React.useContext(ConfigContext);
   const { id, placement, duration, gap, offset, style, className } = useMergeProps(
     baseProps,
@@ -42,8 +43,6 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
   );
 
   const [toasts, setToasts] = React.useState<CoreToaster[]>([]);
-  const listRef = React.useRef<HTMLOListElement>(null);
-  const motionRef = React.useRef<CSSMotionListInstance>(null);
 
   /**
    * @param toast 当前订阅者
@@ -61,11 +60,6 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
       return prevStateToasts.map((item, index) => (index === findI ? { ...item, ...toast } : item));
     }
 
-    // 推迟到下一帧执行进入动画，否则执行顺序会变成 toggle -> setState 导致 key 此时并不存在
-    requestAnimationFrame(() => {
-      motionRef.current?.toggle(toast.id, true);
-    });
-
     return [...prevStateToasts, toast];
   }, []);
 
@@ -80,7 +74,7 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
   }, [handleSubscribe]);
 
   const removeToast = React.useCallback((toastToRemove: ExternalToast) => {
-    motionRef.current?.toggle(toastToRemove.id!, false);
+    // motionRef.current?.toggle(toastToRemove.id!, false);
     setTimeout(() => {
       setToasts((toasts) => {
         const currentToast = toasts.find((toast) => toast.id === toastToRemove.id);
@@ -114,39 +108,33 @@ const Toaster = React.forwardRef<HTMLElement, ToasterProps>((baseProps, ref) => 
   } as React.CSSProperties;
 
   return (
-    <section ref={ref} tabIndex={-1}>
+    <>
       {possiblePlacements.map((p, i) => {
         if (!filteredToasts.length) return null;
 
         return (
-          <ol key={p} ref={listRef} data-toaster-placement={p} className={classes} style={styles}>
-            <CSSMotionList ref={motionRef} name="toaster" mountOnEnter preEnter unmountOnExit timeout={MOTION_DURATION}>
-              {({ ...options }) => {
-                return filteredToasts
-                  .filter((item) => (!item.placement && i === 0) || item.placement === p)
-                  .map((item) => {
-                    return (
-                      <CSSMotionListItem itemKey={item.id} key={item.id} {...options}>
-                        {({ className }) => (
-                          <SingleToast
-                            className={className}
-                            removeToast={removeToast}
-                            duration={duration}
-                            placement={p}
-                            {...item}
-                          />
-                        )}
-                      </CSSMotionListItem>
-                    );
-                  });
-              }}
-            </CSSMotionList>
+          <ol key={p} data-toaster-placement={p} className={classes} style={styles}>
+            <TransitionGroup component={null}>
+              {filteredToasts
+                .filter((item) => (!item.placement && i === 0) || item.placement === p)
+                .map((item) => (
+                  <Transition appear in key={item.id} name="toast" timeout={5000}>
+                    <SingleToast
+                      className={className}
+                      removeToast={removeToast}
+                      duration={duration}
+                      placement={p}
+                      {...item}
+                    />
+                  </Transition>
+                ))}
+            </TransitionGroup>
           </ol>
         );
       })}
-    </section>
+    </>
   );
-});
+};
 
 Toaster.displayName = 'Toaster';
 

@@ -8,6 +8,7 @@ interface SingleToastProps extends ExternalToast {
   onAutoClose?: (toast: ExternalToast) => void;
   closeButton?: React.ReactElement;
   className?: string;
+  style?: React.CSSProperties;
 }
 const SingleToast = React.forwardRef<HTMLLIElement, SingleToastProps>((props, ref) => {
   const originToast = React.useMemo(() => omit(props, ['removeToast', 'closeButton', 'className']), [props]);
@@ -98,6 +99,7 @@ const SingleToast = React.forwardRef<HTMLLIElement, SingleToastProps>((props, re
   return (
     <li
       className={props.className}
+      style={props.style}
       ref={composeRef(ref, toastRef)}
       data-single-toast
       data-y-position={y}
