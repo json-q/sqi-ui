@@ -1,0 +1,7 @@
+@use '../../style/mixin' as *;
+
+@mixin animation-common($timing) {
+  animation-duration: $anim-duration-base;
+  animation-timing-function: $timing;
+  animation-fill-mode: forwards;
+}

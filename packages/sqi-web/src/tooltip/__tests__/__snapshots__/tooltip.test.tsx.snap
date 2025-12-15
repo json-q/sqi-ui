@@ -2,7 +2,7 @@
 
 exports[`Tooltip > renders with custom arrow and content className 1`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-default"
+  class="sqi-popup sqi-tooltip sqi-tooltip-default sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div
@@ -22,7 +22,7 @@ exports[`Tooltip > renders with custom arrow and content className 1`] = `
 
 exports[`Tooltip > renders with different themes 1`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-default"
+  class="sqi-popup sqi-tooltip sqi-tooltip-default sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div
@@ -42,7 +42,7 @@ exports[`Tooltip > renders with different themes 1`] = `
 
 exports[`Tooltip > renders with different themes 2`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-primary"
+  class="sqi-popup sqi-tooltip sqi-tooltip-primary sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div
@@ -62,7 +62,7 @@ exports[`Tooltip > renders with different themes 2`] = `
 
 exports[`Tooltip > renders with different themes 3`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-success"
+  class="sqi-popup sqi-tooltip sqi-tooltip-success sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div
@@ -82,7 +82,7 @@ exports[`Tooltip > renders with different themes 3`] = `
 
 exports[`Tooltip > renders with different themes 4`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-danger"
+  class="sqi-popup sqi-tooltip sqi-tooltip-danger sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div
@@ -102,7 +102,7 @@ exports[`Tooltip > renders with different themes 4`] = `
 
 exports[`Tooltip > renders with different themes 5`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-warning"
+  class="sqi-popup sqi-tooltip sqi-tooltip-warning sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div
@@ -122,7 +122,7 @@ exports[`Tooltip > renders with different themes 5`] = `
 
 exports[`Tooltip > renders with different themes 6`] = `
 <div
-  class="sqi-popup-motion sqi-popup-motion-preEnter sqi-popup sqi-tooltip sqi-tooltip-light"
+  class="sqi-popup sqi-tooltip sqi-tooltip-light sqi-popup-transition sqi-popup-transition-entered"
   role="tooltip"
 >
   <div

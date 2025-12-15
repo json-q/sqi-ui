@@ -46,10 +46,9 @@ const Popup = forwardRef<HTMLElement, PopupProps>((baseProps, ref) => {
       ref={wrapperChildrenRef}
       className={clsx(`${prefixCls}-popup`, rootClassName)}
       motion={{
-        timeout: 200,
+        timeout: 160,
         name: 'popup',
         mountOnEnter: true,
-        preEnter: true,
         unmountOnExit: destroyOnClose,
       }}
       popper={renderContent()}

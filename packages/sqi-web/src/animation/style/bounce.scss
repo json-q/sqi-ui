@@ -1,0 +1,38 @@
+@use './var' as *;
+@use './mixin' as *;
+
+.#{$module}-bounce {
+  &.#{$module}-bounce-enter-active {
+    animation-name: bounceIn;
+    @include animation-common(cubic-bezier(0.68, -0.55, 0.27, 1.55)); // Ease in out
+  }
+
+  &.#{$module}-bounce-exit-active {
+    animation-name: bounceOut;
+    @include animation-common(cubic-bezier(0.4, 0, 1, 1)); //Fast out
+  }
+}
+
+@keyframes bounceIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}

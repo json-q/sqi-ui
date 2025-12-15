@@ -1,4 +1,5 @@
 export * from './alert';
+export * from './animation';
 export * from './button';
 export * from './checkbox';
 export * from './config-provider';

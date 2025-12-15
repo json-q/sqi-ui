@@ -6,6 +6,13 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 
 expect.extend(matchers);
 
+// mock `ResizeObserver` in test environment
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 afterEach(() => {
   cleanup();
 });

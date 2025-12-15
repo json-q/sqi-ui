@@ -5,10 +5,9 @@ import { Component } from './_wrapper';
 const triggerProps: TriggerProps = {
   trigger: 'focus',
   motion: {
-    timeout: 250,
+    timeout: 150,
     name: 'demo-trigger',
     mountOnEnter: true,
-    preEnter: true,
   },
 };
 

@@ -109,14 +109,10 @@ describe('Space', () => {
       </Space>,
     );
 
-    // Check that items have correct margin styles
-    const smItem = smContainer.querySelector('.space-item');
-    const mdItem = mdContainer.querySelector('.space-item');
-    const lgItem = lgContainer.querySelector('.space-item');
-
-    expect(smItem).toHaveStyle('margin-right: 8px');
-    expect(mdItem).toHaveStyle('margin-right: 16px');
-    expect(lgItem).toHaveStyle('margin-right: 24px');
+    // Check that container has correct gap styles
+    expect(smContainer.firstChild).toHaveStyle('column-gap: 8px');
+    expect(mdContainer.firstChild).toHaveStyle('column-gap: 16px');
+    expect(lgContainer.firstChild).toHaveStyle('column-gap: 24px');
 
     expect(smContainer.firstChild).toMatchSnapshot();
     expect(mdContainer.firstChild).toMatchSnapshot();
@@ -131,8 +127,7 @@ describe('Space', () => {
       </Space>,
     );
 
-    const item = container.querySelector('.space-item');
-    expect(item).toHaveStyle('margin-right: 30px');
+    expect(container.firstChild).toHaveStyle('column-gap: 30px');
     expect(container.firstChild).toMatchSnapshot();
   });
 
@@ -144,9 +139,8 @@ describe('Space', () => {
       </Space>,
     );
 
-    const item = container.querySelector('.space-item');
-    expect(item).toHaveStyle('margin-right: 10px');
-    expect(item).toHaveStyle('margin-bottom: 20px');
+    expect(container.firstChild).toHaveStyle('column-gap: 10px');
+    expect(container.firstChild).toHaveStyle('row-gap: 20px');
     expect(container.firstChild).toMatchSnapshot();
   });
 
@@ -158,9 +152,9 @@ describe('Space', () => {
       </Space>,
     );
 
+    // With gap, items don't have individual margins
     const items = container.querySelectorAll('.space-item');
-    const lastItem = items[items.length - 1];
-    expect(lastItem).not.toHaveStyle('margin-right: 16px');
+    expect(items[0]).not.toHaveStyle('margin-right: 16px');
     expect(container.firstChild).toMatchSnapshot();
   });
 });

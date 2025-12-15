@@ -41,22 +41,13 @@ $trigger-module: #{$prefix}-trigger;
   }
 
   // Motion
-  &-motion {
-    transition: $popup-flow-transition-enter;
+  &-transition {
+    transition: $popup-flow-transition;
 
-    &.#{$module}-motion-preEnter {
+    &.#{$module}-transition-entering,
+    &.#{$module}-transition-exiting {
       opacity: 0;
       transform: scale($popup-flow-transition-scale);
-    }
-
-    &.#{$module}-motion-exiting {
-      transition: $popup-flow-transition-leave;
-      opacity: 0;
-      transform: scale($popup-flow-transition-scale);
-    }
-
-    &.#{$module}-motion-exited {
-      display: none;
     }
   }
 }
