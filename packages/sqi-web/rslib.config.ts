@@ -39,6 +39,10 @@ export default defineConfig({
   output: {
     target: 'web',
   },
+  // close build cache, avoid panic in runtime
+  performance: {
+    buildCache: false,
+  },
   plugins: [
     // compat umd in browser
     pluginReact({ swcReactOptions: { runtime: 'classic' } }),
@@ -59,6 +63,9 @@ export default defineConfig({
       output: {
         distPath: { root: './es' },
         filename: { js: '[name].js' },
+      },
+      experiments: {
+        advancedEsm: true,
       },
     },
     {

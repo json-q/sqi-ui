@@ -24,6 +24,7 @@
     transition:
       height $anim-duration-base ease,
       width $anim-duration-base ease,
+      opacity $anim-duration-base ease,
       visibility $anim-duration-base ease;
   }
 }

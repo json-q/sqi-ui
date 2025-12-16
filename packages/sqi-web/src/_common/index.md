@@ -40,6 +40,10 @@ group:
 
 <code src="./demos/css-motion-portal.tsx"></code>
 
+### 动画组
+
+<code src="./demos/css-motion-list.tsx"></code>
+
 ## ResizeObserver
 
 此处的 `ResizeObserver` 仅关注目标元素尺寸变化

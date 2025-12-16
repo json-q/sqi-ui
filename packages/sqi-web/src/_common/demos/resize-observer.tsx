@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox } from '@sqi-ui/web';
-import ResizeObserver, { type ResizeObserverProps } from '../ResizeObserverRect';
+import ResizeObserver, { type ResizeObserverRectProps } from '../ResizeObserverRect';
 
 export default function App() {
   const [times, setTimes] = React.useState(0);
@@ -11,7 +11,7 @@ export default function App() {
     console.log('Ref:', textareaRef.current);
   }, []);
 
-  const onResize: ResizeObserverProps['onResize'] = (sizeInfo) => {
+  const onResize: ResizeObserverRectProps['onResize'] = (sizeInfo) => {
     const { width, height, offsetWidth, offsetHeight } = sizeInfo;
 
     setTimes((prevTimes) => prevTimes + 1);

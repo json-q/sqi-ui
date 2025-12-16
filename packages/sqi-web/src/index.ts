@@ -11,5 +11,6 @@ export * from './radio';
 export * from './space';
 export * from './switch';
 export * from './tag';
+export * from './toaster';
 export * from './tooltip';
 export * from './trigger';
