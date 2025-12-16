@@ -9,16 +9,14 @@ import { ToastState, type CoreToaster, type ExternalToast } from './state';
 import SingleToast from './SingleToast';
 import type { ToasterProps } from './type';
 import { TransitionGroup } from 'react-transition-group';
-import Transition from '../animation/transition';
+import Collapse from '../animation/collapse';
 
 const defaultProps: ToasterProps = {
   placement: 'top-center',
   gap: 12,
-  offset: 16,
+  offset: 24,
   duration: 3000,
 };
-
-const MOTION_DURATION = 160;
 
 function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
   const offsetObject = isObject(offset) ? offset : { top: offset, right: offset, bottom: offset, left: offset };
@@ -84,7 +82,7 @@ const Toaster = (baseProps: ToasterProps) => {
         // return latest toasts
         return toasts.filter(({ id }) => id !== toastToRemove.id);
       });
-    }, MOTION_DURATION);
+    }, 500);
   }, []);
 
   const filteredToasts = React.useMemo(() => {
@@ -108,7 +106,7 @@ const Toaster = (baseProps: ToasterProps) => {
   } as React.CSSProperties;
 
   return (
-    <>
+    <section tabIndex={-1}>
       {possiblePlacements.map((p, i) => {
         if (!filteredToasts.length) return null;
 
@@ -118,7 +116,7 @@ const Toaster = (baseProps: ToasterProps) => {
               {filteredToasts
                 .filter((item) => (!item.placement && i === 0) || item.placement === p)
                 .map((item) => (
-                  <Transition appear in key={item.id} name="toast" timeout={5000}>
+                  <Collapse in key={item.id}>
                     <SingleToast
                       className={className}
                       removeToast={removeToast}
@@ -126,13 +124,13 @@ const Toaster = (baseProps: ToasterProps) => {
                       placement={p}
                       {...item}
                     />
-                  </Transition>
+                  </Collapse>
                 ))}
             </TransitionGroup>
           </ol>
         );
       })}
-    </>
+    </section>
   );
 };
 

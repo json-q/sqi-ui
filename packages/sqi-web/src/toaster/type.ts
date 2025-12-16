@@ -12,11 +12,19 @@ type Offset =
 
 export interface ToasterProps {
   id?: string | number;
+  /**
+   * @default 'top-center'
+   */
   placement?: Placement;
+  /**
+   * @default 12
+   */
   gap?: number;
-  width?: number | string;
   className?: string;
   style?: React.CSSProperties;
+  /**
+   * @default 24
+   */
   offset?: Offset;
   duration?: number;
 }

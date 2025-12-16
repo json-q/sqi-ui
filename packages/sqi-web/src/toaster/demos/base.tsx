@@ -8,9 +8,12 @@ export default function Demo() {
         <Button
           type="primary"
           onClick={() =>
-            toast.add((id) => {
-              return <div style={{ width: 150, padding: 15, backgroundColor: 'lightblue' }}>toasterId: {id}</div>;
-            })
+            toast.add(
+              (id) => {
+                return <div style={{ width: 150, padding: 15, backgroundColor: 'lightblue' }}>toasterId: {id}</div>;
+              },
+              { toasterId: 'base' },
+            )
           }
         >
           Add
@@ -38,7 +41,7 @@ export default function Demo() {
           Clear All
         </Button>
       </Space>
-      <Toaster duration={100000} />
+      <Toaster duration={100000} placement="bottom-end" id="base" />
     </>
   );
 }
