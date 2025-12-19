@@ -17,6 +17,9 @@ export default defineConfig({
   output: {
     target: 'web',
   },
+  performance: {
+    buildCache: false,
+  },
   lib: [
     {
       ...commonLibConfig,
