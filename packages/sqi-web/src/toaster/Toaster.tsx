@@ -5,7 +5,7 @@ import { TransitionGroup } from 'react-transition-group';
 import clsx from 'clsx';
 
 import { useMergeProps } from '@sqi-ui/hooks';
-import { isObject } from '@sqi-ui/utils';
+import { isObject, isUndefined } from '@sqi-ui/utils';
 
 import { ConfigContext } from '../config-provider/context';
 import { ToastState, type CoreToaster, type ExternalToast, type Placement } from './state';
@@ -37,7 +37,7 @@ function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
 
   ['top', 'right', 'bottom', 'left'].forEach((key) => {
     const value = offsetObject[key as keyof typeof offsetObject];
-    if (value !== undefined) {
+    if (!isUndefined(value)) {
       styles[`--offset-${key}`] = typeof value === 'number' ? `${value}px` : value;
     }
   });
