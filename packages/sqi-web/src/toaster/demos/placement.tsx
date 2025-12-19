@@ -5,23 +5,30 @@ const toastStyle: React.CSSProperties = {
   padding: 12,
   border: '1px solid #e4e9ec',
   backgroundColor: 'white',
+  color: 'red',
   boxShadow: '0.5px 0.5px 0.5px 0.5px #eee',
 };
 
 export default function Demo() {
   const showToast = (placement: ToasterProps['placement']) => {
-    toast.add((id) => <div style={toastStyle}>Toast id is: {id}</div>, { placement, toasterId: 'placement' });
+    toast.add(
+      (id) => {
+        return <div style={toastStyle}>Toast id is: {id}</div>;
+      },
+      { placement, toasterId: 'placement' },
+    );
   };
 
   return (
     <>
       <Toaster id="placement" />
+
       <Space>
         <Button type="primary" onClick={() => showToast('top-start')}>
           top-start
         </Button>
         <Button type="primary" onClick={() => showToast('top-center')}>
-          top
+          top-center
         </Button>
         <Button type="primary" onClick={() => showToast('top-end')}>
           top-end
@@ -31,7 +38,7 @@ export default function Demo() {
           bottom-start
         </Button>
         <Button type="primary" onClick={() => showToast('bottom-center')}>
-          bottom
+          bottom-center
         </Button>
         <Button type="primary" onClick={() => showToast('bottom-end')}>
           bottom-end
