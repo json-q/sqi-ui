@@ -30,10 +30,10 @@ group:
 | --- | --- | --- | --- |
 | `id` | 唯一标识符，用于区分不同的 Toaster 实例 | `string \| number` | - |
 | `placement` | Toast 弹出的位置 | `'top-start'` `'top-center'` `'top-end'` `'bottom-start'` `'bottom-center'` `bottom-end` | `top-center` |
-| `gap` | toast 之间的间距 | `number` | - |
+| `gap` | toast 之间的间距 | `number` | `12` |
 | `className` | toast 容器的 className | `string` | - |
 | `style` | toast 容器的 style | `React.CSSProperties` | - |
-| `offset` | 距离边界的距离 | `{ top?: string \| number;  right?: string \| number; bottom?: string \| number; left?: string \| number } \| string \| number` | - |
-| `duration` | toast 自动关闭的持续时间(ms) | `number` | - |
+| `offset` | 距离边界的距离 | `{ top?: string \| number;  right?: string \| number; bottom?: string \| number; left?: string \| number } \| string \| number` | `24px` |
+| `duration` | toast 自动关闭的持续时间(ms) | `number` | 3000 |
 
 > 💡 注：表中“默认值”一栏为 `-` 表示该属性无默认值（即为可选且未指定默认行为），具体默认行为可能由组件内部实现决定。
