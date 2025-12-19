@@ -60,8 +60,7 @@ $module: #{$prefix}-toaster;
     transform: translateY(0);
     transition:
       opacity $anim-duration-base linear,
-      transform $anim-duration-base linear,
-      zoom $anim-duration-base linear;
+      transform $anim-duration-base linear;
   }
 
   &.#{$prefix}-anim-toaster-exit {
@@ -71,13 +70,14 @@ $module: #{$prefix}-toaster;
 
   &.#{$prefix}-anim-toaster-exit-active {
     opacity: 0;
+
     &[data-y-position='top'] {
       transform: translateY(-100%);
     }
-
     &[data-y-position='bottom'] {
       transform: translateY(100%);
     }
+
     transition:
       opacity $anim-duration-base linear,
       transform $anim-duration-base linear;

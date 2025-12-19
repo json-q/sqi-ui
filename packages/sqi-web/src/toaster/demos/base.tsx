@@ -34,7 +34,7 @@ export default function Demo() {
                   </div>
                 );
               },
-              { id: 1 },
+              { id: 1, toasterId: 'base' },
             );
           }}
         >
