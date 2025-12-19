@@ -1,15 +1,17 @@
 'use client';
 
 import * as React from 'react';
+import { TransitionGroup } from 'react-transition-group';
 import clsx from 'clsx';
+
 import { useMergeProps } from '@sqi-ui/hooks';
-import { isObject } from '@sqi-ui/utils';
+import { isObject, isUndefined } from '@sqi-ui/utils';
+
 import { ConfigContext } from '../config-provider/context';
-import { ToastState, type CoreToaster, type ExternalToast } from './state';
+import { ToastState, type CoreToaster, type ExternalToast, type Placement } from './state';
 import SingleToast from './SingleToast';
 import type { ToasterProps } from './type';
-import { TransitionGroup } from 'react-transition-group';
-import Collapse from '../animation/collapse';
+import Transition from '../animation/transition';
 
 const defaultProps: ToasterProps = {
   placement: 'top-center',
@@ -18,13 +20,24 @@ const defaultProps: ToasterProps = {
   duration: 3000,
 };
 
+const ALL_PLACEMENTS: Placement[] = [
+  'top-start',
+  'top-center',
+  'top-end',
+  'bottom-start',
+  'bottom-center',
+  'bottom-end',
+];
+
+const TRANSITION_TIMEOUT = 200;
+
 function genOffsetStyle(offset: Required<ToasterProps>['offset']) {
   const offsetObject = isObject(offset) ? offset : { top: offset, right: offset, bottom: offset, left: offset };
   const styles: Record<string, string> = {};
 
   ['top', 'right', 'bottom', 'left'].forEach((key) => {
     const value = offsetObject[key as keyof typeof offsetObject];
-    if (value !== undefined) {
+    if (!isUndefined(value)) {
       styles[`--offset-${key}`] = typeof value === 'number' ? `${value}px` : value;
     }
   });
@@ -82,20 +95,13 @@ const Toaster = (baseProps: ToasterProps) => {
         // return latest toasts
         return toasts.filter(({ id }) => id !== toastToRemove.id);
       });
-    }, 500);
+    }, TRANSITION_TIMEOUT);
   }, []);
 
   const filteredToasts = React.useMemo(() => {
     if (id) return toasts.filter((toast) => toast.toasterId === id);
     return toasts.filter((toast) => !toast.toasterId);
   }, [toasts, id]);
-
-  const possiblePlacements = React.useMemo(() => {
-    // 过滤 placement 是因为 toast 调用时，不一定传入 placement，此时使用默认的 placement 位置
-    return Array.from(
-      new Set([placement].concat(filteredToasts.filter((item) => item.placement).map((item) => item.placement!))),
-    );
-  }, [filteredToasts, placement]);
 
   // ====================== Merge Style ======================
   const classes = clsx(`${prefixCls}-toaster`, className);
@@ -107,24 +113,22 @@ const Toaster = (baseProps: ToasterProps) => {
 
   return (
     <section tabIndex={-1}>
-      {possiblePlacements.map((p, i) => {
-        if (!filteredToasts.length) return null;
-
+      {ALL_PLACEMENTS.map((p) => {
         return (
-          <ol key={p} data-toaster-placement={p} className={classes} style={styles}>
+          <ol key={p} className={classes} style={styles} data-toaster-placement={p}>
             <TransitionGroup component={null}>
               {filteredToasts
-                .filter((item) => (!item.placement && i === 0) || item.placement === p)
+                .filter((item) => (!item.placement && p === placement) || item.placement === p)
                 .map((item) => (
-                  <Collapse in key={item.id}>
+                  <Transition name="toaster" timeout={TRANSITION_TIMEOUT} in key={item.id}>
                     <SingleToast
                       className={className}
                       removeToast={removeToast}
-                      duration={duration}
+                      duration={item.duration ?? duration}
                       placement={p}
                       {...item}
                     />
-                  </Collapse>
+                  </Transition>
                 ))}
             </TransitionGroup>
           </ol>

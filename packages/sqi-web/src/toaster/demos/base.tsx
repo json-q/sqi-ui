@@ -4,15 +4,19 @@ import { Button, Space, toast, Toaster } from '@sqi-ui/web';
 export default function Demo() {
   return (
     <>
+      <Toaster id="base" />
+
       <Space>
         <Button
           type="primary"
           onClick={() =>
             toast.add(
-              (id) => {
-                return <div style={{ width: 150, padding: 15, backgroundColor: 'lightblue' }}>toasterId: {id}</div>;
+              (id) => (
+                <div style={{ width: 150, padding: 15, backgroundColor: 'blue', color: 'white' }}>toasterId: {id}</div>
+              ),
+              {
+                toasterId: 'base',
               },
-              { toasterId: 'base' },
             )
           }
         >
@@ -30,7 +34,7 @@ export default function Demo() {
                   </div>
                 );
               },
-              { id: 1 },
+              { id: 1, toasterId: 'base' },
             );
           }}
         >
@@ -41,7 +45,6 @@ export default function Demo() {
           Clear All
         </Button>
       </Space>
-      <Toaster duration={100000} placement="bottom-end" id="base" />
     </>
   );
 }

@@ -40,3 +40,46 @@ $module: #{$prefix}-toaster;
     width: max-content;
   }
 }
+
+.#{$prefix}-anim-toaster {
+  &.#{$prefix}-anim-toaster-enter {
+    opacity: 0;
+
+    &[data-y-position='top'] {
+      transform: translateY(-100%);
+    }
+
+    &[data-y-position='bottom'] {
+      transform: translateY(100%);
+    }
+  }
+
+  // 这里必须使用 [data-y-position] 来提高 css 权重，否则会被 -enter[data-y-position] 覆盖
+  &.#{$prefix}-anim-toaster-enter-active[data-y-position] {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity $anim-duration-base linear,
+      transform $anim-duration-base linear;
+  }
+
+  &.#{$prefix}-anim-toaster-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.#{$prefix}-anim-toaster-exit-active {
+    opacity: 0;
+
+    &[data-y-position='top'] {
+      transform: translateY(-100%);
+    }
+    &[data-y-position='bottom'] {
+      transform: translateY(100%);
+    }
+
+    transition:
+      opacity $anim-duration-base linear,
+      transform $anim-duration-base linear;
+  }
+}
