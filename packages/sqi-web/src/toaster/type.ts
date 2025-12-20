@@ -26,5 +26,8 @@ export interface ToasterProps {
    * @default 24
    */
   offset?: Offset;
+  /**
+   * @default 3000
+   */
   duration?: number;
 }
